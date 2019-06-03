@@ -19,8 +19,9 @@
 
     <modules>
         <module>slingstarter</module>
-        <module>slingstarter-compat</module>
         <module>platform</module>
+        <module>compatibility/slingstarter-compat</module>
+        <module>compatibility/core-compat</module>
     </modules>
 
 </project>

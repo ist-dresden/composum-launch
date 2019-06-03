@@ -6,7 +6,7 @@ This module creates a couple of docker images with which it is easy to run the p
 
 - **platform**: based on slingstarter, it deploys both the newest version of the [Composum Nodes](https://github.com/ist-dresden/composum) and the [Composum Platform](https://github.com/ist-dresden/composum-platform).
 
-- compatiblilty/**slingstarter-compat**: like slingstarter, but with the earliest Sling Launchpad version that is supported by the Composum Nodes (as of 4/2019: version 9 on JDK 7).
+- compatiblilty/**slingstarter-compat**: like slingstarter, but with the earliest Sling Launchpad version that is supported by the Composum Nodes (as of 4/2019: version 9 on JDK 8).
 
 Do a mvn clean install on everything and start in the corresponding directory with:
 

@@ -59,13 +59,6 @@
                                     <outputDirectory>${project.build.directory}/lib/20</outputDirectory>
                                 </artifactItem>
 
-                                <dependency>
-                                    <groupId>org.apache.commons</groupId>
-                                    <artifactId>commons-lang3</artifactId>
-                                    <version>3.9</version>
-                                    <outputDirectory>${project.build.directory}/lib/20</outputDirectory>
-                                </dependency>
-
                                 <artifactItem>
                                     <groupId>com.composum.sling.core</groupId>
                                     <artifactId>composum-sling-core-jslibs</artifactId>

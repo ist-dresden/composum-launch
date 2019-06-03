@@ -18,7 +18,7 @@
     </description>
 
     <properties>
-        <sling.launchpad.compatibility.version>8</sling.launchpad.compatibility.version>
+        <sling.launchpad.compatibility.version>9</sling.launchpad.compatibility.version>
     </properties>
 
     <dependencies>
