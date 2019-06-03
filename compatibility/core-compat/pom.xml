@@ -10,18 +10,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.composum.sling.platform</groupId>
-    <artifactId>composum-sling-platform-launcher-platform</artifactId>
+    <artifactId>composum-sling-platform-launcher-compatibility-core</artifactId>
 
     <name>Composum Platform Launcher Basic Starter</name>
-    <description>Creates a docker image from sling launcher with updated Composum Core (incl. Package manager and User
-        mgmt) and Platform
+    <description>Creates a docker image from sling launcher compatibility version, with Composum Core (incl. Package
+        manager and User
+        mgmt)
     </description>
 
     <dependencies>
         <!-- The base docker image we rely on -->
         <dependency>
             <groupId>com.composum.sling.platform</groupId>
-            <artifactId>composum-sling-platform-launcher-slingstarter</artifactId>
+            <artifactId>composum-sling-platform-launcher-compatibility-slingstarter</artifactId>
             <version>${project.version}</version>
             <type>docker-info</type>
             <optional>true</optional>
@@ -55,8 +56,15 @@
                                     <version>1.9.2</version>
                                     <!-- Temporary solution to be able to install packages. Can be removed
                                      when this goes into the package manager. -->
-                                    <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/lib/20</outputDirectory>
                                 </artifactItem>
+
+                                <dependency>
+                                    <groupId>org.apache.commons</groupId>
+                                    <artifactId>commons-lang3</artifactId>
+                                    <version>3.9</version>
+                                    <outputDirectory>${project.build.directory}/lib/20</outputDirectory>
+                                </dependency>
 
                                 <artifactItem>
                                     <groupId>com.composum.sling.core</groupId>
@@ -100,36 +108,6 @@
                                     <version>${composum.core.version}</version>
                                     <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
                                 </artifactItem>
-
-                                <!-- Composum platform -->
-                                <artifactItem>
-                                    <groupId>com.composum.sling.platform</groupId>
-                                    <artifactId>composum-sling-platform-commons-package</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/lib/31</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>com.composum.sling.platform</groupId>
-                                    <artifactId>composum-sling-platform-cache-package</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/lib/32</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>com.composum.sling.platform</groupId>
-                                    <artifactId>composum-sling-platform-models-package</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/lib/32</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>com.composum.sling.platform</groupId>
-                                    <artifactId>composum-sling-platform-services-package</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>zip</type>
-                                    <outputDirectory>${project.build.directory}/lib/33</outputDirectory>
-                                </artifactItem>
                             </artifactItems>
                         </configuration>
                     </execution>
@@ -166,7 +144,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>composum/platform</repository>
+                    <repository>composum/core-compat</repository>
                     <tag>${project.version}</tag>
                     <verbose>true</verbose>
                     <detail>true</detail>

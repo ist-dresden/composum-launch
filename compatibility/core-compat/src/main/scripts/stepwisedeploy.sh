@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # set -evx
 
@@ -7,11 +7,6 @@ function logdate {
 }
 
 logfile=/opt/sling/sling/logs/error.log
-
-# waits until there are no deployment activities on the server for 10 seconds
-function waituntilquiet {
-    `dirname $0`/WaitForServerUp.jsh $logfile
-}
 
 # First copy stuff together into intermediatedir to be able to
 # override stuff from the docker image.
@@ -57,7 +52,7 @@ if [ "$(ls -A .)" ]; then
                 mv -f `pwd`/$fil $targetdir/$dir/
             fi
         done
-        waituntilquiet
+        sleep 20
     done
 fi
 
