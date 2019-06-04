@@ -4,7 +4,7 @@
 # We provide two watched directories for file installation - fileinstall-docker, which is meant to be filled
 # in derived docker images, and fileinstall-user, which could be mounted by the user
 
-FROM openjdk:11.0.1-jdk
+FROM openjdk:12-jdk
 ARG STARTERJAR
 
 RUN set -eux; \
@@ -16,7 +16,9 @@ RUN set -eux; \
 
 # JVM options
 ENV JVM_OPTS \
-    -Djava.awt.headless=true -server
+    -Djava.awt.headless=true -server \
+    --add-opens=java.base/sun.net.www.protocol.jrt=ALL-UNNAMED
+# --add-opens... is a workaround for https://issues.apache.org/jira/browse/FELIX-6035 with JDK 11/12, until a felix upgrade to >=6.0.2 is done
 
 ENV MEM_OPTS \
     -Xms32m -Xmx512m \
