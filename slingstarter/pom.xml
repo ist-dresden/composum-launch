@@ -17,6 +17,7 @@
 
     <dependencies>
         <dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.starter -->
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.starter</artifactId>
             <version>${sling.starter.version}</version>
