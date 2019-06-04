@@ -4,7 +4,7 @@
 # We provide two watched directories for file installation - fileinstall-docker, which is meant to be filled
 # in derived docker images, and fileinstall-user, which could be mounted by the user
 
-FROM openjdk:10-jdk
+FROM openjdk:11.0.1-jdk
 ARG STARTERJAR
 
 RUN set -eux; \
