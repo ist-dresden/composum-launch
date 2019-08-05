@@ -3,15 +3,15 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>composum-platform-launcher-compatibility</artifactId>
+        <artifactId>composum-public-launcher-compatibility</artifactId>
         <groupId>com.composum.platform</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>composum-platform-launcher-compatibility-core</artifactId>
+    <artifactId>composum-public-launcher-compatibility-core</artifactId>
 
-    <name>Composum Platform Launcher Basic Starter</name>
+    <name>Composum Public Launcher Basic Starter</name>
     <description>Creates a docker image from sling launcher compatibility version, with Composum Core (incl. Package
         manager and User
         mgmt)
@@ -21,7 +21,7 @@
         <!-- The base docker image we rely on -->
         <dependency>
             <groupId>com.composum.platform</groupId>
-            <artifactId>composum-platform-launcher-compatibility-slingstarter</artifactId>
+            <artifactId>composum-public-launcher-compatibility-slingstarter</artifactId>
             <version>${project.version}</version>
             <type>docker-info</type>
             <optional>true</optional>
@@ -113,7 +113,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>com.composum.platform</groupId>
-                                    <artifactId>composum-platform-launcher-slingstarter</artifactId>
+                                    <artifactId>composum-public-launcher-slingstarter</artifactId>
                                     <version>${project.version}</version>
                                     <type>docker-info</type>
                                     <outputDirectory>${project.build.directory}/docker-info-deps</outputDirectory>

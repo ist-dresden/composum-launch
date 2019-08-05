@@ -4,23 +4,23 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.composum.platform</groupId>
-        <artifactId>composum-platform-launcher</artifactId>
+        <artifactId>composum-public-launcher</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>composum-platform-launcher-platform</artifactId>
+    <artifactId>composum-public-launcher-pages</artifactId>
 
-    <name>Composum Platform Launcher Basic Starter</name>
-    <description>Creates a docker image from sling launcher with updated Composum Core (incl. Package manager and User
-        mgmt) and Platform
+    <name>Composum Public Launcher Pages Starter</name>
+    <description>Creates a docker image from sling starter with updated Composum Core (incl. Package manager and User
+        mgmt) and Composum Platform and Pages. Basically all released public parts of Composum.
     </description>
 
     <dependencies>
         <!-- The base docker image we rely on -->
         <dependency>
             <groupId>com.composum.platform</groupId>
-            <artifactId>composum-platform-launcher-slingstarter</artifactId>
+            <artifactId>composum-public-launcher-slingstarter</artifactId>
             <version>${project.version}</version>
             <type>docker-info</type>
             <optional>true</optional>
@@ -129,6 +129,29 @@
                                     <type>zip</type>
                                     <outputDirectory>${project.build.directory}/lib/33</outputDirectory>
                                 </artifactItem>
+
+                                <!-- Composum pages packages -->
+                                <artifactItem>
+                                    <groupId>com.composum.pages</groupId>
+                                    <artifactId>composum-pages-commons-package</artifactId>
+                                    <version>${composum.pages.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/lib/40</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.composum.pages</groupId>
+                                    <artifactId>composum-pages-components-package</artifactId>
+                                    <version>${composum.pages.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/lib/41</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.composum.pages</groupId>
+                                    <artifactId>composum-pages-stage-package</artifactId>
+                                    <version>${composum.pages.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/lib/41</outputDirectory>
+                                </artifactItem>
                             </artifactItems>
                         </configuration>
                     </execution>
@@ -142,7 +165,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>com.composum.platform</groupId>
-                                    <artifactId>composum-platform-launcher-slingstarter</artifactId>
+                                    <artifactId>composum-public-launcher-slingstarter</artifactId>
                                     <version>${project.version}</version>
                                     <type>docker-info</type>
                                     <outputDirectory>${project.build.directory}/docker-info-deps</outputDirectory>
@@ -165,7 +188,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>composum/platform</repository>
+                    <repository>composum/pages</repository>
                     <tag>${project.version}</tag>
                     <verbose>true</verbose>
                     <detail>true</detail>
