@@ -19,6 +19,11 @@
             <username>buildmgr</username>
             <password>${deploy_password}</password>
         </server>
+        <server>
+            <id>docker.io</id>
+            <username>composum</username>
+            <password>${docker_password}</password>
+        </server>
     </servers>
 
     <mirrors>
