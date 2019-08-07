@@ -16,7 +16,7 @@
     <packaging>pom</packaging>
 
     <name>Composum Public Launchers</name>
-    <description>Maven parent for Composum Platform launcher (docker)</description>
+    <description>Maven parent for Composum Platform launcher (various docker images).</description>
 
     <properties>
         <composum.nodes.version>1.11.2</composum.nodes.version>
