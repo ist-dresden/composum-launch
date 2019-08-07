@@ -45,15 +45,6 @@
 
         <profile>
             <id>develop</id>
-            <properties>
-                <deploy.package>true</deploy.package>
-                <sling.scheme>https</sling.scheme>
-                <sling.secure>true</sling.secure>
-                <sling.host>test.ist-software.com</sling.host>
-                <sling.port>443</sling.port>
-                <sling.context></sling.context>
-                <sling.password>${deploy_password}</sling.password>
-            </properties>
         </profile>
 
         <!--
