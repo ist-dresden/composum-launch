@@ -136,7 +136,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>composum/core-compat</repository>
+                    <repository>composum/nodes-compat</repository>
                     <tag>${project.version}</tag>
                     <verbose>true</verbose>
                     <detail>true</detail>

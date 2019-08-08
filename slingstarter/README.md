@@ -1,6 +1,7 @@
 # Contents
 
 This creates a docker image that starts the plain sling launchpad with JDK 11, providing debugging and JMX.
+It also contains some preparations and scripts that allow automatically installing further packages when the docker image is started.
 
 ## Compose-files
 
