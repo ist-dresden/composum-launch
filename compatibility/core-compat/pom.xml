@@ -178,13 +178,6 @@
     <profiles>
 
         <profile>
-            <!-- This can also be called manually with   mvn clean install dockerfile:tag dockerfile:push -->
-            <!-- Use authentication with entry in settings.xml , encrypt pwd with  mvn &dash;&dash;encrypt-password -->
-            <!--<server>
-                <id>docker.io</id>
-                <username>composum</username>
-                <password>xxx/password>
-            </server>-->
             <id>deployDocker</id>
             <build>
                 <plugins>
@@ -200,6 +193,7 @@
                                     <goal>tag</goal>
                                 </goals>
                             </execution>
+                            <!-- Not meant to be pushed - this is just for local compatibility tests
                             <execution>
                                 <id>push-image</id>
                                 <phase>deploy</phase>
@@ -207,7 +201,7 @@
                                     <goal>push</goal>
                                 </goals>
                             </execution>
-
+                            -->
                         </executions>
                     </plugin>
 
