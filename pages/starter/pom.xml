@@ -18,7 +18,7 @@
 
     <name>Composum Pages Starter Application</name>
     <description>
-        The Sling Starter application JAR.
+        The Sling Starter application JAR and WAR.
     </description>
 
     <properties>
@@ -50,7 +50,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <createWebapp>false</createWebapp>
+                    <createWebapp>true</createWebapp>
                     <servers>
                         <server>
                             <port>${sling.http.port}</port>
