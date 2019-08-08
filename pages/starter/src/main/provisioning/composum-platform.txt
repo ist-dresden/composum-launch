@@ -1,0 +1,14 @@
+#
+#  Composum Platform
+#
+[feature name=composum-platform]
+[variables]
+    composum.platform.version=1.0.4
+
+[artifacts startLevel=30]
+
+  # Composum Platform packages
+  com.composum.platform/composum-platform-commons-package/${composum.platform.version}/zip
+  com.composum.platform/composum-platform-cache-package/${composum.platform.version}/zip
+  com.composum.platform/composum-platform-models-package/${composum.platform.version}/zip
+  com.composum.platform/composum-platform-services-package/${composum.platform.version}/zip

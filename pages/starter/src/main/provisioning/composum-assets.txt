@@ -1,0 +1,11 @@
+#
+#  Composum Pages
+#
+[feature name=composum-assets]
+[variables]
+    composum.assets.version=1.0.0-SNAPSHOT
+
+[artifacts startLevel=31]
+
+  com.composum.assets/composum-assets-commons-package/${composum.assets.version}/zip
+  com.composum.assets/composum-assets-manager-package/${composum.assets.version}/zip
