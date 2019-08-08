@@ -8,7 +8,7 @@ FROM composum/slingstarter:${PROJECT_VERSION}
 ENV FILEINSTALL_OPTS \
     -Dsling.fileinstall.dir=fileinstall
 
-COPY --chown=sling:sling src/main/scripts/ /opt/sling/scripts/
+COPY --chown=sling:sling src/main/scripts /opt/sling/scripts/
 
 RUN set -eux; \
     mkdir -p /opt/sling/fileinstall; \
@@ -17,4 +17,4 @@ RUN set -eux; \
 ENV COMMAND /opt/sling/scripts/start.sh $COMMAND
 
 # from maven
-COPY --chown=sling:sling target/lib/ /opt/sling/fileinstall-docker/
+COPY --chown=sling:sling target/lib /opt/sling/fileinstall-docker/
