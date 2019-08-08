@@ -1,0 +1,29 @@
+#
+#  Composum Nodes
+#
+[feature name=composum-nodes]
+[variables]
+    composum.nodes.version=1.11.2
+
+[artifacts startLevel=20]
+
+  com.composum.sling.core/composum-sling-core-commons/${composum.nodes.version}
+  com.composum.sling.core/composum-sling-core-console/${composum.nodes.version}
+  com.composum.sling.core/composum-sling-core-jslibs/${composum.nodes.version}
+  com.composum.sling.core/composum-sling-user-management/${composum.nodes.version}
+  com.composum.sling.core/composum-sling-package-manager/${composum.nodes.version}
+  org.apache.jackrabbit.vault/org.apache.jackrabbit.vault/3.2.4
+
+  # enable feature to install packages as part of a provisioning model
+  com.composum.sling.core.osgi/composum-sling-osgi-package-installer/${composum.nodes.version}
+
+[configurations]
+
+  # the whitelisting of administrative login (replace by service users in Nodes 2.0)
+  org.apache.sling.jcr.base.internal.LoginAdminWhitelist.fragment-composum
+    whitelist.name="composum"
+    whitelist.bundles=[
+      "com.composum.core.commons",\
+      "com.composum.core.pckgmgr",\
+      "com.composum.core.pckginstall"
+    ]

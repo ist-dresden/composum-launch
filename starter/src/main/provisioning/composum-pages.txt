@@ -1,0 +1,12 @@
+#
+#  Composum Pages
+#
+[feature name=composum-pages]
+[variables]
+    composum.pages.version=1.0.0-SNAPSHOT
+
+[artifacts startLevel=32]
+
+  com.composum.pages/composum-pages-commons-package/${composum.pages.version}/zip
+  com.composum.pages/composum-pages-components-package/${composum.pages.version}/zip
+  com.composum.pages/composum-pages-stage-package/${composum.pages.version}/zip

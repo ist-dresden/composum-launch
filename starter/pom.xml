@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.composum.meta.ist</groupId>
+        <artifactId>parent-2-public</artifactId>
+        <version>1.1</version>
+        <relativePath></relativePath>
+    </parent>
+
+    <groupId>com.composum.pages</groupId>
+    <artifactId>composum-pages-starter</artifactId>
+    <packaging>slingstart</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <name>Composum Pages Starter Application</name>
+    <description>
+        The Sling Starter application JAR.
+    </description>
+
+    <properties>
+        <sling.http.port>8080</sling.http.port>
+        <sling.control.port>18080</sling.control.port>
+        <sling.java.version>11</sling.java.version>
+    </properties>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>slingstart-maven-plugin</artifactId>
+                <version>1.7.16</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>process-sources</id>
+                        <goals>
+                            <goal>prepare-package</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>install</id>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <createWebapp>false</createWebapp>
+                    <servers>
+                        <server>
+                            <port>${sling.http.port}</port>
+                            <controlPort>${sling.control.port}</controlPort>
+                        </server>
+                    </servers>                    
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>
