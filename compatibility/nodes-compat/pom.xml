@@ -12,7 +12,7 @@
 
     <artifactId>composum-launcher-compatibility-core</artifactId>
 
-    <name>Composum Public Launcher Basic Starter</name>
+    <name>Compusum Launcher Basic Starter</name>
     <description>Creates a docker image from sling launcher compatibility version, with Composum Core (incl. Package
         manager and User
         mgmt)
