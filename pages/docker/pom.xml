@@ -10,6 +10,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.composum.pages</groupId>
     <artifactId>composum-pages-docker</artifactId>
 
     <name>Composum Public Launcher Pages Docker image</name>
