@@ -17,7 +17,7 @@
 
     <packaging>pom</packaging>
 
-    <name>Compusum Launchers</name>
+    <name>Composum Launchers</name>
     <description>Maven parent for Composum Platform launcher (various docker images).</description>
 
     <properties>

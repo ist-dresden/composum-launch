@@ -14,7 +14,7 @@
 
     <packaging>pom</packaging>
 
-    <name>Compusum Launchers for compatibility checks</name>
+    <name>Composum Launchers for compatibility checks</name>
     <description>Some launchers to check whether we are compatible with old Sling versions</description>
 
     <modules>
