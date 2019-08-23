@@ -22,7 +22,7 @@
 
     <properties>
         <composum.nodes.version>1.11.4</composum.nodes.version>
-        <composum.platform.version>1.0.4</composum.platform.version>
+        <composum.platform.version>1.0.5</composum.platform.version>
         <composum.assets.version>1.0.0-SNAPSHOT</composum.assets.version>
         <composum.pages.version>1.0.0-SNAPSHOT</composum.pages.version>
     </properties>
