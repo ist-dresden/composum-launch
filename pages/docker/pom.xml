@@ -2,16 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>com.composum.platform</groupId>
-        <artifactId>composum-public-launcher</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>composum-public-launcher-pages-docker</artifactId>
+    <parent>
+        <groupId>com.composum.platform</groupId>
+        <artifactId>composum-launcher-pages</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
 
-    <name>Composum Public Launcher Pages Docker image</name>
+    <groupId>com.composum.pages</groupId>
+    <artifactId>composum-pages-docker</artifactId>
+
+    <name>Composum Launcher Pages Docker image</name>
     <description>Creates a docker image from sling starter with updated Composum Core (incl. Package manager and User
         mgmt) and Composum Platform and Pages. Basically all released public parts of Composum.
     </description>
@@ -20,7 +22,7 @@
         <!-- The base docker image we rely on -->
         <dependency>
             <groupId>com.composum.platform</groupId>
-            <artifactId>composum-public-launcher-slingstarter</artifactId>
+            <artifactId>composum-launcher-slingstarter</artifactId>
             <version>${project.version}</version>
             <type>docker-info</type>
             <optional>true</optional>
@@ -165,7 +167,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>com.composum.platform</groupId>
-                                    <artifactId>composum-public-launcher-slingstarter</artifactId>
+                                    <artifactId>composum-launcher-slingstarter</artifactId>
                                     <version>${project.version}</version>
                                     <type>docker-info</type>
                                     <outputDirectory>${project.build.directory}/docker-info-deps</outputDirectory>
@@ -230,6 +232,20 @@
     <profiles>
 
         <profile>
+            <id>develop</id>
+            <properties>
+                <imagetag>develop</imagetag>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>master</id>
+            <properties>
+                <imagetag>latest</imagetag>
+            </properties>
+        </profile>
+
+        <profile>
             <!-- This can also be called manually with   mvn clean install dockerfile:tag dockerfile:push -->
             <!-- Use authentication with entry in settings.xml , encrypt pwd with  mvn &dash;&dash;encrypt-password -->
             <!--<server>
@@ -246,20 +262,23 @@
                         <artifactId>dockerfile-maven-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>tag-image</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>tag</goal>
-                                </goals>
-                            </execution>
-                            <execution>
                                 <id>push-image</id>
                                 <phase>deploy</phase>
                                 <goals>
                                     <goal>push</goal>
                                 </goals>
                             </execution>
-
+                            <execution>
+                                <id>tag-image</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>tag</goal>
+                                    <goal>push</goal>
+                                </goals>
+                                <configuration>
+                                    <tag>${imagetag}</tag>
+                                </configuration>
+                            </execution>
                         </executions>
                     </plugin>
 

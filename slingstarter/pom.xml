@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.composum.platform</groupId>
-        <artifactId>composum-public-launcher</artifactId>
+        <artifactId>composum-launcher</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>composum-public-launcher-slingstarter</artifactId>
+    <artifactId>composum-launcher-slingstarter</artifactId>
 
-    <name>Composum Public Launcher Sling Starter</name>
+    <name>Composum Launcher Sling Starter</name>
     <description>Creates a docker image with a plain sling starter. The apache sling starter contains a previous version of the composum nodes module.</description>
 
     <dependencies>

@@ -2,27 +2,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.composum.meta.ist</groupId>
         <artifactId>parent-2-public</artifactId>
         <version>1.1</version>
+        <relativePath> </relativePath>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.composum.platform</groupId>
-    <artifactId>composum-public-launcher</artifactId>
+    <artifactId>composum-launcher</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
-    <name>Composum Public Launchers</name>
+    <name>Composum Launchers</name>
     <description>Maven parent for Composum Platform launcher (various docker images).</description>
 
     <properties>
-        <composum.nodes.version>1.11.2</composum.nodes.version>
-        <composum.platform.version>1.0.4</composum.platform.version>
+        <composum.nodes.version>1.11.4</composum.nodes.version>
+        <composum.platform.version>1.0.5</composum.platform.version>
         <composum.assets.version>1.0.0-SNAPSHOT</composum.assets.version>
-        <composum.pages.version>1.0.0-SNAPSHOT</composum.pages.version>
+        <composum.pages.version>1.0.0</composum.pages.version>
     </properties>
 
     <modules>
