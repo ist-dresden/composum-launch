@@ -14,7 +14,7 @@
     <groupId>com.composum.pages</groupId>
     <artifactId>composum-pages-starter</artifactId>
     <packaging>slingstart</packaging>
-    <version>1.0.2-SNAPSHOT</version><!-- sync with Pages -->
+    <version>1.0.2</version><!-- sync with Pages -->
 
     <name>Composum Pages Starter Application</name>
     <description>
