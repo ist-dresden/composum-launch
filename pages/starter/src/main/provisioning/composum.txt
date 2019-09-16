@@ -3,7 +3,7 @@
 #
 [feature name=composum-nodes]
 [variables]
-    composum.nodes.version=1.11.4
+    composum.nodes.version=1.11.5
 
 [artifacts startLevel=20]
 
