@@ -1,3 +1,7 @@
+# filesystem
+.crossref-*
+.local-*
+local-*
 # IntelliJ
 .idea
 *.iml
