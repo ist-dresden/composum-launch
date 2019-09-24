@@ -3,7 +3,7 @@
 #
 [feature name=composum-pages]
 [variables]
-    composum.pages.version=1.0.3-SNAPSHOT
+    composum.pages.version=1.0.2
 
 [artifacts startLevel=32]
 
