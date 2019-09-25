@@ -25,6 +25,7 @@
         <sling.http.port>8080</sling.http.port>
         <sling.control.port>18080</sling.control.port>
         <sling.java.version>11</sling.java.version>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <build>
@@ -62,4 +63,15 @@
 
         </plugins>
     </build>
+
+    <profiles>
+
+        <profile>
+            <id>master</id>
+            <properties>
+                <maven.deploy.skip>false</maven.deploy.skip>
+            </properties>
+        </profile>
+
+    </profiles>
 </project>

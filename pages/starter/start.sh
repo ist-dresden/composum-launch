@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 echo Start script for quick check
-set -vx
+set -vxe
 cd target
+/bin/rm -fr sling
 exec java -jar composum-pages-starter-*.jar
