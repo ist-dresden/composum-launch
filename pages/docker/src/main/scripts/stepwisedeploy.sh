@@ -21,6 +21,11 @@ targetdir=/opt/sling/fileinstall
 /bin/rm -fr $intermediatedir $targetdir
 mkdir $intermediatedir $targetdir
 
+function cleanup {
+  /bin/rm -fr $intermediatedir
+}
+trap cleanup EXIT
+
 cd /opt/sling/fileinstall-docker
 if [ "$(ls -A .)" ]; then
     for dir in */; do
@@ -41,7 +46,8 @@ if [ "$(ls -A .)" ]; then
     done
 fi
 
-sleep 20 # give server some undisturbed startup time
+sleep 15 # give server some undisturbed startup time before any deployments
+waituntilquiet
 
 echo `logdate` start stepwise deploying stuff
 
@@ -61,6 +67,6 @@ if [ "$(ls -A .)" ]; then
     done
 fi
 
-echo `logdate` finished stepwise deploying stuff at `date`
+echo `logdate` FINISHED stepwise deploying stuff at `date` - server should now be usable
 
-/bin/rm -fr $intermediatedir
+/opt/sling/scripts/preload.sh &
