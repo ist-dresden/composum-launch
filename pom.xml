@@ -25,6 +25,8 @@
         <composum.platform.version>1.0.5</composum.platform.version>
         <composum.assets.version>1.0.0-SNAPSHOT</composum.assets.version>
         <composum.pages.version>1.0.2</composum.pages.version>
+        <!-- no deployment except if specified otherwise -->
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <modules>

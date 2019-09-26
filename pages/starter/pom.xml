@@ -14,7 +14,7 @@
     <groupId>com.composum.pages</groupId>
     <artifactId>composum-pages-starter</artifactId>
     <packaging>slingstart</packaging>
-    <version>1.0.2</version><!-- sync with Pages -->
+    <version>1.0.2-SNAPSHOT</version><!-- sync with Pages -->
 
     <name>Composum Pages Starter Application</name>
     <description>
@@ -25,8 +25,18 @@
         <sling.http.port>8080</sling.http.port>
         <sling.control.port>18080</sling.control.port>
         <sling.java.version>11</sling.java.version>
-        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.deploy.skip>false</maven.deploy.skip>
     </properties>
+
+    <profiles>
+        <profile>
+            <!-- On travis do not deploy on the master branch, since the signing keys for sonatype aren't there. -->
+            <id>master</id>
+            <properties>
+                <maven.deploy.skip>false</maven.deploy.skip>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -64,14 +74,4 @@
         </plugins>
     </build>
 
-    <profiles>
-
-        <profile>
-            <id>master</id>
-            <properties>
-                <maven.deploy.skip>false</maven.deploy.skip>
-            </properties>
-        </profile>
-
-    </profiles>
 </project>

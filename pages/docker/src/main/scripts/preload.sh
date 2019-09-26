@@ -27,7 +27,7 @@ done
 
 sleep 1
 for url in $urls; do
-  curl -s -S -L -o /dev/null -u admin:admin $url
+  curl -f -s -S -L -o /dev/null -u admin:admin $url || echo FAIL : $url
 done
 
 echo `logdate` Preloading done, have a nice day using Composum!
