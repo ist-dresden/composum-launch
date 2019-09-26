@@ -12,7 +12,7 @@
 
     <groupId>com.composum.pages</groupId>
     <artifactId>composum-pages-docker</artifactId>
-    <version>1.0.2-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
+    <version>1.0.2</version><!-- sync with Pages. This is used as a tag for the docker image. -->
 
     <name>Composum Launcher Pages Docker image</name>
     <description>Creates a docker image from sling starter with updated Composum Core (incl. Package manager and User

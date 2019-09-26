@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>composum-launcher-slingstarter</artifactId>
-    <version>1.0.2-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
+    <version>1.0.2</version><!-- sync with Pages. This is used as a tag for the docker image. -->
 
     <name>Composum Launcher Sling Starter</name>
     <description>Creates a docker image with a plain sling starter. The apache sling starter contains a previous version of the composum nodes module.</description>

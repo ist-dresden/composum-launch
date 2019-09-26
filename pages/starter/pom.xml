@@ -14,7 +14,7 @@
     <groupId>com.composum.pages</groupId>
     <artifactId>composum-pages-starter</artifactId>
     <packaging>slingstart</packaging>
-    <version>1.0.2-SNAPSHOT</version><!-- sync with Pages -->
+    <version>1.0.2</version><!-- sync with Pages -->
 
     <name>Composum Pages Starter Application</name>
     <description>
@@ -33,7 +33,7 @@
             <!-- On travis do not deploy on the master branch, since the signing keys for sonatype aren't there. -->
             <id>master</id>
             <properties>
-                <maven.deploy.skip>false</maven.deploy.skip>
+                <maven.deploy.skip>true</maven.deploy.skip>
             </properties>
         </profile>
     </profiles>
