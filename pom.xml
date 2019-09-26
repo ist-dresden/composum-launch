@@ -24,7 +24,7 @@
         <composum.nodes.version>1.11.5</composum.nodes.version>
         <composum.platform.version>1.0.5</composum.platform.version>
         <composum.assets.version>1.0.0-SNAPSHOT</composum.assets.version>
-        <composum.pages.version>1.0.2</composum.pages.version>
+        <composum.pages.version>1.0.3-SNAPSHOT</composum.pages.version>
         <!-- no deployment except if specified otherwise -->
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
