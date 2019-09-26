@@ -1,4 +1,7 @@
 //usr/bin/env jshell --execution local "-J-Dfile=$1" "$0"; exit $?
+/** Scans for new lines of the form "ServiceEvent REGISTERED" in the logfile and exits when there are no such lines
+ * in the last 10 seconds (variable timeout). This is some indication that the last deployment was finished.
+ * (Unfortunately there is no really good indicator.) */
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +14,7 @@ import java.util.regex.Pattern;
 String filename = System.getProperty("file");
 Pattern regex = Pattern.compile("ServiceEvent REGISTERED|BundleEvent|org.apache.sling.audit.osgi.installer");
 int timeout = 10;
-BlockingQueue<Boolean> linequeue = new SynchronousQueue<>();
+BlockingQueue<Object> linequeue = new SynchronousQueue<Object>();
 File file = new File(filename);
 Thread reader = new Thread() {
     @Override
@@ -29,7 +32,7 @@ Thread reader = new Thread() {
                     while ((line = randomAccessFile.readLine()) != null) {
                         if (regex.matcher(line).find()) {
                             System.out.println(line);
-                            linequeue.offer(true);
+                            linequeue.offer(Boolean.TRUE);
                         }
                     }
                     lastKnownPosition = randomAccessFile.getFilePointer();
@@ -48,5 +51,6 @@ try {
     while (linequeue.poll(timeout, TimeUnit.SECONDS) != null) ;
 } finally {
     reader.interrupt();
+    Thread.sleep(1000);
 }
 /exit

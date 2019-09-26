@@ -25,7 +25,18 @@
         <sling.http.port>8080</sling.http.port>
         <sling.control.port>18080</sling.control.port>
         <sling.java.version>11</sling.java.version>
+        <maven.deploy.skip>false</maven.deploy.skip>
     </properties>
+
+    <profiles>
+        <profile>
+            <!-- On travis do not deploy on the master branch, since the signing keys for sonatype aren't there. -->
+            <id>master</id>
+            <properties>
+                <maven.deploy.skip>true</maven.deploy.skip>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -62,4 +73,5 @@
 
         </plugins>
     </build>
+
 </project>
