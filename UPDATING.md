@@ -41,7 +41,7 @@ probably build everything locally, anyway.
 Check http://localhost:8080/
 - Sling console: all bundles active? Composum versions correct? 
 - quick look at browser, user manager, package manager
-- create simple site in pages
+- create simple site in pages, publish, create release, in-place replication + check replicated result in browser
 
 ## Debugging Docker
 
