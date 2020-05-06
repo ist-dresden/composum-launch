@@ -21,10 +21,10 @@
     <description>Maven parent for Composum Platform launcher (various docker images).</description>
 
     <properties>
-        <composum.nodes.version>1.12.1</composum.nodes.version>
-        <composum.platform.version>1.1.0</composum.platform.version>
+        <composum.nodes.version>1.12.2-SNAPSHOT</composum.nodes.version>
+        <composum.platform.version>1.1.1-SNAPSHOT</composum.platform.version>
         <composum.assets.version>1.0.0-SNAPSHOT</composum.assets.version>
-        <composum.pages.version>1.1.0</composum.pages.version>
+        <composum.pages.version>1.1.1-SNAPSHOT</composum.pages.version>
         <!-- no deployment except if specified otherwise -->
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>

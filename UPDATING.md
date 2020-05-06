@@ -17,7 +17,7 @@ probably build everything locally, anyway.
 1. Update the version numbers in the develop branch to the latest Composum releases. The version numbers are defined 
     - in the top level composum-launch/pom.xml
     - composum-launch/pages/starter/src/main/provisioning/composum-*.txt
-    - set composum-launch/pages/*/pom.xml version to pages version (search for "sync with Pages")
+    - set composum-launch/slingstarter/pom.xml und composum-launch/pages/*/pom.xml version to pages version (search for "sync with Pages")
 2. Build locally
 3. Try that locally with the pages/docker image (compare README.md) 
     - start with `start.sh`
