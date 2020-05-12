@@ -14,21 +14,26 @@ The process of updating when new versions of the Composum Components are release
 the develop branch is for local testing - it is so far not deployed on dockerhub, since for local testing you'll
 probably build everything locally, anyway.
 
-1. Update the version numbers in the develop branch to the latest Composum releases. The version numbers are defined 
+Since normally the platform and pages version are in sync, we use this joined
+version also as version for the various artefacts of composum-launch.
+
+1. Update the project version to the joined pages / platform version
+    - mvn -B release:update-versions -DdevelopmentVersion=1.1.1-SNAPSHOT
+2. Update the version numbers in the develop branch to the latest Composum releases. The version numbers are defined 
     - in the top level composum-launch/pom.xml
     - composum-launch/pages/starter/src/main/provisioning/composum-*.txt
     - set composum-launch/slingstarter/pom.xml und composum-launch/pages/*/pom.xml version to pages version (search for "sync with Pages")
-2. Build locally
-3. Try that locally with the pages/docker image (compare README.md) 
-    - start with `start.sh`
-    - run quickcheck (see below)
-    - stop with Ctrl-C
+3. Build locally
 4. Try starter jar locally in pages/starter
     - start with `start.sh`
     - run quickcheck (see below)
     - stop with Crtl-C
-5. Checkin and merge develop to master, push
-6. Check travis build and release on docker-hub https://cloud.docker.com/repository/docker/composum/pages/tags
+5. Try that locally with the pages/docker image (compare README.md) 
+    - start with `start.sh`
+    - run quickcheck (see below)
+    - stop with Ctrl-C
+6. Checkin and merge develop to master, push
+7. Check travis build and release on docker-hub https://cloud.docker.com/repository/docker/composum/pages/tags
     - possibly check `docker pull -a composum/pages ; docker images composum/pages`
 8. Run release from dockerhub
     - start in pages/starter with `start-from-dockerhub.sh`

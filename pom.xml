@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,7 +12,7 @@
 
     <groupId>com.composum.platform</groupId>
     <artifactId>composum-launcher</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.1.1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -22,9 +21,13 @@
 
     <properties>
         <composum.nodes.version>1.12.2-SNAPSHOT</composum.nodes.version>
-        <composum.platform.version>1.1.1-SNAPSHOT</composum.platform.version>
+        <!-- We release project and platform in synchronized versions. The project version is adapted with
+         the maven release plugin to the right version - so we have everything in sync. E.g.:
+         mvn -B release:update-versions -DdevelopmentVersion=1.1.1-SNAPSHOT
+         -->
+        <composum.platform.version>${project.version}</composum.platform.version>
+        <composum.pages.version>${project.version}</composum.pages.version>
         <composum.assets.version>1.0.0-SNAPSHOT</composum.assets.version>
-        <composum.pages.version>1.1.1-SNAPSHOT</composum.pages.version>
         <!-- no deployment except if specified otherwise -->
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
