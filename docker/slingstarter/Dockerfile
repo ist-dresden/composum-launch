@@ -6,6 +6,7 @@
 
 FROM openjdk:12-jdk
 ARG STARTERJAR
+# FIXME(hps,16.10.20) use later JDK?
 
 RUN set -eux; \
     groupadd -r sling --gid=999; \

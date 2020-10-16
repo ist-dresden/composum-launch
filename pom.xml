@@ -33,9 +33,9 @@
     </properties>
 
     <modules>
-        <module>slingstarter</module>
         <module>pages</module>
         <module>compatibility</module>
+        <module>docker</module>
     </modules>
 
 </project>

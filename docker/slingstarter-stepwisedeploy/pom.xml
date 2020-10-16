@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.composum.platform</groupId>
+        <artifactId>composum-launcher-docker</artifactId>
+        <version>1.1.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>composum-launcher-composumnodes</artifactId>
+    <version>1.1.1-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
+
+    <name>Composum Launcher Docker Sling Starter With Deployments</name>
+    <description>Creates a docker image from sling starter with updated Composum Core (incl. Package manager and User
+        mgmt) and some basic scripts to fire up docker images with installed modules.
+    </description>
+
+    <dependencies>
+        <!-- The base docker image we rely on -->
+        <dependency>
+            <groupId>com.composum.platform</groupId>
+            <artifactId>composum-launcher-docker-slingstarter</artifactId>
+            <version>${project.version}</version>
+            <type>docker-info</type>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>fetch-included-libraries</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <!-- composum core bundles. As bundle, not as package, since we need to safely replace.
+                                    order > 20 since we want to replace the old composum bundles in launchpad. -->
+                                <artifactItem>
+                                    <groupId>com.composum.sling.core</groupId>
+                                    <artifactId>composum-sling-osgi-package-installer</artifactId>
+                                    <version>1.9.2</version>
+                                    <!-- Temporary solution to be able to install packages. Can be removed
+                                     when this goes into the package manager. -->
+                                    <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>docker-info</id>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.composum.platform</groupId>
+                                    <artifactId>composum-launcher-docker-slingstarter</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>docker-info</type>
+                                    <outputDirectory>${project.build.directory}/docker-info-deps</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>composum/slingstarter-stepwisedeploy</repository>
+                    <tag>${project.version}</tag>
+                    <verbose>true</verbose>
+                    <detail>true</detail>
+                    <pullNewerImage>false</pullNewerImage>
+                    <buildArgs>
+                        <PROJECT_VERSION>${project.version}</PROJECT_VERSION>
+                    </buildArgs>
+                    <verbose>true</verbose>
+                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
+    <profiles>
+
+        <profile>
+            <id>develop</id>
+            <properties>
+                <imagetag>develop</imagetag>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>master</id>
+            <properties>
+                <imagetag>latest</imagetag>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- This can also be called manually with   mvn clean install dockerfile:tag dockerfile:push -->
+            <!-- Use authentication with entry in settings.xml , encrypt pwd with  mvn &dash;&dash;encrypt-password -->
+            <!--<server>
+                <id>docker.io</id>
+                <username>composum</username>
+                <password>xxx/password>
+            </server>-->
+            <id>deployDocker</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>dockerfile-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>push-image</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>push</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>tag-image</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>tag</goal>
+                                    <goal>push</goal>
+                                </goals>
+                                <configuration>
+                                    <tag>${imagetag}</tag>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+
+</project>

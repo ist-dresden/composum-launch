@@ -112,7 +112,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>com.composum.platform</groupId>
-                                    <artifactId>composum-launcher-slingstarter</artifactId>
+                                    <artifactId>composum-launcher-docker-slingstarter</artifactId>
                                     <version>${project.version}</version>
                                     <type>docker-info</type>
                                     <outputDirectory>${project.build.directory}/docker-info-deps</outputDirectory>

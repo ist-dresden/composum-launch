@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.composum.platform</groupId>
-        <artifactId>composum-launcher</artifactId>
+        <artifactId>composum-launcher-docker</artifactId>
         <version>1.1.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>composum-launcher-slingstarter</artifactId>
+    <artifactId>composum-launcher-docker-slingstarter</artifactId>
     <version>1.1.1-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
 
-    <name>Composum Launcher Sling Starter</name>
+    <name>Composum Launcher Docker Sling Starter</name>
     <description>Creates a docker image with a plain sling starter. The apache sling starter contains a previous version
         of the composum nodes module.
     </description>
@@ -28,32 +29,8 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources-filtered</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-
         <plugins>
             <plugin>
-                <!-- Retrieve slingstart jar to include in docker image -->
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <includeScope>runtime</includeScope>
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <!-- Retrieve slingstart to include in docker image. -->
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <executions>
@@ -73,29 +50,6 @@
                     <verbose>true</verbose>
                     <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <!-- Generate .env file with our version to enable version independent compose files -->
-                        <id>copy-resources</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/env</directory>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
