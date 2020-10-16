@@ -9,19 +9,24 @@
         <version>1.1.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>composum-launcher-slingstarter-stepwisedeploy</artifactId>
+    <artifactId>composum-launcher-composumnodes-v1</artifactId>
     <version>1.1.1-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
 
-    <name>Composum Launcher Docker Sling Starter With Deployments</name>
-    <description>Creates a docker image from sling starter with updated Composum Core (incl. Package manager and User
-        mgmt) and some basic scripts to fire up docker images with installed modules.
+    <name>Composum Launcher Core Docker image</name>
+    <description>Creates a docker image from sling starter with updated Composum Core version 1 (incl. Package manager
+        and User mgmt) and some basic scripts to fire up docker images with installed modules.
     </description>
+
+    <properties>
+        <basedockerimage>composum-launcher-slingstarter-stepwisedeploy</basedockerimage>
+        <thisdockerimage>composum/core</thisdockerimage>
+    </properties>
 
     <dependencies>
         <!-- The base docker image we rely on -->
         <dependency>
             <groupId>com.composum.platform</groupId>
-            <artifactId>composum-launcher-docker-slingstarter</artifactId>
+            <artifactId>${basedockerimage}</artifactId>
             <version>${project.version}</version>
             <type>docker-info</type>
             <optional>true</optional>
@@ -44,10 +49,44 @@
                                     order > 20 since we want to replace the old composum bundles in launchpad. -->
                                 <artifactItem>
                                     <groupId>com.composum.sling.core</groupId>
-                                    <artifactId>composum-sling-osgi-package-installer</artifactId>
-                                    <version>1.9.2</version>
-                                    <!-- Temporary solution to be able to install packages. Can be removed
-                                     when this goes into the package manager. -->
+                                    <artifactId>composum-sling-core-jslibs</artifactId>
+                                    <version>${composum.nodes.version}</version>
+                                    <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.composum.sling.core</groupId>
+                                    <artifactId>composum-sling-core-jslibs</artifactId>
+                                    <version>${composum.nodes.version}</version>
+                                    <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.composum.sling.core</groupId>
+                                    <artifactId>composum-sling-core-commons</artifactId>
+                                    <version>${composum.nodes.version}</version>
+                                    <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.composum.sling.core</groupId>
+                                    <artifactId>composum-sling-core-console</artifactId>
+                                    <version>${composum.nodes.version}</version>
+                                    <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.composum.sling.core</groupId>
+                                    <artifactId>composum-sling-package-manager</artifactId>
+                                    <version>${composum.nodes.version}</version>
+                                    <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.composum.sling.core</groupId>
+                                    <artifactId>composum-sling-user-management</artifactId>
+                                    <version>${composum.nodes.version}</version>
+                                    <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.composum.sling.core</groupId>
+                                    <artifactId>composum-sling-core-config</artifactId>
+                                    <version>${composum.nodes.version}</version>
                                     <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
@@ -63,7 +102,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>com.composum.platform</groupId>
-                                    <artifactId>composum-launcher-docker-slingstarter</artifactId>
+                                    <artifactId>composum-launcher-slingstarter-stepwisedeploy</artifactId>
                                     <version>${project.version}</version>
                                     <type>docker-info</type>
                                     <outputDirectory>${project.build.directory}/docker-info-deps</outputDirectory>
@@ -86,7 +125,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>composum/slingstarter-stepwisedeploy</repository>
+                    <repository>${thisdockerimage}</repository>
                     <tag>${project.version}</tag>
                     <verbose>true</verbose>
                     <detail>true</detail>
