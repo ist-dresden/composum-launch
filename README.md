@@ -10,11 +10,15 @@ This module creates a couple of docker images with which it is easy to run the p
 
 - **slingstarter**: starts a [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter) on JDK 11 with enabled debugging and JMX and some provisions to automatically install more packages when a derived docker image is started. On dockerhub this is available as [composum/slingstarter](https://cloud.docker.com/u/composum/repository/docker/composum/slingstarter).
 
-- **pages/docker**: docker image based on slingstarter, it deploys both the newest version of the [Composum Nodes](https://github.com/ist-dresden/composum), [Composum Platform](https://github.com/ist-dresden/composum-platform) and [Composum Pages](https://github.com/ist-dresden/composum-pages). On dockerhub this is available as [composum/pages](https://cloud.docker.com/u/composum/repository/docker/composum/pages).
+- **slingstarter-stepwisedeploy**: docker image based on slingstarter that sets up some basic scripts for the stepwise deployment of packages within sling starter from a docker image to avoid problems with dependencies between them. On dockerhub available as [composum/slingstarter-stepwisedeploy](https://cloud.docker.com/u/composum/repository/docker/composum/slingstarter-stepwisedeploy).
+
+- **pages/docker**: docker image based on slingstarter, it deploys both the newest version of the [Composum Nodes](https://github.com/ist-dresden/composum), [Composum Platform](https://github.com/ist-dresden/composum-platform) and [Composum Pages](https://github.com/ist-dresden/composum-pages). On dockerhub this is available as [composum/pages](https://cloud.docker.com/u/composum/repository/docker/composum/pages). (TODO: make this based on slingstarter-stepwisedeploy.)
 
 - compatibilty/**slingstarter-compat**: like slingstarter, but with the earliest Sling Launchpad version that is supported the Composum Nodes (as of 4/2019: version 9 on JDK 8).
 
 - compatibilty/**nodes-compat**: like slingstarter, but with the earliest Sling Launchpad version that is supported the Composum Nodes (as of 4/2019: version 9 on JDK 8).
+
+Since there are various modules involved, we normally use the pages version as version number for all docker images, as kind of the leading module.
 
 # Start Composum Pages using docker
 

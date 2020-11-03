@@ -19,7 +19,7 @@
 
     <properties>
         <basedockerimage>composum-launcher-slingstarter-stepwisedeploy</basedockerimage>
-        <thisdockerimage>composum/core</thisdockerimage>
+        <thisdockerimage>composum/core-v1</thisdockerimage>
     </properties>
 
     <dependencies>

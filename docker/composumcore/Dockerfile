@@ -5,7 +5,5 @@
 ARG PROJECT_VERSION
 FROM composum/slingstarter-stepwisedeploy:${PROJECT_VERSION}
 
-# COPY --chown=sling:sling src/main/scripts /opt/sling/scripts/
-
 # from maven
 COPY --chown=sling:sling target/lib /opt/sling/fileinstall-docker/

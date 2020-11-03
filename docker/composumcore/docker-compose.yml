@@ -7,7 +7,7 @@ version: "3.7"
 
 services:
   sling:
-    image: composum/core:${PROJECT_VERSION}
+    image: composum/core-v1:${PROJECT_VERSION}
     container_name: composum-core
     volumes:
       - "./target/run/logs:/opt/sling/sling/logs"
