@@ -49,9 +49,9 @@
                                 <!-- composum core bundles. As bundle, not as package, since we need to safely replace.
                                     order > 20 since we want to replace the old composum bundles in launchpad. -->
                                 <artifactItem>
-                                    <groupId>com.composum.sling.core</groupId>
+                                    <groupId>com.composum.sling.core.osgi</groupId>
                                     <artifactId>composum-sling-osgi-package-installer</artifactId>
-                                    <version>1.9.2</version>
+                                    <version>${composum.nodes.version}</version>
                                     <!-- Temporary solution to be able to install packages. Can be removed
                                      when this goes into the package manager. -->
                                     <outputDirectory>${project.build.directory}/lib/20</outputDirectory>
