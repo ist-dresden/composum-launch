@@ -17,8 +17,10 @@ sleep 15 # give server some undisturbed startup time before any deployments
 waituntilquiet
 
 for file in /opt/sling/scripts/_preinstall*.sh; do
-  echo `logdate` STEPDEPL executing pre installation script $file
-  source $file
+  if test -r "$file"; then
+    echo `logdate` STEPDEPL executing pre installation script $file
+    source $file
+  fi # else it's just the unexpanded glob
 done
 
 # First copy stuff together into intermediatedir to be able to
@@ -75,8 +77,10 @@ fi
 echo `logdate` STEPDEPL FINISHED stepwise deploying stuff at `date` - server should now be usable
 
 for file in /opt/sling/scripts/_postinstall*.sh; do
-  echo `logdate` STEPDEPL executing post installation script $file
-  source $file
+  if test -r "$file"; then
+    echo `logdate` STEPDEPL executing post installation script $file
+    source $file
+  fi # else it's just the unexpanded glob
 done
 
 /opt/sling/scripts/preload.sh &

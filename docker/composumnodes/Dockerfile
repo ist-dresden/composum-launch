@@ -5,6 +5,8 @@
 ARG PROJECT_VERSION
 FROM composum/slingstarter-stepwisedeploy:${PROJECT_VERSION}
 
+RUN rm -f /opt/sling/fileinstall-docker/*/composum-sling-osgi-package-installer*
+
 # from maven
 COPY --chown=sling:sling target/lib /opt/sling/fileinstall-docker/
 COPY --chown=sling:sling src/main/scripts /opt/sling/scripts/

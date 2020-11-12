@@ -47,12 +47,12 @@
                             <artifactItems>
                                 <!-- composum core bundles. As bundle, not as package, since we need to safely replace.
                                     order > 20 since we want to replace the old composum bundles in launchpad. -->
-<!--                                <artifactItem>-->
-<!--                                    <groupId>com.composum.nodes.osgi</groupId>-->
-<!--                                    <artifactId>composum-nodes-osgi-package-installer</artifactId>-->
-<!--                                    <version>${composum.nodes.version}</version>-->
-<!--                                    <outputDirectory>${project.build.directory}/lib/25</outputDirectory>-->
-<!--                                </artifactItem>-->
+                                <artifactItem>
+                                    <groupId>com.composum.nodes.osgi</groupId>
+                                    <artifactId>composum-nodes-osgi-package-installer</artifactId>
+                                    <version>${composum.nodes.version}</version>
+                                    <outputDirectory>${project.build.directory}/lib/26</outputDirectory>
+                                </artifactItem>
 
                                 <artifactItem>
                                     <groupId>com.composum.nodes</groupId>
