@@ -51,7 +51,7 @@
                                 <artifactItem>
                                     <groupId>com.composum.sling.core.osgi</groupId>
                                     <artifactId>composum-sling-osgi-package-installer</artifactId>
-                                    <version>${composum.nodes.version}</version>
+                                    <version>${composum.corev1.version}</version>
                                     <!-- Temporary solution to be able to install packages. Can be removed
                                      when this goes into the package manager. -->
                                     <outputDirectory>${project.build.directory}/lib/20</outputDirectory>
@@ -60,43 +60,43 @@
                                 <artifactItem>
                                     <groupId>com.composum.sling.core</groupId>
                                     <artifactId>composum-sling-core-jslibs</artifactId>
-                                    <version>${composum.nodes.version}</version>
+                                    <version>${composum.corev1.version}</version>
                                     <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.composum.sling.core</groupId>
                                     <artifactId>composum-sling-core-jslibs</artifactId>
-                                    <version>${composum.nodes.version}</version>
+                                    <version>${composum.corev1.version}</version>
                                     <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.composum.sling.core</groupId>
                                     <artifactId>composum-sling-core-commons</artifactId>
-                                    <version>${composum.nodes.version}</version>
+                                    <version>${composum.corev1.version}</version>
                                     <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.composum.sling.core</groupId>
                                     <artifactId>composum-sling-core-console</artifactId>
-                                    <version>${composum.nodes.version}</version>
+                                    <version>${composum.corev1.version}</version>
                                     <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.composum.sling.core</groupId>
                                     <artifactId>composum-sling-package-manager</artifactId>
-                                    <version>${composum.nodes.version}</version>
+                                    <version>${composum.corev1.version}</version>
                                     <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.composum.sling.core</groupId>
                                     <artifactId>composum-sling-user-management</artifactId>
-                                    <version>${composum.nodes.version}</version>
+                                    <version>${composum.corev1.version}</version>
                                     <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.composum.sling.core</groupId>
                                     <artifactId>composum-sling-core-config</artifactId>
-                                    <version>${composum.nodes.version}</version>
+                                    <version>${composum.corev1.version}</version>
                                     <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
                                 </artifactItem>
                             </artifactItems>

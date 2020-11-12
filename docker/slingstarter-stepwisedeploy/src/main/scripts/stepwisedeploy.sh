@@ -13,6 +13,14 @@ function waituntilquiet {
     `dirname $0`/WaitForServerUp.jsh $logfile
 }
 
+sleep 15 # give server some undisturbed startup time before any deployments
+waituntilquiet
+
+for file in /opt/sling/scripts/_preinstall*.sh; do
+  echo `logdate` STEPDEPL executing pre installation script $file
+  source $file
+done
+
 # First copy stuff together into intermediatedir to be able to
 # override stuff from the docker image.
 intermediatedir=/opt/sling/fileinstall-joined
@@ -46,10 +54,7 @@ if [ "$(ls -A .)" ]; then
     done
 fi
 
-sleep 15 # give server some undisturbed startup time before any deployments
-waituntilquiet
-
-echo `logdate` start stepwise deploying stuff
+echo `logdate` STEPDEPL start stepwise deploying stuff
 
 # Now stepwise move the links to the install directory
 cd $intermediatedir
@@ -59,7 +64,7 @@ if [ "$(ls -A .)" ]; then
         echo `logdate` checking `pwd`/$dir
         for fil in $dir/*; do
             if test \! -e "$targetdir/$fil"; then
-                echo `logdate` deploying $fil
+                echo `logdate` STEPDEPL deploying $fil
                 mv -f `pwd`/$fil $targetdir/$dir/
             fi
         done
@@ -67,6 +72,11 @@ if [ "$(ls -A .)" ]; then
     done
 fi
 
-echo `logdate` FINISHED stepwise deploying stuff at `date` - server should now be usable
+echo `logdate` STEPDEPL FINISHED stepwise deploying stuff at `date` - server should now be usable
+
+for file in /opt/sling/scripts/_postinstall*.sh; do
+  echo `logdate` STEPDEPL executing post installation script $file
+  source $file
+done
 
 /opt/sling/scripts/preload.sh &

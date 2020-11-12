@@ -17,7 +17,8 @@
     <modules>
         <module>slingstarter</module>
         <module>slingstarter-stepwisedeploy</module>
-        <module>composumcore</module>
+        <module>composumcoreV1</module>
+        <module>composumnodes</module>
     </modules>
 
     <build>
