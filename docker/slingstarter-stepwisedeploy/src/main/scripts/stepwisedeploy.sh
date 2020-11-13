@@ -13,8 +13,14 @@ function waituntilquiet {
     `dirname $0`/WaitForServerUp.jsh $logfile
 }
 
-sleep 15 # give server some undisturbed startup time before any deployments
+sleep 30 # give server some undisturbed startup time before any deployments
 waituntilquiet
+
+until curl -f -u admin:admin -s -S http://localhost:8080/system/console/status-jcrresolver; do
+  echo `logdate` STEPDEPL waiting until server up
+  sleep 10
+done
+curl -s -S -L -o /dev/null -u admin:admin http://localhost:8080/
 
 for file in /opt/sling/scripts/_preinstall*.sh; do
   if test -r "$file"; then
