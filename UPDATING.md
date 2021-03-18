@@ -22,7 +22,7 @@ version also as version for the various artefacts of composum-launch.
 2. Update the version numbers in the develop branch to the latest Composum releases. The version numbers are defined 
     - in the top level composum-launch/pom.xml
     - composum-launch/pages/starter/src/main/provisioning/composum-*.txt
-    - set composum-launch/slingstarter/pom.xml und composum-launch/pages/*/pom.xml version to pages version (search for "sync with Pages")
+    - set composum-launch/pages/**/pom.xml version to pages version (search for "sync with Pages")
 3. Build locally
 4. Try starter jar locally in pages/starter
     - start with `start.sh`
@@ -60,3 +60,9 @@ Start with pages/docker/start-from-dockerhub.sh :
 ## Preconditions, to check once in a while
 
 - Starter derived from newest release of sling starter https://github.com/apache/sling-org-apache-sling-starter/releases 
+
+## Tricks
+If you have xmlstarlet (e.g. package xmlstarlet from https://brew.sh/) installed, the following command prints the versions of the pom.xml below a main directory:
+for fil in */pom.xml ; do
+   xml sel -T -N pom=http://maven.apache.org/POM/4.0.0 -t -m pom:project -v pom:groupId -o : -v pom:artifactId -o : -v pom:version -nl $fil 
+done
