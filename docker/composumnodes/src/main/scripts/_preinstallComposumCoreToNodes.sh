@@ -1,5 +1,9 @@
 # Script to uninstall Composum Core V1 and install Composum Nodes instead.
 
+# make sure the server is somewhat up and running.
+sleep 20
+curl -s -S -L -o /dev/null -u admin:admin http://localhost:8080/
+
 echo `logdate` REMCOMPV1 removing Composum Core v1 if present
 
 # possibly also remove com.composum.core.pckginstall
@@ -20,6 +24,6 @@ if test -n "$failed"; then
 fi
 
 if test -n "$removed"; then
-sleep 5
+sleep 20
 waituntilquiet
 fi
