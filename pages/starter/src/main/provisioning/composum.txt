@@ -3,25 +3,16 @@
 #
 [feature name=composum-nodes]
 [variables]
-    composum.nodes.version=1.12.2-SNAPSHOT
+    composum.nodes.version=2.4.4-SNAPSHOT
 
 [artifacts startLevel=20]
 
-  com.composum.sling.core/composum-sling-core-commons/${composum.nodes.version}
-  com.composum.sling.core/composum-sling-core-console/${composum.nodes.version}
-  com.composum.sling.core/composum-sling-core-jslibs/${composum.nodes.version}
-  com.composum.sling.core/composum-sling-user-management/${composum.nodes.version}
-  com.composum.sling.core/composum-sling-package-manager/${composum.nodes.version}
-  com.composum.sling.core.osgi/composum-sling-osgi-package-installer/${composum.nodes.version}
-  org.apache.jackrabbit.vault/org.apache.jackrabbit.vault/3.4.0
+  com.composum.nodes/composum-nodes-commons/${composum.nodes.version}
+  com.composum.nodes/composum-nodes-config/${composum.nodes.version}
+  com.composum.nodes/composum-nodes-console/${composum.nodes.version}
+  com.composum.nodes/composum-nodes-jslibs/${composum.nodes.version}
+  com.composum.nodes/composum-nodes-usermgr/${composum.nodes.version}
+  com.composum.nodes/composum-nodes-pckgmgr/${composum.nodes.version}
+  com.composum.nodes.osgi/composum-nodes-osgi-package-installer/${composum.nodes.version}
+  org.apache.jackrabbit.vault/org.apache.jackrabbit.vault/3.4.10
 
-[configurations]
-
-  # the whitelisting of administrative login (to replace by service users in Nodes 2.0)
-  org.apache.sling.jcr.base.internal.LoginAdminWhitelist.fragment-composum
-    whitelist.name="composum"
-    whitelist.bundles=[
-      "com.composum.core.commons",\
-      "com.composum.core.pckgmgr",\
-      "com.composum.core.pckginstall"
-    ]

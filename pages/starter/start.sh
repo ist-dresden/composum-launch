@@ -3,4 +3,4 @@ echo Start script for quick check
 set -vxe
 cd target
 /bin/rm -fr sling
-exec java -jar composum-pages-starter-*.jar
+exec java -jar composum-launcher-pages-starter-*.jar

@@ -3,7 +3,7 @@
 #
 [feature name=composum-assets]
 [variables]
-    composum.assets.version=1.0.0-SNAPSHOT
+    composum.assets.version=1.0.1-SNAPSHOT
 
 [artifacts startLevel=31]
 
