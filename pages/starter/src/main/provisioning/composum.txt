@@ -16,3 +16,13 @@
   com.composum.nodes.osgi/composum-nodes-osgi-package-installer/${composum.nodes.version}
   org.apache.jackrabbit.vault/org.apache.jackrabbit.vault/3.4.10
 
+[configurations]
+
+  # the whitelisting of administrative login (to be replaced by service users in Nodes 2.0)
+  org.apache.sling.jcr.base.internal.LoginAdminWhitelist.fragment-composum_core_v2
+    whitelist.name="composum_core"
+    whitelist.bundles=[
+      "com.composum.nodes.commons",
+      "com.composum.nodes.pckgmgr",
+      "com.composum.nodes.pckginstall"
+    ]
