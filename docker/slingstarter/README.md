@@ -9,3 +9,9 @@ For testing, there are some docker-compose files. You need to do a mvn install b
 
 - docker-compose.yml : for a quick check of the created docker image: start with a file system based CR.
 
+## Testing
+
+Start e.g. with
+docker-compose up --force-recreate -V --abort-on-container-exit
+Remove everything e.g. with
+docker-compose down --rmi local -v --remove-orphans
