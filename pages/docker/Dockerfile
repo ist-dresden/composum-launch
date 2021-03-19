@@ -3,7 +3,7 @@
 # See comments of base image!
 
 ARG PROJECT_VERSION
-FROM composum/slingstarter:${PROJECT_VERSION}
+FROM composum/nodes:${PROJECT_VERSION}
 
 ENV FILEINSTALL_OPTS \
     -Dsling.fileinstall.dir=fileinstall
