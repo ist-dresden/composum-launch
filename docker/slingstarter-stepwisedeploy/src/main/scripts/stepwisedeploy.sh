@@ -2,6 +2,14 @@
 
 # set -evx
 
+immediatedir=/opt/sling/fileinstall-immediate
+intermediatedir=/opt/sling/fileinstall-joined
+targetdir=/opt/sling/fileinstall
+
+/bin/rm -fr $intermediatedir $targetdir
+mkdir $intermediatedir $targetdir
+cp -fr $immediatedir/* $targetdir/
+
 function logdate {
     date -u '+%d.%m.%Y %H:%M:%S'
 }
@@ -11,15 +19,30 @@ logfile=/opt/sling/sling/logs/error.log
 # waits until there are no deployment activities on the server for 10 seconds
 function waituntilquiet {
     `dirname $0`/WaitForServerUp.jsh $logfile
+    until curl -f -u admin:admin -s -S http://localhost:8080/system/console/status-osgi-installer.txt | egrep 'INSTALLED$' > /dev/null; do
+      echo `logdate` STEPDEPL waiting until osgi up
+      sleep 10
+    done
+    while curl -f -u admin:admin -s -S http://localhost:8080/system/console/status-osgi-installer.txt | egrep '^\*.*INSTALL$' > /dev/null; do
+      echo `logdate` STEPDEPL waiting until server quiet
+      sleep 10
+    done
 }
 
-sleep 30 # give server some undisturbed startup time before any deployments
+sleep 20 # give server some undisturbed startup time before any deployments
 waituntilquiet
 
-until curl -f -u admin:admin -s -S http://localhost:8080/system/console/status-jcrresolver; do
+until curl -f -u admin:admin -s -S http://localhost:8080/system/console/status-jcrresolver | egrep '^JCR.*/[^a-zA-Z]' > /dev/null; do
   echo `logdate` STEPDEPL waiting until server up
   sleep 10
 done
+
+## This is installed at runlevel 25, so the rest of the server must be up.
+until curl -f -u admin:admin -s -S http://localhost:8080/system/console/status-osgi-installer.txt | egrep 'com.composum.*pckginstall.*INSTALLED' > /dev/null; do
+  echo `logdate` STEPDEPL waiting until server up 2
+  sleep 10
+done
+
 curl -s -S -L -o /dev/null -u admin:admin http://localhost:8080/
 
 for file in /opt/sling/scripts/_preinstall*.sh; do
@@ -31,11 +54,6 @@ done
 
 # First copy stuff together into intermediatedir to be able to
 # override stuff from the docker image.
-intermediatedir=/opt/sling/fileinstall-joined
-targetdir=/opt/sling/fileinstall
-
-/bin/rm -fr $intermediatedir $targetdir
-mkdir $intermediatedir $targetdir
 
 function cleanup {
   /bin/rm -fr $intermediatedir

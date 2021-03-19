@@ -47,7 +47,7 @@
                                     <groupId>com.composum.nodes.osgi</groupId>
                                     <artifactId>composum-nodes-osgi-package-installer</artifactId>
                                     <version>${composum.nodes.version}</version>
-                                    <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/immediatelib/25</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>

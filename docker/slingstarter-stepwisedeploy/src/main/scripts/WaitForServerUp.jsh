@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
     String filename = System.getProperty("file");
     Pattern regex = Pattern.compile("ServiceEvent REGISTERED|BundleEvent|org.apache.sling.audit.osgi.installer|OsgiInstallerImpl");
-    int timeout = 20;
+    int timeout = 10;
     @SuppressWarnings("rawtypes")
     BlockingQueue linequeue = new SynchronousQueue<Object>();
     File file = new File(filename);
