@@ -1,0 +1,11 @@
+#
+#  Composum Platform other public projects
+#
+[feature name=composum-platform-otherpublic]
+[variables]
+    composum.platform.other.version=1.0.0
+
+[artifacts startLevel=33]
+
+  # Composum Platform additional packages
+  com.composum.platform/cpm-platform-htl-package/${composum.platform.other.version}/zip
