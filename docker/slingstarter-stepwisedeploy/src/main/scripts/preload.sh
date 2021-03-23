@@ -33,6 +33,14 @@ for url in $urls; do
   curl -s -S -L -o /dev/null -u admin:admin $url
 done
 
+TMPFIL=`mktemp -d /tmp/deleteme.preload.XXXXXXXX`
+trap "{ /bin/rm -fr $TMPFIL; }" EXIT
+
+# preload everything with it's required stuff
+wget -P $TMPFIL -q -nc -p --user=admin --password=admin --delete-after $urls
+# loading the browser with links depth 1 touches all the major composum applications
+wget -P $TMPFIL -q -nc -p -r -l 1 --user=admin --password=admin --delete-after ${urlbase}/bin/browser.html
+
 sleep 1
 for url in $urls; do
   curl -f -s -S -L -o /dev/null -u admin:admin $url || echo FAIL : $url
