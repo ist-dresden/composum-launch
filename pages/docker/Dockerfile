@@ -14,7 +14,5 @@ RUN set -eux; \
     mkdir -p /opt/sling/fileinstall; \
     chmod a+x /opt/sling/scripts/*.sh
 
-ENV COMMAND /opt/sling/scripts/start.sh $COMMAND
-
 # from maven
 COPY --chown=sling:sling target/lib /opt/sling/fileinstall-docker/

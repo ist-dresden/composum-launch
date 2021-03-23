@@ -7,7 +7,7 @@
         <groupId>com.composum.meta.ist</groupId>
         <artifactId>parent-2-public</artifactId>
         <version>1.4</version>
-        <relativePath/>
+        <relativePath />
     </parent>
 
     <groupId>com.composum.platform</groupId>

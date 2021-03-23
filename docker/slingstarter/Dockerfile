@@ -6,11 +6,15 @@
 
 FROM openjdk:12-jdk
 ARG STARTERJAR
-# FIXME(hps,16.10.20) use later JDK?
+# TODO(hps,16.10.20) use later JDK?
+# install some essential utilities for diagnosing trouble from a shell within the container
+RUN yum install -y procps-ng
+RUN yum install -y less
+RUN yum install -y vim-minimal
+RUN yum install -y wget
 
-RUN set -eux; \
-    groupadd -r sling --gid=999; \
-    useradd -r -g sling --uid=999 --home-dir=/opt/sling/sling --shell=/bin/bash sling; \
+RUN set -eux; groupadd -r sling --gid=1000; \
+    useradd -r -g sling --uid=1000 --home-dir=/opt/sling/sling --shell=/bin/bash sling; \
     mkdir -p /opt/sling/sling /opt/sling/fileinstall-docker /opt/sling/fileinstall-user; \
     chown -R sling:sling /opt/sling; \
     ln -s /opt/sling/sling/logs /var/log/sling;
