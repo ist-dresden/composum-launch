@@ -36,6 +36,7 @@ if [ "$(ls -A .)" ]; then
     done
 fi
 
+echo `logdate` first startup wait
 sleep 20 # give server some undisturbed startup time
 
 echo `logdate` start stepwise deploying stuff

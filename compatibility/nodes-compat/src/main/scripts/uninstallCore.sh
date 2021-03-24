@@ -27,6 +27,5 @@ if test -n "$failed"; then
 fi
 
 if test -n "$removed"; then
-sleep 20
-waituntilquiet
+  sleep 10
 fi

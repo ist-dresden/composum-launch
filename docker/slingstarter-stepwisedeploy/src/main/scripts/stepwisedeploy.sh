@@ -29,6 +29,7 @@ function waituntilquiet {
     done
 }
 
+echo `logdate` STEPDEPL first startup wait
 sleep 20 # give server some undisturbed startup time before any deployments
 waituntilquiet
 
