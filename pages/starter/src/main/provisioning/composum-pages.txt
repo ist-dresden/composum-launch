@@ -5,6 +5,8 @@
 [variables]
     composum.pages.version=1.2.0
 
+# FIXME(hps,21/03/24): include pages-options-assets and pages-options-microsite when releases are available
+
 [artifacts startLevel=32]
 
   com.composum.pages/composum-pages-commons-package/${composum.pages.version}/zip

@@ -79,6 +79,22 @@
                                     <outputDirectory>${project.build.directory}/lib/33</outputDirectory>
                                 </artifactItem>
 
+                                <!-- Composum assets -->
+                                <artifactItem>
+                                    <groupId>com.composum.assets</groupId>
+                                    <artifactId>composum-assets-commons-package</artifactId>
+                                    <version>${composum.assets.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/lib/35</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.composum.assets</groupId>
+                                    <artifactId>composum-assets-manager-package</artifactId>
+                                    <version>${composum.assets.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/lib/35</outputDirectory>
+                                </artifactItem>
+
                                 <!-- Composum pages packages -->
                                 <artifactItem>
                                     <groupId>com.composum.pages</groupId>
@@ -101,7 +117,33 @@
                                     <type>zip</type>
                                     <outputDirectory>${project.build.directory}/lib/41</outputDirectory>
                                 </artifactItem>
-                            </artifactItems>
+
+                                <!-- optional public components -->
+                                <!--
+                                FIXME(hps,21/03/24): include this when there are released versions.
+                                <artifactItem>
+                                    <groupId>com.composum.pages.options</groupId>
+                                    <artifactId>composum-pages-options-assets-package</artifactId>
+                                    <version>${composum.pages.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/lib/43</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.composum.pages.options</groupId>
+                                    <artifactId>composum-pages-options-microsite-package</artifactId>
+                                    <version>${composum.pages.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/lib/43</outputDirectory>
+                                </artifactItem>
+                                -->
+
+                                <artifactItem>
+                                    <groupId>com.composum.platform</groupId>
+                                    <artifactId>cpm-platform-htl-package</artifactId>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/lib/43</outputDirectory>
+                                </artifactItem>
+                        </artifactItems>
                         </configuration>
                     </execution>
 

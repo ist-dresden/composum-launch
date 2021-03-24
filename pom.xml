@@ -34,6 +34,18 @@
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
+    <dependencyManagement>
+        <!-- Declares the versions of additional packages that can be deployed -->
+        <dependencies>
+            <dependency>
+                <groupId>com.composum.platform</groupId>
+                <artifactId>cpm-platform-htl-package</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
+
     <modules>
         <module>pages</module>
         <module>compatibility</module>
