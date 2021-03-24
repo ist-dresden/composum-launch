@@ -32,8 +32,10 @@ version also as version for the various artefacts of composum-launch.
     - stop with Ctrl-C
 5. Update the project version to the joined pages / platform version
    - mvn -B -DpushChanges=false release:clean release:prepare release:clean
-6. generate-resources verify this, generate .env files with generate-resources and checkin, push master
-7. Check travis build and release on docker-hub https://cloud.docker.com/repository/docker/composum/pages/tags
+6. generate-resources verify this, generate .env files with generate-resources and checkin & tag, push master
+7. Check travis build  
+   and 
+   release on docker-hub https://cloud.docker.com/repository/docker/composum/pages/tags
     - possibly check `docker pull -a composum/pages ; docker images composum/pages`
 8. Run release from dockerhub
     - start in pages/starter with `start-from-dockerhub.sh`

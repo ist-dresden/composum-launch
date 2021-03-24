@@ -5,12 +5,12 @@
     <parent>
         <groupId>com.composum.platform</groupId>
         <artifactId>composum-launcher-pages</artifactId>
-        <version>1.2.0</version>
+        <version>1.2.1-SNAPSHOT</version>
     </parent>
 
     <groupId>com.composum.pages</groupId>
     <artifactId>composum-launcher-pages-docker</artifactId>
-    <version>1.2.0</version><!-- sync with Pages. This is used as a tag for the docker image. -->
+    <version>1.2.1-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
 
     <name>Composum Launcher Pages Docker image</name>
     <description>Creates a docker image from sling starter with updated Composum Core (incl. Package manager and User
