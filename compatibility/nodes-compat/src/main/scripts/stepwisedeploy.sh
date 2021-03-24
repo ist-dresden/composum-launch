@@ -38,6 +38,8 @@ fi
 
 sleep 20 # give server some undisturbed startup time
 
+/opt/sling/scripts/uninstallCore.sh
+
 echo `logdate` start stepwise deploying stuff
 
 # Now stepwise move the links to the install directory

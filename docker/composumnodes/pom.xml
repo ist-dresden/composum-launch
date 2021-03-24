@@ -44,7 +44,7 @@
                         </goals>
                         <configuration>
                             <artifactItems>
-                                <!-- composum core bundles. As bundle, not as package, since we need to safely replace.
+                                <!-- composum nodes bundles. As bundle, not as package, since we need to safely replace.
                                     order > 20 since we want to replace the old composum bundles in launchpad. -->
                                 <artifactItem>
                                     <groupId>com.composum.nodes.osgi</groupId>
