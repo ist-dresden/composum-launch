@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -9,11 +8,12 @@
         <version>1.2.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>composum-launcher-compatibility-nodes</artifactId>
+    <artifactId>composum-launcher-compatibility-core</artifactId>
 
-    <name>Composum Launcher Compatibility Starter with Composum Nodes</name>
-    <description>Creates a docker image from sling launcher compatibility version, with Composum Nodes (incl. Package
-        manager and User mgmt)
+    <name>Composum Launcher Compatibility Starter with Composum Core V1</name>
+    <description>Creates a docker image from sling launcher compatibility version, with Composum Core (incl. Package
+        manager and User
+        mgmt)
     </description>
 
     <dependencies>
@@ -135,7 +135,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>composum/nodes-compat</repository>
+                    <repository>composum/core-compat</repository>
                     <tag>${project.version}</tag>
                     <verbose>true</verbose>
                     <detail>true</detail>

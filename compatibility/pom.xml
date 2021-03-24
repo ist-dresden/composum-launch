@@ -17,6 +17,7 @@
 
     <modules>
         <module>slingstarter-compat</module>
+        <module>core-compat</module>
         <module>nodes-compat</module>
     </modules>
 
