@@ -17,29 +17,30 @@ probably build everything locally, anyway.
 Since normally the platform and pages version are in sync, we use this joined
 version also as version for the various artefacts of composum-launch.
 
-1. Update the project version to the joined pages / platform version
-    - mvn -B release:update-versions -DdevelopmentVersion=1.1.1-SNAPSHOT
-2. Update the version numbers in the develop branch to the latest Composum releases. The version numbers are defined 
+1. Update the version numbers in the develop branch to the latest Composum releases. The version numbers are defined 
     - in the top level composum-launch/pom.xml
     - composum-launch/pages/starter/src/main/provisioning/composum-*.txt
     - set composum-launch/pages/**/pom.xml version to pages version (search for "sync with Pages")
-3. Build locally
-4. Try starter jar locally in pages/starter
+2. Build locally
+3. Try starter jar locally in pages/starter
     - start with `start.sh`
     - run quickcheck (see below)
     - stop with Crtl-C
-5. Try that locally with the pages/docker image (compare README.md) 
+4. Try that locally with the pages/docker image (compare README.md) 
     - start with `start.sh`
     - run quickcheck (see below)
     - stop with Ctrl-C
-6. Checkin and merge develop to master, push
+5. Update the project version to the joined pages / platform version
+   - mvn -B -DpushChanges=false release:clean release:prepare release:clean
+6. generate-resources verify this, generate .env files with generate-resources and checkin, push master
 7. Check travis build and release on docker-hub https://cloud.docker.com/repository/docker/composum/pages/tags
     - possibly check `docker pull -a composum/pages ; docker images composum/pages`
 8. Run release from dockerhub
     - start in pages/starter with `start-from-dockerhub.sh`
     - run quickcheck (see below)
     - stop with Ctrl-C
-9. Set versions to snapshot versions (see step 1), commit that
+9. Merge master to develop, set versions to snapshot versions, commit that
+   - mvn -B release:update-versions -DdevelopmentVersion=1.1.1-SNAPSHOT
 
 ## Quickcheck
 
