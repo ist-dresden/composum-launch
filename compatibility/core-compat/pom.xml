@@ -8,9 +8,9 @@
         <version>1.2.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>composum-launcher-compatibility-core</artifactId>
+    <artifactId>composum-launcher-compatibility-docker-core</artifactId>
 
-    <name>Composum Launcher Compatibility Starter with Composum Core V1</name>
+    <name>Composum Launcher Compatibility Docker Starter with Composum Core V1</name>
     <description>Creates a docker image from sling launcher compatibility version, with Composum Core (incl. Package
         manager and User
         mgmt)
@@ -20,7 +20,7 @@
         <!-- The base docker image we rely on -->
         <dependency>
             <groupId>com.composum.platform</groupId>
-            <artifactId>composum-launcher-compatibility-slingstarter</artifactId>
+            <artifactId>composum-launcher-compatibility-docker-slingstarter</artifactId>
             <version>${project.version}</version>
             <type>docker-info</type>
             <optional>true</optional>
@@ -112,7 +112,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>com.composum.platform</groupId>
-                                    <artifactId>composum-launcher-docker-slingstarter</artifactId>
+                                    <artifactId>composum-launcher-compatibility-docker-slingstarter</artifactId>
                                     <version>${project.version}</version>
                                     <type>docker-info</type>
                                     <outputDirectory>${project.build.directory}/docker-info-deps</outputDirectory>

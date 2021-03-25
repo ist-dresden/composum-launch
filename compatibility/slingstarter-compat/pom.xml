@@ -8,9 +8,9 @@
         <version>1.2.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>composum-launcher-compatibility-slingstarter</artifactId>
+    <artifactId>composum-launcher-compatibility-docker-slingstarter</artifactId>
 
-    <name>Composum Launcher Sling Starter</name>
+    <name>Composum Launcher Compatibility Sling Starter</name>
     <description>Creates a docker image with a plain sling starter with the earliest JDK and version supported for
         Composum Core
     </description>

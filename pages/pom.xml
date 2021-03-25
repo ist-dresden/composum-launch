@@ -12,7 +12,7 @@
 
     <packaging>pom</packaging>
 
-    <name>Composum Pages Launchers</name>
+    <name>Composum Launcher Pages Launchers</name>
     <description>Composum launchers containing Pages and it's prerequisites Core and Platform</description>
 
     <modules>

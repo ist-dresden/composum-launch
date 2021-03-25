@@ -46,9 +46,9 @@
     </dependencyManagement>
 
     <modules>
+        <module>docker</module>
         <module>pages</module>
         <module>compatibility</module>
-        <module>docker</module>
     </modules>
 
 

@@ -11,7 +11,7 @@
     <artifactId>composum-launcher-composumcore-v1</artifactId>
     <version>1.2.1-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
 
-    <name>Composum Launcher Core Docker image</name>
+    <name>Composum Launcher Docker Core V1 image</name>
     <description>Creates a docker image from sling starter with updated Composum Core version 1 (incl. Package manager
         and User mgmt) and some basic scripts to fire up a docker container with installed modules.
     </description>
