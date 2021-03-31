@@ -8,5 +8,6 @@ function removeimage {
   echo Done
 }
 trap removeimage EXIT
+docker-compose down --rmi local -v --remove-orphans
 docker-compose up --force-recreate -V --abort-on-container-exit
 

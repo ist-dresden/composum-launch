@@ -4,11 +4,6 @@ function logdate {
     date -u '+%d.%m.%Y %H:%M:%S'
 }
 
-sleep 5
-
-echo `logdate` Preloading: access some URL whose initial generation takes time to improve user experience after startup
-# (mostly client libraries)
-
 urlbase="http://localhost:8080"
 urls=""
 
@@ -19,6 +14,15 @@ for urlscript in /opt/sling/scripts/preloadurls*.sh; do
         source $urlscript
     fi
 done
+
+`dirname $0`/WaitForServerUp.jsh $logfile
+until curl -f -u admin:admin -s -S $urlbase/system/console/status-osgi-installer.txt | egrep 'com.composum.nodes.console.*INSTALLED' > /dev/null; do
+  echo `logdate` preload waiting until server up
+  sleep 10
+done
+`dirname $0`/WaitForServerUp.jsh $logfile
+
+echo `logdate` Preloading: access some URL whose initial generation takes time to improve user experience after startup
 
 # load everything in parallel to speed things up
 for url in $urls; do

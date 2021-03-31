@@ -61,6 +61,8 @@ function cleanup {
 }
 trap cleanup EXIT
 
+pushd .
+
 cd /opt/sling/fileinstall-docker
 if [ "$(ls -A .)" ]; then
     for dir in */; do
@@ -107,5 +109,7 @@ for file in /opt/sling/scripts/_postinstall*.sh; do
     source $file
   fi # else it's just the unexpanded glob
 done
+
+popd
 
 /opt/sling/scripts/preload.sh &
