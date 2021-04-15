@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.composum.meta.ist</groupId>
         <artifactId>parent-2-public</artifactId>
         <version>1.4</version>
-        <relativePath />
+        <relativePath/>
     </parent>
 
     <groupId>com.composum.platform</groupId>
@@ -18,14 +19,21 @@
     <name>Composum Launchers</name>
     <description>Maven parent for Composum Platform launcher (various docker images).</description>
 
+    <!--
+    We release project and platform in synchronized versions. The project version is adapted with
+     the maven release plugin to the right version - so we have everything in sync. E.g.:
+     mvn -B release:update-versions -DdevelopmentVersion=1.1.1-SNAPSHOT
+     -->
+    <!--
+    Set properties to latest releases with
+    mvn -DallowDowngrade=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
+    If you want the latest snapshots:
+    mvn -DallowSnapshots=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
+    -->
     <properties>
-        <composum.nodes.version>2.4.3</composum.nodes.version>
+        <composum.nodes.version>2.5.2</composum.nodes.version>
         <!-- For docker images etc. that use the composum core v1.x, which is now superceeded by composum nodes -->
         <composum.corev1.version>1.12.4</composum.corev1.version>
-        <!-- We release project and platform in synchronized versions. The project version is adapted with
-         the maven release plugin to the right version - so we have everything in sync. E.g.:
-         mvn -B release:update-versions -DdevelopmentVersion=1.1.1-SNAPSHOT
-         -->
         <composum.platform.version>1.3.0</composum.platform.version>
         <composum.pages.version>1.2.0</composum.pages.version>
         <composum.assets.version>1.0.0</composum.assets.version>
@@ -41,6 +49,36 @@
                 <artifactId>cpm-platform-htl-package</artifactId>
                 <version>1.0.0</version>
             </dependency>
+
+            <!-- These dependencies are mostly declared here to allow automatical update of the properties with mvn release:update-versions -->
+            <dependency>
+                <groupId>com.composum.nodes</groupId>
+                <artifactId>composum-nodes-commons</artifactId>
+                <version>${composum.nodes.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.composum.sling.core</groupId>
+                <artifactId>composum-sling-core-commons</artifactId>
+                <version>${composum.corev1.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.composum.platform</groupId>
+                <artifactId>composum-platform-commons-package</artifactId>
+                <version>${composum.platform.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>com.composum.pages</groupId>
+                <artifactId>composum-pages-components-package</artifactId>
+                <version>${composum.pages.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>com.composum.assets</groupId>
+                <artifactId>composum-assets-commons-package</artifactId>
+                <version>${composum.assets.version}</version>
+                <type>zip</type>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
@@ -52,7 +90,7 @@
     </modules>
 
 
-  <scm>
-    <tag>composum-launcher-1.2.0</tag>
-  </scm>
+    <scm>
+        <tag>composum-launcher-1.2.0</tag>
+    </scm>
 </project>

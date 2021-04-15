@@ -69,3 +69,16 @@ If you have xmlstarlet (e.g. package xmlstarlet from https://brew.sh/) installed
 for fil in */pom.xml ; do
    xml sel -T -N pom=http://maven.apache.org/POM/4.0.0 -t -m pom:project -v pom:groupId -o : -v pom:artifactId -o : -v pom:version -nl $fil 
 done
+
+### Updating properties
+Helper for that:
+mvn -DallowDowngrade=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
+If you want the latest snapshots:
+mvn -DallowSnapshots=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
+
+Possibly interesting other goals: https://www.mojohaus.org/versions-maven-plugin/
+versions:use-latest-releases
+versions:commit or -DgenerateBackupPoms=false
+
+mvn versions:display-dependency-updates versions:display-parent-updates versions:display-property-updates
+mvn versions:display-plugin-updates

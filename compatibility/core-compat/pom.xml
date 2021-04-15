@@ -65,12 +65,6 @@
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.composum.sling.core</groupId>
-                                    <artifactId>composum-sling-core-jslibs</artifactId>
-                                    <version>${composum.corev1.version}</version>
-                                    <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>com.composum.sling.core</groupId>
                                     <artifactId>composum-sling-core-commons</artifactId>
                                     <version>${composum.corev1.version}</version>
                                     <outputDirectory>${project.build.directory}/lib/25</outputDirectory>
