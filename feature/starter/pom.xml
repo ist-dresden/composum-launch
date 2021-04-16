@@ -4,11 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.composum.platform</groupId>
+        <groupId>com.composum.platform.features</groupId>
         <artifactId>composum-launcher-feature</artifactId>
         <version>1.2.1-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.composum.platform.features</groupId>
     <artifactId>composum-launcher-feature-starter</artifactId>
     <version>1.2.1-SNAPSHOT</version><!-- sync with Pages -->
 
@@ -19,7 +20,7 @@
     </description>
 
     <properties>
-        <sling.feature.launcher.version>1.1.16</sling.feature.launcher.version>
+        <org.apache.sling.feature.launcher.version>1.1.16</org.apache.sling.feature.launcher.version>
         <!-- skip index generation for all builds except for CI and release -->
         <bnd.index.generation.skip>true</bnd.index.generation.skip>
 
@@ -37,7 +38,7 @@
         <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.feature.launcher</artifactId>
-            <version>${sling.feature.launcher.version}</version>
+            <version>${org.apache.sling.feature.launcher.version}</version>
         </dependency>
     </dependencies>
 
@@ -156,7 +157,7 @@
                         </goals>
                         <phase>package</phase>
                         <configuration>
-                            <artifact>org.apache.sling:org.apache.sling.feature.launcher:${sling.feature.launcher.version}</artifact>
+                            <artifact>org.apache.sling:org.apache.sling.feature.launcher:${org.apache.sling.feature.launcher.version}</artifact>
                             <stripVersion>true</stripVersion>
                         </configuration>
                     </execution>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.composum.platform.features</groupId>
+        <artifactId>composum-launcher-feature</artifactId>
+        <version>1.2.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.composum.platform.features</groupId>
+    <artifactId>composum-launcher-feature-nodesstarter</artifactId>
+    <version>1.2.1-SNAPSHOT</version><!-- sync with Pages -->
+
+    <name>Sling Starter With Composum Nodes</name>
+    <description>
+        Creates a feature set based on a Sling Starter 12 snapshot to start Sling and updating Composum Nodes.
+    </description>
+
+    <properties>
+        <org.apache.sling.feature.launcher.version>1.1.16</org.apache.sling.feature.launcher.version>
+        <sling.starter.version>12.210321.9ee9acf</sling.starter.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.feature.launcher</artifactId>
+            <version>${org.apache.sling.feature.launcher.version}</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.composum.platform.features</groupId>-->
+        <!--            <artifactId>org.apache.sling.starter.copy</artifactId>-->
+        <!--            <version>${sling.starter.version}</version>-->
+        <!--            <classifier>oak_tar_far</classifier>-->
+        <!--            <type>far</type>-->
+        <!--        </dependency>-->
+
+        <!-- Content to be put into the internal repository in the JAR -->
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.framework</artifactId>
+            <version>6.0.3</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+
+                <groupId>org.apache.sling</groupId>
+                <artifactId>slingfeature-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <framework>
+                        <groupId>org.apache.felix</groupId>
+                        <artifactId>org.apache.felix.framework</artifactId>
+                        <version>6.0.3</version>
+                    </framework>
+                    <aggregates>
+                        <aggregate>
+                            <filesInclude>**/*.json</filesInclude>
+                            <includeArtifact>
+                                <groupId>com.composum.nodes.setup</groupId>
+                                <artifactId>composum-nodes-slingfeature</artifactId>
+                                <version>${composum.nodes.version}</version>
+                                <type>slingosgifeature</type>
+                            </includeArtifact>
+                            <includeArtifact>
+                                <groupId>com.composum.platform.features</groupId>
+                                <artifactId>org.apache.sling.starter.copy</artifactId>
+                                <version>${sling.starter.version}</version>
+                                <classifier>oak_tar</classifier>
+                                <type>slingosgifeature</type>
+                            </includeArtifact>
+                            <artifactsOverrides>
+                                <artifactsOverride>com.composum.nodes:*:HIGHEST</artifactsOverride>
+                            </artifactsOverrides>
+                        </aggregate>
+                    </aggregates>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>aggregate-features</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>aggregate-features</goal>
+                            <goal>analyse-features</goal>
+                            <goal>attach-features</goal>
+                            <goal>attach-featurearchives</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/embeddedNodesFAR.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>
+                                com.composum.platform.feature.nodesstarter.LaunchFromEmbeddedFAR
+                            </mainClass>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <classpathLayoutType>repository</classpathLayoutType>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}</directory>
+                            <!-- Clean up remnants from test starts possibly done by the user. -->
+                            <includes>
+                                <include>sling/**</include>
+                                <include>launcher/**</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
