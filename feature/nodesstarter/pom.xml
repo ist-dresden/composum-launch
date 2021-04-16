@@ -9,13 +9,12 @@
         <version>1.2.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.composum.platform.features</groupId>
     <artifactId>composum-launcher-feature-nodesstarter</artifactId>
     <version>1.2.1-SNAPSHOT</version><!-- sync with Pages -->
 
     <name>Sling Starter With Composum Nodes</name>
     <description>
-        Creates a feature set based on a Sling Starter 12 snapshot to start Sling and updating Composum Nodes.
+        Creates a feature set and a starter based on a Sling Starter 12 snapshot to start Sling and updating Composum Nodes.
     </description>
 
     <properties>
@@ -48,8 +47,8 @@
 
     <build>
         <plugins>
-            <plugin>
 
+            <plugin>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>slingfeature-maven-plugin</artifactId>
                 <extensions>true</extensions>

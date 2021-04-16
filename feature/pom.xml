@@ -20,6 +20,7 @@
         <module>starter</module>
         <module>sling-starter-copy</module>
         <module>nodesstarter</module>
+        <module>composumstarter</module>
     </modules>
 
 </project>
