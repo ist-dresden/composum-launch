@@ -1,5 +1,0 @@
-{
-    "jenkins": {
-        "emailRecipients": ["dev@sling.apache.org"]
-    }
-}

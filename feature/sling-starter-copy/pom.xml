@@ -21,8 +21,9 @@
         <relativePath/>
     </parent>
 
-    <artifactId>org.apache.sling.starter</artifactId>
-    <version>12-SNAPSHOT</version>
+    <groupId>com.composum.platform.features</groupId>
+    <artifactId>org.apache.sling.starter.copy</artifactId>
+    <version>12.210321.9ee9acf</version>
 
     <name>Apache Sling Starter Application</name>
     <description>
