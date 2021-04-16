@@ -1,0 +1,1 @@
+Marker for repository - used to determine the URL of the repository in the JAR.

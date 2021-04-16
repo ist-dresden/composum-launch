@@ -31,6 +31,10 @@
             <outputDirectory>far</outputDirectory>
             <destName>embedded.far</destName>
         </file>
+        <file>
+            <outputDirectory>/lib/</outputDirectory>
+            <source>${basedir}/src/main/resources/lib/marker.txt</source>
+        </file>
     </files>
 
     <fileSets>
