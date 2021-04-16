@@ -14,7 +14,8 @@
 
     <name>Sling Starter With Composum Nodes</name>
     <description>
-        Creates a feature set and a starter based on a Sling Starter 12 snapshot to start Sling and updating Composum Nodes.
+        Creates a feature set and a starter based on a Sling Starter 12 snapshot to start Sling and updating Composum
+        Nodes.
     </description>
 
     <properties>
@@ -40,7 +41,7 @@
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.framework</artifactId>
-            <version>6.0.3</version>
+            <version>${org.apache.felix.framework.version}</version>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
@@ -56,10 +57,11 @@
                     <framework>
                         <groupId>org.apache.felix</groupId>
                         <artifactId>org.apache.felix.framework</artifactId>
-                        <version>6.0.3</version>
+                        <version>${org.apache.felix.framework.version}</version>
                     </framework>
                     <aggregates>
                         <aggregate>
+                            <classifier>oak_tar</classifier>
                             <filesInclude>**/*.json</filesInclude>
                             <includeArtifact>
                                 <groupId>com.composum.nodes.setup</groupId>
@@ -79,6 +81,17 @@
                             </artifactsOverrides>
                         </aggregate>
                     </aggregates>
+                    <scans>
+                        <scan>
+                            <includeClassifier>oak_tar</includeClassifier>
+                        </scan>
+                    </scans>
+                    <archives>
+                        <archive>
+                            <classifier>oak_tar_far</classifier>
+                            <includeClassifier>oak_tar</includeClassifier>
+                        </archive>
+                    </archives>
                 </configuration>
                 <executions>
                     <execution>
@@ -94,10 +107,8 @@
                 </executions>
             </plugin>
 
-            <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -124,7 +135,6 @@
                     </archive>
                 </configuration>
             </plugin>
-
 
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>

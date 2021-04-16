@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.composum.meta.ist</groupId>
         <artifactId>parent-2-public</artifactId>
-        <version>1.4</version>
+        <version>1.5-SNAPSHOT</version>
         <relativePath/>
     </parent>
 
@@ -39,6 +39,9 @@
         <composum.assets.version>1.0.0</composum.assets.version>
         <!-- no deployment except if specified otherwise -->
         <maven.deploy.skip>true</maven.deploy.skip>
+
+        <!-- For the feature starter. -->
+        <org.apache.felix.framework.version>6.0.3</org.apache.felix.framework.version>
     </properties>
 
     <dependencyManagement>
@@ -48,6 +51,13 @@
                 <groupId>com.composum.platform</groupId>
                 <artifactId>cpm-platform-htl-package</artifactId>
                 <version>1.0.0</version>
+            </dependency>
+
+            <!-- For the feature starter: the used framework. -->
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.framework</artifactId>
+                <version>${org.apache.felix.framework.version}</version>
             </dependency>
 
             <!-- These dependencies are mostly declared here to allow automatical update of the properties with mvn release:update-versions -->

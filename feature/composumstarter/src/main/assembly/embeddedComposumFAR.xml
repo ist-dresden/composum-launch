@@ -11,34 +11,20 @@
     <dependencySets>
         <dependencySet>
             <includes>
-                <include>org.apache.sling:org.apache.sling.feature.launcher</include>
+                <include>com.composum.platform.features:composum-launcher-feature-nodesstarter</include>
             </includes>
             <outputDirectory>/</outputDirectory>
             <unpack>true</unpack>
         </dependencySet>
     </dependencySets>
 
-    <repositories>
-        <repository>
-            <outputDirectory>/lib/</outputDirectory>
-            <includeMetadata>true</includeMetadata>
-        </repository>
-    </repositories>
-
     <files>
         <file>
-            <source>${basedir}/target/composum-launcher-feature-nodesstarter-${project.version}-oak_tar_far.far</source>
+            <!-- replaces the far/embedded.far -->
+            <source>${basedir}/target/composum-launcher-feature-composumstarter-${project.version}-oak_tar_far.far</source>
             <outputDirectory>far</outputDirectory>
             <destName>embedded.far</destName>
         </file>
     </files>
-
-    <fileSets>
-        <fileSet>
-            <directory>${basedir}/target/classes/com/composum/platform/feature/nodesstarter</directory>
-            <!-- useProjectArtefact in dependency doesn't work since it tries to include the far, too. :-( So this way. -->
-            <outputDirectory>/com/composum/platform/feature/nodesstarter</outputDirectory>
-        </fileSet>
-    </fileSets>
 
 </assembly>

@@ -25,11 +25,96 @@
             <groupId>com.composum.platform.features</groupId>
             <artifactId>composum-launcher-feature-nodesstarter</artifactId>
             <version>${project.version}</version>
+            <classifier>oak_tar-starter</classifier>
         </dependency>
     </dependencies>
 
     <build>
+        <plugins>
 
+            <plugin>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>slingfeature-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <framework>
+                        <groupId>org.apache.felix</groupId>
+                        <artifactId>org.apache.felix.framework</artifactId>
+                        <version>${org.apache.felix.framework.version}</version>
+                    </framework>
+                    <aggregates>
+                        <aggregate>
+                            <classifier>oak_tar</classifier>
+                            <filesInclude>**/*.json</filesInclude>
+                            <includeArtifact>
+                                <groupId>com.composum.platform.features</groupId>
+                                <artifactId>composum-launcher-feature-nodesstarter</artifactId>
+                                <version>${project.version}</version>
+                                <classifier>oak_tar</classifier>
+                                <type>slingosgifeature</type>
+                            </includeArtifact>
+                        </aggregate>
+                    </aggregates>
+                    <scans>
+                        <scan>
+                            <includeClassifier>oak_tar</includeClassifier>
+                        </scan>
+                    </scans>
+                    <archives>
+                        <archive>
+                            <classifier>oak_tar_far</classifier>
+                            <includeClassifier>oak_tar</includeClassifier>
+                        </archive>
+                    </archives>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>aggregate-features</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>aggregate-features</goal>
+                            <goal>analyse-features</goal>
+                            <goal>attach-features</goal>
+                            <goal>attach-featurearchives</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/embeddedComposumFAR.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}</directory>
+                            <!-- Clean up remnants from test starts possibly done by the user. -->
+                            <includes>
+                                <include>sling/**</include>
+                                <include>launcher/**</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+
+        </plugins>
     </build>
 
 </project>
