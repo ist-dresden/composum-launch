@@ -36,7 +36,9 @@
         <composum.corev1.version>1.12.4</composum.corev1.version>
         <composum.platform.version>1.3.1-SNAPSHOT</composum.platform.version>
         <composum.pages.version>1.2.0</composum.pages.version>
+        <composum.pages.options.version>1.2.1-SNAPSHOT</composum.pages.options.version>
         <composum.assets.version>1.0.0</composum.assets.version>
+        <cpm.platform.htl.version>1.0.0</cpm.platform.htl.version>
         <!-- no deployment except if specified otherwise -->
         <maven.deploy.skip>true</maven.deploy.skip>
 
@@ -50,7 +52,7 @@
             <dependency>
                 <groupId>com.composum.platform</groupId>
                 <artifactId>cpm-platform-htl-package</artifactId>
-                <version>1.0.0</version>
+                <version>${cpm.platform.htl.version}</version>
             </dependency>
 
             <!-- For the feature starter: the used framework. -->
@@ -81,6 +83,12 @@
                 <groupId>com.composum.pages</groupId>
                 <artifactId>composum-pages-components-package</artifactId>
                 <version>${composum.pages.version}</version>
+                <type>zip</type>
+            </dependency>
+            <dependency>
+                <groupId>com.composum.pages.options</groupId>
+                <artifactId>composum-pages-options-assets-package</artifactId>
+                <version>${composum.pages.options.version}</version>
                 <type>zip</type>
             </dependency>
             <dependency>

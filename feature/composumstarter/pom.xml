@@ -38,6 +38,7 @@
                 <artifactId>slingfeature-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
+                    <replacePropertyVariables>composum.platform.version,composum.assets.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version</replacePropertyVariables>
                     <framework>
                         <groupId>org.apache.felix</groupId>
                         <artifactId>org.apache.felix.framework</artifactId>

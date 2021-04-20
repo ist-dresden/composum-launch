@@ -124,14 +124,14 @@
                                 <artifactItem>
                                     <groupId>com.composum.pages.options</groupId>
                                     <artifactId>composum-pages-options-assets-package</artifactId>
-                                    <version>${composum.pages.version}</version>
+                                    <version>${composum.pages.options.version}</version>
                                     <type>zip</type>
                                     <outputDirectory>${project.build.directory}/lib/43</outputDirectory>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>com.composum.pages.options</groupId>
                                     <artifactId>composum-pages-options-microsite-package</artifactId>
-                                    <version>${composum.pages.version}</version>
+                                    <version>${composum.pages.options.version}</version>
                                     <type>zip</type>
                                     <outputDirectory>${project.build.directory}/lib/43</outputDirectory>
                                 </artifactItem>
