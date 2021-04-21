@@ -164,7 +164,7 @@
                     <artifactIdOverride>
                         ${{project.groupId}}:${{project.artifactId}}:slingosgifeature:${{{filename}}}:${{project.version}}
                     </artifactIdOverride>
-                    <installConvertedCP>false</installConvertedCP>
+                    <installConvertedCP>true</installConvertedCP>
                     <!-- Attention: because of the hack to deal with the overrides in the local Repo the generated files must be placed locally and not in the local Maven repo -->
                     <convertedCPOutput>${project.build.directory}/fm.out</convertedCPOutput>
                     <fmOutput>${project.build.directory}/fm</fmOutput>
@@ -266,34 +266,38 @@
             <plugin>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>slingfeature-maven-plugin</artifactId>
-                <version>1.1.12</version>
                 <extensions>true</extensions>
                 <configuration>
                     <features>target/fm</features>
                     <testFeatures>src/test/features</testFeatures>
                     <generatedFeatures>${basedir}/target/fm</generatedFeatures>
+                    <aggregates>
+                        <aggregate>
+                            <classifier>all</classifier>
+                            <filesInclude>**/*.json</filesInclude>
+                        </aggregate>
+                    </aggregates>
+                    <scans>
+                        <scan>
+                            <includeClassifier>all</includeClassifier>
+                        </scan>
+                    </scans>
+                    <archives>
+                        <archive>
+                            <classifier>all</classifier>
+                            <includeClassifier>all</includeClassifier>
+                        </archive>
+                    </archives>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>aggregate-base-feature</id>
-                        <phase>generate-test-sources</phase>
+                        <id>aggregate-features</id>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>aggregate-features</goal>
-                        </goals>
-                        <configuration>
-                            <aggregates>
-                                <aggregate>
-                                    <filesInclude>**/*.json</filesInclude>
-                                </aggregate>
-                            </aggregates>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>attach-base-feature</id>
-                        <phase>process-test-sources</phase>
-                        <goals>
                             <!-- <goal>analyse-features</goal> -->
                             <goal>attach-features</goal>
+                            <goal>attach-featurearchives</goal>
                         </goals>
                     </execution>
                 </executions>
