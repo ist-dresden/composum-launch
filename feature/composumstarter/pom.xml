@@ -10,7 +10,6 @@
         <version>1.2.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.composum.platform.features</groupId>
     <artifactId>composum-launcher-feature-composumstarter</artifactId>
     <version>1.2.1-SNAPSHOT</version><!-- sync with Pages -->
     <packaging>pom</packaging>
@@ -61,6 +60,12 @@
                                 <version>${composum.nodes.version}</version>
                                 <type>slingosgifeature</type>
                             </includeArtifact>
+                            <includeArtifact>
+                                <groupId>com.composum.platform</groupId>
+                                <artifactId>composum-platform-feature</artifactId>
+                                <version>${composum.platform.version}</version>
+                                <type>slingosgifeature</type>
+                            </includeArtifact>
                         </aggregate>
                     </aggregates>
                     <scans>
@@ -81,7 +86,7 @@
                         <phase>prepare-package</phase>
                         <goals>
                             <goal>aggregate-features</goal>
-                            <goal>analyse-features</goal>
+                            <!-- <goal>analyse-features</goal> -->
                             <goal>attach-features</goal>
                             <goal>attach-featurearchives</goal>
                         </goals>
