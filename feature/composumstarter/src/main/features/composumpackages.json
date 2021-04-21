@@ -1,11 +1,39 @@
 {
   "content-packages:ARTIFACTS|required": [
-    "com.composum.platform:composum-platform-package:zip:${composum.platform.version}",
-    "com.composum.assets:composum-assets-commons-package:zip:${composum.assets.version}",
-    "com.composum.assets:composum-assets-manager-package:zip:${composum.assets.version}",
-    "com.composum.pages:composum-pages-package:zip:${composum.pages.version}",
-    "com.composum.pages.options:composum-pages-options-assets-package:zip:${composum.pages.options.version}",
-    "com.composum.pages.options:composum-pages-options-microsite-package:zip:${composum.pages.options.version}",
-    "com.composum.platform:cpm-platform-htl-package:zip:${cpm.platform.htl.version}"
+    {
+      "id": "com.composum.platform:composum-platform-package:zip:${composum.platform.version}",
+      "start-order": "31",
+      "start-level": "31"
+    },
+    {
+      "id": "com.composum.assets:composum-assets-commons-package:zip:${composum.assets.version}",
+      "start-order": "35",
+      "start-level": "35"
+    },
+    {
+      "id": "com.composum.assets:composum-assets-manager-package:zip:${composum.assets.version}",
+      "start-order": "35",
+      "start-level": "35"
+    },
+    {
+      "id": "com.composum.pages:composum-pages-package:zip:${composum.pages.version}",
+      "start-order": "40",
+      "start-level": "40"
+    },
+    {
+      "id": "com.composum.pages.options:composum-pages-options-assets-package:zip:${composum.pages.options.version}",
+      "start-order": "45",
+      "start-level": "45"
+    },
+    {
+      "id": "com.composum.pages.options:composum-pages-options-microsite-package:zip:${composum.pages.options.version}",
+      "start-order": "45",
+      "start-level": "45"
+    },
+    {
+      "id": "com.composum.platform:cpm-platform-htl-package:zip:${cpm.platform.htl.version}",
+      "start-order": "45",
+      "start-level": "45"
+    }
   ]
 }
