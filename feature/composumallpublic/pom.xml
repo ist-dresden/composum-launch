@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.composum.platform.features</groupId>
+        <artifactId>composum-launcher-feature</artifactId>
+        <version>1.2.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>composum-launcher-feature-composumallpublic</artifactId>
+    <version>1.2.1-SNAPSHOT</version><!-- sync with Pages -->
+    <packaging>slingosgifeature</packaging>
+
+    <name>Composum All Public Feature</name>
+    <description>All public composum packages converted to a feature: composum-(nodes,platform,pages,assets,prototype),
+        cpm-platform-htl
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.composum.nodes.setup</groupId>
+            <artifactId>composum-nodes-slingfeature</artifactId>
+            <version>${composum.nodes.version}</version>
+            <type>slingosgifeature</type>
+        </dependency>
+
+        <!-- Composum platform -->
+        <dependency>
+            <groupId>com.composum.platform</groupId>
+            <artifactId>composum-platform-package</artifactId>
+            <version>${composum.platform.version}</version>
+            <type>zip</type>
+            <!-- intended start level 31 -->
+        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>com.composum.platform</groupId>-->
+        <!--            <artifactId>composum-platform-commons-package</artifactId>-->
+        <!--            <version>${composum.platform.version}</version>-->
+        <!--            <type>zip</type>-->
+        <!--            &lt;!&ndash; intended start level 31 &ndash;&gt;-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.composum.platform</groupId>-->
+        <!--            <artifactId>composum-platform-cache-package</artifactId>-->
+        <!--            <version>${composum.platform.version}</version>-->
+        <!--            <type>zip</type>-->
+        <!--            &lt;!&ndash; intended start level 32 &ndash;&gt;-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.composum.platform</groupId>-->
+        <!--            <artifactId>composum-platform-models-package</artifactId>-->
+        <!--            <version>${composum.platform.version}</version>-->
+        <!--            <type>zip</type>-->
+        <!--            &lt;!&ndash; intended start level 32 &ndash;&gt;-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.composum.platform</groupId>-->
+        <!--            <artifactId>composum-platform-services-package</artifactId>-->
+        <!--            <version>${composum.platform.version}</version>-->
+        <!--            <type>zip</type>-->
+        <!--            &lt;!&ndash; intended start level 33 &ndash;&gt;-->
+        <!--        </dependency>-->
+
+        <!-- Composum assets -->
+        <dependency>
+            <groupId>com.composum.assets</groupId>
+            <artifactId>composum-assets-commons-package</artifactId>
+            <version>${composum.assets.version}</version>
+            <type>zip</type>
+            <!-- intended start level 35 -->
+        </dependency>
+        <dependency>
+            <groupId>com.composum.assets</groupId>
+            <artifactId>composum-assets-manager-package</artifactId>
+            <version>${composum.assets.version}</version>
+            <type>zip</type>
+            <!-- intended start level 35 -->
+        </dependency>
+
+        <!-- Composum pages packages -->
+        <dependency>
+            <groupId>com.composum.pages</groupId>
+            <artifactId>composum-pages-commons-package</artifactId>
+            <version>${composum.pages.version}</version>
+            <type>zip</type>
+            <!-- intended start level 40 -->
+        </dependency>
+        <dependency>
+            <groupId>com.composum.pages</groupId>
+            <artifactId>composum-pages-components-package</artifactId>
+            <version>${composum.pages.version}</version>
+            <type>zip</type>
+            <!-- intended start level 41 -->
+        </dependency>
+        <dependency>
+            <groupId>com.composum.pages</groupId>
+            <artifactId>composum-pages-stage-package</artifactId>
+            <version>${composum.pages.version}</version>
+            <type>zip</type>
+            <!-- intended start level 41 -->
+        </dependency>
+
+        <!-- optional public components -->
+        <dependency>
+            <groupId>com.composum.pages.options</groupId>
+            <artifactId>composum-pages-options-assets-package</artifactId>
+            <version>${composum.pages.options.version}</version>
+            <type>zip</type>
+            <!-- intended start level 43 -->
+        </dependency>
+        <dependency>
+            <groupId>com.composum.pages.options</groupId>
+            <artifactId>composum-pages-options-microsite-package</artifactId>
+            <version>${composum.pages.options.version}</version>
+            <type>zip</type>
+            <!-- intended start level 43 -->
+        </dependency>
+
+        <dependency>
+            <groupId>com.composum.platform</groupId>
+            <artifactId>cpm-platform-htl-package</artifactId>
+            <version>${cpm.platform.htl.version}</version>
+            <type>zip</type>
+            <!-- intended start level 43 -->
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <!-- Not a regular JAR build, so we need to copy that explicitly -->
+                        <id>copy-frm-resource</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/fm</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/features</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>sling-feature-converter-maven-plugin</artifactId>
+                <configuration>
+                    <!-- NOTE: ${{ / }} is a way to encode placeholders that should not be interpolated in Maven in this call
+                               and ${{{ / }}} is used to make it a CP Conversion Placeholder -->
+                    <artifactIdOverride>
+                        ${{project.groupId}}:${{project.artifactId}}:slingosgifeature:${{{filename}}}:${{project.version}}
+                    </artifactIdOverride>
+                    <installConvertedCP>false</installConvertedCP>
+                    <!-- Attention: because of the hack to deal with the overrides in the local Repo the generated files must be placed locally and not in the local Maven repo -->
+                    <convertedCPOutput>${project.build.directory}/fm.out</convertedCPOutput>
+                    <fmOutput>${project.build.directory}/fm</fmOutput>
+                    <!-- FIXME is this needed? <isContentPackage>true</isContentPackage>-->
+                    <strictValidation>true</strictValidation>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>convert-platform</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>convert-cp</goal>
+                        </goals>
+                        <configuration>
+                            <bundleStartOrder>31</bundleStartOrder>
+                            <fmPrefix>platform-</fmPrefix>
+                            <contentPackages>
+                                <contentPackage>
+                                    <groupId>com.composum.platform</groupId>
+                                    <artifactId>composum-platform-package</artifactId>
+                                </contentPackage>
+                            </contentPackages>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>convert-assets</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>convert-cp</goal>
+                        </goals>
+                        <configuration>
+                            <bundleStartOrder>35</bundleStartOrder>
+                            <fmPrefix>assets-</fmPrefix>
+                            <contentPackages>
+                                <contentPackage>
+                                    <groupId>com.composum.assets</groupId>
+                                    <artifactId>composum-assets-commons-package</artifactId>
+                                </contentPackage>
+                                <contentPackage>
+                                    <groupId>com.composum.assets</groupId>
+                                    <artifactId>composum-assets-manager-package</artifactId>
+                                </contentPackage>
+                            </contentPackages>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>convert-pages</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>convert-cp</goal>
+                        </goals>
+                        <configuration>
+                            <bundleStartOrder>40</bundleStartOrder>
+                            <fmPrefix>pages-</fmPrefix>
+                            <contentPackages>
+                                <contentPackage>
+                                    <groupId>com.composum.pages</groupId>
+                                    <artifactId>composum-pages-commons-package</artifactId>
+                                </contentPackage>
+                                <contentPackage>
+                                    <groupId>com.composum.pages</groupId>
+                                    <artifactId>composum-pages-components-package</artifactId>
+                                </contentPackage>
+                                <contentPackage>
+                                    <groupId>com.composum.pages</groupId>
+                                    <artifactId>composum-pages-stage-package</artifactId>
+                                </contentPackage>
+                            </contentPackages>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>convert-optional</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>convert-cp</goal>
+                        </goals>
+                        <configuration>
+                            <bundleStartOrder>43</bundleStartOrder>
+                            <fmPrefix>optional-</fmPrefix>
+                            <contentPackages>
+                                <contentPackage>
+                                    <groupId>com.composum.pages.options</groupId>
+                                    <artifactId>composum-pages-options-assets-package</artifactId>
+                                </contentPackage>
+                                <contentPackage>
+                                    <groupId>com.composum.pages.options</groupId>
+                                    <artifactId>composum-pages-options-microsite-package</artifactId>
+                                </contentPackage>
+                                <contentPackage>
+                                    <groupId>com.composum.platform</groupId>
+                                    <artifactId>cpm-platform-htl-package</artifactId>
+                                </contentPackage>
+                            </contentPackages>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>slingfeature-maven-plugin</artifactId>
+                <version>1.1.12</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <features>target/fm</features>
+                    <testFeatures>src/test/features</testFeatures>
+                    <generatedFeatures>${basedir}/target/fm</generatedFeatures>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>aggregate-base-feature</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>aggregate-features</goal>
+                        </goals>
+                        <configuration>
+                            <aggregates>
+                                <aggregate>
+                                    <filesInclude>**/*.json</filesInclude>
+                                </aggregate>
+                            </aggregates>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>attach-base-feature</id>
+                        <phase>process-test-sources</phase>
+                        <goals>
+                            <!-- <goal>analyse-features</goal> -->
+                            <goal>attach-features</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
