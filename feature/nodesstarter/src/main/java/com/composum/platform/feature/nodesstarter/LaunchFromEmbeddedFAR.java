@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Uses the sling feature launcher to start from the embedded feature archive.
@@ -44,6 +45,7 @@ public class LaunchFromEmbeddedFAR {
             args.add(repositoryURL);
         }
 
+        System.out.println("Feature launcher start arguments: " + args.stream().collect(Collectors.joining(" ")));
         org.apache.sling.feature.launcher.impl.Main.main(args.toArray(new String[0]));
     }
 }

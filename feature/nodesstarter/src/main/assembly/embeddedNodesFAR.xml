@@ -7,8 +7,23 @@
     <formats>
         <format>jar</format>
     </formats>
+    <containerDescriptorHandlers>
+        <containerDescriptorHandler>
+            <handlerName>metaInf-services</handlerName>
+        </containerDescriptorHandler>
+    </containerDescriptorHandlers>
 
     <dependencySets>
+        <dependencySet>
+            <includes>
+                <!-- This extension overrides the default content-package handler and has to go before the feature launcher
+                 to override it's own ContentPackageHandler. It processes the packages and creates an execution plan
+                   for org.apache.sling:org.apache.sling.jcr.packageinit . -->
+                <include>org.apache.sling:org.apache.sling.feature.extension.content</include>
+            </includes>
+            <outputDirectory>/</outputDirectory>
+            <unpack>true</unpack>
+        </dependencySet>
         <dependencySet>
             <includes>
                 <include>org.apache.sling:org.apache.sling.feature.launcher</include>
