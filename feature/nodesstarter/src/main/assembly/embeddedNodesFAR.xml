@@ -24,21 +24,32 @@
             <outputDirectory>/</outputDirectory>
             <unpack>true</unpack>
         </dependencySet>
+
         <dependencySet>
+            <!-- separate dependency set since otherwise the META-INF/services/ is reordered, and this has to go after extension.content. -->
+            <outputDirectory>/</outputDirectory>
+            <unpack>true</unpack>
             <includes>
                 <include>org.apache.sling:org.apache.sling.feature.launcher</include>
             </includes>
-            <outputDirectory>/</outputDirectory>
-            <unpack>true</unpack>
+        </dependencySet>
+
+        <!-- Now we are creating a maven-repository like structure at lib with things the feature launcher needs in addition to the FAR. -->
+        <dependencySet>
+            <outputDirectory>lib/</outputDirectory>
+            <outputFileNameMapping>${artifact.groupIdPath}/${artifact.artifactId}/${artifact.version}/${artifact.file.name}</outputFileNameMapping>
+            <includes>
+                <include>org.apache.felix:org.apache.felix.framework</include>
+            </includes>
         </dependencySet>
     </dependencySets>
 
-    <repositories>
-        <repository>
-            <outputDirectory>/lib/</outputDirectory>
-            <includeMetadata>true</includeMetadata>
-        </repository>
-    </repositories>
+    <!-- Creating a repository instead does work, but strangely it always tries to access the network for that, so we avoid this. -->
+    <!--    <repositories>-->
+    <!--        <repository>-->
+    <!--            <outputDirectory>/lib/</outputDirectory>-->
+    <!--        </repository>-->
+    <!--    </repositories>-->
 
     <files>
         <file>

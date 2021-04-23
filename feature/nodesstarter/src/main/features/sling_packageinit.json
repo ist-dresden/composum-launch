@@ -1,0 +1,8 @@
+{
+  "bundles": [
+    {
+      "id": "org.apache.sling:org.apache.sling.jcr.packageinit:${org.apache.sling.jcr.packageinit.version}",
+      "start-order": "21"
+    }
+  ]
+}
