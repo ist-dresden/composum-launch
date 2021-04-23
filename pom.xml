@@ -35,10 +35,10 @@
         <!-- For docker images etc. that use the composum core v1.x, which is now superceeded by composum nodes -->
         <composum.corev1.version>1.12.4</composum.corev1.version>
         <composum.platform.version>1.3.1-SNAPSHOT</composum.platform.version>
-        <composum.pages.version>1.2.0</composum.pages.version>
+        <composum.pages.version>1.2.1-SNAPSHOT</composum.pages.version>
         <composum.pages.options.version>1.2.1-SNAPSHOT</composum.pages.options.version>
-        <composum.assets.version>1.0.0</composum.assets.version>
-        <cpm.platform.htl.version>1.0.0</cpm.platform.htl.version>
+        <composum.assets.version>1.0.1-SNAPSHOT</composum.assets.version>
+        <cpm.platform.htl.version>1.0.1-SNAPSHOT</cpm.platform.htl.version>
         <!-- no deployment except if specified otherwise -->
         <maven.deploy.skip>true</maven.deploy.skip>
 
