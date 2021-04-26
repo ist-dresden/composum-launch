@@ -4,5 +4,11 @@
       "id": "org.apache.sling:org.apache.sling.jcr.packageinit:${org.apache.sling.jcr.packageinit.version}",
       "start-order": "21"
     }
-  ]
+  ],
+  "framework-properties": {
+    "felix.startlevel.bundle": "30",
+    "felix.log.level": "2",
+    "felix.fileinstall.start.level": "30",
+    "felix.fileinstall.active.level": "30"
+  }
 }
