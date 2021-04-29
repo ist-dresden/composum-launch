@@ -62,7 +62,11 @@
                 <version>${org.apache.felix.framework.version}</version>
             </dependency>
 
-            <!-- These dependencies are mostly declared here to allow automatical update of the properties with mvn release:update-versions -->
+            <!-- These dependencies are mostly declared here to allow automatical update of the properties with mvn release:update-versions
+                mvn -DallowDowngrade=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
+                or
+                mvn -DallowSnapshots=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
+            -->
             <dependency>
                 <groupId>com.composum.nodes</groupId>
                 <artifactId>composum-nodes-commons</artifactId>
