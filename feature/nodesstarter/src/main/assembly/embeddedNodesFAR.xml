@@ -53,7 +53,7 @@
 
     <files>
         <file>
-            <source>${basedir}/target/composum-launcher-feature-nodesstarter-${project.version}-oak_tar_far.far</source>
+            <source>${basedir}/target/composum-launcher-feature-nodesstarter-${project.version}-oak_tar.far</source>
             <outputDirectory>far</outputDirectory>
             <destName>embedded.far</destName>
         </file>

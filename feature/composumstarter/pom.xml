@@ -46,8 +46,20 @@
                     </framework>
                     <aggregates>
                         <aggregate>
+                            <classifier>composum</classifier>
+                            <filesInclude>**/composum*.json</filesInclude>
+                            <includeArtifact>
+                                <groupId>com.composum.platform.features</groupId>
+                                <artifactId>composum-launcher-feature-nodesstarter</artifactId>
+                                <version>${project.version}</version>
+                                <classifier>composum</classifier>
+                                <type>slingosgifeature</type>
+                            </includeArtifact>
+                        </aggregate>
+                        <aggregate>
                             <classifier>oak_tar</classifier>
                             <filesInclude>**/*.json</filesInclude>
+                            <includeClassifier>composum</includeClassifier>
                             <includeArtifact>
                                 <groupId>com.composum.platform.features</groupId>
                                 <artifactId>composum-launcher-feature-nodesstarter</artifactId>
@@ -71,8 +83,12 @@
                     </scans>
                     <archives>
                         <archive>
-                            <classifier>oak_tar_far</classifier>
+                            <classifier>oak_tar</classifier>
                             <includeClassifier>oak_tar</includeClassifier>
+                        </archive>
+                        <archive>
+                            <classifier>composum</classifier>
+                            <includeClassifier>composum</includeClassifier>
                         </archive>
                     </archives>
                 </configuration>

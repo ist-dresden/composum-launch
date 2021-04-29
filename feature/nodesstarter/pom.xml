@@ -68,14 +68,22 @@
                     </framework>
                     <aggregates>
                         <aggregate>
-                            <classifier>oak_tar</classifier>
-                            <filesInclude>**/*.json</filesInclude>
+                            <classifier>composum</classifier>
+                            <filesInclude>**/composum*.json</filesInclude>
                             <includeArtifact>
                                 <groupId>com.composum.nodes.setup</groupId>
                                 <artifactId>composum-nodes-slingfeature</artifactId>
                                 <version>${composum.nodes.version}</version>
                                 <type>slingosgifeature</type>
                             </includeArtifact>
+                            <artifactsOverrides>
+                                <artifactsOverride>com.composum.nodes:*:HIGHEST</artifactsOverride>
+                            </artifactsOverrides>
+                        </aggregate>
+                        <aggregate>
+                            <classifier>oak_tar</classifier>
+                            <includeClassifier>composum</includeClassifier>
+                            <filesInclude>**/*.json</filesInclude>
                             <includeArtifact>
                                 <groupId>com.composum.platform.features</groupId>
                                 <artifactId>org.apache.sling.starter.copy</artifactId>
@@ -95,8 +103,12 @@
                     </scans>
                     <archives>
                         <archive>
-                            <classifier>oak_tar_far</classifier>
+                            <classifier>oak_tar</classifier>
                             <includeClassifier>oak_tar</includeClassifier>
+                        </archive>
+                        <archive>
+                            <classifier>composum</classifier>
+                            <includeClassifier>composum</includeClassifier>
                         </archive>
                     </archives>
                 </configuration>

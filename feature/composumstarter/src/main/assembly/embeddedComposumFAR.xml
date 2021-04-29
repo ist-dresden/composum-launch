@@ -26,7 +26,7 @@
     <files>
         <file>
             <!-- replaces the far/embedded.far -->
-            <source>${basedir}/target/composum-launcher-feature-composumstarter-${project.version}-oak_tar_far.far</source>
+            <source>${basedir}/target/composum-launcher-feature-composumstarter-${project.version}-oak_tar.far</source>
             <outputDirectory>far</outputDirectory>
             <destName>embedded.far</destName>
         </file>
