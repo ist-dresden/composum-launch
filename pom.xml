@@ -31,7 +31,7 @@
     mvn -DallowSnapshots=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
     -->
     <properties>
-        <composum.nodes.version>2.5.4-SNAPSHOT</composum.nodes.version>
+        <composum.nodes.version>2.6.1-SNAPSHOT</composum.nodes.version>
         <!-- For docker images etc. that use the composum core v1.x, which is now superceeded by composum nodes -->
         <composum.corev1.version>1.12.4</composum.corev1.version>
         <composum.platform.version>1.3.1-SNAPSHOT</composum.platform.version>
