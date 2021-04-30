@@ -23,7 +23,6 @@
         <sling.starter.version>12.210321.9ee9acf</sling.starter.version>
         <!-- FIXME temporary overide until https://issues.apache.org/jira/browse/SLING-10339 or https://issues.apache.org/jira/browse/JCRVLT-517 are released. -->
         <org.apache.sling.jcr.packageinit.version>1.0.3-SNAPSHOT</org.apache.sling.jcr.packageinit.version>
-
     </properties>
 
     <repositories>
@@ -51,12 +50,14 @@
         <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.feature.extension.content</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.jcr.packageinit</artifactId>
             <version>${org.apache.sling.jcr.packageinit.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!-- Content to be put into the internal repository in the JAR -->
