@@ -25,9 +25,10 @@
     <artifactId>org.apache.sling.starter.copy</artifactId>
     <version>12.210321.9ee9acf</version>
 
-    <name>Apache Sling Starter Application</name>
+    <name>Apache Sling Starter Application (snapshot)</name>
     <description>
-        The Sling Starter demo application.
+        A copy of the the Sling Starter demo application to have a fixed snapshot, since there was no release for a
+        very long time.
     </description>
 
     <scm>
