@@ -12,7 +12,6 @@
 
     <artifactId>composum-launcher-feature-composumstarter</artifactId>
     <version>1.2.1-SNAPSHOT</version><!-- sync with Pages -->
-    <packaging>pom</packaging>
 
     <name>Sling Starter With Composum Public</name>
     <description>
@@ -27,6 +26,21 @@
             <version>${project.version}</version>
             <classifier>oak_tar-starter</classifier>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient-osgi</artifactId>
+            <scope>test</scope>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.httpcomponents</groupId>-->
+<!--            <artifactId>httpcore-osgi</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -38,7 +52,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <replacePropertyVariables>
-                        composum.platform.version,composum.assets.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version
+                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version
                     </replacePropertyVariables>
                     <framework>
                         <groupId>org.apache.felix</groupId>
@@ -137,6 +151,87 @@
                             </includes>
                         </fileset>
                     </filesets>
+                </configuration>
+            </plugin>
+
+            <!-- reserve a network port for the integration tests -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>reserve-network-port</id>
+                        <goals>
+                            <goal>reserve-network-port</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <portNames>
+                                <portName>http.port</portName>
+                            </portNames>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Start a server for the integration test -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>startITserver</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-jar</argument>
+                                <argument>${project.build.directory}/${project.build.finalName}-oak_tar-starter.jar</argument>
+                                <argument>-D</argument>
+                                <argument>org.osgi.service.http.port=${http.port}</argument>
+                                <argument>--pidfile=${project.build.directory}/pid.it.txt</argument>
+                            </arguments>
+                            <workingDirectory>${project.build.directory}/it</workingDirectory>
+                            <async>true</async>
+                            <asyncDestroyOnShutdown>true</asyncDestroyOnShutdown>
+                            <timeout>180000</timeout>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>shutdownITserver</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.composum.platform.feature.nodesstarter.StopFromPid</mainClass>
+                            <arguments>
+                                <argument>stop</argument>
+                                <argument>--pidfile=${project.build.directory}/pid.it.txt</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- run the ITs -->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <systemPropertyVariables>
+                        <starter.http.port>${http.port}</starter.http.port>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
 
