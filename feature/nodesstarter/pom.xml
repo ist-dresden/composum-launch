@@ -147,6 +147,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>embeddedNodesFAR</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
@@ -154,6 +155,18 @@
                         <configuration>
                             <descriptors>
                                 <descriptor>src/main/assembly/embeddedNodesFAR.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>starter</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/plainLauncher.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>

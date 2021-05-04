@@ -45,26 +45,31 @@ public class LaunchFromEmbeddedFAR {
     List<String> args = new ArrayList<>();
     File pidfile = null;
 
+    boolean haveFeature = false;
+    boolean wantDefaultFeature = false;
+    boolean haveRepository = false;
+    boolean wantDefaultRepository = false;
+    boolean wantHelp = false;
+
     public static void main(String[] rawArgs) throws IOException {
         new LaunchFromEmbeddedFAR().run(rawArgs);
     }
 
-    private void run(String[] rawArgs) throws IOException {
+    protected void run(String[] rawArgs) throws IOException {
         System.out.println("Start arguments " + String.join(" ", Arrays.asList(rawArgs)));
         if (rawArgs.length > 0 && StopFromPid.STOP_COMMAND.equals(rawArgs[0])) {
             StopFromPid.main(rawArgs);
-        } else {
+        } else try {
             processArgs(rawArgs);
             System.out.println("Feature launcher start arguments: " + String.join(" ", args));
             org.apache.sling.feature.launcher.impl.Main.main(args.toArray(new String[0]));
+        } finally {
+            System.out.println("TEST");
+            System.out.flush();
         }
     }
 
-    private void processArgs(String[] rawArgs) throws IOException {
-        boolean haveFeature = false;
-        boolean wantDefaultFeature = false;
-        boolean haveRepository = false;
-        boolean wantDefaultRepository = false;
+    protected void processArgs(String[] rawArgs) throws IOException {
 
         Iterator<String> argIterator = Arrays.asList(rawArgs).iterator();
         while (argIterator.hasNext()) {
@@ -72,7 +77,7 @@ public class LaunchFromEmbeddedFAR {
             switch (arg) {
                 case START_COMMAND: // currently just ignored
                     continue;
-                    
+
                 case "-f":
                     String feature = argIterator.next();
                     if ("default".equalsIgnoreCase(feature)) {
@@ -94,24 +99,49 @@ public class LaunchFromEmbeddedFAR {
                         args.add(url);
                     }
                     continue;
-            }
-            if (arg.startsWith(OPTION_PIDFILE)) {
-                createPidFile(arg);
-                continue;
+
+                case "-?":
+                case "-h":
+                case "--help":
+                    wantHelp = true;
+                    // go on: add this to command line so that it's invalid and help is printed.
+                    break;
+
+                default:
+                    if (arg.startsWith(OPTION_PIDFILE)) {
+                        createPidFile(arg);
+                        continue;
+                    }
+                    break;
             }
             args.add(arg); // otherwise just pass it through to the feature launcher.
         }
 
-        if (wantDefaultFeature || !haveFeature) {
-            addDefaultFeatureArg();
-        }
+        if (wantHelp) {
+            printHelp();
+        } else {
 
-        if (wantDefaultRepository || !haveRepository) {
-            addDefaultRepositoryArg();
+            if (wantDefaultFeature || !haveFeature) {
+                addDefaultFeatureArg();
+            }
+
+            if (wantDefaultRepository || !haveRepository) {
+                addDefaultRepositoryArg();
+            }
+
         }
     }
 
-    private void createPidFile(String arg) throws IOException {
+    protected void printHelp() {
+        System.out.println("\n\nComposum Nodes Launcher based on Sling Feature launcher.");
+        System.out.println("Additional arguments:");
+        System.out.println("-h / -? / --help \tprint help");
+        System.out.println("-f default\tuses the embedded feature archive if present. It's always used if no other explicit -f argument is given.");
+        System.out.println("-u default\tuses the embedded repository containing the felix framework. It's always used if other explicit -u argument is given - the network won't be used to retrieve features if no explicit other -u argument is given.");
+        System.out.println();
+    }
+
+    protected void createPidFile(String arg) throws IOException {
         String pidfilename = arg.substring(OPTION_PIDFILE.length());
         String pid = String.valueOf(ProcessHandle.current().pid());
         pidfile = new File(pidfilename);
@@ -125,7 +155,7 @@ public class LaunchFromEmbeddedFAR {
         pidfile.deleteOnExit();
     }
 
-    private void addDefaultRepositoryArg() {
+    protected void addDefaultRepositoryArg() {
         URL repositoryMarkerURL = LaunchFromEmbeddedFAR.class.getResource(DEFAULT_REPOSITORY_PATH_MARKER);
         if (repositoryMarkerURL == null) {
             throw new IllegalArgumentException("File format is wrong - no embedded repository marker " + DEFAULT_REPOSITORY_PATH_MARKER + " found in JAR");
@@ -136,13 +166,20 @@ public class LaunchFromEmbeddedFAR {
         args.add(repositoryURL);
     }
 
-    private void addDefaultFeatureArg() {
+    /**
+     * Adds the argument for the embedded default feature. Having no embedded default feature can be OK, if only the
+     * embedded default repository is to be used.
+     */
+    protected void addDefaultFeatureArg() {
         URL mainFeatureURL = LaunchFromEmbeddedFAR.class.getResource(DEFAULT_SLING_FEATURE_MODEL_FILE_PATH);
         if (mainFeatureURL == null) {
-            throw new IllegalArgumentException("File format is wrong - no embedded file " + DEFAULT_SLING_FEATURE_MODEL_FILE_PATH + " found in JAR");
+            // this might be OK if the user just wants help. If we throw an exception, the command line help is never
+            // printed.
+            System.out.println("WARNING: no feature given and no default feature archive is found in the launcher jar!");
+        } else {
+            System.out.println("Using feature file " + mainFeatureURL);
+            args.add("-f");
+            args.add(mainFeatureURL.toExternalForm());
         }
-        System.out.println("Using feature file " + mainFeatureURL);
-        args.add("-f");
-        args.add(mainFeatureURL.toExternalForm());
     }
 }

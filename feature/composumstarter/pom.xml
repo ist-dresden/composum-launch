@@ -24,7 +24,7 @@
             <groupId>com.composum.platform.features</groupId>
             <artifactId>composum-launcher-feature-nodesstarter</artifactId>
             <version>${project.version}</version>
-            <classifier>oak_tar-starter</classifier>
+            <classifier>oak_tar-launcher</classifier>
         </dependency>
 
         <dependency>
@@ -189,7 +189,7 @@
                             <executable>java</executable>
                             <arguments>
                                 <argument>-jar</argument>
-                                <argument>${project.build.directory}/${project.build.finalName}-oak_tar-starter.jar</argument>
+                                <argument>${project.build.directory}/${project.build.finalName}-oak_tar-launcher.jar</argument>
                                 <argument>-D</argument>
                                 <argument>org.osgi.service.http.port=${http.port}</argument>
                                 <argument>--pidfile=${project.build.directory}/pid.it.txt</argument>

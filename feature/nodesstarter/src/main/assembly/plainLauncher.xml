@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
-    <!-- Creates a launcher with embedded feature archive. -->
+    <!-- Creates a launcher without embedded feature archive. It just contains felix and the launcher.
+     Use that one if you're going to provide your own feature archives even for the basic sling, anyway. -->
 
-    <id>oak_tar-launcher</id>
+    <id>launcher</id>
     <includeBaseDirectory>false</includeBaseDirectory>
     <formats>
         <format>jar</format>
@@ -45,19 +46,7 @@
         </dependencySet>
     </dependencySets>
 
-    <!-- Creating a repository instead does work, but strangely it always tries to access the network for that, so we avoid this. -->
-    <!--    <repositories>-->
-    <!--        <repository>-->
-    <!--            <outputDirectory>/lib/</outputDirectory>-->
-    <!--        </repository>-->
-    <!--    </repositories>-->
-
     <files>
-        <file>
-            <source>${basedir}/target/composum-launcher-feature-nodesstarter-${project.version}-oak_tar.far</source>
-            <outputDirectory>far</outputDirectory>
-            <destName>embedded.far</destName>
-        </file>
         <file>
             <!-- Marker-file used to access the internal repository. -->
             <outputDirectory>/lib/</outputDirectory>

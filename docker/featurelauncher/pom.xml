@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.composum.platform</groupId>
+        <artifactId>composum-launcher-docker</artifactId>
+        <version>1.2.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>composum-launcher-docker-featurelauncher</artifactId>
+    <version>1.2.1-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
+
+    <name>Composum Launcher Docker Feature Launcher</name>
+    <description>Creates a docker image with a sling feature launcher that launches a FAR from a Sling Starter 12
+        snapshot, but is prepared to deploy more / different features as well as packages / bundles from the filesystem.
+    </description>
+
+    <dependencies>
+        <!-- We use scope runtime for stuff that get's embedded into the docker image since there is no need to make
+        that a transitive dependency for docker images deriving from this. -->
+        <dependency>
+            <groupId>com.composum.platform.features</groupId>
+            <artifactId>composum-launcher-feature-nodesstarter</artifactId>
+            <version>${project.version}</version>
+            <classifier>launcher</classifier>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.composum.platform.features</groupId>
+            <artifactId>composum-launcher-feature-nodesstarter</artifactId>
+            <version>${project.version}</version>
+            <classifier>oak_tar</classifier>
+            <type>far</type>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>fetch-included-libraries</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.composum.platform.features</groupId>
+                                    <artifactId>composum-launcher-feature-nodesstarter</artifactId>
+                                    <version>${project.version}</version>
+                                    <classifier>launcher</classifier>
+                                    <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
+                                    <destFileName>nodeslauncher.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.composum.platform.features</groupId>
+                                    <artifactId>composum-launcher-feature-nodesstarter</artifactId>
+                                    <version>${project.version}</version>
+                                    <classifier>oak_tar</classifier>
+                                    <type>far</type>
+                                    <outputDirectory>${project.build.directory}/dependencies/system</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>composum/featurestarter-nodes</repository>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <LAUNCHERJAR>target/dependencies/nodeslauncher.jar</LAUNCHERJAR>
+                        <SYSTEM_FAR_DIRECTORY>target/dependencies/system</SYSTEM_FAR_DIRECTORY>
+                    </buildArgs>
+                    <verbose>true</verbose>
+                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+
+        <profile>
+            <!-- This can also be called manually with   mvn clean install dockerfile:tag dockerfile:push -->
+            <!-- Use authentication with entry in settings.xml , encrypt pwd with  mvn &dash;&dash;encrypt-password -->
+            <!--<server>
+                <id>docker.io</id>
+                <username>composum</username>
+                <password>xxx/password>
+            </server>-->
+            <id>deployDocker</id>
+            <build>
+                <plugins>
+
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>dockerfile-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>tag-image</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>tag</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>push-image</id>
+                                <phase>deploy</phase>
+                                <goals>
+                                    <goal>push</goal>
+                                </goals>
+                            </execution>
+
+                        </executions>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+
+</project>

@@ -14,6 +14,9 @@ This module creates a couple of docker images with which it is easy to run the p
 
 - **pages/docker**: docker image based on slingstarter, it deploys both the newest version of the [Composum Nodes](https://github.com/ist-dresden/composum), [Composum Platform](https://github.com/ist-dresden/composum-platform) and [Composum Pages](https://github.com/ist-dresden/composum-pages). On dockerhub this is available as [composum/pages](https://cloud.docker.com/u/composum/repository/docker/composum/pages). (TODO: make this based on slingstarter-stepwisedeploy.)
 
+- **featurelauncher**: docker image using the feature launcher, deploying a snapshot of Sling Starter 12 and preparing
+  for further deployments both as feature archives and as packages from the filesystem.
+
 - compatibility/**slingstarter-compat**: like slingstarter, but with the earliest Sling Launchpad version that is supported the Composum Nodes (as of 4/2019: version 9 on JDK 8).
 
 - compatibility/**nodes-compat**: like slingstarter, but with the earliest Sling Launchpad version that is supported the Composum Nodes (as of 4/2019: version 9 on JDK 8).
@@ -26,8 +29,10 @@ Since there are various modules involved, we normally use the pages version as v
 
 Run as a temporary installation (after stopping the container all data is deleted):
 
-    docker pull composum/pages:1.0.0-SNAPSHOT
-    docker run --rm -p 8080:8080 composum/pages:1.0.0-SNAPSHOT
+    docker pull composum/pages:{version}
+    docker run --rm -p 8080:8080 composum/pages:{version}
+
+where `{version}` has to be replaced by the current version of this project, e.g. `1.2.1-SNAPSHOT` .
 
 Compare the [docker run](https://docs.docker.com/engine/reference/run/) documentation for other options.
 Composum Pages is accessible at http://localhost:8080/bin/pages.html one or two minutes after starting.
