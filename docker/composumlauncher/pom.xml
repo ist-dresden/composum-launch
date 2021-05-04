@@ -8,36 +8,30 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>composum-launcher-docker-featurelauncher</artifactId>
+    <artifactId>composum-launcher-docker-composumlauncher</artifactId>
     <version>1.2.1-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
 
-    <name>Composum Launcher Docker Feature Launcher</name>
+    <name>Composum Launcher Docker Composum Feature Launcher</name>
     <description>Creates a docker image with a sling feature launcher that launches a FAR from a Sling Starter 12
-        snapshot, but is prepared to deploy more / different features as well as packages / bundles from the filesystem.
+        snapshot and includes all public Composum modules as features. Based on the featurelauncher docker image
+        (composum/featurelauncher-nodes).
     </description>
 
     <properties>
-        <thisdockerimage>composum/featurelauncher-nodes</thisdockerimage>
+        <basedockerartifact>composum-launcher-docker-featurelauncher</basedockerartifact>
+        <thisdockerimage>composum/featurelauncher-composum</thisdockerimage>
     </properties>
 
     <dependencies>
-        <!-- We use scope runtime for stuff that get's embedded into the docker image since there is no need to make
-        that a transitive dependency for docker images deriving from this. -->
+        <!-- The base docker image we rely on -->
         <dependency>
-            <groupId>com.composum.platform.features</groupId>
-            <artifactId>composum-launcher-feature-nodesstarter</artifactId>
+            <groupId>com.composum.platform</groupId>
+            <artifactId>${basedockerartifact}</artifactId>
             <version>${project.version}</version>
-            <classifier>launcher</classifier>
-            <scope>provided</scope>
+            <type>docker-info</type>
+            <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>com.composum.platform.features</groupId>
-            <artifactId>composum-launcher-feature-nodesstarter</artifactId>
-            <version>${project.version}</version>
-            <classifier>oak_tar</classifier>
-            <type>far</type>
-            <scope>provided</scope>
-        </dependency>
+
     </dependencies>
 
     <build>
@@ -52,21 +46,14 @@
                         </goals>
                         <configuration>
                             <artifactItems>
+                                <!-- The system FAR is already in the docker image - add our application(s) now -->
                                 <artifactItem>
                                     <groupId>com.composum.platform.features</groupId>
-                                    <artifactId>composum-launcher-feature-nodesstarter</artifactId>
+                                    <artifactId>composum-launcher-feature-composumstarter</artifactId>
                                     <version>${project.version}</version>
-                                    <classifier>launcher</classifier>
-                                    <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
-                                    <destFileName>nodeslauncher.jar</destFileName>
-                                </artifactItem>
-                                <artifactItem>
-                                    <groupId>com.composum.platform.features</groupId>
-                                    <artifactId>composum-launcher-feature-nodesstarter</artifactId>
-                                    <version>${project.version}</version>
-                                    <classifier>oak_tar</classifier>
+                                    <classifier>composum</classifier>
                                     <type>far</type>
-                                    <outputDirectory>${project.build.directory}/dependencies/system</outputDirectory>
+                                    <outputDirectory>${project.build.directory}/dependencies</outputDirectory>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
@@ -89,11 +76,11 @@
                     <repository>${thisdockerimage}</repository>
                     <tag>${project.version}</tag>
                     <buildArgs>
-                        <LAUNCHERJAR>target/dependencies/nodeslauncher.jar</LAUNCHERJAR>
-                        <SYSTEM_FAR_DIRECTORY>target/dependencies/system</SYSTEM_FAR_DIRECTORY>
+                        <PROJECT_VERSION>${project.version}</PROJECT_VERSION>
                     </buildArgs>
                     <verbose>true</verbose>
                     <detail>true</detail>
+                    <pullNewerImage>false</pullNewerImage>
                     <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                 </configuration>
             </plugin>

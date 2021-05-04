@@ -20,6 +20,7 @@
         <module>composumcoreV1</module>
         <module>composumnodes</module>
         <module>featurelauncher</module>
+        <module>composumlauncher</module>
     </modules>
 
     <build>
