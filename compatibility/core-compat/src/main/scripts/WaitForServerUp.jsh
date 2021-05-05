@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 String filename = System.getProperty("file");
-Pattern regex = Pattern.compile("ServiceEvent REGISTERED|BundleEvent|org.apache.sling.audit.osgi.installer");
+Pattern regex = Pattern.compile("ServiceEvent REGISTERED|BundleEvent|org.apache.sling.audit.osgi.installer|OsgiInstallerImpl|JcrInstaller|FelixStartLevel|Startup Thread");
 int timeout = 10;
 BlockingQueue<Boolean> linequeue = new SynchronousQueue<>();
 File file = new File(filename);

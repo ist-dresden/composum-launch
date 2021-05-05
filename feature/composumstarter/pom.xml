@@ -82,12 +82,6 @@
                                 <classifier>oak_tar</classifier>
                                 <type>slingosgifeature</type>
                             </includeArtifact>
-                            <includeArtifact>
-                                <groupId>com.composum.nodes.osgi</groupId>
-                                <artifactId>composum-nodes-osgi-package-installer</artifactId>
-                                <version>${composum.nodes.version}</version>
-                                <type>slingosgifeature</type>
-                            </includeArtifact>
                         </aggregate>
                     </aggregates>
                     <scans>
@@ -197,6 +191,7 @@
                             <workingDirectory>${project.build.directory}/it</workingDirectory>
                             <async>true</async>
                             <asyncDestroyOnShutdown>true</asyncDestroyOnShutdown>
+                            <successCodes>0,143</successCodes>
                             <timeout>180000</timeout>
                         </configuration>
                     </execution>

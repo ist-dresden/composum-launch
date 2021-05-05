@@ -10,9 +10,11 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
+import java.text.DateFormat;
+import java.util.Date;
 
     String filename = System.getProperty("file");
-    Pattern regex = Pattern.compile("ServiceEvent REGISTERED|BundleEvent|org.apache.sling.audit.osgi.installer|OsgiInstallerImpl");
+    Pattern regex = Pattern.compile("ServiceEvent REGISTERED|BundleEvent|org.apache.sling.audit.osgi.installer|OsgiInstallerImpl|JcrInstaller|FelixStartLevel|Startup Thread");
     int timeout = 10;
     @SuppressWarnings("rawtypes")
     BlockingQueue linequeue = new SynchronousQueue<Object>();
@@ -57,6 +59,7 @@ import java.util.regex.Pattern;
         Thread.sleep(1000);
     }
 
-    System.out.println("No service registered log entries for " + timeout + " seconds");
+    System.out.println(DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(new Date()) +
+            "No service registered log entries for " + timeout + " seconds");
 
 /exit

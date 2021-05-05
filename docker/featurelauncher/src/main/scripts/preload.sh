@@ -54,7 +54,7 @@ wget -P $TMPFIL -q -nc -p -r -l 1 --user=admin --password=admin --delete-after $
 
 sleep 1
 for url in $urls; do
-  curl -f -s -S -L -o /dev/null -u admin:admin $url || echo FAIL : $url
+  curl -f -s -S -L -o /dev/null -u admin:admin $url || echo `logdate` Preloading: FAIL $url
 done
 
 echo `logdate` Preloading: done, have a nice day using Composum!
