@@ -1,4 +1,10 @@
 {
+  "bundles":[
+    {
+      "id":"com.composum.assets:metadata-extractor-bundle::${composum.assets.version}",
+      "start-order":"9"
+    }
+  ],
   "content-packages:ARTIFACTS|required": [
     {
       "id": "com.composum.platform:composum-platform-commons-package:zip:${composum.platform.version}",

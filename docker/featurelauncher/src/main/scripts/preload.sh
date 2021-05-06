@@ -31,11 +31,10 @@ done
 
 echo `logdate` Preloading: access some URL whose initial generation takes time to improve user experience after startup
 
-# load everything in parallel to speed things up
+# load everything
 for url in $urls; do
-  curl -s -S -L -o /dev/null -u admin:admin $url &
+  curl -s -S -L -o /dev/null -u admin:admin $url
 done
-
 wait
 
 # load everything again in case something went wrong

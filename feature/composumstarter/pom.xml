@@ -99,6 +99,7 @@
                             <includeClassifier>composum</includeClassifier>
                         </archive>
                     </archives>
+                    <reports>duplicates,exported-packages,contents</reports>
                 </configuration>
                 <executions>
                     <execution>
@@ -109,6 +110,7 @@
                             <goal>analyse-features</goal>
                             <goal>attach-features</goal>
                             <goal>attach-featurearchives</goal>
+                            <goal>info</goal>
                         </goals>
                     </execution>
                 </executions>
