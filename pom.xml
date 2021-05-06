@@ -38,6 +38,7 @@
         <composum.pages.version>1.2.1-SNAPSHOT</composum.pages.version>
         <composum.pages.options.version>1.2.1-SNAPSHOT</composum.pages.options.version>
         <composum.assets.version>1.0.1-SNAPSHOT</composum.assets.version>
+        <composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
         <cpm.platform.htl.version>1.0.1-SNAPSHOT</cpm.platform.htl.version>
         <!-- no deployment except if specified otherwise -->
         <maven.deploy.skip>true</maven.deploy.skip>
