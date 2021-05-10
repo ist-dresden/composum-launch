@@ -90,7 +90,7 @@ public class CheckSuccessfulStartIT {
      * "Status: 240 bundles in total - all 240 bundles active."
      */
     @Test
-    public void checkBundles() throws InterruptedException {
+    public void checkBundles() throws InterruptedException, IOException {
         Thread.sleep(5000); // give server some undisturbed startup time
 
         HttpGet get = new HttpGet("http://localhost:" + port + "/system/console/status-Bundlelist.txt");
@@ -140,7 +140,47 @@ public class CheckSuccessfulStartIT {
                 LOG.info("Still getting exception reading bundlelist from IT testserver {}", lastFailure);
             }
         }
+
+        checkServiceHookExecution();
+
         Assert.assertNull(lastFailure);
+    }
+
+    /**
+     * Checks that
+     * http://localhost:8080/bin/cpm/usermanagement.tree.json/home/users/system/composum/platform
+     * contains an entry about composum-platform-service to check that the platform SetupHook was executed.
+     * Not done as a test in itself, since we rely on {@link #checkBundles()} to ensure the server is up.
+     */
+    protected void checkServiceHookExecution() throws IOException, InterruptedException {
+        HttpGet get = new HttpGet("http://localhost:" + port + "/bin/cpm/usermanagement.tree.json/home/users/system/composum/platform");
+        String lastFailure = null;
+        long delay = 500;
+        long begin = System.currentTimeMillis();
+        while (System.currentTimeMillis() < begin + MAXIMUM_WAIT_TIME) {
+            LOG.info("Delaying {}", delay);
+            Thread.sleep(delay);
+            delay = delay * 5 / 3;
+            try (CloseableHttpResponse httpResponse = client.execute(get, httpClientContext)) {
+
+                if (httpResponse.getStatusLine().getStatusCode() != 200) {
+                    lastFailure = "Status code is " + httpResponse.getStatusLine();
+                    LOG.info("Delaying user check after failure {}", lastFailure);
+                    continue;
+                }
+
+                String response = IOUtils.toString(httpResponse.getEntity().getContent(), "UTF-8");
+
+                if (!response.contains("\"composum-platform-service\"")) {
+                    LOG.info("User composum-platform-service not yet found");
+                    continue;
+                }
+
+                lastFailure = null;
+                LOG.info("User composum-platform-service present after {} more seconds", Math.round((System.currentTimeMillis() - begin) / 1000));
+                break;
+            }
+        }
     }
 
 }
