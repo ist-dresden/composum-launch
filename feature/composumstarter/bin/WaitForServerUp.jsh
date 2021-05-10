@@ -59,6 +59,6 @@ import java.util.Date;
         Thread.sleep(1000);
     }
 
-    System.out.println(new SimpleDateFormat("dd.mm.YY HH:MM:SS").format(new Date()) + " No service registered log entries for " + timeout + " seconds");
+    System.out.println(new SimpleDateFormat("dd.MM.YY HH:mm:ss").format(new Date()) + " No service registered log entries for " + timeout + " seconds");
 
 /exit
