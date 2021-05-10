@@ -1,0 +1,17 @@
+{
+  "prototype": {
+    "id": "com.composum.platform.features:org.apache.sling.starter.copy:slingosgifeature:oak_tar:${sling.starter.version}",
+    "removals": {
+      "bundles": [
+        "org.apache.sling:org.apache.sling.installer.factory.packages:0"
+      ]
+    }
+  },
+  "bundles": [
+    {
+      "id": "com.composum.nodes.osgi:composum-nodes-osgi-package-installer:${composum.nodes.version}",
+      "start-order": "21",
+      "description": "Packagetransformer that replaces org.apache.sling.installer.factory.packages until https://issues.apache.org/jira/browse/JCRVLT-427 / https://issues.apache.org/jira/browse/SLING-10362 is fixed."
+    }
+  ]
+}

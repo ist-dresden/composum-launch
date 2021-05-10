@@ -7,8 +7,6 @@
   ],
   "framework-properties": {
     "felix.startlevel.bundle": "30",
-    "felix.log.level": "2",
-    "felix.fileinstall.start.level": "30",
-    "felix.fileinstall.active.level": "30"
+    "felix.log.level": "2"
   }
 }
