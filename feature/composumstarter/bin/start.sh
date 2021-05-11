@@ -22,8 +22,15 @@ for hook in ${scriptdir}/*-resourceshook.sh; do
 done
 
 $scriptdir/preload.sh &
+preloadpid=$!
+trap "kill $preloadpid" EXIT
+
+JAVA_ARGS="-Djava.awt.headless=true -server"
+JAVA_ARGS="$JAVA_ARGS -Djava.rmi.server.hostname=0.0.0.0 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=28080 -Dcom.sun.management.jmxremote.rmi.port=28080 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+JAVA_ARGS="$JAVA_ARGS -agentlib:jdwp=transport=dt_socket,address=*:18080,server=y,suspend=n"
+JAVA_ARGS="$JAVA_ARGS -Dsling.fileinstall.dir=launcher/fileinstall -Dfelix.startlevel.bundle=30 -Dfelix.log.level=2"
 
 cd target
-cmdline="java -Djava.awt.headless=true -server -agentlib:jdwp=transport=dt_socket,address=*:18080,server=y,suspend=n -Djava.rmi.server.hostname=0.0.0.0 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=28080 -Dcom.sun.management.jmxremote.rmi.port=28080 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dsling.fileinstall.dir=launcher/fileinstall -Dfelix.startlevel.bundle=30 -Dfelix.log.level=2 -jar $launcherjar"
+cmdline="java $JAVA_ARGS -jar $launcherjar"
 echo "Launching with $cmdline"
 $cmdline

@@ -83,7 +83,7 @@
         },
         {
             "id":"org.apache.sling:org.apache.sling.installer.factory.packages:1.0.4",
-            "start-order":"20"
+            "start-order":"21"
         },
         {
             "id":"org.apache.sling:org.apache.sling.installer.hc:2.0.2",

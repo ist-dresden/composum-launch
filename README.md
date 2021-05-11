@@ -8,14 +8,18 @@ Composum Nodes, Platform and Pages.
 
 This module creates a couple of docker images with which it is easy to run the public parts of the [Composum](http://composum.com/) suite.
 
-- **slingstarter**: starts a [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter) on JDK 11 with enabled debugging and JMX and some provisions to automatically install more packages when a derived docker image is started. On dockerhub this is available as [composum/slingstarter](https://cloud.docker.com/u/composum/repository/docker/composum/slingstarter).
-
-- **slingstarter-stepwisedeploy**: docker image based on slingstarter that sets up some basic scripts for the stepwise deployment of packages within sling starter from a docker image to avoid problems with dependencies between them. On dockerhub available as [composum/slingstarter-stepwisedeploy](https://cloud.docker.com/u/composum/repository/docker/composum/slingstarter-stepwisedeploy).
-
-- **pages/docker**: docker image based on slingstarter, it deploys both the newest version of the [Composum Nodes](https://github.com/ist-dresden/composum), [Composum Platform](https://github.com/ist-dresden/composum-platform) and [Composum Pages](https://github.com/ist-dresden/composum-pages). On dockerhub this is available as [composum/pages](https://cloud.docker.com/u/composum/repository/docker/composum/pages). (TODO: make this based on slingstarter-stepwisedeploy.)
-
 - **featurelauncher**: docker image using the feature launcher, deploying a snapshot of Sling Starter 12 and preparing
   for further deployments both as feature archives and as packages from the filesystem.
+
+- **composumlauncher**: docker image with a sling feature launcher that launches a FAR from a Sling Starter 12 snapshot
+  and includes all public Composum modules as features. Based on the featurelauncher docker image (
+  composum/featurelauncher-nodes).
+
+- **slingstarter**: (obsolete) starts a [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter) on JDK 11 with enabled debugging and JMX and some provisions to automatically install more packages when a derived docker image is started. On dockerhub this is available as [composum/slingstarter](https://cloud.docker.com/u/composum/repository/docker/composum/slingstarter).
+
+- **slingstarter-stepwisedeploy**: (obsolete) docker image based on slingstarter that sets up some basic scripts for the stepwise deployment of packages within sling starter from a docker image to avoid problems with dependencies between them. On dockerhub available as [composum/slingstarter-stepwisedeploy](https://cloud.docker.com/u/composum/repository/docker/composum/slingstarter-stepwisedeploy).
+
+- **pages/docker**: (obsolete) docker image based on slingstarter, it deploys both the newest version of the [Composum Nodes](https://github.com/ist-dresden/composum), [Composum Platform](https://github.com/ist-dresden/composum-platform) and [Composum Pages](https://github.com/ist-dresden/composum-pages). On dockerhub this is available as [composum/pages](https://cloud.docker.com/u/composum/repository/docker/composum/pages). (TODO: make this based on slingstarter-stepwisedeploy.)
 
 - compatibility/**slingstarter-compat**: like slingstarter, but with the earliest Sling Launchpad version that is supported the Composum Nodes (as of 4/2019: version 9 on JDK 8).
 

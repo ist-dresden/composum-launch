@@ -9,8 +9,8 @@ version: "3.7"
 
 services:
   sling:
-    image: composum/featurestarter-nodes:${PROJECT_VERSION}
-    container_name: featurestarter-nodes
+    image: composum/featurelauncher-nodes:${PROJECT_VERSION}
+    container_name: featurelauncher-nodes
     volumes:
       - "./target/run/logs:/opt/sling/launcher/logs"
       - "./target/run/fileinstall:/opt/sling/fileinstall-user"

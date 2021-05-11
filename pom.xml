@@ -31,14 +31,19 @@
     mvn -DallowSnapshots=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
     -->
     <properties>
-        <composum.nodes.version>2.6.2-SNAPSHOT</composum.nodes.version>
+        <!-- nodes needs version >= 2.6.3-SNAPSHOT because of integration of sling osgi features. -->
+        <composum.nodes.version>2.6.3-SNAPSHOT</composum.nodes.version>
         <!-- For docker images etc. that use the composum core v1.x, which is now superceeded by composum nodes -->
         <composum.corev1.version>1.12.4</composum.corev1.version>
+        <!-- platform needs version >= 1.3.1-SNAPSHOT because of fixed package dependencies. -->
         <composum.platform.version>1.3.1-SNAPSHOT</composum.platform.version>
+        <!-- pages needs version >= 1.2.1-SNAPSHOT because of fixed package dependencies. -->
         <composum.pages.version>1.2.1-SNAPSHOT</composum.pages.version>
         <composum.pages.options.version>1.2.1-SNAPSHOT</composum.pages.options.version>
+        <!-- platform needs version >= 1.0.1-SNAPSHOT because of fixed package dependencies. -->
         <composum.assets.version>1.0.1-SNAPSHOT</composum.assets.version>
         <composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
+        <!-- htl needs version >= 1.0.1-SNAPSHOT because of fixed package dependencies. -->
         <cpm.platform.htl.version>1.0.1-SNAPSHOT</cpm.platform.htl.version>
         <!-- no deployment except if specified otherwise -->
         <maven.deploy.skip>true</maven.deploy.skip>

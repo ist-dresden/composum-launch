@@ -64,7 +64,6 @@ public class LaunchFromEmbeddedFAR {
             System.out.println("Feature launcher start arguments: " + String.join(" ", args));
             org.apache.sling.feature.launcher.impl.Main.main(args.toArray(new String[0]));
         } finally {
-            System.out.println("TEST");
             System.out.flush();
         }
     }
