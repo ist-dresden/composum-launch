@@ -9,7 +9,7 @@ urls=""
 logfile=/opt/sling/launcher/logs/error.log
 
 # fill the variable urls
-for urlscript in /opt/sling/scripts/preloadurls*.sh; do
+for urlscript in /opt/sling/scripts/_preloadurls*.sh /opt/sling/scripts-user/_preloadurls*.sh; do
     if [[ -e $urlscript ]]; then
         echo `logdate` "Preloading: loading urls from $urlscript"
         source $urlscript

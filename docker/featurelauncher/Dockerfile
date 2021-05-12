@@ -34,6 +34,7 @@ EXPOSE 28080
 VOLUME /opt/sling/launcher
 VOLUME /opt/sling/fileinstall-user
 VOLUME /opt/sling/features-user
+VOLUME /opt/sling/scripts-user
 WORKDIR /opt/sling
 USER sling:sling
 

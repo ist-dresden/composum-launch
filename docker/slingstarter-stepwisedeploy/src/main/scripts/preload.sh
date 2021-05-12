@@ -8,7 +8,7 @@ urlbase="http://localhost:8080"
 urls=""
 
 # fill the variable urls
-for urlscript in /opt/sling/scripts/preloadurls*.sh; do
+for urlscript in /opt/sling/scripts/_preloadurls*.sh; do
     if [[ -e $urlscript ]]; then
         echo "loading urls from $urlscript"
         source $urlscript

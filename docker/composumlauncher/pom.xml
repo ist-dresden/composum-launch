@@ -32,6 +32,13 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>com.composum.platform.features</groupId>
+            <artifactId>composum-launcher-feature-composumstarter</artifactId>
+            <version>${project.version}</version>
+            <classifier>composum</classifier>
+            <type>far</type>
+        </dependency>
     </dependencies>
 
     <build>
