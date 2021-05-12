@@ -67,6 +67,14 @@
             <version>${org.apache.felix.framework.version}</version>
             <scope>runtime</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.composum.platform.features</groupId>
+            <artifactId>org.apache.sling.starter.copy</artifactId>
+            <version>${sling.starter.version}</version>
+            <classifier>oak_tar</classifier>
+            <type>slingosgifeature</type>
+        </dependency>
     </dependencies>
 
     <build>

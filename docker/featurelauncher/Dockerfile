@@ -17,7 +17,8 @@ RUN set -eux; \
     useradd -r -g sling --uid=1000 --home-dir=/opt/sling --shell=/bin/bash sling; \
     mkdir -p /opt/sling/launcher /opt/sling/fileinstall-docker /opt/sling/fileinstall-user /opt/sling/features-docker/system /opt/sling/features-user /opt/sling/features-docker /opt/sling/scripts; \
     chown -R sling:sling /opt/sling; \
-    ln -s /opt/sling/launcher/logs /var/log/sling;
+    ln -s /opt/sling/launcher/logs /var/log/sling; \
+    ln -s /opt/sling/launcher/logs /opt/sling/logs;
 
 COPY --chown=sling:sling src/main/scripts /opt/sling/scripts/
 

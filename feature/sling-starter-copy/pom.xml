@@ -52,6 +52,9 @@
         <groovy.version>3.0.7</groovy.version>
         <!-- skip index generation for all builds except for CI and release -->
         <bnd.index.generation.skip>true</bnd.index.generation.skip>
+
+        <!-- This is hopefully a temporary solution, not to be distributed. -->
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <build>
