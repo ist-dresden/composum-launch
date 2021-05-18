@@ -51,11 +51,11 @@ public class LaunchFromEmbeddedFAR {
     boolean wantDefaultRepository = false;
     boolean wantHelp = false;
 
-    public static void main(String[] rawArgs) throws IOException {
+    public static void main(String[] rawArgs) throws Throwable {
         new LaunchFromEmbeddedFAR().run(rawArgs);
     }
 
-    protected void run(String[] rawArgs) throws IOException {
+    protected void run(String[] rawArgs) throws Throwable {
         System.out.println("Start arguments " + String.join(" ", Arrays.asList(rawArgs)));
         if (rawArgs.length > 0 && StopFromPid.STOP_COMMAND.equals(rawArgs[0])) {
             StopFromPid.main(rawArgs);
@@ -63,8 +63,12 @@ public class LaunchFromEmbeddedFAR {
             processArgs(rawArgs);
             System.out.println("Feature launcher start arguments: " + String.join(" ", args));
             org.apache.sling.feature.launcher.impl.Main.main(args.toArray(new String[0]));
+        } catch (Throwable e) { // make sure we see what happened.
+            e.printStackTrace(System.err);
+            throw e;
         } finally {
             System.out.flush();
+            System.err.flush();
         }
     }
 
