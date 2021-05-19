@@ -36,11 +36,6 @@
             <artifactId>httpclient-osgi</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.httpcomponents</groupId>-->
-<!--            <artifactId>httpcore-osgi</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -83,16 +78,35 @@
                                 <type>slingosgifeature</type>
                             </includeArtifact>
                         </aggregate>
+                        <aggregate>
+                            <classifier>oak_mongo</classifier>
+                            <filesInclude>**/*.json</filesInclude>
+                            <includeClassifier>composum</includeClassifier>
+                            <includeArtifact>
+                                <groupId>com.composum.platform.features</groupId>
+                                <artifactId>composum-launcher-feature-nodesstarter</artifactId>
+                                <version>${project.version}</version>
+                                <classifier>oak_mongo</classifier>
+                                <type>slingosgifeature</type>
+                            </includeArtifact>
+                        </aggregate>
                     </aggregates>
                     <scans>
                         <scan>
                             <includeClassifier>oak_tar</includeClassifier>
+                        </scan>
+                        <scan>
+                            <includeClassifier>oak_mongo</includeClassifier>
                         </scan>
                     </scans>
                     <archives>
                         <archive>
                             <classifier>oak_tar</classifier>
                             <includeClassifier>oak_tar</includeClassifier>
+                        </archive>
+                        <archive>
+                            <classifier>oak_mongo</classifier>
+                            <includeClassifier>oak_mongo</includeClassifier>
                         </archive>
                         <archive>
                             <classifier>composum</classifier>

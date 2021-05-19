@@ -80,6 +80,8 @@ ENV ADD_LAUNCHER_OPTS ""
 
 ENV COMMAND java
 
+ENV CMD "/opt/sling/scripts/start.sh $COMMAND $JVM_OPTS $MEM_OPTS $DEBUG_OPTS $JMX_OPTS $FILEINSTALL_OPTS $ADD_OPTS -jar /opt/sling/nodeslauncher.jar $LAUNCHER_OPTS $ADD_LAUNCHER_OPTS"
+
 CMD exec /opt/sling/scripts/start.sh $COMMAND $JVM_OPTS $MEM_OPTS $DEBUG_OPTS $JMX_OPTS $FILEINSTALL_OPTS $ADD_OPTS -jar /opt/sling/nodeslauncher.jar $LAUNCHER_OPTS $ADD_LAUNCHER_OPTS
 
 # from maven dependency:copy

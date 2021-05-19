@@ -21,7 +21,8 @@
     <properties>
         <org.apache.sling.feature.launcher.version>1.1.16</org.apache.sling.feature.launcher.version>
         <sling.starter.version>12.210321.9ee9acf</sling.starter.version>
-        <!-- FIXME temporary overide until https://issues.apache.org/jira/browse/SLING-10339 or https://issues.apache.org/jira/browse/JCRVLT-517 are released. -->
+        <!-- FIXME temporary overide until https://issues.apache.org/jira/browse/SLING-10339 or https://issues.apache.org/jira/browse/JCRVLT-517 are released:
+             Release > 1.0.2 of https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.jcr.packageinit -->
         <org.apache.sling.jcr.packageinit.version>1.0.3-SNAPSHOT</org.apache.sling.jcr.packageinit.version>
     </properties>
 
@@ -53,6 +54,7 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.jcr.packageinit -->
         <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.jcr.packageinit</artifactId>
@@ -85,7 +87,9 @@
                 <artifactId>slingfeature-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
-                    <replacePropertyVariables>org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version</replacePropertyVariables>
+                    <replacePropertyVariables>
+                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version
+                    </replacePropertyVariables>
                     <framework>
                         <groupId>org.apache.felix</groupId>
                         <artifactId>org.apache.felix.framework</artifactId>
@@ -108,7 +112,7 @@
                         <aggregate>
                             <classifier>oak_tar</classifier>
                             <includeClassifier>composum</includeClassifier>
-                            <filesInclude>**/*.json</filesInclude>
+                            <filesInclude>common/*.json</filesInclude>
                             <includeArtifact>
                                 <groupId>com.composum.platform.features</groupId>
                                 <artifactId>org.apache.sling.starter.copy</artifactId>
@@ -120,16 +124,38 @@
                                 <artifactsOverride>com.composum.nodes:*:HIGHEST</artifactsOverride>
                             </artifactsOverrides>
                         </aggregate>
+                        <aggregate>
+                            <classifier>oak_mongo</classifier>
+                            <includeClassifier>composum</includeClassifier>
+                            <filesInclude>common/*.json</filesInclude>
+                            <includeArtifact>
+                                <groupId>com.composum.platform.features</groupId>
+                                <artifactId>org.apache.sling.starter.copy</artifactId>
+                                <version>${sling.starter.version}</version>
+                                <classifier>oak_mongo</classifier>
+                                <type>slingosgifeature</type>
+                            </includeArtifact>
+                            <artifactsOverrides>
+                                <artifactsOverride>com.composum.nodes:*:HIGHEST</artifactsOverride>
+                            </artifactsOverrides>
+                        </aggregate>
                     </aggregates>
                     <scans>
                         <scan>
                             <includeClassifier>oak_tar</includeClassifier>
+                        </scan>
+                        <scan>
+                            <includeClassifier>oak_mongo</includeClassifier>
                         </scan>
                     </scans>
                     <archives>
                         <archive>
                             <classifier>oak_tar</classifier>
                             <includeClassifier>oak_tar</includeClassifier>
+                        </archive>
+                        <archive>
+                            <classifier>oak_mongo</classifier>
+                            <includeClassifier>oak_mongo</includeClassifier>
                         </archive>
                         <archive>
                             <classifier>composum</classifier>
@@ -143,7 +169,7 @@
                         <phase>prepare-package</phase>
                         <goals>
                             <goal>aggregate-features</goal>
-                            <!-- <goal>analyse-features</goal> -->
+                            <goal>analyse-features</goal>
                             <goal>attach-features</goal>
                             <goal>attach-featurearchives</goal>
                         </goals>

@@ -13,6 +13,7 @@ The application defined in the Dockerfile is accessible at port 8080, for debugg
 - /opt/sling/launcher contains the launcher directory, /opt/sling/launcher/logs the log files
 - /opt/sling/features-user can contain additional feature archives or features.
 - /opt/sling/fileinstall-user can contain bundles or packages for use by the Sling [file installer](https://sling.apache.org/documentation/bundles/file-installer-provider.html).
+- /opt/sling/features-docker/system/ contains the system feature in the docker image. The system features can be changed by overriding this directory.
 The features have to be present at startup time, the fileinstall-user directory is repeatedly scanned. If the features are not embedded in a feature archive, it's necessary to specify a repository with in the environment variable LAUNCHER_OPTS for the docker image.
 
 An example docker-compose file is present at [docker-compose.yml](docker-compose.yml).
