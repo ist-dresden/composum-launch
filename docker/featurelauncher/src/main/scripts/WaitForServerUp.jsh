@@ -15,7 +15,7 @@ import java.util.Date;
 
     String filename = System.getProperty("file");
     Pattern regex = Pattern.compile("ServiceEvent REGISTERED|BundleEvent|org.apache.sling.audit.osgi.installer|OsgiInstallerImpl|JcrInstaller|FelixStartLevel|Startup Thread");
-    int timeout = 10;
+    int timeout = 20;
     @SuppressWarnings("rawtypes")
     BlockingQueue linequeue = new SynchronousQueue<Object>();
     File file = new File(filename);
@@ -59,6 +59,6 @@ import java.util.Date;
         Thread.sleep(1000);
     }
 
-    System.out.println(new SimpleDateFormat("dd.MM.YY HH:mm:ss").format(new Date()) + " No service registered log entries for " + timeout + " seconds");
+    System.out.println(new SimpleDateFormat("dd.MM.YYYY HH:mm:ss").format(new Date()) + " No service registered log entries for " + timeout + " seconds");
 
 /exit

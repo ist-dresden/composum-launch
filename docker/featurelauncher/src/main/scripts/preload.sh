@@ -28,6 +28,8 @@ until curl -f -u admin:admin -s -S $urlbase/system/console/status-Bundlelist.txt
   sleep 10
 done
 `dirname $0`/WaitForServerUp.jsh $logfile
+sleep 30
+`dirname $0`/WaitForServerUp.jsh $logfile
 
 echo `logdate` Preloading: access some URL whose initial generation takes time to improve user experience after startup
 
