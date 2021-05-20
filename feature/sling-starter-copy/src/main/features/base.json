@@ -81,9 +81,11 @@
             "id":"org.apache.sling:org.apache.sling.i18n:2.5.16",
             "start-order":"20"
         },
+        // CAUTION - this is a workaround for SLING-10372 - the repository has to be UP when this starts.
+        // Take care to keep this start level when updating the versions.
         {
             "id":"org.apache.sling:org.apache.sling.installer.factory.packages:1.0.4",
-            "start-order":"20"
+            "start-order":"21"
         },
         {
             "id":"org.apache.sling:org.apache.sling.installer.hc:2.0.2",
