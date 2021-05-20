@@ -8,18 +8,5 @@
   "framework-properties": {
     "felix.startlevel.bundle": "30",
     "felix.log.level": "2"
-  },
-  "configurations": {
-    "org.apache.jackrabbit.vault.packaging.impl.PackagingImpl":{
-      "authIdsForRootInstallation":[
-        "sling-package-install"
-      ],
-      "packageRoots":[
-        "/etc/packages"
-      ],
-      "authIdsForHookExecution":[
-        "sling-package-install"
-      ]
-    }
   }
 }
