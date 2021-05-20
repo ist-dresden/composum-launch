@@ -181,14 +181,26 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>embeddedNodesFAR</id>
+                        <id>oakTarLauncher</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>src/main/assembly/embeddedNodesFAR.xml</descriptor>
+                                <descriptor>src/main/assembly/oakTarLauncher.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>oakMongoLauncher</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/oakMongoLauncher.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>

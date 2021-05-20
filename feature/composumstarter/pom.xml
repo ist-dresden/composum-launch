@@ -134,13 +134,27 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>oakTarLauncher</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
                         <configuration>
                             <descriptors>
-                                <descriptor>src/main/assembly/embeddedComposumFAR.xml</descriptor>
+                                <descriptor>src/main/assembly/oakTarLauncher.xml</descriptor>
+                            </descriptors>
+                            <mergeManifestMode>merge</mergeManifestMode>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>oakMongoLauncher</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/oakMongoLauncher.xml</descriptor>
                             </descriptors>
                             <mergeManifestMode>merge</mergeManifestMode>
                         </configuration>

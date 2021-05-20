@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
+
+    <id>oak_mongo-launcher</id>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <containerDescriptorHandlers>
+        <containerDescriptorHandler>
+            <handlerName>metaInf-services</handlerName>
+        </containerDescriptorHandler>
+    </containerDescriptorHandlers>
+
+    <dependencySets>
+        <dependencySet>
+            <includes>
+                <include>com.composum.platform.features:composum-launcher-feature-nodesstarter</include>
+            </includes>
+            <outputDirectory>/</outputDirectory>
+            <unpack>true</unpack>
+        </dependencySet>
+    </dependencySets>
+
+    <files>
+        <file>
+            <!-- replaces the far/embedded.far -->
+            <source>${basedir}/target/composum-launcher-feature-composumstarter-${project.version}-oak_mongo.far</source>
+            <outputDirectory>far</outputDirectory>
+            <destName>embedded.far</destName>
+        </file>
+    </files>
+
+</assembly>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
+    <!-- Creates a launcher with embedded feature archive. -->
+
+    <id>oak_mongo-launcher</id>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <containerDescriptorHandlers>
+        <containerDescriptorHandler>
+            <handlerName>metaInf-services</handlerName>
+        </containerDescriptorHandler>
+    </containerDescriptorHandlers>
+
+    <dependencySets>
+        <dependencySet>
+            <includes>
+                <!-- This extension overrides the default content-package handler and has to go before the feature launcher
+                 to override it's own ContentPackageHandler. It processes the packages and creates an execution plan
+                   for org.apache.sling:org.apache.sling.jcr.packageinit . -->
+                <include>org.apache.sling:org.apache.sling.feature.extension.content</include>
+            </includes>
+            <outputDirectory>/</outputDirectory>
+            <unpack>true</unpack>
+        </dependencySet>
+
+        <dependencySet>
+            <!-- separate dependency set since otherwise the META-INF/services/ is reordered, and this has to go after extension.content. -->
+            <outputDirectory>/</outputDirectory>
+            <unpack>true</unpack>
+            <includes>
+                <include>org.apache.sling:org.apache.sling.feature.launcher</include>
+            </includes>
+        </dependencySet>
+
+        <!-- Now we are creating a maven-repository like structure at lib with things the feature launcher needs in addition to the FAR. -->
+        <dependencySet>
+            <outputDirectory>lib/</outputDirectory>
+            <outputFileNameMapping>${artifact.groupIdPath}/${artifact.artifactId}/${artifact.version}/${artifact.file.name}</outputFileNameMapping>
+            <includes>
+                <include>org.apache.felix:org.apache.felix.framework</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
+
+    <!-- Creating a repository instead does work, but strangely it always tries to access the network for that, so we avoid this. -->
+    <!--    <repositories>-->
+    <!--        <repository>-->
+    <!--            <outputDirectory>/lib/</outputDirectory>-->
+    <!--        </repository>-->
+    <!--    </repositories>-->
+
+    <files>
+        <file>
+            <source>${basedir}/target/composum-launcher-feature-nodesstarter-${project.version}-oak_mongo.far</source>
+            <outputDirectory>far</outputDirectory>
+            <destName>embedded.far</destName>
+        </file>
+        <file>
+            <!-- Marker-file used to access the internal repository. -->
+            <outputDirectory>/lib/</outputDirectory>
+            <source>${basedir}/src/main/resources/lib/marker.txt</source>
+        </file>
+    </files>
+
+    <fileSets>
+        <fileSet>
+            <directory>${basedir}/target/classes/com/composum/platform/feature/nodesstarter</directory>
+            <!-- useProjectArtefact in dependency doesn't work since it tries to include the far, too. :-( So this way. -->
+            <outputDirectory>/com/composum/platform/feature/nodesstarter</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+</assembly>
