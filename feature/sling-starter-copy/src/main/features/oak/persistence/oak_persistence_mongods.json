@@ -5,8 +5,8 @@
              "start-order":"15"
         },
         {
-          /* workaround for SLING-10402 */
-             "id":"org.mongodb:mongo-java-driver:3.10.2",
+             // Do NOT blindly update this, see SLING-10402
+             "id":"org.mongodb:mongo-java-driver:3.8.2",
              "start-order":"15"
          }
     ],
