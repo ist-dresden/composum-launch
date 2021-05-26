@@ -8,5 +8,5 @@ MVN="mvn -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMave
 # Build as much as possible to find all errors at once, but
 # do not start deployment until everything was right
 $MVN -fae -P${TRAVIS_BRANCH} clean install &&
-$MVN -P${TRAVIS_BRANCH},deployDocker deploy &&
+$MVN -P${TRAVIS_BRANCH},deployDocker clean deploy &&
 echo "Build script done!"
