@@ -20,10 +20,8 @@
 
     <properties>
         <org.apache.sling.feature.launcher.version>1.1.16</org.apache.sling.feature.launcher.version>
-        <sling.starter.version>12.210321.1d09582f-fix1</sling.starter.version>
-        <!-- FIXME temporary overide until https://issues.apache.org/jira/browse/SLING-10339 or https://issues.apache.org/jira/browse/JCRVLT-517 are released:
-             Release > 1.0.2 of https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.jcr.packageinit -->
-        <org.apache.sling.jcr.packageinit.version>1.0.3-SNAPSHOT</org.apache.sling.jcr.packageinit.version>
+        <sling.starter.version>12.210525.51eaaa3b-fix1</sling.starter.version>
+        <org.apache.sling.jcr.packageinit.version>1.0.2</org.apache.sling.jcr.packageinit.version>
     </properties>
 
     <repositories>
