@@ -20,24 +20,9 @@
 
     <properties>
         <org.apache.sling.feature.launcher.version>1.1.16</org.apache.sling.feature.launcher.version>
-        <sling.starter.version>12.210525.51eaaa3b-fix1</sling.starter.version>
+        <sling.starter.version>12.210525.51eaaa3b-fix2</sling.starter.version>
         <org.apache.sling.jcr.packageinit.version>1.0.2</org.apache.sling.jcr.packageinit.version>
     </properties>
-
-    <repositories>
-        <repository>
-            <!-- Only for org.apache.sling:org.apache.sling.jcr.packageinit:1.0.3-SNAPSHOT . FIXME remove when released. -->
-            <id>apache-snapshots</id>
-            <name>Apache Snapshot Repository</name>
-            <url>https://repository.apache.org/snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>

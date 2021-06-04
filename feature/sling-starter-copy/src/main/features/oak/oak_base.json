@@ -128,9 +128,10 @@
         {
             "id":"org.apache.sling:org.apache.sling.installer.provider.jcr:3.3.0",
             "start-order":"20"
-        },    
+        },
+        /** Version > 3.5.0 needed because of https://issues.apache.org/jira/browse/JCRVLT-525  */
         {
-            "id":"org.apache.jackrabbit.vault:org.apache.jackrabbit.vault:3.5.0",
+            "id":"org.apache.jackrabbit.vault:org.apache.jackrabbit.vault:3.5.1-SNAPSHOT",
             "start-order":"20"
         },
         {
