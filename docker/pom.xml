@@ -15,13 +15,28 @@
     <description>Parent of various Docker-Images related to Composum. This contains some stuff common to all docker images.</description>
 
     <modules>
-        <module>slingstarter</module>
-        <module>slingstarter-stepwisedeploy</module>
-        <module>composumcoreV1</module>
-        <module>composumnodes</module>
         <module>featurelauncher</module>
         <module>composumlauncher</module>
     </modules>
+
+    <properties>
+        <maven.deploy.skip>false</maven.deploy.skip>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>obsolete</id>
+            <modules>
+                <!-- More or less obsolete docker images using Sling Starter 11.
+                 Do not build by default because of docker pull rate limiting.
+                  https://docs.docker.com/docker-hub/download-rate-limit/ -->
+                <module>composumcoreV1</module>
+                <module>slingstarter</module>
+                <module>slingstarter-stepwisedeploy</module>
+                <module>composumnodes</module>
+            </modules>
+        </profile>
+    </profiles>
 
     <build>
         <resources>

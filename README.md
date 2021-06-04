@@ -27,7 +27,31 @@ This module creates a couple of docker images with which it is easy to run the p
 
 Since there are various modules involved, we normally use the pages version as version number for all docker images, as kind of the leading module.
 
-# Start Composum Pages using docker
+# Start the Composum Suite using docker
+
+## Pull from dockerhub
+
+Run as a temporary installation (after stopping the container all data is deleted):
+
+    docker pull composum/featurelauncher-composum:latest
+    docker run --rm -p 8080:8080 composum/featurelauncher-composum:latest
+
+where `{version}` has to be replaced by the current version of this project, e.g. `1.2.1-SNAPSHOT` .
+
+Compare the [docker run](https://docs.docker.com/engine/reference/run/) documentation for other options.
+Composum Pages is accessible at http://localhost:8080/bin/pages.html one or two minutes after starting.
+
+## Build the docker images and start locally
+
+Do a `mvn clean install` on everything and start in the corresponding directory using [docker-compose](https://docs.docker.com/compose/):
+
+    docker-compose up --force-recreate -V --abort-on-container-exit
+
+Stop it and destroy created containers with:
+
+    docker-compose down --rmi local -v --remove-orphans
+
+# Start Composum Pages using docker (obsolete Sling 11 starter)
 
 ## Pull from dockerhub
 
@@ -41,7 +65,7 @@ where `{version}` has to be replaced by the current version of this project, e.g
 Compare the [docker run](https://docs.docker.com/engine/reference/run/) documentation for other options.
 Composum Pages is accessible at http://localhost:8080/bin/pages.html one or two minutes after starting.
 
-## Build and start locally
+## Build the docker images and start locally
 
 Do a `mvn clean install` on everything and start in the corresponding directory using [docker-compose](https://docs.docker.com/compose/):
 
@@ -53,15 +77,28 @@ Stop it and destroy created containers with:
 
 # Start Composum Pages using Sling Starter
 
-**pages/starter**: contains a [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter)
-extended with the newest version of the [Composum Nodes](https://github.com/ist-dresden/composum), [Composum Platform](https://github.com/ist-dresden/composum-platform) and [Composum Pages](https://github.com/ist-dresden/composum-pages).
+**feature/nodesstarter**: A [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter) 12-SNAPSHOT with composum nodes installed in the newest version, and some provisions to install packages (see [feature/README.md](feature/README.md)), and run it offline.
+**feature/composumstarter**: Extends the feature/nodesstarter with all public Composum modules. (There are some enterprise modules, which aren't contained.) 
 
-If you don't want to build it yourself, you can grab a copy with using maven with
+**pages/starter**: (obsolete) contains a [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter) version 11
+extended with the newest version of the [Composum Nodes](https://github.com/ist-dresden/composum), [Composum Platform](https://github.com/ist-dresden/composum-platform) and [Composum Pages](https://github.com/ist-dresden/composum-pages). Since it is based on Starter 11, this is obsolete.
 
-    mvn dependency:copy -Dartifact=com.composum.pages:composum-pages-starter:1.0.0-SNAPSHOT -DoutputDirectory=.
+To get these, you can build them yourself, or grab a snapshot from our [snapshot repository](https://build.ist-software.com/nexus/#browse/browse:maven-snapshots:com%2Fcomposum%2Fpages%2Fcomposum-launcher-pages-starter).
 
-or download it from https://build.ist-software.com/archiva/repository/mirror/com/composum/pages/composum-pages-starter/ . Composum Pages is accessible at http://localhost:8080/bin/pages.html after starting
+Composum Pages is accessible at http://localhost:8080/bin/pages.html after starting
 
     java -jar composum-pages-starter-1.0.0-SNAPSHOT.jar
 
 (You need to wait one or two minutes for Sling to fully start up.)
+
+# Building this module
+
+Because of docker pull rate limiting
+https://docs.docker.com/docker-hub/download-rate-limit/ 
+and because there are some images for compatibility checking that are rarely needed, and many images are Sling Starter 11 based, which is now more or less obsolete, there are some maven profiles you'd have to set if you really want to build everything:
+
+**compat**: this profile builds the docker images for compatibility checking
+**obsolete**: this profile builds the docker images using Sling Starter 11 (which are mentioned above but marked as obsolete).
+
+So, to build absolutely everything, you'd have to call
+mvn clean install -P compat,obsolete

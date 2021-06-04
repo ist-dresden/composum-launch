@@ -17,6 +17,10 @@
         mgmt) and Composum Platform and Pages. Basically all released public parts of Composum.
     </description>
 
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
     <dependencies>
         <!-- The base docker image we rely on -->
         <dependency>
