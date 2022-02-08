@@ -19,8 +19,8 @@
     </description>
 
     <properties>
-        <org.apache.sling.feature.launcher.version>1.1.16</org.apache.sling.feature.launcher.version>
-        <sling.starter.version>12.210525.51eaaa3b-fix2</sling.starter.version>
+        <org.apache.sling.feature.launcher.version>1.2.0</org.apache.sling.feature.launcher.version>
+        <sling.starter.version>12.20220207-SNAPSHOT</sling.starter.version>
         <org.apache.sling.jcr.packageinit.version>1.0.2</org.apache.sling.jcr.packageinit.version>
     </properties>
 
@@ -71,7 +71,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <replacePropertyVariables>
-                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version
+                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version
                     </replacePropertyVariables>
                     <framework>
                         <groupId>org.apache.felix</groupId>
