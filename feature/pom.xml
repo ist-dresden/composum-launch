@@ -19,6 +19,7 @@
 
     <modules>
         <module>sling-starter-copy</module>
+        <module>sling-kickstart-copy</module>
         <module>nodesstarter</module>
         <module>composumstarter</module>
     </modules>
