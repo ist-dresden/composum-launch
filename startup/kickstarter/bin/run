@@ -1,17 +1,9 @@
 #!/bin/bash
+echo 'Starts the server in the forecround'
 
 BINPATH=$( dirname ${0} )
 CPM_HOME=$( cd $BINPATH/..; pwd )
-cd ${CPM_HOME}
 
-if [ -r ./cpm_config.properties ]; then
-   . ./cpm_config.properties
-fi
+source $BINPATH/readconfiguration.sh
 
-if [ -n "$JAVA_VERSION" ]; then
-	 unset JAVA_HOME
-   export JAVA_HOME=`/usr/libexec/java_home -v $JAVA_VERSION`
-   JAVA="${JAVA_HOME}/bin/java"
-fi
-
-$JAVA -jar org.apache.sling.kickstart-*.jar $* &
+$JAVA $CPM_JVM_OPTS -jar $CPM_JARFILE $KICKSTART_OPTS

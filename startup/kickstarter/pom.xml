@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.composum.platform</groupId>
+        <artifactId>composum-launcher</artifactId>
+        <version>1.2.1-SNAPSHOT</version>
+        <relativePath>../..</relativePath>
+    </parent>
+
+    <groupId>com.composum.platform</groupId>
+    <artifactId>composum-startup-kickstarter</artifactId>
+    <version>1.2.1-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <name>Composum Startup Kickstarter</name>
+    <description>Example for startup with kickstarter</description>
+
+    <properties>
+        <org.apache.sling.kickstart.version>0.0.12</org.apache.sling.kickstart.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>fetch-starter</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.kickstart -->
+                                <artifactItem>
+                                    <groupId>org.apache.sling</groupId>
+                                    <artifactId>org.apache.sling.kickstart</artifactId>
+                                    <version>${org.apache.sling.kickstart.version}</version>
+                                    <outputDirectory>${project.basedir}/starter</outputDirectory>
+                                </artifactItem>
+
+                                <artifactItem>
+                                    <groupId>org.apache.sling</groupId>
+                                    <artifactId>org.apache.sling.starter</artifactId>
+                                    <version>12</version>
+                                    <type>far</type>
+                                    <classifier>oak_tar_far</classifier>
+                                    <outputDirectory>${project.basedir}/starter</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.basedir}/starter</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
