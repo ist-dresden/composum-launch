@@ -1,3 +1,4 @@
 launcher/
 starter/
-log/
+logs/
+conf/controlport

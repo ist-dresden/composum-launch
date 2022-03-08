@@ -22,8 +22,9 @@ if [ -z "$CPM_JARFILE" ]; then
    CPM_JARFILE=`ls -1 starter/*.jar | head -1`
 fi
 
-if [ -z "$CPM_FAR" ]; then
-  CPM_FAR=`ls -1 starter/*.far | head -1`
+if [ -z "$CPM_FEATUREFILE" ]; then
+  CPM_FEATUREFILE=`ls -1 starter/*.far | head -1`
+  CPM_FEATUREFILE=file://`realpath $CPM_FEATUREFILE`
 fi
 
 # TCP port used for stop and status scripts
@@ -67,8 +68,4 @@ fi
 # --nofm --nofar : do not use embedded FAR - we give that explicitly.
 KICKSTART_OPTS="${KICKSTART_OPTS} --nofm --nofar"
 
-KICKSTART_OPTS="${KICKSTART_OPTS} -j=${CPM_CTRL_PORT} -p=${CPM_PORT} -s=${CPM_FAR} ${CPM_KICKSTART_OPTS}"
-
-set | egrep 'CPM_|KICK'
-
-set -v -x
+KICKSTART_OPTS="${KICKSTART_OPTS} -j=${CPM_CTRL_PORT} -p=${CPM_PORT} -s=${CPM_FEATUREFILE} ${CPM_KICKSTART_OPTS}"
