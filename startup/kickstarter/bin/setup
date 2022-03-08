@@ -17,4 +17,5 @@ mvn clean
 
 mkdir -p logs
 mkdir -p conf
+mkdir -p fileinstall
 mvn install
