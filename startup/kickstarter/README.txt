@@ -14,3 +14,15 @@ see composumpackages.json
 
 run without network:
 docker run -ti --rm --network none -v `pwd`:`pwd` -w `pwd` -p 8080:8080 openjdk:12-jdk /bin/bash
+
+
+feature file:
+"id": *"([^:]+):([^:]+):([^:]*):([^:"]+)",
+
+      <artifactItem>
+          <groupId>$1</groupId>
+          <artifactId>$2</artifactId>
+          <version>$4</version>
+          <type>$3</type>
+          <outputDirectory>\${project.basedir}/fileinstall</outputDirectory>
+      </artifactItem>

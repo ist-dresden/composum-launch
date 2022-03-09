@@ -11,7 +11,7 @@ read
 
 bin/stop
 
-rm -rf logs hs_err_* launcher conf/controlport starter
+rm -rf logs hs_err_* launcher conf/controlport starter fileinstall
 
 mvn clean
 

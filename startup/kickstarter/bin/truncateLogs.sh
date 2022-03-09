@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+echo "Truncates the logfiles of the launcher"
+if test -d launcher/logs; then
+  truncate --size=0 launcher/logs/*.log
+else
+  echo "ERROR: I'm confused: there is no launcher/logs here in $(pwd)"
+fi
+
+if test -d logs; then
+  truncate --size=0 logs/*.log
+else
+  echo "ERROR: I'm confused: there is no logs here in $(pwd)"
+fi
