@@ -16,21 +16,6 @@
  */
 package org.apache.sling.launchpad;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.apache.felix.utils.json.JSONParser;
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
@@ -55,6 +40,20 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 @RunWith(Parameterized.class)
 public class SmokeIT {
@@ -208,9 +207,9 @@ public class SmokeIT {
      */
     @Test
     public void checkReadableUrls() throws Exception {
-        final int minTests = 6;
+        final int minTests = 2;
         final int TRIES = 10;
-        final int WAIT_BETWEEN_TRIES_MILLIS = 1000;
+        final int WAIT_BETWEEN_TRIES_MILLIS = 2000;
 
         final String baseURL = String.format("http://localhost:%d", slingHttpPort);
         final List<UrlCheck> checks = new ArrayList<>();
