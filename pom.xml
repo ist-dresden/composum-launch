@@ -47,8 +47,19 @@
         <!-- no deployment except if specified otherwise -->
         <maven.deploy.skip>true</maven.deploy.skip>
 
+        <!-- As long as 12 isn't officially in the repo, we use 12-SNAPSHOT - that's almost the same and not updated anymore. -->
+        <sling.starter.version>12-SNAPSHOT</sling.starter.version>
+        <!-- Version of our local copy at feature/sling-starter-copy -->
+        <sling.starter.copy.version>12.1-SNAPSHOT</sling.starter.copy.version>
+
         <!-- For the feature starter. -->
-        <org.apache.felix.framework.version>6.0.3</org.apache.felix.framework.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.framework -->
+        <org.apache.felix.framework.version>7.0.3</org.apache.felix.framework.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.feature.launcher -->
+        <!-- Due to https://issues.apache.org/jira/browse/SLING-11158 1.1.28 and 1.2.0 do not work. -->
+        <org.apache.sling.feature.launcher.version>1.1.26</org.apache.sling.feature.launcher.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.jcr.packageinit -->
+        <org.apache.sling.jcr.packageinit.version>1.0.4</org.apache.sling.jcr.packageinit.version>
     </properties>
 
     <dependencyManagement>
@@ -118,7 +129,7 @@
                 <plugin>
                     <groupId>org.apache.sling</groupId>
                     <artifactId>slingfeature-maven-plugin</artifactId>
-                    <version>1.5.0</version>
+                    <version>1.6.0</version>
                 </plugin>
                 <!-- https://mvnrepository.com/artifact/org.apache.sling/sling-kickstart-maven-plugin -->
                 <plugin>
@@ -130,7 +141,7 @@
                 <plugin>
                     <groupId>org.apache.sling</groupId>
                     <artifactId>feature-launcher-maven-plugin</artifactId>
-                    <version>0.1.0</version>
+                    <version>0.1.2</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -154,5 +165,20 @@
             </modules>
         </profile>
     </profiles>
+
+    <repositories>
+        <repository>
+            <!-- To be able to reference sling starter snapshots, since there is no public 12 release yet. -->
+            <id>apache.snapshots</id>
+            <name>Apache Development Snapshot Repository</name>
+            <url>https://repository.apache.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>
