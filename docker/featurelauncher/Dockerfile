@@ -4,13 +4,13 @@
 # We provide two watched directories for file installation - fileinstall-docker, which is meant to be filled
 # in derived docker images, and fileinstall-user, which could be mounted by the user
 
-FROM openjdk:12-jdk
-# TODO(hps,16.10.20) use later JDK?
+FROM openjdk:17
 # install some essential utilities for diagnosing trouble from a shell within the container
-RUN yum install -y procps-ng
-RUN yum install -y less
-RUN yum install -y vim-minimal
-RUN yum install -y wget
+RUN installer=$(command -v yum && echo yum || echo microdnf); \
+    $installer install -y procps-ng; \
+    $installer install -y less; \
+    $installer install -y vim-minimal; \
+    $installer install -y wget
 
 RUN set -eux; \
     groupadd -r sling --gid=1000; \

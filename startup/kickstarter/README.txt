@@ -19,7 +19,7 @@ which can also be done other ways. So, as of 22/03 we do not recommend productio
 To check the behaviour of the kickstarter without network access and access to $HOME/.m2: with docker it's
 possible to execute a bash in the current directory while just mounting it into the docker image:
 
-docker run -ti --rm --network none -v `pwd`:`pwd` -w `pwd` -p 8080:8080 openjdk:11 /bin/bash
+docker run -ti --rm --network none -v `pwd`:`pwd` -w `pwd` -p 8080:8080 openjdk:17 /bin/bash
 
 ## Links
 
