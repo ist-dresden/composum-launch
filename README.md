@@ -25,6 +25,8 @@ This module creates a couple of docker images with which it is easy to run the p
 
 - compatibility/**nodes-compat**: like slingstarter, but with the earliest Sling Launchpad version that is supported the Composum Nodes (as of 4/2019: version 9 on JDK 8).
 
+- **startup**: some experiments how to start up Sling with composum using the various starters
+
 Since there are various modules involved, we normally use the pages version as version number for all docker images, as kind of the leading module.
 
 # Start the Composum Suite using docker

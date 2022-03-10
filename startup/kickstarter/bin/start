@@ -9,4 +9,4 @@ source $BINPATH/readconfiguration.sh
 
 set -x
 mkdir -p logs
-$JAVA $CPM_JVM_OPTS -jar $CPM_JARFILE start $KICKSTART_OPTS -f=logs/stdout.log >& logs/starter.log &
+$JAVA $CPM_JVM_OPTS -jar $CPM_JARFILE start $KICKSTART_OPTS >& logs/starter.log &
