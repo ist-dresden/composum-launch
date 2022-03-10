@@ -87,7 +87,7 @@
 
                 <composum.corev1.version>2</composum.corev1.version>
                 <composum.nodes.version>3.3.2-SNAPSHOT</composum.nodes.version>
-                <composum.platform.version>1.5.1-SNAPSHOT</composum.platform.version>
+                <composum.platform.version>1.6.0-SNAPSHOT</composum.platform.version>
                 <composum.pages.version>1.4.1-SNAPSHOT</composum.pages.version>
                 <composum.pages.options.version>1.4.1-SNAPSHOT</composum.pages.options.version>
                 <composum.assets.version>1.3.1-SNAPSHOT</composum.assets.version>

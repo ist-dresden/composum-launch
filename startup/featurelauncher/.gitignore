@@ -1,6 +1,6 @@
 launcher/
 starter/
 logs/
-conf/controlport
+conf/cpm.pid
 fileinstall/
 featureexamples/

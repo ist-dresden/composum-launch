@@ -1,4 +1,5 @@
 #! /bin/bash
+# helper script that prints the versions of the checked out composum projects at $COMPOSUM in a format usable for pom properties
 cd $COMPOSUM
 
 function printVersion () {

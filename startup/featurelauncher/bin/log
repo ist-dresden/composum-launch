@@ -1,6 +1,7 @@
 #!/bin/bash
+echo "tail of all logs" # helptext-marker
 BINPATH=$( dirname ${0} )
 CPM_HOME=$( cd $BINPATH/..; pwd )
 cd ${CPM_HOME}
 
-tail -n 1000 -F *.log launcher/logs/*.log
+tail -n 1000 -F logs/*.log launcher/logs/*.log

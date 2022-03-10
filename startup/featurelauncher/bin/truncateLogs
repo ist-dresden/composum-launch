@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-echo "Truncates the logfiles of the launcher"
+echo "Truncates the logfiles of the launcher" # helptext-marker
 if test -d launcher/logs; then
   truncate --size=0 launcher/logs/*.log
 else

@@ -1,9 +1,9 @@
 #!/bin/bash
-echo 'Starts the server in the forecround'
+echo 'Starts the server in the foreground' # helptext-marker
 
 BINPATH=$( dirname ${0} )
 CPM_HOME=$( cd $BINPATH/..; pwd )
 
 source $BINPATH/readconfiguration.sh
 
-$JAVA $CPM_JVM_OPTS -jar $CPM_JARFILE $FEATURE_CMD
+$JAVA $CPM_JVM_OPTS -jar $CPM_JARFILE $FEATURE_CMD 2>&1 | tee logs/stdout.log
