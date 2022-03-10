@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo 'Starts the server in the background'
+
+BINPATH=$( dirname ${0} )
+CPM_HOME=$( cd $BINPATH/..; pwd )
+
+source $BINPATH/readconfiguration.sh
+
+set -x
+mkdir -p logs
+$JAVA $CPM_JVM_OPTS -jar $CPM_JARFILE start $KICKSTART_OPTS >& logs/starter.log &
