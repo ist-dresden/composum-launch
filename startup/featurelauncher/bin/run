@@ -6,4 +6,4 @@ CPM_HOME=$( cd $BINPATH/..; pwd )
 
 source $BINPATH/readconfiguration.sh
 
-$JAVA $CPM_JVM_OPTS -jar $CPM_JARFILE $KICKSTART_OPTS
+$JAVA $CPM_JVM_OPTS -jar $CPM_JARFILE $FEATURE_CMD

@@ -16,4 +16,5 @@ docker run -ti --rm --network none -v `pwd`:`pwd` -w `pwd` -p 8080:8080 openjdk:
 ## Links
 https://github.com/apache/sling-org-apache-sling-starter
 https://github.com/apache/sling-org-apache-sling-feature-launcher
+https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.feature.launcher
 https://issues.apache.org/jira/browse/SLING-11184?jql=project%20%3D%20SLING%20AND%20component%20%3D%20Starter

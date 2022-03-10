@@ -1,5 +1,6 @@
 # sourced to read configuration, including default values
 # We read a cpm_config.properties in CPM_HOME
+# debug with (source bin/readconfiguration.sh ; set | egrep 'CPM|CMD|JAVA' )
 set -e
 
 if [ -z "$CPM_HOME" ]; then
@@ -16,6 +17,8 @@ if [ -n "$JAVA_VERSION" ]; then
 	 unset JAVA_HOME
    export JAVA_HOME=`/usr/libexec/java_home -v $JAVA_VERSION`
    JAVA="${JAVA_HOME}/bin/java"
+else
+   JAVA=java
 fi
 
 if [ -z "$CPM_JARFILE" ]; then
@@ -65,7 +68,28 @@ then
     CPM_JVM_OPTS="${CPM_JVM_OPTS} -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=${CPM_DEBUG_PORT}"
 fi
 
-# --nofm --nofar : do not use embedded FAR - we give that explicitly.
-KICKSTART_OPTS="${KICKSTART_OPTS} --nofm --nofar"
+FEATURE_CMD="-f $CPM_FEATUREFILE -D org.osgi.framework.system.packages.extra=sun.misc" # -v for verbose
+# FEATURE_CMD="$FEATURE_CMD -p ${CPM_HOME}/sling -c ${CPM_HOME}/sling/cache -u file://${COMPOSUM}/maven/repo,https://build.ist-software.com/nexus/repository/maven-public/"
+#FEATURE_CMD="$FEATURE_CMD -D org.osgi.framework.system.packages.extra=sun.misc"
 
-KICKSTART_OPTS="${KICKSTART_OPTS} -j=${CPM_CTRL_PORT} -p=${CPM_PORT} -s=${CPM_FEATUREFILE} ${CPM_KICKSTART_OPTS}"
+if [ $CPM_HOST ]; then
+    FEATURE_CMD="${FEATURE_CMD} -D org.apache.felix.http.host=${CPM_HOST}"
+fi
+if [ $CPM_PORT ]; then
+    FEATURE_CMD="${FEATURE_CMD} -D org.osgi.service.http.port=${CPM_PORT}"
+fi
+if [ $CPM_CONTEXT ]; then
+    FEATURE_CMD="${FEATURE_CMD} -D org.apache.felix.http.context_path=${CPM_CONTEXT}"
+fi
+if [ $CPM_RUNMODE ]; then
+    FEATURE_CMD="${FEATURE_CMD} -D sling.run.modes=${CPM_RUNMODE}"
+fi
+if [ $CPM_MONGO_URI ]; then
+    FEATURE_CMD="${FEATURE_CMD} -D oak.mongo.uri=${CPM_MONGO_URI}"
+fi
+
+if [ $CPM_USE_JAAS ]; then
+    FEATURE_CMD="${FEATURE_CMD} -D java.security.auth.login.config=${CPM_JAAS_CONFIG}"
+fi
+
+FEATURE_CMD="$FEATURE_CMD $CPM_FEATURE_OPTS"
