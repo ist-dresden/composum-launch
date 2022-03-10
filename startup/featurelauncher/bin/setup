@@ -9,7 +9,7 @@ cd ${CPM_HOME}
 echo remove everything and start from scratch - abort or press enter to continue
 read
 
-bin/stop
+${BINPATH}/stop
 
 rm -rf logs hs_err_* launcher conf/controlport starter fileinstall
 

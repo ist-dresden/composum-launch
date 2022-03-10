@@ -4,6 +4,8 @@ echo 'Starts the server in the background' # helptext-marker
 BINPATH=$( dirname ${0} )
 CPM_HOME=$( cd $BINPATH/..; pwd )
 
+${BINPATH}/stop
+
 source $BINPATH/readconfiguration.sh
 
 CMD="$JAVA $CPM_JVM_OPTS -jar $CPM_JARFILE $FEATURE_CMD"
