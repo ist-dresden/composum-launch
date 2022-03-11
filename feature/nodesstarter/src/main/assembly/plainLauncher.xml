@@ -52,6 +52,10 @@
             <outputDirectory>/lib/</outputDirectory>
             <source>${basedir}/src/main/resources/lib/marker.txt</source>
         </file>
+        <file>
+            <outputDirectory>/lib/</outputDirectory>
+            <source>${basedir}/target/classes/lib/felixversion.properties</source>
+        </file>
     </files>
 
     <fileSets>
