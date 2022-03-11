@@ -22,9 +22,9 @@
     <build>
         <resources>
             <resource>
-                <directory>src/featureexamples</directory>
+                <directory>${project.basedir}/src/featuresexamples</directory>
                 <filtering>true</filtering>
-                <targetPath>${project.basedir}/featureexamples</targetPath>
+                <targetPath>${project.basedir}/featuresexamples</targetPath>
             </resource>
         </resources>
 
@@ -72,8 +72,25 @@
                         <fileset>
                             <directory>${project.basedir}/fileinstall</directory>
                         </fileset>
+                        <fileset>
+                            <directory>${project.basedir}/featuresexamples</directory>
+                        </fileset>
                     </filesets>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <!-- Not present by default, since this is a pom artifact. -->
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

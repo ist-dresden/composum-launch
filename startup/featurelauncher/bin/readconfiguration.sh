@@ -1,7 +1,6 @@
 # sourced to read configuration, including default values
 # We read a cpm_config.properties in CPM_HOME
 # debug with (source bin/readconfiguration.sh ; set | egrep 'CPM|CMD|JAVA' )
-set -e
 
 if [ -z "$CPM_HOME" ]; then
   CPM_HOME=.
@@ -28,6 +27,14 @@ fi
 if [ -z "$CPM_FEATUREFILE" ]; then
   CPM_FEATUREFILE=`ls -1 starter/*.far | head -1`
   CPM_FEATUREFILE=file://`realpath $CPM_FEATUREFILE`
+fi
+
+if [ -z "$CPM_FEATURES" ]; then
+  for fil in features/*; do
+    if test -r "$fil"; then
+      CPM_FEATURES="$CPM_FEATURES -f file://$(realpath $fil)"
+    fi
+  done
 fi
 
 # TCP port used for stop and status scripts
@@ -92,4 +99,4 @@ if [ $CPM_USE_JAAS ]; then
     FEATURE_CMD="${FEATURE_CMD} -D java.security.auth.login.config=${CPM_JAAS_CONFIG}"
 fi
 
-FEATURE_CMD="$FEATURE_CMD $CPM_FEATURE_OPTS"
+FEATURE_CMD="$FEATURE_CMD $CPM_FEATURES $CPM_FEATURE_OPTS"

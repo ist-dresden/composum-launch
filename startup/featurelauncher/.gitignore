@@ -1,6 +1,7 @@
-launcher/
-starter/
-logs/
-conf/cpm.pid
-fileinstall/
-featureexamples/
+/launcher
+/starter
+/logs
+/conf/cpm.pid
+/fileinstall
+/featuresexamples
+/features

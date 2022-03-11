@@ -11,11 +11,12 @@ read
 
 ${BINPATH}/stop
 
-rm -rf logs hs_err_* launcher conf/controlport starter fileinstall
+rm -rf logs hs_err_* launcher conf/controlport starter fileinstall features
 
 mvn clean
 
 mkdir -p logs
 mkdir -p conf
 mkdir -p fileinstall
-mvn install
+mkdir -p features
+mvn -P latestsnapshots install

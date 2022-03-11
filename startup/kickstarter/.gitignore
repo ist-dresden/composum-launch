@@ -1,6 +1,7 @@
-launcher/
-starter/
-logs/
-conf/controlport
-fileinstall/
-featureexamples/
+/launcher
+/starter
+/logs
+/conf/controlport
+/fileinstall
+/featuresexamples
+/features/

@@ -1,6 +1,6 @@
 # sourced to read configuration, including default values
 # We read a cpm_config.properties in CPM_HOME
-set -e
+# test with (source bin/readconfiguration.sh ; set | egrep 'CPM|CMD|JAVA|KICK' )
 
 if [ -z "$CPM_HOME" ]; then
   CPM_HOME=.
@@ -25,6 +25,14 @@ fi
 if [ -z "$CPM_FEATUREFILE" ]; then
   CPM_FEATUREFILE=`ls -1 starter/*.far | head -1`
   CPM_FEATUREFILE=file://`realpath $CPM_FEATUREFILE`
+fi
+
+if [ -z "$CPM_FEATURES" ]; then
+  for fil in features/*; do
+    if test -r "$fil"; then
+      CPM_FEATURES="$CPM_FEATURES -af=file://$(realpath $fil)"
+    fi
+  done
 fi
 
 # TCP port used for stop and status scripts
@@ -68,4 +76,4 @@ fi
 # --nofm --nofar : do not use embedded FAR - we give that explicitly.
 KICKSTART_OPTS="${KICKSTART_OPTS} --nofm --nofar"
 
-KICKSTART_OPTS="${KICKSTART_OPTS} -j=${CPM_CTRL_PORT} -p=${CPM_PORT} -s=${CPM_FEATUREFILE} ${CPM_KICKSTART_OPTS}"
+KICKSTART_OPTS="${KICKSTART_OPTS} -j=${CPM_CTRL_PORT} -p=${CPM_PORT} -s=${CPM_FEATUREFILE} ${CPM_FEATURES} ${CPM_KICKSTART_OPTS}"

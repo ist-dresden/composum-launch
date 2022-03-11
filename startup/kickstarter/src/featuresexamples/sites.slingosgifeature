@@ -1,0 +1,14 @@
+{
+  "id":"${project.groupId}:${project.artifactId}:slingosgifeature:sites:${project.version}",
+  "title":"Some composum sites",
+  "content-packages:ARTIFACTS|required": [
+    {
+      "id": "sites.ist.composum:composum-site-app-package:zip:1.0.0-SNAPSHOT",
+      "start-order": "50"
+    },
+    {
+      "id": "sites.ist.composum:composum-site-content:zip:1.0.0-SNAPSHOT",
+      "start-order": "50"
+    }
+  ]
+}
