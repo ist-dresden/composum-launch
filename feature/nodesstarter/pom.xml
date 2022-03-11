@@ -48,9 +48,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.composum.platform.features</groupId>
-            <artifactId>org.apache.sling.starter.copy</artifactId>
-            <version>${sling.starter.copy.version}</version>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.starter</artifactId>
+            <version>${sling.starter.version}</version>
             <classifier>oak_tar</classifier>
             <type>slingosgifeature</type>
         </dependency>
@@ -98,9 +98,9 @@
                             <includeClassifier>composum</includeClassifier>
                             <filesInclude>common/*.json</filesInclude>
                             <includeArtifact>
-                                <groupId>com.composum.platform.features</groupId>
-                                <artifactId>org.apache.sling.starter.copy</artifactId>
-                                <version>${sling.starter.copy.version}</version>
+                                <groupId>org.apache.sling</groupId>
+                                <artifactId>org.apache.sling.starter</artifactId>
+                                <version>${sling.starter.version}</version>
                                 <classifier>oak_tar</classifier>
                                 <type>slingosgifeature</type>
                             </includeArtifact>
@@ -113,9 +113,9 @@
                             <includeClassifier>composum</includeClassifier>
                             <filesInclude>common/*.json</filesInclude>
                             <includeArtifact>
-                                <groupId>com.composum.platform.features</groupId>
-                                <artifactId>org.apache.sling.starter.copy</artifactId>
-                                <version>${sling.starter.copy.version}</version>
+                                <groupId>org.apache.sling</groupId>
+                                <artifactId>org.apache.sling.starter</artifactId>
+                                <version>${sling.starter.version}</version>
                                 <classifier>oak_mongo</classifier>
                                 <type>slingosgifeature</type>
                             </includeArtifact>
