@@ -18,12 +18,6 @@
         Nodes.
     </description>
 
-    <properties>
-        <org.apache.sling.feature.launcher.version>1.2.0</org.apache.sling.feature.launcher.version>
-        <sling.starter.version>12.20220207-SNAPSHOT</sling.starter.version>
-        <org.apache.sling.jcr.packageinit.version>1.0.2</org.apache.sling.jcr.packageinit.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.sling</groupId>
@@ -56,7 +50,7 @@
         <dependency>
             <groupId>com.composum.platform.features</groupId>
             <artifactId>org.apache.sling.starter.copy</artifactId>
-            <version>${sling.starter.version}</version>
+            <version>${sling.starter.copy.version}</version>
             <classifier>oak_tar</classifier>
             <type>slingosgifeature</type>
         </dependency>
@@ -99,7 +93,7 @@
                             <includeArtifact>
                                 <groupId>com.composum.platform.features</groupId>
                                 <artifactId>org.apache.sling.starter.copy</artifactId>
-                                <version>${sling.starter.version}</version>
+                                <version>${sling.starter.copy.version}</version>
                                 <classifier>oak_tar</classifier>
                                 <type>slingosgifeature</type>
                             </includeArtifact>
@@ -114,7 +108,7 @@
                             <includeArtifact>
                                 <groupId>com.composum.platform.features</groupId>
                                 <artifactId>org.apache.sling.starter.copy</artifactId>
-                                <version>${sling.starter.version}</version>
+                                <version>${sling.starter.copy.version}</version>
                                 <classifier>oak_mongo</classifier>
                                 <type>slingosgifeature</type>
                             </includeArtifact>
