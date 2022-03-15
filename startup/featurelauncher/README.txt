@@ -24,9 +24,8 @@ start up everything correctly. However, trying to update a package by stopping t
 starting the server again does not work, as the packages cannot be uninstalled.
 (Error message "PackageException: Unable to uninstall package. No snapshot present.")
 
-Using the uber packages (bin/fileinstall.uber.latest) did not work since the uber packages did not have dependencies
-declared, and the wrapped packages weren't installed since their dependencies weren't met at that point.
-(TODO: declare dependencies of uber packages.)
+It is possible to install the individual packages, or the uber-packages that combine the platform / pages packages, if their
+dependencies are set right. The uber-packages have to depend on the other uber-packages.
 
 ### Upgrade from Sling 11
 
