@@ -14,6 +14,35 @@ If you want to preinstall various composum packages, there are bin/fileinstall* 
 E.g.:
 bin/setup ; bin/fileinstall.individual.latest ; bin/fileinstall.sites ; bin/start ; sleep 30; bin/log
 
+## Results of some experiments
+
+### Starting with various packages
+
+(15.2.22 with Sling Starter 12)
+Starting it up using either the packages directly with bin/fileinstall.individual.latest and bin/fileinstall.sites does
+start up everything correctly. However, trying to update a package by stopping the server, replacing the package and
+starting the server again does not work, as the packages cannot be uninstalled.
+(Error message "PackageException: Unable to uninstall package. No snapshot present.")
+
+Using the uber packages (bin/fileinstall.uber.latest) did not work since the uber packages did not have dependencies
+declared, and the wrapped packages weren't installed since their dependencies weren't met at that point.
+(TODO: declare dependencies of uber packages.)
+
+### Upgrade from Sling 11
+
+A possible path for upgrading from (for example) a Sling 11 launcher based Composum installation to a Sling 12 launcher
+based installation is:
+- set up and run the Sling 12 launcher; check that it works and stop it.
+- use oak-upgrade-*.jar (https://jackrabbit.apache.org/oak/docs/migration.html) to copy the content from the old installation
+into the new installation (should also be stopped). For example:
+
+    java -jar starter/oak-upgrade-*.jar /somewhere/sling11launcher/sling/repository /somewhereelse/sling12launcher/launcher/repository --include-paths=/content/sites,/content/ist,/public,/preview,/var/composum --copy-binaries
+
+- start the Sling 12 launcher with the copied content.
+
+This replaces the JCR folders mentioned in --include-paths in the new launcher with the content from the old launcher, including the content versions.
+Thus, the versions of the pages and the releases are kept.
+
 ## Tip: Running without network for testing
 
 To check the behaviour of the kickstarter without network access and access to $HOME/.m2: with docker it's

@@ -21,7 +21,7 @@ else
 fi
 
 if [ -z "$CPM_JARFILE" ]; then
-   CPM_JARFILE=`ls -1 starter/*.jar | head -1`
+   CPM_JARFILE=`ls -1 starter/*launcher*.jar | head -1`
 fi
 
 if [ -z "$CPM_FEATUREFILE" ]; then

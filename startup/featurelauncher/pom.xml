@@ -55,6 +55,15 @@
                                     <classifier>oak_tar_far</classifier>
                                     <outputDirectory>${project.basedir}/starter</outputDirectory>
                                 </artifactItem>
+
+                                <!-- https://mvnrepository.com/artifact/org.apache.jackrabbit/oak-upgrade -->
+                                <dependency>
+                                    <groupId>org.apache.jackrabbit</groupId>
+                                    <artifactId>oak-upgrade</artifactId>
+                                    <version>1.42.0</version>
+                                    <outputDirectory>${project.basedir}/starter</outputDirectory>
+                                </dependency>
+
                             </artifactItems>
                         </configuration>
                     </execution>
