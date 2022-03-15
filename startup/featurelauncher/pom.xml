@@ -104,15 +104,19 @@
                 <!-- CAUTION: use the 4.* version of nodes since that's already in the starter! -->
                 <!-- Caution: platform 1.6.0-SNAPSHOT currently has unsatisfied depencency to sling nodes package -->
 
-                <composum.corev1.version>2</composum.corev1.version>
-                <composum.nodes.version>4.0.1</composum.nodes.version>
-                <composum.platform.version>1.5.1-SNAPSHOT</composum.platform.version>
+                <composum.corev1.version>1.12.5-SNAPSHOT</composum.corev1.version>
+                <composum.nodes.version>3.3.2-SNAPSHOT</composum.nodes.version>
+                <composum.platform.version>1.6.0-SNAPSHOT</composum.platform.version>
                 <composum.pages.version>1.4.1-SNAPSHOT</composum.pages.version>
                 <composum.pages.options.version>1.4.1-SNAPSHOT</composum.pages.options.version>
                 <composum.assets.version>1.3.1-SNAPSHOT</composum.assets.version>
                 <composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
                 <cpm.platform.htl.version>1.1.1-SNAPSHOT</cpm.platform.htl.version>
 
+                <!-- closed source parts -->
+                <cpm.platform.replication.version>1.1.1-SNAPSHOT</cpm.platform.replication.version>
+                <cpm.platform.workflow.version>1.1.1-SNAPSHOT</cpm.platform.workflow.version>
+                <cpm.platform.tenant.version>1.1.1-SNAPSHOT</cpm.platform.tenant.version>
             </properties>
         </profile>
 
@@ -250,6 +254,75 @@
         </profile>
 
         <profile>
+            <id>composumuberpackages</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>fileinstall-composum-uber</id>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>com.composum.nodes</groupId>
+                                            <artifactId>composum-nodes-sling-package</artifactId>
+                                            <version>${composum.nodes.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+
+                                        <artifactItem>
+                                            <groupId>com.composum.assets</groupId>
+                                            <artifactId>metadata-extractor-bundle</artifactId>
+                                            <version>${composum.assets.version}</version>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+
+                                        <artifactItem>
+                                            <groupId>com.composum.platform</groupId>
+                                            <artifactId>composum-platform-package</artifactId>
+                                            <version>${composum.platform.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+
+                                        <artifactItem>
+                                            <groupId>com.composum.assets</groupId>
+                                            <artifactId>composum-assets-package</artifactId>
+                                            <version>${composum.assets.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+
+                                        <artifactItem>
+                                            <groupId>com.composum.pages</groupId>
+                                            <artifactId>composum-pages-package-all</artifactId>
+                                            <version>${composum.pages.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+
+                                        <artifactItem>
+                                            <groupId>com.composum.platform</groupId>
+                                            <artifactId>cpm-platform-htl-package</artifactId>
+                                            <version>${cpm.platform.htl.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
             <!-- That's for testing by IST GmbH - our sites, which are obviously private. Requires composumindividualpackages, too. -->
             <id>composumsites</id>
             <build>
@@ -264,6 +337,28 @@
                                 </goals>
                                 <configuration>
                                     <artifactItems>
+                                        <artifactItem>
+                                            <groupId>com.composum.platform</groupId>
+                                            <artifactId>cpm-platform-replication-package</artifactId>
+                                            <version>${cpm.platform.replication.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>com.composum.platform</groupId>
+                                            <artifactId>composum-platform-workflow-package</artifactId>
+                                            <version>${cpm.platform.workflow.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>com.composum.platform</groupId>
+                                            <artifactId>composum-platform-tenant-package</artifactId>
+                                            <version>${cpm.platform.tenant.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+
                                         <!-- The cmp-site-composum is the largest site we have so far, and thus interesting to deploy. -->
                                         <artifactItem>
                                             <groupId>sites.ist.composum</groupId>

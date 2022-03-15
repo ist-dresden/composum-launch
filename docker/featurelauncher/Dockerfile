@@ -7,10 +7,9 @@
 FROM openjdk:17
 # install some essential utilities for diagnosing trouble from a shell within the container
 RUN installer=$(command -v yum && echo yum || echo microdnf); \
-    $installer install -y procps-ng; \
-    $installer install -y less; \
-    $installer install -y vim-minimal; \
-    $installer install -y wget
+    for pkg in procps-ng less vim-minimal wget findutils; do \
+      $installer install -y $pkg; \
+    done
 
 RUN set -eux; \
     groupadd -r sling --gid=1000; \

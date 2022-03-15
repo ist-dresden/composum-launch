@@ -29,7 +29,7 @@ This module creates a couple of docker images with which it is easy to run the p
 
 Since there are various modules involved, we normally use the pages version as version number for all docker images, as kind of the leading module.
 
-# Start the Composum Suite using docker
+# Start the Composum Suite (incl. Pages and additional modules) using docker
 
 ## Pull from dockerhub
 
@@ -38,7 +38,7 @@ Run as a temporary installation (after stopping the container all data is delete
     docker pull composum/featurelauncher-composum:latest
     docker run --rm -p 8080:8080 composum/featurelauncher-composum:latest
 
-where `{version}` has to be replaced by the current version of this project, e.g. `1.2.1-SNAPSHOT` .
+Alternatively, you can also use tag develop instead of latest to use a later snapshot.
 
 Compare the [docker run](https://docs.docker.com/engine/reference/run/) documentation for other options.
 Composum Pages is accessible at http://localhost:8080/bin/pages.html one or two minutes after starting.

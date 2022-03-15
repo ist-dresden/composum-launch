@@ -45,6 +45,12 @@
         <composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
         <!-- htl needs version >= 1.0.1-SNAPSHOT because of fixed package dependencies. -->
         <cpm.platform.htl.version>1.1.1-SNAPSHOT</cpm.platform.htl.version>
+
+        <!-- Version numbers of some proprietary packages, not for general use. -->
+        <cpm.platform.replication.version>1.1.1-SNAPSHOT</cpm.platform.replication.version>
+        <cpm.platform.workflow.version>1.1.1-SNAPSHOT</cpm.platform.workflow.version>
+        <cpm.platform.tenant.version>1.1.1-SNAPSHOT</cpm.platform.tenant.version>
+
         <!-- no deployment except if specified otherwise -->
         <maven.deploy.skip>true</maven.deploy.skip>
 

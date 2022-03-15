@@ -1,0 +1,18 @@
+{
+  "id":"${project.groupId}:${project.artifactId}:slingosgifeature:composumProprietary:${project.version}",
+  "title":"some proprietary packages for composum",
+  "content-packages:ARTIFACTS|true":[
+    {
+      "id": "com.composum.platform:cpm-platform-replication-package:zip:${cpm.platform.replication.version}",
+      "start-order": "45"
+    },
+    {
+      "id": "com.composum.platform:composum-platform-workflow-package:zip:${cpm.platform.workflow.version}",
+      "start-order": "45"
+    },
+    {
+      "id": "com.composum.platform:composum-platform-tenant-package:zip:${cpm.platform.tenant.version}",
+      "start-order": "45"
+    }
+  ]
+}

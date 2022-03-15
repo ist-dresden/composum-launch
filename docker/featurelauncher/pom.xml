@@ -30,14 +30,6 @@
             <classifier>launcher</classifier>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.composum.platform.features</groupId>
-            <artifactId>composum-launcher-feature-nodesstarter</artifactId>
-            <version>${project.version}</version>
-            <classifier>oak_tar</classifier>
-            <type>far</type>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <build>
