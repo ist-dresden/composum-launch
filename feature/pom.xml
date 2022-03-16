@@ -22,6 +22,7 @@
         <module>sling-kickstart-copy</module>
         <module>nodesstarter</module>
         <module>composumstarter</module>
+        <module>felixframeworkcontainer</module>
     </modules>
 
     <properties>

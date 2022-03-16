@@ -56,7 +56,17 @@
                                     <outputDirectory>${project.basedir}/starter</outputDirectory>
                                 </artifactItem>
 
-                                <!-- https://mvnrepository.com/artifact/org.apache.jackrabbit/oak-upgrade -->
+                                <artifactItem>
+                                    <groupId>com.composum.platform.features</groupId>
+                                    <artifactId>composum-launcher-feature-felixcontainer</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>zip</type>
+                                    <classifier>zip</classifier>
+                                    <outputDirectory>${project.basedir}/starter</outputDirectory>
+                                </artifactItem>
+
+                                <!-- https://mvnrepository.com/artifact/org.apache.jackrabbit/oak-upgrade .
+                                    Not needed for running, but for experimenting with upgrades. -->
                                 <dependency>
                                     <groupId>org.apache.jackrabbit</groupId>
                                     <artifactId>oak-upgrade</artifactId>

@@ -26,7 +26,7 @@ fi
 
 if [ -z "$CPM_FEATUREFILE" ]; then
   CPM_FEATUREFILE=`ls -1 starter/*.far | head -1`
-  CPM_FEATUREFILE=file://`realpath $CPM_FEATUREFILE`
+  # CPM_FEATUREFILE=file://`realpath $CPM_FEATUREFILE`
 fi
 
 if [ -z "$CPM_FEATURES" ]; then
@@ -35,6 +35,30 @@ if [ -z "$CPM_FEATURES" ]; then
       CPM_FEATURES="$CPM_FEATURES -f file://$(realpath $fil)"
     fi
   done
+fi
+
+if [ -z "$CPM_REPOSITORIES" ]; then
+  # To avoid network access, use the FAR as repository URL.
+  add_standard_repos=0
+  for feature in $CPM_FEATUREFILE $CPM_FEATURES; do
+    if [[ $feature == *.slingosgifeature ]]; then
+      add_standard_repos=1
+    elif [[ $feature == *.far ]]; then
+      CPM_REPOSITORIES="$CPM_REPOSITORIES -u jar:file:$feature!"
+    fi
+  done
+
+  if [ -z "$CPM_FELIXCONTAINER" ]; then
+    CPM_FELIXCONTAINER=`ls -1 starter/*felixcontainer*.zip | head -1`
+  fi
+  if [ -n "$CPM_FELIXCONTAINER" ]; then
+    CPM_REPOSITORIES="$CPM_REPOSITORIES -u jar:file:$CPM_FELIXCONTAINER!"
+  fi
+
+  # If there are features besides FAR, also use the normal repositories to retrieve the artifacts
+  if [[ $add_standard_repos == 1 ]]; then
+    CPM_REPOSITORIES="$CPM_REPOSITORIES -u file:$HOME/.m2/repository -u https://repo.maven.apache.org/maven2 -u https://repository.apache.org/content/groups/snapshots"
+  fi
 fi
 
 # TCP port used for stop and status scripts
@@ -99,4 +123,4 @@ if [ $CPM_USE_JAAS ]; then
     FEATURE_CMD="${FEATURE_CMD} -D java.security.auth.login.config=${CPM_JAAS_CONFIG}"
 fi
 
-FEATURE_CMD="$FEATURE_CMD $CPM_FEATURES $CPM_FEATURE_OPTS"
+FEATURE_CMD="$FEATURE_CMD $CPM_FEATURES $CPM_REPOSITORIES $CPM_FEATURE_OPTS"
