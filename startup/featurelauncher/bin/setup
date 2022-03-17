@@ -19,4 +19,6 @@ mkdir -p logs
 mkdir -p conf
 mkdir -p fileinstall
 mkdir -p features
+mkdir -p launcher
+tmutil addexclusion launcher
 mvn -P latestsnapshots install

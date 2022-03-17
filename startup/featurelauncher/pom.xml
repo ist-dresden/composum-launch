@@ -66,14 +66,26 @@
                                 </artifactItem>
 
                                 <!-- https://mvnrepository.com/artifact/org.apache.jackrabbit/oak-upgrade .
-                                    Not needed for running, but for experimenting with upgrades. -->
-                                <dependency>
+                                    Not needed for running, but for experimenting with upgrades.
+                                    https://jackrabbit.apache.org/oak/docs/migration.html
+                                    -->
+                                <artifactItem>
                                     <groupId>org.apache.jackrabbit</groupId>
                                     <artifactId>oak-upgrade</artifactId>
-                                    <version>1.42.0</version>
+                                    <version>${launcher.oak.version}</version>
                                     <outputDirectory>${project.basedir}/starter</outputDirectory>
-                                </dependency>
+                                </artifactItem>
 
+                                <!-- https://mvnrepository.com/artifact/org.apache.jackrabbit/oak-upgrade .
+                                    Not needed for running, but for experimenting with upgrades.
+                                    https://jackrabbit.apache.org/oak/docs/command_line.html
+                                    -->
+                                <artifactItem>
+                                    <groupId>org.apache.jackrabbit</groupId>
+                                    <artifactId>oak-run</artifactId>
+                                    <version>${launcher.oak.version}</version>
+                                    <outputDirectory>${project.basedir}/starter</outputDirectory>
+                                </artifactItem>
                             </artifactItems>
                         </configuration>
                     </execution>

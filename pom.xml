@@ -60,7 +60,7 @@
         <!-- FIXME switch to real stuff at feature/sling-starter-copy -->
         <sling.starter.copy.version>12.20220207-SNAPSHOT</sling.starter.copy.version>
         <!-- Does have to be the same version as in the launcher. https://mvnrepository.com/artifact/org.apache.jackrabbit/oak-upgrade -->
-        <launcher.oak.version>1.42</launcher.oak.version>
+        <launcher.oak.version>1.42.0</launcher.oak.version>
 
         <!-- For the feature starter. -->
         <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.framework -->

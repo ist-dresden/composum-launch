@@ -88,6 +88,7 @@ fi
 # default JVM options
 if [ -z "$CPM_JVM_OPTS" ]; then
    CPM_JVM_OPTS="-server -Xms${CPM_HEAP_MIN}m -Xmx${CPM_HEAP_MAX}m -Djava.awt.headless=true"
+   CPM_JVM_OPTS="-Dcom.sun.management.jmxremote.port=9005 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=localhost"
 fi
 
 # debug option
