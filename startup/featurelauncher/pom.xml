@@ -165,13 +165,13 @@
                                 </goals>
                                 <configuration>
                                     <artifactItems>
-<!--                                        <artifactItem>-->
-<!--                                            <groupId>com.composum.nodes</groupId>-->
-<!--                                            <artifactId>composum-nodes-sling-package</artifactId>-->
-<!--                                            <version>${composum.nodes.version}</version>-->
-<!--                                            <type>zip</type>-->
-<!--                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>-->
-<!--                                        </artifactItem>-->
+                                        <artifactItem>
+                                            <groupId>com.composum.nodes</groupId>
+                                            <artifactId>composum-nodes-sling-package</artifactId>
+                                            <version>${composum.nodes.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
 
                                         <artifactItem>
                                             <groupId>com.composum.assets</groupId>
