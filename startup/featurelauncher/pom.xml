@@ -136,7 +136,7 @@
                 <!-- Caution: platform 1.6.0-SNAPSHOT currently has unsatisfied depencency to sling nodes package -->
 
                 <composum.corev1.version>1.12.5-SNAPSHOT</composum.corev1.version>
-                <composum.nodes.version>3.3.2-SNAPSHOT</composum.nodes.version>
+                <composum.nodes.version>3.4.1-SNAPSHOT</composum.nodes.version>
                 <composum.platform.version>1.6.0-SNAPSHOT</composum.platform.version>
                 <composum.pages.version>1.4.1-SNAPSHOT</composum.pages.version>
                 <composum.pages.options.version>1.4.1-SNAPSHOT</composum.pages.options.version>
@@ -165,13 +165,13 @@
                                 </goals>
                                 <configuration>
                                     <artifactItems>
-                                        <artifactItem>
-                                            <groupId>com.composum.nodes</groupId>
-                                            <artifactId>composum-nodes-sling-package</artifactId>
-                                            <version>${composum.nodes.version}</version>
-                                            <type>zip</type>
-                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
-                                        </artifactItem>
+<!--                                        <artifactItem>-->
+<!--                                            <groupId>com.composum.nodes</groupId>-->
+<!--                                            <artifactId>composum-nodes-sling-package</artifactId>-->
+<!--                                            <version>${composum.nodes.version}</version>-->
+<!--                                            <type>zip</type>-->
+<!--                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>-->
+<!--                                        </artifactItem>-->
 
                                         <artifactItem>
                                             <groupId>com.composum.assets</groupId>

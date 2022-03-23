@@ -20,5 +20,5 @@ mkdir -p conf
 mkdir -p fileinstall
 mkdir -p features
 mkdir -p launcher
-tmutil addexclusion launcher
+tmutil addexclusion launcher fileinstall
 mvn -P latestsnapshots install
