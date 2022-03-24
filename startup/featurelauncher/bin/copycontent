@@ -48,11 +48,11 @@ COPYPATHS="""
 NOTOVERWRITEPATHS="""
 /content/slingshot
 /content/starter
+/var/composum/clientlibs
 """
 
 # Paths where we do not want to copy content - subpaths of COPYPATHS
 EXCLUDEPATHS="""
-/var/composum/clientlibs
 /var/composum/tmp
 """
 
