@@ -14,6 +14,15 @@ read
 
 ${BINPATH}/stop
 
+OLDREPO="$1"
+if [ -z "${OLDREPO}" ]; then
+   OLDREPO="oldrepository"
+fi
+NEWREPO="$2"
+if [ -z "${NEWREPO}" ]; then
+   NEWREPO="launcher/repository"
+fi
+
 # Paths for which we want to overwrite content
 COPYPATHS="""
 /content
@@ -21,6 +30,8 @@ COPYPATHS="""
 /conf/content
 /conf/tenants
 /etc/tenants
+/etc/map.live
+/etc/map.test
 /var/audit
 /var/composum
 /home/groups/composum
@@ -50,7 +61,7 @@ function commatize () {
   sed -e 's/ *$//;s/^ *//' | tr -s ' ' ','
 }
 
-java -mx4g -jar starter/oak-upgrade-*.jar oldrepository launcher/repository --copy-binaries \
+java -mx4g -jar starter/oak-upgrade-*.jar ${OLDREPO} ${NEWREPO} --copy-binaries \
   --include-paths=$(echo $COPYPATHS | commatize) \
   --exclude-paths=$(echo $NOTOVERWRITEPATHS $EXCLUDEPATHS | commatize) \
   --merge-paths=$(echo $NOTOVERWRITEPATHS | commatize)
