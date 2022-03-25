@@ -148,6 +148,8 @@
                 <cpm.platform.replication.version>1.1.1-SNAPSHOT</cpm.platform.replication.version>
                 <cpm.platform.workflow.version>1.1.1-SNAPSHOT</cpm.platform.workflow.version>
                 <cpm.platform.tenant.version>1.1.1-SNAPSHOT</cpm.platform.tenant.version>
+                <cpm.platform.auth.version>1.2.0-SNAPSHOT</cpm.platform.auth.version>
+                <cpm.platform.config.version>1.0.0-SNAPSHOT</cpm.platform.config.version>
             </properties>
         </profile>
 
@@ -370,6 +372,14 @@
                                     <artifactItems>
                                         <artifactItem>
                                             <groupId>com.composum.platform</groupId>
+                                            <artifactId>composum-platform-config-mapping</artifactId>
+                                            <version>${cpm.platform.config.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+
+                                        <artifactItem>
+                                            <groupId>com.composum.platform</groupId>
                                             <artifactId>cpm-platform-replication-package</artifactId>
                                             <version>${cpm.platform.replication.version}</version>
                                             <type>zip</type>
@@ -468,6 +478,38 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <!-- That's for testing by IST GmbH. -->
+            <id>composumauth</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>fileinstall-composum-auth</id>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>com.composum.platform</groupId>
+                                            <artifactId>composum-platform-sling-saml-package</artifactId>
+                                            <version>${cpm.platform.auth.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
     </profiles>
 
 </project>

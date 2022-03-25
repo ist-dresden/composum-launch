@@ -21,8 +21,5 @@ echo "<!-- closed source parts -->"
 printVersion cpm-platform-replication cpm.platform.replication.version
 printVersion cpm-platform-workflow cpm.platform.workflow.version
 printVersion cpm-platform-tenant cpm.platform.tenant.version
-
-echo
-echo "<!-- unused -->"
 printVersion cpm-platform-auth cpm.platform.auth.version
 printVersion cpm-platform-config cpm.platform.config.version
