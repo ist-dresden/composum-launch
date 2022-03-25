@@ -48,7 +48,9 @@ COPYPATHS="""
 NOTOVERWRITEPATHS="""
 /content/slingshot
 /content/starter
-/var/composum/clientlibs
+/var/composum/clientlibs/apps
+/var/composum/clientlibs/libs
+/var/composum/clientlibs/categorycache
 """
 
 # Paths where we do not want to copy content - subpaths of COPYPATHS
@@ -64,4 +66,5 @@ function commatize () {
 java -mx4g -jar starter/oak-upgrade-*.jar ${OLDREPO} ${NEWREPO} --copy-binaries \
   --include-paths=$(echo $COPYPATHS | commatize) \
   --exclude-paths=$(echo $NOTOVERWRITEPATHS $EXCLUDEPATHS | commatize) \
-  --merge-paths=$(echo $NOTOVERWRITEPATHS | commatize)
+  --merge-paths=$(echo $NOTOVERWRITEPATHS | commatize) \
+  --copy-versions=2000-01-01 --copy-orphaned-versions=2000-01-01
