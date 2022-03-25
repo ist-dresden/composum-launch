@@ -55,7 +55,9 @@
         <maven.deploy.skip>true</maven.deploy.skip>
 
         <!-- As long as 12 isn't officially in the repo, we use 12-SNAPSHOT - that's almost the same and not updated anymore. -->
-        <sling.starter.version>12-SNAPSHOT</sling.starter.version>
+         <sling.starter.version>12-SNAPSHOT</sling.starter.version>
+        <!-- or our copy: -->
+<!--        <sling.starter.version>12.1-SNAPSHOT</sling.starter.version>-->
         <!-- Version of our local copy com.composum.platform.features:org.apache.sling.starter.copy -->
         <!-- FIXME switch to real stuff at feature/sling-starter-copy -->
         <sling.starter.copy.version>12.20220207-SNAPSHOT</sling.starter.copy.version>
@@ -70,6 +72,9 @@
         <org.apache.sling.feature.launcher.version>1.1.26</org.apache.sling.feature.launcher.version>
         <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.jcr.packageinit -->
         <org.apache.sling.jcr.packageinit.version>1.0.4</org.apache.sling.jcr.packageinit.version>
+
+        <!-- https://mvnrepository.com/artifact/com.spotify/dockerfile-maven-plugin -->
+        <com.spotify.dockerfile.version>1.4.12</com.spotify.dockerfile.version>
     </properties>
 
     <dependencyManagement>
@@ -152,6 +157,14 @@
                     <groupId>org.apache.sling</groupId>
                     <artifactId>feature-launcher-maven-plugin</artifactId>
                     <version>0.1.2</version>
+                </plugin>
+
+                <!-- https://mvnrepository.com/artifact/io.fabric8/docker-maven-plugin -->
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>0.39.1</version>
+                    <extensions>true</extensions>
                 </plugin>
             </plugins>
         </pluginManagement>
