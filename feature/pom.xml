@@ -23,6 +23,7 @@
         <module>nodesstarter</module>
         <module>composumstarter</module>
         <module>felixframeworkcontainer</module>
+        <module>integrationtest</module>
     </modules>
 
     <properties>
