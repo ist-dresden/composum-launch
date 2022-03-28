@@ -7,7 +7,7 @@
         <version>1.2.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>docker-build</packaging>
+    <packaging>docker</packaging>
 
     <artifactId>composum-launcher-docker-featurelauncher</artifactId>
     <version>1.2.1-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
@@ -31,6 +31,13 @@
             <classifier>launcher</classifier>
             <scope>provided</scope>
         </dependency>
+
+        <!-- For integration test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -72,15 +79,6 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
-<!--                    <repository>${thisdockerimage}</repository>-->
-<!--                    <tag>${project.version}</tag>-->
-<!--                    <buildArgs>-->
-<!--                        <LAUNCHERJAR>target/dependencies/nodeslauncher.jar</LAUNCHERJAR>-->
-<!--                        <SYSTEM_FAR_DIRECTORY>target/dependencies/system</SYSTEM_FAR_DIRECTORY>-->
-<!--                    </buildArgs>-->
-<!--                    <verbose>true</verbose>-->
-<!--                    <detail>true</detail>-->
-<!--                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>-->
                     <verbose>all</verbose>
                     <images>
                         <image>
@@ -94,6 +92,13 @@
                                     <SYSTEM_FAR_DIRECTORY>target/dependencies/system</SYSTEM_FAR_DIRECTORY>
                                 </args>
                             </build>
+                            <run>
+                                <ports>
+                                    <port>8080:8080</port>
+                                    <port>18080:18080</port>
+                                    <port>28080:28080</port>
+                                </ports>
+                            </run>
                         </image>
                     </images>
                 </configuration>
@@ -115,40 +120,6 @@
             <properties>
                 <imagetag>latest</imagetag>
             </properties>
-        </profile>
-
-        <profile>
-            <!-- This can also be called manually with   mvn clean install dockerfile:tag dockerfile:push -->
-            <!-- Use authentication with entry in settings.xml , encrypt pwd with  mvn &dash;&dash;encrypt-password -->
-            <!--<server>
-                <id>docker.io</id>
-                <username>composum</username>
-                <password>xxx/password>
-            </server>-->
-            <id>deployDocker</id>
-            <build>
-                <plugins>
-
-                    <plugin>
-                        <groupId>io.fabric8</groupId>
-                        <artifactId>docker-maven-plugin</artifactId>
-                        <configuration>
-                            <tagName>${project.version}</tagName>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>push-image</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>tag</goal>
-                                    <goal>push</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                </plugins>
-            </build>
         </profile>
 
     </profiles>
