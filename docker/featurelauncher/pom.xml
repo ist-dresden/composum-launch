@@ -75,32 +75,73 @@
             </plugin>
 
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>reserve-network-port</id>
+                        <goals>
+                            <goal>reserve-network-port</goal>
+                        </goals>
+                        <phase>validate</phase>
+                        <configuration>
+                            <portNames>
+                                <portName>dockerstart.http.port</portName>
+                            </portNames>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
                     <verbose>all</verbose>
-                    <images>
-                        <image>
-                            <name>${thisdockerimage}:${project.version}</name>
-                            <alias>featurelauncher</alias>
-                            <build>
-                                <dockerFile>Dockerfile</dockerFile>
-                                <contextDir>${project.basedir}</contextDir>
-                                <args>
-                                    <LAUNCHERJAR>target/dependencies/nodeslauncher.jar</LAUNCHERJAR>
-                                    <SYSTEM_FAR_DIRECTORY>target/dependencies/system</SYSTEM_FAR_DIRECTORY>
-                                </args>
-                            </build>
-                            <run>
-                                <ports>
-                                    <port>8080:8080</port>
-                                    <port>18080:18080</port>
-                                    <port>28080:28080</port>
+                    <stopMode>kill</stopMode>
+                    <allContainers>true</allContainers>
+                    <!-- ensures a container left running after an aborted build is noticed because it's in conflict. -->
+                   <containerNamePattern>%n</containerNamePattern>
+                   <images>
+                       <image>
+                           <name>${thisdockerimage}:${project.version}</name>
+                           <alias>featurelauncher</alias>
+                           <build>
+                               <dockerFile>Dockerfile</dockerFile>
+                               <contextDir>${project.basedir}</contextDir>
+                               <args>
+                                   <LAUNCHERJAR>target/dependencies/nodeslauncher.jar</LAUNCHERJAR>
+                                   <SYSTEM_FAR_DIRECTORY>target/dependencies/system</SYSTEM_FAR_DIRECTORY>
+                               </args>
+                           </build>
+                           <run>
+                               <ports>
+                                   <port>${dockerstart.http.port}:8080</port>
+<!--                                    <port>18080:18080</port>-->
+<!--                                    <port>28080:28080</port>-->
                                 </ports>
                             </run>
                         </image>
                     </images>
+                </configuration>
+            </plugin>
+
+            <!-- run the ITs -->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <systemPropertyVariables>
+                        <starter.http.test.port>${dockerstart.http.port}</starter.http.test.port>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
