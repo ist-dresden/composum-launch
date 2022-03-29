@@ -336,7 +336,7 @@
                             /bin/browser.html,
                             /bin/packages.html,
                             /bin/cpm/usermanagement.tree.json/home/users/system/sling,
-                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.config.*active
+                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.config.*active,
                         </starter.check.paths>
                     </systemPropertyVariables>
                 </configuration>
