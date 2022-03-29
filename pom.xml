@@ -58,9 +58,6 @@
          <sling.starter.version>12-SNAPSHOT</sling.starter.version>
         <!-- or our copy: -->
 <!--        <sling.starter.version>12.1-SNAPSHOT</sling.starter.version>-->
-        <!-- Version of our local copy com.composum.platform.features:org.apache.sling.starter.copy -->
-        <!-- FIXME switch to real stuff at feature/sling-starter-copy -->
-        <sling.starter.copy.version>12.20220207-SNAPSHOT</sling.starter.copy.version>
         <!-- Does have to be the same version as in the launcher. https://mvnrepository.com/artifact/org.apache.jackrabbit/oak-upgrade -->
         <launcher.oak.version>1.42.0</launcher.oak.version>
 

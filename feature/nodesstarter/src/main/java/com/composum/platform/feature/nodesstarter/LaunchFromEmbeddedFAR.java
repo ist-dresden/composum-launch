@@ -159,7 +159,7 @@ public class LaunchFromEmbeddedFAR {
         System.out.println("Additional arguments:");
         System.out.println("-h / -? / --help \tprint help");
         System.out.println("-f default\tuses the embedded feature archive if present. It's always used if no other explicit -f argument is given.");
-        System.out.println("-u default\tuses the embedded repository containing the felix framework. It's always used if other explicit -u argument is given - the network won't be used to retrieve features if no explicit other -u argument is given.");
+        System.out.println("-u default\tuses the embedded repository containing the felix framework. It's always used if no other explicit -u argument is given - the network won't be used to retrieve features if no explicit other -u argument is given.");
         System.out.println();
     }
 
