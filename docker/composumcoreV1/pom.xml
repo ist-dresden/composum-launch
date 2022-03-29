@@ -17,7 +17,6 @@
     </description>
 
     <properties>
-        <basedockerimage>composum-launcher-slingstarter-stepwisedeploy</basedockerimage>
         <thisdockerimage>composum/core-v1</thisdockerimage>
     </properties>
 
@@ -25,7 +24,7 @@
         <!-- The base docker image we rely on -->
         <dependency>
             <groupId>com.composum.platform</groupId>
-            <artifactId>${basedockerimage}</artifactId>
+            <artifactId>composum-launcher-slingstarter-stepwisedeploy</artifactId>
             <version>${project.version}</version>
             <type>docker-info</type>
             <optional>true</optional>

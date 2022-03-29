@@ -27,15 +27,14 @@
             <classifier>oak_tar-launcher</classifier>
         </dependency>
 
+        <!-- For integration tests -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient-osgi</artifactId>
+            <groupId>com.composum.platform.features</groupId>
+            <artifactId>composum-launcher-feature-integrationtest</artifactId>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -263,8 +262,26 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <dependenciesToScan>
+                        com.composum.platform.features:composum-launcher-feature-integrationtest
+                    </dependenciesToScan>
                     <systemPropertyVariables>
-                        <starter.http.port>${http.port}</starter.http.port>
+                        <starter.http.test.ports>false:${http.port}</starter.http.test.ports>
+                        <starter.min.bundles.count>243</starter.min.bundles.count>
+                        <!-- Comma-separated list of paths to check for 200 status -->
+                        <starter.check.paths>
+                            /starter.html,
+                            /server/default/jcr:root/content CONTAINS sv:node,
+                            /system/sling.js,
+                            /content/starter/img/sling-logo.svg,
+                            /system/console/bundles,
+                            /bin/browser.html,
+                            /bin/packages.html,
+                            /bin/cpm/usermanagement.tree.json/home/users/system/sling,
+                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.config.*active,
+                            /system/console/status-Bundlelist.txt CONTAINS com.composum.platform.htl,
+                            /bin/cpm/usermanagement.tree.json/home/users/system/composum/platform CONTAINS composum-platform-service,
+                        </starter.check.paths>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
