@@ -22,7 +22,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -47,9 +49,11 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -57,6 +61,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 @RunWith(Parameterized.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SmokeIT {
     private static final String CHECK_PATHS_PROPERTY = "starter.check.paths";
 
@@ -112,7 +117,7 @@ public class SmokeIT {
     }
 
     @Test
-    public void verifyAllBundlesStarted() throws Exception {
+    public void test002VerifyAllBundlesStarted() throws Exception {
 
         try ( CloseableHttpClient client = newClient() ) {
 
@@ -174,12 +179,12 @@ public class SmokeIT {
     }
 
     @Test
-    public void ensureRepositoryIsStarted() throws Exception {
+    public void test001ensureRepositoryIsStarted() throws Exception {
         try ( CloseableHttpClient client = newClient() ) {
 
             HttpGet get = new HttpGet("http://localhost:" + slingHttpPort + "/server/default/jcr:root/content");
 
-            try ( CloseableHttpResponse response = client.execute(get) ) {
+            try ( CloseableHttpResponse response = client.execute(get, httpClientContext) ) {
 
                 if ( response.getStatusLine().getStatusCode() != 200 ) {
                     fail("Unexpected status line " + response.getStatusLine());
@@ -207,7 +212,7 @@ public class SmokeIT {
      * For testing the SLING-10402 scenario
      */
     @Test
-    public void checkReadableUrls() throws Exception {
+    public void test003checkReadableUrls() throws Exception {
         final int minTests = 6;
         final int TRIES = 10;
         final int WAIT_BETWEEN_TRIES_MILLIS = 1000;
@@ -221,7 +226,7 @@ public class SmokeIT {
         );
 
         try ( CloseableHttpClient client = newClient() ) {
-            UrlCheck.runAll(client, TRIES, WAIT_BETWEEN_TRIES_MILLIS, checks);
+            UrlCheck.runAll(client, httpClientContext,TRIES, WAIT_BETWEEN_TRIES_MILLIS, checks);
         }
 
         assertTrue(

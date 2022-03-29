@@ -329,12 +329,14 @@
                         <!-- Comma-separated list of paths to check for 200 status -->
                         <starter.check.paths>
                             /starter.html,
+                            /server/default/jcr:root/content CONTAINS sv:node,
                             /system/sling.js,
                             /content/starter/img/sling-logo.svg,
                             /system/console/bundles,
                             /bin/browser.html,
                             /bin/packages.html,
                             /bin/cpm/usermanagement.tree.json/home/users/system/sling,
+                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.config.*active
                         </starter.check.paths>
                     </systemPropertyVariables>
                 </configuration>

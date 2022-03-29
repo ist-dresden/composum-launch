@@ -41,7 +41,6 @@ COPYPATHS="""
 /public
 /preview
 /robots.txt
-/jcr:content
 """
 
 # Paths for which we don't want to overwrite new content - standard stuff from the sling launcher

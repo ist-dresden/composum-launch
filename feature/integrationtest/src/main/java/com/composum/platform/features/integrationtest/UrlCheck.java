@@ -16,19 +16,40 @@
  */
 package com.composum.platform.features.integrationtest;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.ConnectException;
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.commons.codec.Charsets;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 class UrlCheck {
     private final String url;
+    private final Pattern containsPattern;
+
+    /** Pattern for special syntax enabling the starter to check that the output contains a line matching a given regex,
+     * e.g. /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.config.*active */
+    public static final Pattern CONTAINSCHECK_PATTERN = Pattern.compile("(?<path>.*)\\s+CONTAINS\\s+(?<pattern>.*\\S)");
 
     UrlCheck(String baseURL, String path) {
         final String separator = baseURL.endsWith("/") ? "" : "/";
+        Matcher containsCheck = CONTAINSCHECK_PATTERN.matcher(path);
+        if (containsCheck.matches()) {
+            path = containsCheck.group("path");
+            containsPattern = Pattern.compile(containsCheck.group("pattern"));
+        } else {
+            containsPattern = null;
+        }
         this.url = baseURL + separator + path;
     }
 
@@ -42,18 +63,37 @@ class UrlCheck {
      * @throws Exception
      */
     String run(HttpResponse response) throws Exception {
-        return null;
+        if (containsPattern == null) {
+            return null;
+        } else {
+            HttpEntity entity = response.getEntity();
+            if (entity == null) {
+                throw new IllegalStateException("Response has no content for url " + url);
+            }
+            try (InputStream stream = entity.getContent()) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charsets.UTF_8), 100000);
+                String line;
+                while (null != (line = reader.readLine())) {
+                    if (containsPattern.matcher(line).find()) {
+                        return null;
+                    } else {
+                        System.out.println(line);
+                    }
+                }
+            }
+            return "Pattern not found: " + containsPattern.pattern();
+        }
     }
 
     /** Run all supplied checks */
-    static void runAll(CloseableHttpClient client, int retryCount, int msecBetweenRetries, Collection<UrlCheck> checks) throws Exception {
+    static void runAll(CloseableHttpClient client, HttpClientContext httpClientContext, int retryCount, int msecBetweenRetries, Collection<UrlCheck> checks) throws Exception {
         for(UrlCheck check : checks) {
             String lastFailure = null;
             HttpGet get = new HttpGet(check.getUrl());
             int requestCount = 0;
             final long start = System.currentTimeMillis();
             for (int i = 0; i < retryCount; i++) {
-                try (CloseableHttpResponse response = client.execute(get)) {
+                try (CloseableHttpResponse response = client.execute(get, httpClientContext)) {
                     requestCount++;
                     if (response.getStatusLine().getStatusCode() != 200) {
                         lastFailure = "Status code is " + response.getStatusLine();
@@ -65,7 +105,7 @@ class UrlCheck {
                     if (lastFailure == null) {
                         break;
                     }
-                } catch ( ConnectException e ) {
+                } catch ( ConnectException | NoHttpResponseException e ) {
                     lastFailure = e.getClass().getName() + " : " + e.getMessage();
                 }
     

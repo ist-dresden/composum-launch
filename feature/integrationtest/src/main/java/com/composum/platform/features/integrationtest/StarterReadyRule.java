@@ -67,11 +67,11 @@ public class StarterReadyRule extends ExternalResource {
                 previous
             );
         }
-        final int TRIES = 60;
+        final int TRIES = 180;
         final int WAIT_BETWEEN_TRIES_MILLIS = 1000;
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             try {
-                UrlCheck.runAll(client, TRIES, WAIT_BETWEEN_TRIES_MILLIS, checks);
+                UrlCheck.runAll(client, null, TRIES, WAIT_BETWEEN_TRIES_MILLIS, checks);
             } catch(Throwable t) {
                 previousFailures.put(launchpadPort, t);
                 throw t;
