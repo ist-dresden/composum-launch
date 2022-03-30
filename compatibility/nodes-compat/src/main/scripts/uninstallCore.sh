@@ -1,5 +1,9 @@
 # Script to uninstall Composum Core V1 and install Composum Nodes instead.
 
+function logdate {
+    date -u '+%d.%m.%Y %H:%M:%S'
+}
+
 # make sure the server is somewhat up and running.
 until curl -f -u admin:admin -s -S http://localhost:8080/system/console/bundles.json | egrep 'Bundle information:' > /dev/null; do
   echo `logdate` REMCOMPV1 waiting until server up

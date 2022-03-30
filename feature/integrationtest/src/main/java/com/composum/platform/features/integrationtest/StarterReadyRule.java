@@ -30,6 +30,10 @@ import org.junit.rules.ExternalResource;
 
 public class StarterReadyRule extends ExternalResource {
 
+    private static final String STARTER_READY_PROPERTY = "starter.starterready.path";
+    private final String READY_MARKER_1 = "Do not remove this comment, used for Starter integration tests";
+    private final String READY_MARKER_2 = "Do not remove this comment, used for Launchpad integration tests";
+
     private final List<UrlCheck> checks = new ArrayList<>();
     private final int launchpadPort;
     private static final Map<Integer, Throwable> previousFailures = new HashMap<>();
@@ -38,8 +42,7 @@ public class StarterReadyRule extends ExternalResource {
         this.launchpadPort = launchpadPort;
         final String baseURL = String.format("http://localhost:%d", launchpadPort);
         checks.add(new UrlCheck(baseURL, "/server/default/jcr:root/content"));
-        checks.add(new UrlCheck(baseURL, "/content/starter.html") {
-            final String READY_MARKER = "Do not remove this comment, used for Starter integration tests";
+        checks.add(new UrlCheck(baseURL, System.getProperty(STARTER_READY_PROPERTY, "/content/starter.html")) {
             @Override
             public String run(HttpResponse response) throws Exception {
                 try (InputStreamReader isr = new InputStreamReader(response.getEntity().getContent());
@@ -47,13 +50,13 @@ public class StarterReadyRule extends ExternalResource {
 
                     String line;
                     while ((line = reader.readLine()) != null) {
-                        if (line.contains(READY_MARKER)) {
+                        if (line.contains(READY_MARKER_1) || line.contains(READY_MARKER_2)) {
                             return null;
                         }
                     }
                 }
 
-                return String.format("Did not find 'ready' marker [%s] in the response body", READY_MARKER);
+                return String.format("Did not find 'ready' marker [%s] in the response body", READY_MARKER_1);
             }
         });
     }

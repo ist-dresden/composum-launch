@@ -7,7 +7,7 @@ version: "3.7"
 services:
   sling:
     image: composum/nodes-compat:${PROJECT_VERSION}
-    container_name: composumnodes-compat
+    container_name: nodes-compat
     volumes:
       - "./target/run/logs:/opt/sling/sling/logs"
       - "./target/run/fileinstall:/opt/sling/fileinstall-user"

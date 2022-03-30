@@ -9,11 +9,16 @@
     </parent>
 
     <artifactId>composum-launcher-compatibility-docker-nodes</artifactId>
+    <packaging>docker</packaging>
 
     <name>Composum Launcher Compatibility Docker Starter with Composum Nodes</name>
     <description>Creates a docker image from sling launcher compatibility version, with Composum Nodes (incl. Package
         manager and User mgmt)
     </description>
+
+    <properties>
+        <thisdockerimage>composum/nodes-compat</thisdockerimage>
+    </properties>
 
     <dependencies>
         <!-- The base docker image we rely on -->
@@ -21,8 +26,16 @@
             <groupId>com.composum.platform</groupId>
             <artifactId>composum-launcher-compatibility-docker-slingstarter</artifactId>
             <version>${project.version}</version>
-            <type>docker-info</type>
+            <type>docker</type>
             <optional>true</optional>
+        </dependency>
+
+        <!-- For integration tests -->
+        <dependency>
+            <groupId>com.composum.platform.features</groupId>
+            <artifactId>composum-launcher-feature-integrationtest</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -93,50 +106,97 @@
                             </artifactItems>
                         </configuration>
                     </execution>
-
-                    <execution>
-                        <id>docker-info</id>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>com.composum.platform</groupId>
-                                    <artifactId>composum-launcher-compatibility-docker-slingstarter</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>docker-info</type>
-                                    <outputDirectory>${project.build.directory}/docker-info-deps</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
                 </executions>
             </plugin>
 
             <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>${thisdockerimage}:${project.version}</name>
+                            <build>
+                                <dockerFile>Dockerfile</dockerFile>
+                                <contextDir>${project.basedir}</contextDir>
+                                <args>
+                                    <PROJECT_VERSION>${project.version}</PROJECT_VERSION>
+                                </args>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>8080:8080</port>
+                                    <port>18080:18080</port>
+                                    <port>28080:28080</port>
+                                </ports>
+                                <volumes>
+                                    <bind>
+                                        <volume>${project.build.directory}/run/logs:/opt/sling/sling/logs</volume>
+                                    </bind>
+                                </volumes>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+
+            <!-- run the ITs -->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>default</id>
                         <goals>
-                            <goal>build</goal>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>composum/nodes-compat</repository>
-                    <tag>${project.version}</tag>
-                    <verbose>true</verbose>
-                    <detail>true</detail>
-                    <pullNewerImage>false</pullNewerImage>
-                    <buildArgs>
-                        <PROJECT_VERSION>${project.version}</PROJECT_VERSION>
-                    </buildArgs>
-                    <verbose>true</verbose>
-                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                    <skip>${docker.skip}</skip>
+                    <dependenciesToScan>
+                        com.composum.platform.features:composum-launcher-feature-integrationtest
+                    </dependenciesToScan>
+                    <systemPropertyVariables>
+                        <starter.http.test.ports>false:8080</starter.http.test.ports>
+                        <starter.min.bundles.count>155</starter.min.bundles.count>
+                        <starter.starterready.path>/index.html</starter.starterready.path>
+                        <!-- Comma-separated list of paths to check for 200 status -->
+                        <starter.check.paths>
+                            /server/default/jcr:root/content CONTAINS sv:node,
+                            /index.html,
+                            /system/console/bundles,
+                            /bin/browser.html,
+                            /bin/packages.html,
+                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.console.*active,
+                        </starter.check.paths>
+                    </systemPropertyVariables>
                 </configuration>
+            </plugin>
+
+            <!-- TODO remove this workaround for missing installation of artifacts https://github.com/fabric8io/docker-maven-plugin/issues/1537 -->
+            <plugin>
+                <artifactId>maven-install-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-install</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -163,42 +223,5 @@
             </plugin>
         </plugins>
     </build>
-
-
-    <profiles>
-
-        <profile>
-            <id>deployDocker</id>
-            <build>
-                <plugins>
-
-                    <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>dockerfile-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>tag-image</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>tag</goal>
-                                </goals>
-                            </execution>
-                            <!-- Not meant to be pushed - this is just for local compatibility tests
-                            <execution>
-                                <id>push-image</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>push</goal>
-                                </goals>
-                            </execution>
-                            -->
-                        </executions>
-                    </plugin>
-
-                </plugins>
-            </build>
-        </profile>
-
-    </profiles>
 
 </project>

@@ -50,6 +50,9 @@ class UrlCheck {
         } else {
             containsPattern = null;
         }
+        if (path.startsWith("/")) { // already in baseURL + separator
+            path = path.substring(1);
+        }
         this.url = baseURL + separator + path;
     }
 
