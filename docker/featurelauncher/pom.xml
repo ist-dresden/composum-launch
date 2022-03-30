@@ -39,7 +39,6 @@
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -122,6 +121,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <skip>${docker.skip}</skip>
                     <dependenciesToScan>
                         com.composum.platform.features:composum-launcher-feature-integrationtest
                     </dependenciesToScan>
@@ -142,6 +142,32 @@
                         </starter.check.paths>
                     </systemPropertyVariables>
                 </configuration>
+            </plugin>
+
+            <!-- TODO remove this workaround for missing installation of artifacts https://github.com/fabric8io/docker-maven-plugin/issues/1537 -->
+            <plugin>
+                <artifactId>maven-install-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-install</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
