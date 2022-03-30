@@ -19,6 +19,7 @@
 
     <properties>
         <thisdockerimage>composum/featurelauncher-nodes</thisdockerimage>
+        <docker.image.tag>${project.version}</docker.image.tag>
     </properties>
 
     <dependencies>
@@ -81,7 +82,7 @@
                 <configuration>
                     <images>
                         <image>
-                            <name>${thisdockerimage}:${project.version}</name>
+                            <name>${thisdockerimage}:${docker.image.tag}</name>
                             <build>
                                 <dockerFile>Dockerfile</dockerFile>
                                 <contextDir>${project.basedir}</contextDir>
@@ -170,14 +171,14 @@
         <profile>
             <id>develop</id>
             <properties>
-                <imagetag>develop</imagetag>
+                <docker.image.tag>develop</docker.image.tag>
             </properties>
         </profile>
 
         <profile>
             <id>master</id>
             <properties>
-                <imagetag>latest</imagetag>
+                <docker.image.tag>latest</docker.image.tag>
             </properties>
         </profile>
 

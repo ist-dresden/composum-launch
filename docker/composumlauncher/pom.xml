@@ -20,6 +20,7 @@
 
     <properties>
         <thisdockerimage>composum/featurelauncher-composum</thisdockerimage>
+        <docker.image.tag>${project.version}</docker.image.tag>
     </properties>
 
     <dependencies>
@@ -82,7 +83,7 @@
                 <configuration>
                     <images>
                         <image>
-                            <name>${thisdockerimage}:${project.version}</name>
+                            <name>${thisdockerimage}:${docker.image.tag}</name>
                             <build>
                                 <dockerFile>Dockerfile</dockerFile>
                                 <contextDir>${project.basedir}</contextDir>
@@ -130,7 +131,7 @@
                             /system/console/bundles,
                             /bin/browser.html,
                             /bin/packages.html,
-                            /bin/cpm/usermanagement.tree.json/home/users/system/sling,
+                            /bin/cpm/usermanagement.tree.json/home/users/system/composum/platform CONTAINS composum-platform-service,
                             /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.config.*active,
                         </starter.check.paths>
                     </systemPropertyVariables>
@@ -170,49 +171,15 @@
         <profile>
             <id>develop</id>
             <properties>
-                <imagetag>develop</imagetag>
+                <docker.image.tag>develop</docker.image.tag>
             </properties>
         </profile>
 
         <profile>
             <id>master</id>
             <properties>
-                <imagetag>latest</imagetag>
+                <docker.image.tag>latest</docker.image.tag>
             </properties>
-        </profile>
-
-        <profile>
-            <!-- This can also be called manually with   mvn clean install dockerfile:tag dockerfile:push -->
-            <!-- Use authentication with entry in settings.xml , encrypt pwd with  mvn &dash;&dash;encrypt-password -->
-            <!--<server>
-                <id>docker.io</id>
-                <username>composum</username>
-                <password>xxx/password>
-            </server>-->
-            <id>deployDocker</id>
-            <build>
-                <plugins>
-
-                    <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>dockerfile-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>tag-push-image</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>tag</goal>
-                                    <goal>push</goal>
-                                </goals>
-                                <configuration>
-                                    <tag>${imagetag}</tag>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                </plugins>
-            </build>
         </profile>
 
     </profiles>
