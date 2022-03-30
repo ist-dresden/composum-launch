@@ -162,6 +162,13 @@
                     <artifactId>docker-maven-plugin</artifactId>
                     <version>0.39.1</version>
                     <extensions>true</extensions>
+                    <configuration>
+                        <verbose>all</verbose>
+                        <stopMode>kill</stopMode>
+                        <allContainers>true</allContainers>
+                        <!-- ensures a container left running after an aborted build is noticed because it's in conflict. -->
+                        <containerNamePattern>%n</containerNamePattern>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

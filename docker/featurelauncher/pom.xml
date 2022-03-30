@@ -78,17 +78,10 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <extensions>true</extensions>
                 <configuration>
-                    <verbose>all</verbose>
-                    <stopMode>kill</stopMode>
-                    <allContainers>true</allContainers>
-                    <!-- ensures a container left running after an aborted build is noticed because it's in conflict. -->
-                    <containerNamePattern>%n</containerNamePattern>
                     <images>
                         <image>
                             <name>${thisdockerimage}:${project.version}</name>
-                            <alias>featurelauncher</alias>
                             <build>
                                 <dockerFile>Dockerfile</dockerFile>
                                 <contextDir>${project.basedir}</contextDir>
