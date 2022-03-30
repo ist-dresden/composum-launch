@@ -54,8 +54,7 @@
         <!-- no deployment except if specified otherwise -->
         <maven.deploy.skip>true</maven.deploy.skip>
 
-        <!-- As long as 12 isn't officially in the repo, we use 12-SNAPSHOT - that's almost the same and not updated anymore. -->
-         <sling.starter.version>12-SNAPSHOT</sling.starter.version>
+         <sling.starter.version>12</sling.starter.version>
         <!-- or our copy: -->
 <!--        <sling.starter.version>12.1-SNAPSHOT</sling.starter.version>-->
         <!-- Does have to be the same version as in the launcher. https://mvnrepository.com/artifact/org.apache.jackrabbit/oak-upgrade -->
