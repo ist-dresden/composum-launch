@@ -19,7 +19,7 @@ logfile=/opt/sling/launcher/logs/error.log
 # waits until there are no deployment activities on the server for 10 seconds
 function waituntilquiet {
     `dirname $0`/WaitForServerUp.jsh $logfile
-    until curl -f -u admin:admin -s -S http://localhost:8080/system/console/status-osgi-installer.txt | egrep 'INSTALLED$' > /dev/null; do
+    until curl -f -u admin:admin -s -S http://localhost:8080/system/console/status-osgi-installer.txt | egrep 'OSGi Installer' > /dev/null; do
       echo `logdate` STEPDEPL waiting until osgi up
       sleep 10
     done
@@ -39,10 +39,12 @@ until curl -f -u admin:admin -s -S http://localhost:8080/system/console/status-j
 done
 
 ## This is installed at runlevel 25, so the rest of the server must be up.
-until curl -f -u admin:admin -s -S http://localhost:8080/system/console/status-osgi-installer.txt | egrep 'com.composum.*pckginstall.*INSTALLED' > /dev/null; do
-  echo `logdate` STEPDEPL waiting until server up 2
-  sleep 10
-done
+#until curl -f -u admin:admin -s -S http://localhost:8080/system/console/status-osgi-installer.txt | egrep 'com.composum.*pckginstall.*INSTALLED' > /dev/null; do
+#  echo `logdate` STEPDEPL waiting until server up 2
+#  sleep 10
+#done
+
+waituntilquiet
 
 curl -s -S -L -o /dev/null -u admin:admin http://localhost:8080/
 

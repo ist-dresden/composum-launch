@@ -20,6 +20,6 @@ RUN set -eux; \
 
 ENV COMMAND /opt/sling/scripts/start.sh $COMMAND
 
-# from maven
-COPY --chown=sling:sling target/lib /opt/sling/fileinstall-docker/
-COPY --chown=sling:sling target/immediatelib /opt/sling/fileinstall-immediate/
+# from maven, currently nothing needed.
+# COPY --chown=sling:sling target/lib /opt/sling/fileinstall-docker/
+# COPY --chown=sling:sling target/immediatelib /opt/sling/fileinstall-immediate/
