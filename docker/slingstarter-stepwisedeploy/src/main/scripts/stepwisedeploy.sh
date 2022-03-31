@@ -14,7 +14,7 @@ function logdate {
     date -u '+%d.%m.%Y %H:%M:%S'
 }
 
-logfile=/opt/sling/sling/logs/error.log
+logfile=/opt/sling/launcher/logs/error.log
 
 # waits until there are no deployment activities on the server for 10 seconds
 function waituntilquiet {

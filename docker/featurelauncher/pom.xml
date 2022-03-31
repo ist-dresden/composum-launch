@@ -97,6 +97,11 @@
                                     <port>18080:18080</port>
                                     <port>28080:28080</port>
                                 </ports>
+                                <volumes>
+                                    <bind>
+                                        <volume>${project.build.directory}/run/logs:/opt/sling/launcher/logs</volume>
+                                    </bind>
+                                </volumes>
                             </run>
                         </image>
                     </images>

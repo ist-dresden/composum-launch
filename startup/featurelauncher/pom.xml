@@ -39,7 +39,6 @@
                         </goals>
                         <configuration>
                             <artifactItems>
-                                <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.kickstart -->
                                 <artifactItem>
                                     <groupId>org.apache.sling</groupId>
                                     <artifactId>org.apache.sling.feature.launcher</artifactId>

@@ -5,7 +5,7 @@
 # in derived docker images, and fileinstall-user, which could be mounted by the user
 
 FROM openjdk:17
-ARG STARTERJAR
+ARG FELIXVERSION
 # install some essential utilities for diagnosing trouble from a shell within the container
 RUN installer=$(command -v yum && echo yum || echo microdnf); \
     $installer install -y procps-ng; \
@@ -14,10 +14,10 @@ RUN installer=$(command -v yum && echo yum || echo microdnf); \
     $installer install -y wget
 
 RUN set -eux; groupadd -r sling --gid=1000; \
-    useradd -r -g sling --uid=1000 --home-dir=/opt/sling/sling --shell=/bin/bash sling; \
-    mkdir -p /opt/sling/sling /opt/sling/fileinstall-docker /opt/sling/fileinstall-user; \
+    useradd -r -g sling --uid=1000 --home-dir=/opt/sling/launcher --shell=/bin/bash sling; \
+    mkdir -p /opt/sling/launcher /opt/sling/fileinstall-docker /opt/sling/fileinstall-user; \
     chown -R sling:sling /opt/sling; \
-    ln -s /opt/sling/sling/logs /var/log/sling;
+    ln -s /opt/sling/launcher/logs /var/log/sling;
 
 # JVM options
 ENV JVM_OPTS \
@@ -61,11 +61,15 @@ EXPOSE 18080
 # JMX port for jconsole
 EXPOSE 28080
 
-VOLUME /opt/sling/sling
+VOLUME /opt/sling/launcher
 VOLUME /opt/sling/fileinstall-user
 WORKDIR /opt/sling
 USER sling:sling
-CMD exec $COMMAND $JVM_OPTS $MEM_OPTS $DEBUG_OPTS $JMX_OPTS $FILEINSTALL_OPTS $ADD_OPTS -jar /opt/sling/org.apache.sling.starter.jar $SLING_OPTS
+CMD exec $COMMAND $JVM_OPTS $MEM_OPTS $DEBUG_OPTS $JMX_OPTS $FILEINSTALL_OPTS $ADD_OPTS $STARTER_CMDLINE $SLING_OPTS
+
+ENV STARTER_CMDLINE -jar featurelauncher.jar -f main.far -u jar:file:felixcontainer.zip! -u jar:file:main.far! -fv $FELIXVERSION -v
 
 # from maven dependency:copy
-COPY $STARTERJAR /opt/sling/org.apache.sling.starter.jar
+COPY target/lib/composum-launcher-feature-felixcontainer-1.2.1-SNAPSHOT-zip.zip felixcontainer.zip
+COPY target/lib/org.apache.sling.feature.launcher-1.1.26.jar featurelauncher.jar
+COPY target/lib/org.apache.sling.starter-12-oak_tar_far.far main.far
