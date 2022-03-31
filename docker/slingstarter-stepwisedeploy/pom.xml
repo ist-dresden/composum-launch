@@ -44,7 +44,7 @@
                                 <artifactItem>
                                     <groupId>com.composum.sling.core.osgi</groupId>
                                     <artifactId>composum-sling-osgi-package-installer</artifactId>
-                                    <version>${composum.corev1.version}</version>
+                                    <version>1.12.4</version>
                                     <outputDirectory>${project.build.directory}/immediatelib/21</outputDirectory>
                                 </artifactItem>
                             </artifactItems>

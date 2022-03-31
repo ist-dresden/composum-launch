@@ -135,7 +135,6 @@
                 <!-- CAUTION: use the 4.* version of nodes since that's already in the starter! -->
                 <!-- Caution: platform 1.6.0-SNAPSHOT currently has unsatisfied depencency to sling nodes package -->
 
-                <composum.corev1.version>1.12.5-SNAPSHOT</composum.corev1.version>
                 <composum.nodes.version>3.4.1-SNAPSHOT</composum.nodes.version>
                 <composum.platform.version>1.6.0-SNAPSHOT</composum.platform.version>
                 <composum.pages.version>1.4.1-SNAPSHOT</composum.pages.version>
