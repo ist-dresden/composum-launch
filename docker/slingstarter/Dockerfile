@@ -49,8 +49,7 @@ ENV ADD_OPTS ""
 # additional options for sling
 ENV SLING_OPTS ""
 
-ENV FILEINSTALL_OPTS \
-    -Dsling.fileinstall.dir=fileinstall-docker,fileinstall-user
+ENV FILEINSTALL_OPTS -D sling.fileinstall.dir=fileinstall-docker,fileinstall-user -D felix.startlevel.bundle=30
 
 ENV COMMAND java
 
@@ -65,7 +64,7 @@ VOLUME /opt/sling/launcher
 VOLUME /opt/sling/fileinstall-user
 WORKDIR /opt/sling
 USER sling:sling
-CMD exec $COMMAND $JVM_OPTS $MEM_OPTS $DEBUG_OPTS $JMX_OPTS $FILEINSTALL_OPTS $ADD_OPTS $STARTER_CMDLINE $SLING_OPTS
+CMD exec $COMMAND $JVM_OPTS $MEM_OPTS $DEBUG_OPTS $JMX_OPTS $ADD_OPTS $STARTER_CMDLINE $SLING_OPTS $FILEINSTALL_OPTS
 
 ENV STARTER_CMDLINE -jar featurelauncher.jar -f main.far -u jar:file:felixcontainer.zip! -u jar:file:main.far! -fv $FELIXVERSION -v
 

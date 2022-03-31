@@ -64,12 +64,8 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>
-                                com.composum.platform.feature.nodesstarter.LaunchFromEmbeddedFAR
-                            </mainClass>
                             <classpathPrefix>lib/</classpathPrefix>
                             <classpathLayoutType>repository</classpathLayoutType>
-                            <addClasspath>true</addClasspath>
                         </manifest>
                     </archive>
                 </configuration>

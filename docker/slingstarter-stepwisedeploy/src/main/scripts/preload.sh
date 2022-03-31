@@ -16,7 +16,7 @@ for urlscript in /opt/sling/scripts/_preloadurls*.sh; do
 done
 
 `dirname $0`/WaitForServerUp.jsh $logfile
-until curl -f -u admin:admin -s -S $urlbase/system/console/status-osgi-installer.txt | egrep 'com.composum.nodes.console.*INSTALLED' > /dev/null; do
+until curl -f -u admin:admin -s -S $urlbase/system/console/status-osgi-installer.txt | egrep 'com.composum.nodes.console.*(INSTALLED|IGNORED)' > /dev/null; do
   echo `logdate` preload waiting until server up
   sleep 10
 done

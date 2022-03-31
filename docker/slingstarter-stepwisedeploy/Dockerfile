@@ -5,9 +5,6 @@
 ARG PROJECT_VERSION
 FROM composum/slingstarter:${PROJECT_VERSION}
 
-ENV FILEINSTALL_OPTS \
-    -Dsling.fileinstall.dir=fileinstall
-
 RUN set -eux; \
     mkdir -p /opt/sling/fileinstall-immediate; \
     chown -R sling:sling /opt/sling/fileinstall-immediate;
