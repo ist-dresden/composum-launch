@@ -25,6 +25,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.codec.Charsets;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NoHttpResponseException;
@@ -34,12 +36,19 @@ import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 class UrlCheck {
+
+    private final static Log LOG = LogFactory.getLog(UrlCheck.class);
+
     private final String url;
     private final Pattern containsPattern;
 
     /** Pattern for special syntax enabling the starter to check that the output contains a line matching a given regex,
      * e.g. /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.config.*active */
     public static final Pattern CONTAINSCHECK_PATTERN = Pattern.compile("(?<path>.*)\\s+CONTAINS\\s+(?<pattern>.*\\S)");
+
+    /** If this property is set, then the UrlCheck waits for that many milliseconds when a check finally fails.
+     * In Integration tests this might help to diagnose the problem, since the server is otherwise stopped immediately after failure. */
+    private static final String STARTER_WAITONFAILURE_PROPERTY = "starter.waitonfailure";
 
     UrlCheck(String baseURL, String path) {
         final String separator = baseURL.endsWith("/") ? "" : "/";
@@ -116,12 +125,24 @@ class UrlCheck {
             }
             
             if(lastFailure != null) {
+                String errorMessage = String.format("Starter not ready or path not found after %d tries (%d msec). Request to URL %s failed with message '%s'",
+                        requestCount,
+                        System.currentTimeMillis() - start,
+                        check.getUrl(),
+                        lastFailure);
+
+                String waitTimeStr = System.getProperty(STARTER_WAITONFAILURE_PROPERTY, "");
+                if (!waitTimeStr.trim().isEmpty()) {
+                    long waitTime = Long.valueOf(waitTimeStr);
+                    if (waitTime > 0) {
+                        LOG.error("FAILURE; waiting for " + waitTime + "ms for diagnostic purposes: " + errorMessage);
+                        Thread.sleep(waitTime);
+                        LOG.info("Continuing.");
+                    }
+                }
+
                 throw new RuntimeException(
-                    String.format("Starter not ready or path not found after %d tries (%d msec). Request to URL %s failed with message '%s'",
-                    requestCount, 
-                    System.currentTimeMillis() - start,
-                    check.getUrl(), 
-                    lastFailure));
+                        errorMessage);
             }
         }
     }

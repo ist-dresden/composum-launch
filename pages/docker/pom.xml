@@ -224,6 +224,8 @@
                             /bin/pages.html,
                             /bin/assets.html,
                         </starter.check.paths>
+                        <!-- Uncomment if you want the test to sleep for a while so that the server is running for diagnostics if something fails. -->
+                        <!-- <starter.waitonfailure>600000</starter.waitonfailure> -->
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
