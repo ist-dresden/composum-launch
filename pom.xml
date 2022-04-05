@@ -129,25 +129,6 @@
         <pluginManagement>
             <plugins>
                 <!-- FIXME move to parent in composum-meta -->
-                <!-- https://mvnrepository.com/artifact/org.apache.sling/slingfeature-maven-plugin -->
-                <plugin>
-                    <groupId>org.apache.sling</groupId>
-                    <artifactId>slingfeature-maven-plugin</artifactId>
-                    <version>1.6.0</version>
-                </plugin>
-                <!-- https://mvnrepository.com/artifact/org.apache.sling/sling-kickstart-maven-plugin -->
-                <plugin>
-                    <groupId>org.apache.sling</groupId>
-                    <artifactId>sling-kickstart-maven-plugin</artifactId>
-                    <version>0.0.8</version>
-                </plugin>
-                <!-- https://mvnrepository.com/artifact/org.apache.sling/feature-launcher-maven-plugin -->
-                <plugin>
-                    <groupId>org.apache.sling</groupId>
-                    <artifactId>feature-launcher-maven-plugin</artifactId>
-                    <version>0.1.2</version>
-                </plugin>
-
                 <!-- https://mvnrepository.com/artifact/io.fabric8/docker-maven-plugin -->
                 <plugin>
                     <groupId>io.fabric8</groupId>

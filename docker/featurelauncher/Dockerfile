@@ -40,7 +40,8 @@ USER sling:sling
 
 # JVM options
 ENV JVM_OPTS \
-    -Djava.awt.headless=true -server
+    -Djava.awt.headless=true -server \
+    --add-opens java.base/java.lang=ALL-UNNAMED
 
 ENV MEM_OPTS \
     -Xms32m -Xmx512m \
@@ -64,12 +65,14 @@ ENV JMX_OPTS \
 ENV ADD_OPTS ""
 
 # not quite clear what applies here: https://felix.apache.org/documentation/subprojects/apache-felix-file-install.html
+# and https://sling.apache.org/documentation/bundles/file-installer-provider.html
 ENV FILEINSTALL_OPTS \
-    -Dsling.fileinstall.dir=fileinstall-docker,fileinstall-user \
-    -Dfelix.startlevel.bundle=30 \
-    -Dfelix.log.level=2 \
-    -Dfelix.fileinstall.start.level=30 \
-    -Dfelix.fileinstall.active.level=30
+    -D sling.fileinstall.dir=fileinstall-docker,fileinstall-user \
+    -D sling.fileinstall.dir.autocreate=true \
+    -D felix.startlevel.bundle=30 \
+    -D felix.log.level=2 \
+    -D felix.fileinstall.start.level=30 \
+    -D felix.fileinstall.active.level=30
 
 # arguments for the feature launcher
 ENV LAUNCHER_OPTS ""
@@ -79,7 +82,7 @@ ENV ADD_LAUNCHER_OPTS ""
 
 ENV COMMAND java
 
-CMD exec /opt/sling/scripts/start.sh $COMMAND $JVM_OPTS $MEM_OPTS $DEBUG_OPTS $JMX_OPTS $FILEINSTALL_OPTS $ADD_OPTS -jar /opt/sling/nodeslauncher.jar $LAUNCHER_OPTS $ADD_LAUNCHER_OPTS
+CMD exec /opt/sling/scripts/start.sh $COMMAND $JVM_OPTS $MEM_OPTS $DEBUG_OPTS $JMX_OPTS $ADD_OPTS -jar /opt/sling/nodeslauncher.jar $FILEINSTALL_OPTS $LAUNCHER_OPTS $ADD_LAUNCHER_OPTS
 
 # from maven dependency:copy
 ARG LAUNCHERJAR

@@ -101,9 +101,9 @@ then
     CPM_JVM_OPTS="${CPM_JVM_OPTS} -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=${CPM_DEBUG_PORT}"
 fi
 
-FEATURE_CMD="-f $CPM_FEATUREFILE -D org.osgi.framework.system.packages.extra=sun.misc" # -v for verbose
+FEATURE_CMD="-f $CPM_FEATUREFILE" # -v for verbose
 # FEATURE_CMD="$FEATURE_CMD -p ${CPM_HOME}/sling -c ${CPM_HOME}/sling/cache -u file://${COMPOSUM}/maven/repo,https://build.ist-software.com/nexus/repository/maven-public/"
-#FEATURE_CMD="$FEATURE_CMD -D org.osgi.framework.system.packages.extra=sun.misc"
+# FEATURE_CMD="$FEATURE_CMD -D org.osgi.framework.system.packages.extra=sun.misc"
 
 if [ $CPM_HOST ]; then
     FEATURE_CMD="${FEATURE_CMD} -D org.apache.felix.http.host=${CPM_HOST}"
