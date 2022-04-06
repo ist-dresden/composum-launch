@@ -265,7 +265,7 @@
                     </dependenciesToScan>
                     <systemPropertyVariables>
                         <starter.http.test.ports>false:${http.port}</starter.http.test.ports>
-                        <starter.min.bundles.count>243</starter.min.bundles.count>
+                        <starter.min.bundles.count>242</starter.min.bundles.count>
                         <!-- Comma-separated list of paths to check for 200 status -->
                         <starter.check.paths>
                             /starter.html,
@@ -276,7 +276,7 @@
                             /bin/browser.html,
                             /bin/packages.html,
                             /bin/cpm/usermanagement.tree.json/home/users/system/sling,
-                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.config.*active,
+                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.console.*active,
                             /system/console/status-Bundlelist.txt CONTAINS com.composum.platform.htl,
                             /bin/cpm/usermanagement.tree.json/home/users/system/composum/platform CONTAINS composum-platform-service,
                         </starter.check.paths>

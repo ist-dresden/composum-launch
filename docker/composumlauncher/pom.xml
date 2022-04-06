@@ -120,7 +120,7 @@
                     </dependenciesToScan>
                     <systemPropertyVariables>
                         <starter.http.test.ports>false:8080</starter.http.test.ports>
-                        <starter.min.bundles.count>227</starter.min.bundles.count>
+                        <starter.min.bundles.count>226</starter.min.bundles.count>
                         <!-- Comma-separated list of paths to check for 200 status -->
                         <starter.check.paths>
                             /starter.html,
@@ -131,7 +131,7 @@
                             /bin/browser.html,
                             /bin/packages.html,
                             /bin/cpm/usermanagement.tree.json/home/users/system/composum/platform CONTAINS composum-platform-service,
-                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.config.*active,
+                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.console.*active,
                         </starter.check.paths>
                     </systemPropertyVariables>
                 </configuration>

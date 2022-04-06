@@ -214,8 +214,8 @@ public class SmokeIT {
     @Test
     public void test003checkReadableUrls() throws Exception {
         final int minTests = 6;
-        final int TRIES = 10;
-        final int WAIT_BETWEEN_TRIES_MILLIS = 1000;
+        final int TRIES = 12;
+        final int WAIT_BETWEEN_TRIES_MILLIS = 5000;
 
         final String baseURL = String.format("http://localhost:%d", slingHttpPort);
         final List<UrlCheck> checks = new ArrayList<>();

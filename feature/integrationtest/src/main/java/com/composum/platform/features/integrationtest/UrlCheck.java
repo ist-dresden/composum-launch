@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.ConnectException;
 import java.util.Collection;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -135,7 +136,7 @@ class UrlCheck {
                 if (!waitTimeStr.trim().isEmpty()) {
                     long waitTime = Long.valueOf(waitTimeStr);
                     if (waitTime > 0) {
-                        LOG.error("FAILURE; waiting for " + waitTime + "ms for diagnostic purposes: " + errorMessage);
+                        LOG.error("FAILURE; waiting for " + waitTime + "ms for diagnostic purposes: " + errorMessage + " ; at " + new Date());
                         Thread.sleep(waitTime);
                         LOG.info("Continuing.");
                     }
