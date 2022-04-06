@@ -10,6 +10,7 @@
 
     <artifactId>composum-launcher-composumnodes</artifactId>
     <version>1.2.1-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
+    <packaging>docker</packaging>
 
     <name>Composum Launcher Docker Nodes image</name>
     <description>Creates a docker image from sling starter with updated Composum Core version 1 (incl. Package manager
@@ -17,18 +18,26 @@
     </description>
 
     <properties>
-        <basedockerimage>composum-launcher-slingstarter-stepwisedeploy</basedockerimage>
         <thisdockerimage>composum/nodes</thisdockerimage>
+        <docker.image.tag>${project.version}</docker.image.tag>
     </properties>
 
     <dependencies>
-        <!-- The base docker image we rely on -->
+        <!-- The base docker image we rely on - for enforcing build order -->
         <dependency>
             <groupId>com.composum.platform</groupId>
-            <artifactId>${basedockerimage}</artifactId>
+            <artifactId>composum-launcher-slingstarter-stepwisedeploy</artifactId>
             <version>${project.version}</version>
-            <type>docker-info</type>
+            <type>pom</type>
             <optional>true</optional>
+        </dependency>
+
+        <!-- For integration tests -->
+        <dependency>
+            <groupId>com.composum.platform.features</groupId>
+            <artifactId>composum-launcher-feature-integrationtest</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -46,12 +55,12 @@
                             <artifactItems>
                                 <!-- composum nodes bundles. As bundle, not as package, since we need to safely replace.
                                     order > 20 since we want to replace the old composum bundles in launchpad. -->
-                                <artifactItem>
-                                    <groupId>com.composum.nodes.osgi</groupId>
-                                    <artifactId>composum-nodes-osgi-package-installer</artifactId>
-                                    <version>${composum.nodes.version}</version>
-                                    <outputDirectory>${project.build.directory}/lib/26</outputDirectory>
-                                </artifactItem>
+<!--                                <artifactItem>-->
+<!--                                    <groupId>com.composum.nodes.osgi</groupId>-->
+<!--                                    <artifactId>composum-nodes-osgi-package-installer</artifactId>-->
+<!--                                    <version>${composum.nodes.version}</version>-->
+<!--                                    <outputDirectory>${project.build.directory}/lib/26</outputDirectory>-->
+<!--                                </artifactItem>-->
 
                                 <artifactItem>
                                     <groupId>com.composum.nodes</groupId>
@@ -92,111 +101,117 @@
                             </artifactItems>
                         </configuration>
                     </execution>
-
-                    <execution>
-                        <id>docker-info</id>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>com.composum.platform</groupId>
-                                    <artifactId>composum-launcher-slingstarter-stepwisedeploy</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>docker-info</type>
-                                    <outputDirectory>${project.build.directory}/docker-info-deps</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
                 </executions>
             </plugin>
 
             <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>${thisdockerimage}:${docker.image.tag}</name>
+                            <build>
+                                <dockerFile>Dockerfile</dockerFile>
+                                <contextDir>${project.basedir}</contextDir>
+                                <args>
+                                    <PROJECT_VERSION>${project.version}</PROJECT_VERSION>
+                                </args>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>8080:8080</port>
+                                    <port>18080:18080</port>
+                                    <port>28080:28080</port>
+                                </ports>
+                                <volumes>
+                                    <bind>
+                                        <volume>${project.build.directory}/run/logs:/opt/sling/launcher/logs</volume>
+                                    </bind>
+                                </volumes>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+
+            <!-- run the ITs -->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>default</id>
                         <goals>
-                            <goal>build</goal>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>${thisdockerimage}</repository>
-                    <tag>${project.version}</tag>
-                    <verbose>true</verbose>
-                    <detail>true</detail>
-                    <pullNewerImage>false</pullNewerImage>
-                    <buildArgs>
-                        <PROJECT_VERSION>${project.version}</PROJECT_VERSION>
-                    </buildArgs>
-                    <verbose>true</verbose>
-                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                    <skip>${docker.skip}</skip>
+                    <dependenciesToScan>
+                        com.composum.platform.features:composum-launcher-feature-integrationtest
+                    </dependenciesToScan>
+                    <systemPropertyVariables>
+                        <starter.http.test.ports>false:8080</starter.http.test.ports>
+                        <starter.min.bundles.count>225</starter.min.bundles.count>
+                        <!-- Comma-separated list of paths to check for 200 status -->
+                        <starter.check.paths>
+                            /starter.html,
+                            /server/default/jcr:root/content CONTAINS sv:node,
+                            /system/sling.js,
+                            /content/starter/img/sling-logo.svg,
+                            /system/console/bundles,
+                            /bin/browser.html,
+                            /bin/packages.html,
+                            /bin/cpm/usermanagement.tree.json/home/users/system/sling,
+                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.console.*active,
+                        </starter.check.paths>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
 
+            <!-- TODO remove this workaround for missing installation of artifacts https://github.com/fabric8io/docker-maven-plugin/issues/1537 -->
+            <plugin>
+                <artifactId>maven-install-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-install</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
 
     <profiles>
 
         <profile>
             <id>develop</id>
             <properties>
-                <imagetag>develop</imagetag>
+                <docker.image.tag>develop</docker.image.tag>
             </properties>
         </profile>
 
         <profile>
             <id>master</id>
             <properties>
-                <imagetag>latest</imagetag>
+                <docker.image.tag>latest</docker.image.tag>
             </properties>
-        </profile>
-
-        <profile>
-            <!-- This can also be called manually with   mvn clean install dockerfile:tag dockerfile:push -->
-            <!-- Use authentication with entry in settings.xml , encrypt pwd with  mvn &dash;&dash;encrypt-password -->
-            <!--<server>
-                <id>docker.io</id>
-                <username>composum</username>
-                <password>xxx/password>
-            </server>-->
-            <id>deployDocker</id>
-            <build>
-                <plugins>
-
-                    <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>dockerfile-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>push-image</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>push</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>tag-image</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>tag</goal>
-                                    <goal>push</goal>
-                                </goals>
-                                <configuration>
-                                    <tag>${imagetag}</tag>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                </plugins>
-            </build>
         </profile>
 
     </profiles>

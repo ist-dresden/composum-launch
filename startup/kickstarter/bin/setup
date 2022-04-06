@@ -1,0 +1,22 @@
+#!/bin/bash
+echo "This script is setting up a fresh and empty(!) instance - DANGER - all data lost."
+
+BINPATH=$( dirname ${0} )
+CPM_HOME=$( cd $BINPATH/..; pwd )
+
+cd ${CPM_HOME}
+ 
+echo remove everything and start from scratch - abort or press enter to continue
+read
+
+bin/stop
+
+rm -rf logs hs_err_* launcher conf/controlport starter fileinstall features
+
+mvn clean
+
+mkdir -p logs
+mkdir -p conf
+mkdir -p fileinstall
+mkdir -p features
+mvn install

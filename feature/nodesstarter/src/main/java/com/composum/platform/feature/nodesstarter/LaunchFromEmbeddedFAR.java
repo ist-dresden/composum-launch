@@ -3,12 +3,16 @@ package com.composum.platform.feature.nodesstarter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
 /**
  * Uses the sling feature launcher to start from the embedded feature archive.
@@ -42,6 +46,12 @@ public class LaunchFromEmbeddedFAR {
      */
     public static final String OPTION_PIDFILE = "--pidfile=";
 
+    /** Property file with some defaults for arguments. */
+    public static final String PROPERTYFILE_DEFAULTS = "/lib/felixversion.properties";
+
+    /** Property in {@link #PROPERTYFILE_DEFAULTS} with the felix framework version. */
+    public static final String PROPERTY_FELIXVERSION = "felixFrameworkVersion";
+
     List<String> args = new ArrayList<>();
     File pidfile = null;
 
@@ -50,6 +60,7 @@ public class LaunchFromEmbeddedFAR {
     boolean haveRepository = false;
     boolean wantDefaultRepository = false;
     boolean wantHelp = false;
+    boolean felixVersionSpecified = false;
 
     public static void main(String[] rawArgs) throws Throwable {
         new LaunchFromEmbeddedFAR().run(rawArgs);
@@ -110,6 +121,11 @@ public class LaunchFromEmbeddedFAR {
                     // go on: add this to command line so that it's invalid and help is printed.
                     break;
 
+                case "-fv":
+                    felixVersionSpecified = true;
+                    argIterator.next(); // just pass on the felix argument.
+                    continue;
+
                 default:
                     if (arg.startsWith(OPTION_PIDFILE)) {
                         createPidFile(arg);
@@ -122,16 +138,19 @@ public class LaunchFromEmbeddedFAR {
 
         if (wantHelp) {
             printHelp();
-        } else {
+        }
 
-            if (wantDefaultFeature || !haveFeature) {
-                addDefaultFeatureArg();
-            }
+        if (wantDefaultFeature || !haveFeature) {
+            addDefaultFeatureArg();
+        }
 
-            if (wantDefaultRepository || !haveRepository) {
-                addDefaultRepositoryArg();
-            }
+        if (wantDefaultRepository || !haveRepository) {
+            addDefaultRepositoryArg();
+        }
 
+        if (!felixVersionSpecified) {
+            args.add("-fv");
+            args.add(getFelixDefaultVersion());
         }
     }
 
@@ -140,7 +159,7 @@ public class LaunchFromEmbeddedFAR {
         System.out.println("Additional arguments:");
         System.out.println("-h / -? / --help \tprint help");
         System.out.println("-f default\tuses the embedded feature archive if present. It's always used if no other explicit -f argument is given.");
-        System.out.println("-u default\tuses the embedded repository containing the felix framework. It's always used if other explicit -u argument is given - the network won't be used to retrieve features if no explicit other -u argument is given.");
+        System.out.println("-u default\tuses the embedded repository containing the felix framework. It's always used if no other explicit -u argument is given - the network won't be used to retrieve features if no explicit other -u argument is given.");
         System.out.println();
     }
 
@@ -183,6 +202,15 @@ public class LaunchFromEmbeddedFAR {
             System.out.println("Using feature file " + mainFeatureURL);
             args.add("-f");
             args.add(mainFeatureURL.toExternalForm());
+        }
+    }
+
+    /** Returns the felix version embedded in the launcher artifact. */
+    protected String getFelixDefaultVersion() throws IOException {
+        try (InputStream stream = getClass().getResourceAsStream(PROPERTYFILE_DEFAULTS)) {
+            Properties props = new Properties();
+            props.load(stream);
+            return props.getProperty(PROPERTY_FELIXVERSION);
         }
     }
 }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>com.composum.platform</groupId>
         <artifactId>composum-launcher-docker</artifactId>
-        <version>1.2.1-SNAPSHOT</version>
+        <version>1.3.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <packaging>docker</packaging>
 
     <artifactId>composum-launcher-docker-featurelauncher</artifactId>
-    <version>1.2.1-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
+    <version>1.3.0-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
 
     <name>Composum Launcher Docker Feature Launcher</name>
     <description>Creates a docker image with a sling feature launcher that launches a FAR from a Sling Starter 12
@@ -18,6 +18,7 @@
 
     <properties>
         <thisdockerimage>composum/featurelauncher-nodes</thisdockerimage>
+        <docker.image.tag>${project.version}</docker.image.tag>
     </properties>
 
     <dependencies>
@@ -30,13 +31,13 @@
             <classifier>launcher</classifier>
             <scope>provided</scope>
         </dependency>
+
+        <!-- For integration tests -->
         <dependency>
             <groupId>com.composum.platform.features</groupId>
-            <artifactId>composum-launcher-feature-nodesstarter</artifactId>
+            <artifactId>composum-launcher-feature-integrationtest</artifactId>
             <version>${project.version}</version>
-            <classifier>oak_tar</classifier>
-            <type>far</type>
-            <scope>provided</scope>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -75,27 +76,98 @@
             </plugin>
 
             <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>${thisdockerimage}:${docker.image.tag}</name>
+                            <build>
+                                <dockerFile>Dockerfile</dockerFile>
+                                <contextDir>${project.basedir}</contextDir>
+                                <args>
+                                    <LAUNCHERJAR>target/dependencies/nodeslauncher.jar</LAUNCHERJAR>
+                                    <SYSTEM_FAR_DIRECTORY>target/dependencies/system</SYSTEM_FAR_DIRECTORY>
+                                </args>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>8080:8080</port>
+                                    <port>18080:18080</port>
+                                    <port>28080:28080</port>
+                                </ports>
+                                <volumes>
+                                    <bind>
+                                        <volume>${project.build.directory}/run/logs:/opt/sling/launcher/logs</volume>
+                                    </bind>
+                                </volumes>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+
+            <!-- run the ITs -->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>default</id>
                         <goals>
-                            <goal>build</goal>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>${thisdockerimage}</repository>
-                    <tag>${project.version}</tag>
-                    <buildArgs>
-                        <LAUNCHERJAR>target/dependencies/nodeslauncher.jar</LAUNCHERJAR>
-                        <SYSTEM_FAR_DIRECTORY>target/dependencies/system</SYSTEM_FAR_DIRECTORY>
-                    </buildArgs>
-                    <verbose>true</verbose>
-                    <detail>true</detail>
-                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                    <skip>${docker.skip}</skip>
+                    <dependenciesToScan>
+                        com.composum.platform.features:composum-launcher-feature-integrationtest
+                    </dependenciesToScan>
+                    <systemPropertyVariables>
+                        <starter.http.test.ports>false:8080</starter.http.test.ports>
+                        <starter.min.bundles.count>226</starter.min.bundles.count>
+                        <!-- Comma-separated list of paths to check for 200 status -->
+                        <starter.check.paths>
+                            /starter.html,
+                            /server/default/jcr:root/content CONTAINS sv:node,
+                            /system/sling.js,
+                            /content/starter/img/sling-logo.svg,
+                            /system/console/bundles,
+                            /bin/browser.html,
+                            /bin/packages.html,
+                            /bin/cpm/usermanagement.tree.json/home/users/system/sling,
+                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.console.*active,
+                        </starter.check.paths>
+                        <!-- Uncomment if you want the test to sleep for a while so that the server is running for diagnostics if something fails. -->
+                        <!-- <starter.waitonfailure>600000</starter.waitonfailure> -->
+                    </systemPropertyVariables>
                 </configuration>
+            </plugin>
+
+            <!-- TODO remove this workaround for missing installation of artifacts https://github.com/fabric8io/docker-maven-plugin/issues/1537 -->
+            <plugin>
+                <artifactId>maven-install-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-install</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -105,49 +177,15 @@
         <profile>
             <id>develop</id>
             <properties>
-                <imagetag>develop</imagetag>
+                <docker.image.tag>develop</docker.image.tag>
             </properties>
         </profile>
 
         <profile>
             <id>master</id>
             <properties>
-                <imagetag>latest</imagetag>
+                <docker.image.tag>latest</docker.image.tag>
             </properties>
-        </profile>
-
-        <profile>
-            <!-- This can also be called manually with   mvn clean install dockerfile:tag dockerfile:push -->
-            <!-- Use authentication with entry in settings.xml , encrypt pwd with  mvn &dash;&dash;encrypt-password -->
-            <!--<server>
-                <id>docker.io</id>
-                <username>composum</username>
-                <password>xxx/password>
-            </server>-->
-            <id>deployDocker</id>
-            <build>
-                <plugins>
-
-                    <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>dockerfile-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>tag-push-image</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>tag</goal>
-                                    <goal>push</goal>
-                                </goals>
-                                <configuration>
-                                    <tag>${imagetag}</tag>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                </plugins>
-            </build>
         </profile>
 
     </profiles>

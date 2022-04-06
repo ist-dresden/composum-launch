@@ -4,13 +4,12 @@
 # We provide two watched directories for file installation - fileinstall-docker, which is meant to be filled
 # in derived docker images, and fileinstall-user, which could be mounted by the user
 
-FROM openjdk:12-jdk
-# TODO(hps,16.10.20) use later JDK?
+FROM openjdk:17
 # install some essential utilities for diagnosing trouble from a shell within the container
-RUN yum install -y procps-ng
-RUN yum install -y less
-RUN yum install -y vim-minimal
-RUN yum install -y wget
+RUN installer=$(command -v yum && echo yum || echo microdnf); \
+    for pkg in procps-ng less vim-minimal wget findutils; do \
+      $installer install -y $pkg; \
+    done
 
 RUN set -eux; \
     groupadd -r sling --gid=1000; \
@@ -41,7 +40,8 @@ USER sling:sling
 
 # JVM options
 ENV JVM_OPTS \
-    -Djava.awt.headless=true -server
+    -Djava.awt.headless=true -server \
+    --add-opens java.base/java.lang=ALL-UNNAMED
 
 ENV MEM_OPTS \
     -Xms32m -Xmx512m \
@@ -65,12 +65,14 @@ ENV JMX_OPTS \
 ENV ADD_OPTS ""
 
 # not quite clear what applies here: https://felix.apache.org/documentation/subprojects/apache-felix-file-install.html
+# and https://sling.apache.org/documentation/bundles/file-installer-provider.html
 ENV FILEINSTALL_OPTS \
-    -Dsling.fileinstall.dir=fileinstall-docker,fileinstall-user \
-    -Dfelix.startlevel.bundle=30 \
-    -Dfelix.log.level=2 \
-    -Dfelix.fileinstall.start.level=30 \
-    -Dfelix.fileinstall.active.level=30
+    -D sling.fileinstall.dir=fileinstall-docker,fileinstall-user \
+    -D sling.fileinstall.dir.autocreate=true \
+    -D felix.startlevel.bundle=30 \
+    -D felix.log.level=2 \
+    -D felix.fileinstall.start.level=30 \
+    -D felix.fileinstall.active.level=30
 
 # arguments for the feature launcher
 ENV LAUNCHER_OPTS ""
@@ -80,9 +82,7 @@ ENV ADD_LAUNCHER_OPTS ""
 
 ENV COMMAND java
 
-ENV CMD "/opt/sling/scripts/start.sh $COMMAND $JVM_OPTS $MEM_OPTS $DEBUG_OPTS $JMX_OPTS $FILEINSTALL_OPTS $ADD_OPTS -jar /opt/sling/nodeslauncher.jar $LAUNCHER_OPTS $ADD_LAUNCHER_OPTS"
-
-CMD exec /opt/sling/scripts/start.sh $COMMAND $JVM_OPTS $MEM_OPTS $DEBUG_OPTS $JMX_OPTS $FILEINSTALL_OPTS $ADD_OPTS -jar /opt/sling/nodeslauncher.jar $LAUNCHER_OPTS $ADD_LAUNCHER_OPTS
+CMD exec /opt/sling/scripts/start.sh $COMMAND $JVM_OPTS $MEM_OPTS $DEBUG_OPTS $JMX_OPTS $ADD_OPTS -jar /opt/sling/nodeslauncher.jar $FILEINSTALL_OPTS $LAUNCHER_OPTS $ADD_LAUNCHER_OPTS
 
 # from maven dependency:copy
 ARG LAUNCHERJAR

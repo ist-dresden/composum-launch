@@ -1,6 +1,6 @@
 # Composum starter using feature launcher for the public composum modules
 
-This creates a JAR that contains the Sling Kickstarter and a feature archive containg a Sling Starter 12 snapshot and
+This creates a JAR that contains the Sling Kickstarter and a feature archive containg a Sling Starter 12 and
 the public composum projects, so that just executing this JAR will fire up a Composum instance including e.g. Pages and
 Assets.
 

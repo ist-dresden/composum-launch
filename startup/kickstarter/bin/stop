@@ -1,0 +1,10 @@
+#!/bin/bash
+echo 'Stops the server'
+
+BINPATH=$( dirname ${0} )
+CPM_HOME=$( cd $BINPATH/..; pwd )
+
+source $BINPATH/readconfiguration.sh
+
+set -x
+$JAVA -jar $CPM_JARFILE stop

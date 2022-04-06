@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.composum.platform.features</groupId>
         <artifactId>composum-launcher-feature</artifactId>
-        <version>1.2.1-SNAPSHOT</version>
+        <version>1.3.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>composum-launcher-feature-composumstarter</artifactId>
-    <version>1.2.1-SNAPSHOT</version><!-- sync with Pages -->
+    <version>1.3.0-SNAPSHOT</version><!-- sync with Pages -->
 
     <name>Composum Feature Based Sling Starter With Composum Public</name>
     <description>
@@ -27,15 +25,14 @@
             <classifier>oak_tar-launcher</classifier>
         </dependency>
 
+        <!-- For integration tests -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient-osgi</artifactId>
+            <groupId>com.composum.platform.features</groupId>
+            <artifactId>composum-launcher-feature-integrationtest</artifactId>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -47,7 +44,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <replacePropertyVariables>
-                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version
+                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version
                     </replacePropertyVariables>
                     <framework>
                         <groupId>org.apache.felix</groupId>
@@ -65,6 +62,9 @@
                                 <classifier>composum</classifier>
                                 <type>slingosgifeature</type>
                             </includeArtifact>
+                            <artifactsOverrides>
+                                <artifactsOverride>com.composum.nodes:*:${composum.nodes.version}</artifactsOverride>
+                            </artifactsOverrides>
                         </aggregate>
                         <aggregate>
                             <classifier>oak_tar</classifier>
@@ -77,6 +77,9 @@
                                 <classifier>oak_tar</classifier>
                                 <type>slingosgifeature</type>
                             </includeArtifact>
+                            <artifactsOverrides>
+                                <artifactsOverride>com.composum.nodes:*:${composum.nodes.version}</artifactsOverride>
+                            </artifactsOverrides>
                         </aggregate>
                         <aggregate>
                             <classifier>oak_mongo</classifier>
@@ -89,6 +92,9 @@
                                 <classifier>oak_mongo</classifier>
                                 <type>slingosgifeature</type>
                             </includeArtifact>
+                            <artifactsOverrides>
+                                <artifactsOverride>com.composum.nodes:*:${composum.nodes.version}</artifactsOverride>
+                            </artifactsOverrides>
                         </aggregate>
                     </aggregates>
                     <scans>
@@ -254,8 +260,26 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <dependenciesToScan>
+                        com.composum.platform.features:composum-launcher-feature-integrationtest
+                    </dependenciesToScan>
                     <systemPropertyVariables>
-                        <starter.http.port>${http.port}</starter.http.port>
+                        <starter.http.test.ports>false:${http.port}</starter.http.test.ports>
+                        <starter.min.bundles.count>242</starter.min.bundles.count>
+                        <!-- Comma-separated list of paths to check for 200 status -->
+                        <starter.check.paths>
+                            /starter.html,
+                            /server/default/jcr:root/content CONTAINS sv:node,
+                            /system/sling.js,
+                            /content/starter/img/sling-logo.svg,
+                            /system/console/bundles,
+                            /bin/browser.html,
+                            /bin/packages.html,
+                            /bin/cpm/usermanagement.tree.json/home/users/system/sling,
+                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.console.*active,
+                            /system/console/status-Bundlelist.txt CONTAINS com.composum.platform.htl,
+                            /bin/cpm/usermanagement.tree.json/home/users/system/composum/platform CONTAINS composum-platform-service,
+                        </starter.check.paths>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

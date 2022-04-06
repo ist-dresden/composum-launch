@@ -10,11 +10,17 @@
 
     <artifactId>composum-launcher-slingstarter-stepwisedeploy</artifactId>
     <version>1.2.1-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
+    <packaging>docker-build</packaging>
 
     <name>Composum Launcher Docker Sling Starter With Deployments</name>
     <description>Creates a docker image from sling starter with updated Composum Core (incl. Package manager and User
         mgmt) and some basic scripts to fire up docker images with installed modules.
     </description>
+
+    <properties>
+        <thisdockerimage>composum/slingstarter-stepwisedeploy</thisdockerimage>
+        <docker.image.tag>${project.version}</docker.image.tag>
+    </properties>
 
     <dependencies>
         <!-- The base docker image we rely on -->
@@ -22,7 +28,7 @@
             <groupId>com.composum.platform</groupId>
             <artifactId>composum-launcher-docker-slingstarter</artifactId>
             <version>${project.version}</version>
-            <type>docker-info</type>
+            <type>docker</type>
             <optional>true</optional>
         </dependency>
     </dependencies>
@@ -30,131 +36,66 @@
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>fetch-included-libraries</id>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <!-- Temporary solution to be able to install packages. Can be removed
-                                 when this goes into the package manager. -->
-                                <artifactItem>
-                                    <groupId>com.composum.sling.core.osgi</groupId>
-                                    <artifactId>composum-sling-osgi-package-installer</artifactId>
-                                    <version>${composum.corev1.version}</version>
-                                    <outputDirectory>${project.build.directory}/immediatelib/21</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>docker-info</id>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>com.composum.platform</groupId>
-                                    <artifactId>composum-launcher-docker-slingstarter</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>docker-info</type>
-                                    <outputDirectory>${project.build.directory}/docker-info-deps</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
                 <configuration>
-                    <repository>composum/slingstarter-stepwisedeploy</repository>
-                    <tag>${project.version}</tag>
-                    <verbose>true</verbose>
-                    <detail>true</detail>
-                    <pullNewerImage>false</pullNewerImage>
-                    <buildArgs>
-                        <PROJECT_VERSION>${project.version}</PROJECT_VERSION>
-                    </buildArgs>
-                    <verbose>true</verbose>
-                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                    <images>
+                        <image>
+                            <name>${thisdockerimage}:${docker.image.tag}</name>
+                            <build>
+                                <dockerFile>Dockerfile</dockerFile>
+                                <contextDir>${project.basedir}</contextDir>
+                                <args>
+                                    <PROJECT_VERSION>${project.version}</PROJECT_VERSION>
+                                </args>
+                            </build>
+                        </image>
+                    </images>
                 </configuration>
             </plugin>
 
+            <!-- TODO remove this workaround for missing installation of artifacts https://github.com/fabric8io/docker-maven-plugin/issues/1537 -->
+            <plugin>
+                <artifactId>maven-install-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-install</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
 
     <profiles>
 
         <profile>
             <id>develop</id>
             <properties>
-                <imagetag>develop</imagetag>
+                <docker.image.tag>develop</docker.image.tag>
             </properties>
         </profile>
 
         <profile>
             <id>master</id>
             <properties>
-                <imagetag>latest</imagetag>
+                <docker.image.tag>latest</docker.image.tag>
             </properties>
-        </profile>
-
-        <profile>
-            <!-- This can also be called manually with   mvn clean install dockerfile:tag dockerfile:push -->
-            <!-- Use authentication with entry in settings.xml , encrypt pwd with  mvn &dash;&dash;encrypt-password -->
-            <!--<server>
-                <id>docker.io</id>
-                <username>composum</username>
-                <password>xxx/password>
-            </server>-->
-            <id>deployDocker</id>
-            <build>
-                <plugins>
-
-                    <plugin>
-                        <groupId>com.spotify</groupId>
-                        <artifactId>dockerfile-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>push-image</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>push</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>tag-image</id>
-                                <phase>deploy</phase>
-                                <goals>
-                                    <goal>tag</goal>
-                                    <goal>push</goal>
-                                </goals>
-                                <configuration>
-                                    <tag>${imagetag}</tag>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                </plugins>
-            </build>
         </profile>
 
     </profiles>

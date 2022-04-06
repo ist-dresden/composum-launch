@@ -1,0 +1,69 @@
+#!/bin/bash
+echo "Copies content from oldrepository twit oak-upgrade into the launcher repository.." # helptext-marker
+echo "oldrepository can be the content from an old system that you want to replace with a new system"
+
+BINPATH=$( dirname ${0} )
+CPM_HOME=$( cd $BINPATH/..; pwd )
+
+cd ${CPM_HOME}
+
+echo
+echo Overwrites the content with content from oldrepository/ - abort or press enter to continue.
+echo The launcher has to be initialized and applications deployed.
+read
+
+${BINPATH}/stop
+
+OLDREPO="$1"
+if [ -z "${OLDREPO}" ]; then
+   OLDREPO="oldrepository"
+fi
+NEWREPO="$2"
+if [ -z "${NEWREPO}" ]; then
+   NEWREPO="launcher/repository"
+fi
+
+# Paths for which we want to overwrite content
+COPYPATHS="""
+/content
+/conf/composum
+/conf/content
+/conf/tenants
+/etc/tenants
+/etc/map.live
+/etc/map.test
+/var/audit
+/var/composum
+/home/groups/composum
+/home/groups/tenants
+/home/users/keycloak
+/home/users/tenants
+/public
+/preview
+/robots.txt
+"""
+
+# Paths for which we don't want to overwrite new content - standard stuff from the sling launcher
+NOTOVERWRITEPATHS="""
+/content/slingshot
+/content/starter
+/var/composum/clientlibs/apps
+/var/composum/clientlibs/libs
+/var/composum/clientlibs/categorycache
+"""
+
+# Paths where we do not want to copy content - subpaths of COPYPATHS
+EXCLUDEPATHS="""
+/var/composum/tmp
+"""
+
+# turn space separated list into comma separated list
+function commatize () {
+  sed -e 's/ *$//;s/^ *//' | tr -s ' ' ','
+}
+
+java -mx4g -jar starter/oak-upgrade-*.jar ${OLDREPO} ${NEWREPO} --copy-binaries \
+  --include-paths=$(echo $COPYPATHS | commatize) \
+  --exclude-paths=$(echo $NOTOVERWRITEPATHS $EXCLUDEPATHS | commatize) \
+  --merge-paths=$(echo $NOTOVERWRITEPATHS | commatize) \
+  --copy-versions=2000-01-01 --copy-orphaned-versions=2000-01-01

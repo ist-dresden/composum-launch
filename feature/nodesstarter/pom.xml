@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.composum.platform.features</groupId>
         <artifactId>composum-launcher-feature</artifactId>
-        <version>1.2.1-SNAPSHOT</version>
+        <version>1.3.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>composum-launcher-feature-nodesstarter</artifactId>
-    <version>1.2.1-SNAPSHOT</version><!-- sync with Pages -->
+    <version>1.3.0-SNAPSHOT</version><!-- sync with Pages -->
 
     <name>Composum Feature Based Sling Starter With Composum Nodes</name>
     <description>
         Creates a feature set and a starter based on a Sling Starter 12 snapshot to start Sling and updating Composum
         Nodes.
     </description>
-
-    <properties>
-        <org.apache.sling.feature.launcher.version>1.1.16</org.apache.sling.feature.launcher.version>
-        <sling.starter.version>12.210525.51eaaa3b-fix2</sling.starter.version>
-        <org.apache.sling.jcr.packageinit.version>1.0.2</org.apache.sling.jcr.packageinit.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -54,15 +47,30 @@
         </dependency>
 
         <dependency>
-            <groupId>com.composum.platform.features</groupId>
-            <artifactId>org.apache.sling.starter.copy</artifactId>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.starter</artifactId>
             <version>${sling.starter.version}</version>
             <classifier>oak_tar</classifier>
             <type>slingosgifeature</type>
         </dependency>
+
+        <!-- For integration tests -->
+        <dependency>
+            <groupId>com.composum.platform.features</groupId>
+            <artifactId>composum-launcher-feature-integrationtest</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
 
             <plugin>
@@ -71,7 +79,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <replacePropertyVariables>
-                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version
+                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version
                     </replacePropertyVariables>
                     <framework>
                         <groupId>org.apache.felix</groupId>
@@ -97,8 +105,8 @@
                             <includeClassifier>composum</includeClassifier>
                             <filesInclude>common/*.json</filesInclude>
                             <includeArtifact>
-                                <groupId>com.composum.platform.features</groupId>
-                                <artifactId>org.apache.sling.starter.copy</artifactId>
+                                <groupId>org.apache.sling</groupId>
+                                <artifactId>org.apache.sling.starter</artifactId>
                                 <version>${sling.starter.version}</version>
                                 <classifier>oak_tar</classifier>
                                 <type>slingosgifeature</type>
@@ -112,8 +120,8 @@
                             <includeClassifier>composum</includeClassifier>
                             <filesInclude>common/*.json</filesInclude>
                             <includeArtifact>
-                                <groupId>com.composum.platform.features</groupId>
-                                <artifactId>org.apache.sling.starter.copy</artifactId>
+                                <groupId>org.apache.sling</groupId>
+                                <artifactId>org.apache.sling.starter</artifactId>
                                 <version>${sling.starter.version}</version>
                                 <classifier>oak_mongo</classifier>
                                 <type>slingosgifeature</type>
@@ -227,6 +235,107 @@
                             </includes>
                         </fileset>
                     </filesets>
+                </configuration>
+            </plugin>
+
+            <!-- reserve network ports for the integration tests -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>reserve-network-port</id>
+                        <goals>
+                            <goal>reserve-network-port</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <portNames>
+                                <portName>http.port</portName>
+                            </portNames>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Start a server for the integration test -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>startITserver</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-jar</argument>
+                                <argument>${project.build.directory}/${project.build.finalName}-oak_tar-launcher.jar
+                                </argument>
+                                <argument>-D</argument>
+                                <argument>org.osgi.service.http.port=${http.port}</argument>
+                                <argument>--pidfile=${project.build.directory}/pid.it.txt</argument>
+                            </arguments>
+                            <workingDirectory>${project.build.directory}/it</workingDirectory>
+                            <async>true</async>
+                            <asyncDestroyOnShutdown>true</asyncDestroyOnShutdown>
+                            <successCodes>0,143</successCodes>
+                            <timeout>180000</timeout>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>shutdownITserver</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.composum.platform.feature.nodesstarter.StopFromPid</mainClass>
+                            <arguments>
+                                <argument>stop</argument>
+                                <argument>--pidfile=${project.build.directory}/pid.it.txt</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- run the ITs -->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <dependenciesToScan>
+                        com.composum.platform.features:composum-launcher-feature-integrationtest
+                    </dependenciesToScan>
+                    <systemPropertyVariables>
+                        <starter.http.test.ports>false:${http.port}</starter.http.test.ports>
+                        <starter.min.bundles.count>223</starter.min.bundles.count>
+                        <!-- Comma-separated list of paths to check for 200 status -->
+                        <starter.check.paths>
+                            /starter.html,
+                            /server/default/jcr:root/content CONTAINS sv:node,
+                            /system/sling.js,
+                            /content/starter/img/sling-logo.svg,
+                            /system/console/bundles,
+                            /bin/browser.html,
+                            /bin/packages.html,
+                            /bin/cpm/usermanagement.tree.json/home/users/system/sling,
+                            /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.console.*active,
+                        </starter.check.paths>
+                        <!-- Uncomment if you want the test to sleep for a while so that the server is running for diagnostics if something fails. -->
+                        <!-- <starter.waitonfailure>600000</starter.waitonfailure> -->
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
 

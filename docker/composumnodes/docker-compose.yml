@@ -10,10 +10,9 @@ services:
     image: composum/nodes:${PROJECT_VERSION}
     container_name: composum-nodes
     volumes:
-      - "./target/run/logs:/opt/sling/sling/logs"
+      - "./target/run/logs:/opt/sling/launcher/logs"
       - "./target/run/fileinstall:/opt/sling/fileinstall-user"
     ports:
       - "8080:8080"
       - "18080:18080"
       - "28080:28080"
-

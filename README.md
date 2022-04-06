@@ -11,7 +11,7 @@ This module creates a couple of docker images with which it is easy to run the p
 - **featurelauncher**: docker image using the feature launcher, deploying a snapshot of Sling Starter 12 and preparing
   for further deployments both as feature archives and as packages from the filesystem.
 
-- **composumlauncher**: docker image with a sling feature launcher that launches a FAR from a Sling Starter 12 snapshot
+- **composumlauncher**: docker image with a sling feature launcher that launches a FAR from a Sling Starter 12
   and includes all public Composum modules as features. Based on the featurelauncher docker image (
   composum/featurelauncher-nodes).
 
@@ -25,9 +25,11 @@ This module creates a couple of docker images with which it is easy to run the p
 
 - compatibility/**nodes-compat**: like slingstarter, but with the earliest Sling Launchpad version that is supported the Composum Nodes (as of 4/2019: version 9 on JDK 8).
 
+- **startup**: some experiments how to start up Sling with composum using the various starters
+
 Since there are various modules involved, we normally use the pages version as version number for all docker images, as kind of the leading module.
 
-# Start the Composum Suite using docker
+# Start the Composum Suite (incl. Pages and additional modules) using docker
 
 ## Pull from dockerhub
 
@@ -36,7 +38,7 @@ Run as a temporary installation (after stopping the container all data is delete
     docker pull composum/featurelauncher-composum:latest
     docker run --rm -p 8080:8080 composum/featurelauncher-composum:latest
 
-where `{version}` has to be replaced by the current version of this project, e.g. `1.2.1-SNAPSHOT` .
+Alternatively, you can also use tag develop instead of latest to use a later snapshot.
 
 Compare the [docker run](https://docs.docker.com/engine/reference/run/) documentation for other options.
 Composum Pages is accessible at http://localhost:8080/bin/pages.html one or two minutes after starting.
@@ -77,7 +79,7 @@ Stop it and destroy created containers with:
 
 # Start Composum Pages using Sling Starter
 
-**feature/nodesstarter**: A [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter) 12-SNAPSHOT with composum nodes installed in the newest version, and some provisions to install packages (see [feature/README.md](feature/README.md)), and run it offline.
+**feature/nodesstarter**: A [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter) 12 with composum nodes installed in the newest version, and some provisions to install packages (see [feature/README.md](feature/README.md)), and run it offline.
 **feature/composumstarter**: Extends the feature/nodesstarter with all public Composum modules. (There are some enterprise modules, which aren't contained.) 
 
 **pages/starter**: (obsolete) contains a [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter) version 11

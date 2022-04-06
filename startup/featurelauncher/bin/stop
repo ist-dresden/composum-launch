@@ -1,0 +1,32 @@
+#!/bin/bash
+echo 'Stops the server in the background' # helptext-marker
+
+BINPATH=$( dirname ${0} )
+CPM_HOME=$( cd $BINPATH/..; pwd )
+cd $CPM_HOME
+
+PID=$(cat ./conf/cpm.pid 2>/dev/null)
+if [ "$PID" ]; then
+    TRY=0
+    echo "Checking process $PID..."
+    while [ $TRY -lt 15 ]; do
+        STAT=`kill "$PID" 2>/dev/null; echo $?`
+        if [ 0 -eq "$STAT" ]; then
+            echo "Process $PID still running..."
+            sleep 2
+            TRY=$[$TRY+1]
+        else
+            TRY=100
+        fi
+    done
+    STAT=`kill "$PID" 2>/dev/null; echo $?`
+    if [ 0 -eq "$STAT" ]; then # pull out the shotgun
+        echo "Terminating process $PID ..."
+        kill -9 $PID
+    else
+        echo "Process finished normally."
+    fi
+    /bin/rm -f ./conf/cpm.pid
+else
+  echo "No PID file $(realpath ./conf/cpm.pid) found"
+fi

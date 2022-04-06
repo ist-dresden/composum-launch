@@ -1,6 +1,6 @@
 # Composum Launcher Docker Feature Launcher
 
-Creates a docker image with a sling feature launcher that launches a FAR from a Sling Starter 12 snapshot, but is
+Creates a docker image with a sling feature launcher that launches a FAR from a Sling Starter 12, but is
 prepared to deploy more / different features as well as packages / bundles from the filesystem.
 
 Caution: for production use you'll want to create your own docker-image - this is rather meant as and example and a

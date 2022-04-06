@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
+    <!-- Creates a zip with the felix framework that can be used as "repository" for the sling feature launcher for starting felix. -->
+    <id>zip</id>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <dependencySets>
+        <!-- Now we are creating a maven-repository like structure at lib with things the feature launcher needs in addition to the FAR. -->
+        <dependencySet>
+            <outputFileNameMapping>${artifact.groupIdPath}/${artifact.artifactId}/${artifact.version}/${artifact.file.name}</outputFileNameMapping>
+            <includes>
+                <include>org.apache.felix:org.apache.felix.framework</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
+
+    <files>
+        <file>
+            <source>${basedir}/target/classes/felixversion.properties</source>
+        </file>
+    </files>
+
+    <fileSets>
+        <fileSet>
+            <directory>${basedir}/target/classes/com/composum/platform/feature/nodesstarter</directory>
+            <!-- useProjectArtefact in dependency doesn't work since it tries to include the far, too. :-( So this way. -->
+            <outputDirectory>/com/composum/platform/feature/nodesstarter</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+</assembly>
