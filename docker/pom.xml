@@ -27,7 +27,7 @@
         <profile>
             <id>obsolete</id>
             <modules>
-                <!-- More or less obsolete docker images using Sling Starter 11.
+                <!-- More or less obsolete docker images.
                  Do not build by default because of docker pull rate limiting.
                   https://docs.docker.com/docker-hub/download-rate-limit/ -->
                 <module>slingstarter</module>

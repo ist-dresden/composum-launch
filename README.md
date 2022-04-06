@@ -11,7 +11,7 @@ This module creates a couple of docker images with which it is easy to run the p
 - **featurelauncher**: docker image using the feature launcher, deploying a snapshot of Sling Starter 12 and preparing
   for further deployments both as feature archives and as packages from the filesystem.
 
-- **composumlauncher**: docker image with a sling feature launcher that launches a FAR from a Sling Starter 12 snapshot
+- **composumlauncher**: docker image with a sling feature launcher that launches a FAR from a Sling Starter 12
   and includes all public Composum modules as features. Based on the featurelauncher docker image (
   composum/featurelauncher-nodes).
 
@@ -79,7 +79,7 @@ Stop it and destroy created containers with:
 
 # Start Composum Pages using Sling Starter
 
-**feature/nodesstarter**: A [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter) 12-SNAPSHOT with composum nodes installed in the newest version, and some provisions to install packages (see [feature/README.md](feature/README.md)), and run it offline.
+**feature/nodesstarter**: A [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter) 12 with composum nodes installed in the newest version, and some provisions to install packages (see [feature/README.md](feature/README.md)), and run it offline.
 **feature/composumstarter**: Extends the feature/nodesstarter with all public Composum modules. (There are some enterprise modules, which aren't contained.) 
 
 **pages/starter**: (obsolete) contains a [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter) version 11

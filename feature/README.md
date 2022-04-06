@@ -7,7 +7,7 @@ the [Sling feature launcher](https://github.com/apache/sling-org-apache-sling-fe
 
 All feature modules create feature archives with classifiers oak_tar and oak_mongo.
 
-- nodesstarter : produces a JAR containing a feature archive produced from a Sling Starter 12 snapshot, that has
+- nodesstarter : produces a JAR containing a feature archive produced from a Sling Starter 12, that has
   everything embedded and does not need any network access to start. It also updates Composum Nodes.
 - composumstarter : like nodesstarter, but contains all public composum modules
 
