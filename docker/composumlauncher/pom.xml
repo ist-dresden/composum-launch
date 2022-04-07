@@ -19,7 +19,6 @@
 
     <properties>
         <thisdockerimage>composum/featurelauncher-composum</thisdockerimage>
-        <docker.image.tag>${project.version}</docker.image.tag>
     </properties>
 
     <dependencies>
@@ -89,6 +88,9 @@
                                 <args>
                                     <PROJECT_VERSION>${project.version}</PROJECT_VERSION>
                                 </args>
+                                <createImageOptions>
+                                    <platform>${docker.platform}</platform>
+                                </createImageOptions>
                             </build>
                             <run>
                                 <ports>

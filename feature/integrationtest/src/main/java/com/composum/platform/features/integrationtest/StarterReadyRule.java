@@ -70,7 +70,7 @@ public class StarterReadyRule extends ExternalResource {
                 previous
             );
         }
-        final int TRIES = 180;
+        final int TRIES = 360;
         final int WAIT_BETWEEN_TRIES_MILLIS = 1000;
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             try {

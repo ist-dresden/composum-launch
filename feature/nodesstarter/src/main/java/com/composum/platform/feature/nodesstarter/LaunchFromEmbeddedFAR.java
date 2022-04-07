@@ -94,7 +94,7 @@ public class LaunchFromEmbeddedFAR {
 
                 case "-f":
                     String feature = argIterator.next();
-                    if ("default".equalsIgnoreCase(feature)) {
+                    if ("embedded".equalsIgnoreCase(feature)) {
                         wantDefaultFeature = true;
                     } else {
                         haveFeature = true;
@@ -105,7 +105,7 @@ public class LaunchFromEmbeddedFAR {
 
                 case "-u":
                     String url = argIterator.next();
-                    if ("default".equalsIgnoreCase(url)) {
+                    if ("embedded".equalsIgnoreCase(url)) {
                         wantDefaultRepository = true;
                     } else {
                         haveRepository = true;
@@ -178,14 +178,19 @@ public class LaunchFromEmbeddedFAR {
     }
 
     protected void addDefaultRepositoryArg() {
+        String repositoryURL = getRepositoryURL();
+        System.out.println("Using repository " + repositoryURL);
+        args.add("-u");
+        args.add(repositoryURL);
+    }
+
+    protected String getRepositoryURL() {
         URL repositoryMarkerURL = LaunchFromEmbeddedFAR.class.getResource(DEFAULT_REPOSITORY_PATH_MARKER);
         if (repositoryMarkerURL == null) {
             throw new IllegalArgumentException("File format is wrong - no embedded repository marker " + DEFAULT_REPOSITORY_PATH_MARKER + " found in JAR");
         }
         String repositoryURL = repositoryMarkerURL.toExternalForm().replaceFirst("/marker.txt", "/");
-        System.out.println("Using repository " + repositoryURL);
-        args.add("-u");
-        args.add(repositoryURL);
+        return repositoryURL;
     }
 
     /**
@@ -193,7 +198,7 @@ public class LaunchFromEmbeddedFAR {
      * embedded default repository is to be used.
      */
     protected void addDefaultFeatureArg() {
-        URL mainFeatureURL = LaunchFromEmbeddedFAR.class.getResource(DEFAULT_SLING_FEATURE_MODEL_FILE_PATH);
+        URL mainFeatureURL = getMainFeatureURL();
         if (mainFeatureURL == null) {
             // this might be OK if the user just wants help. If we throw an exception, the command line help is never
             // printed.
@@ -203,6 +208,10 @@ public class LaunchFromEmbeddedFAR {
             args.add("-f");
             args.add(mainFeatureURL.toExternalForm());
         }
+    }
+
+    protected URL getMainFeatureURL() {
+        return LaunchFromEmbeddedFAR.class.getResource(DEFAULT_SLING_FEATURE_MODEL_FILE_PATH);
     }
 
     /** Returns the felix version embedded in the launcher artifact. */

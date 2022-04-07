@@ -18,7 +18,6 @@
 
     <properties>
         <thisdockerimage>composum/featurelauncher-nodes</thisdockerimage>
-        <docker.image.tag>${project.version}</docker.image.tag>
     </properties>
 
     <dependencies>
@@ -89,6 +88,9 @@
                                     <LAUNCHERJAR>target/dependencies/nodeslauncher.jar</LAUNCHERJAR>
                                     <SYSTEM_FAR_DIRECTORY>target/dependencies/system</SYSTEM_FAR_DIRECTORY>
                                 </args>
+                                <createImageOptions>
+                                    <platform>${docker.platform}</platform>
+                                </createImageOptions>
                             </build>
                             <run>
                                 <ports>
@@ -140,6 +142,7 @@
                         </starter.check.paths>
                         <!-- Uncomment if you want the test to sleep for a while so that the server is running for diagnostics if something fails. -->
                         <!-- <starter.waitonfailure>600000</starter.waitonfailure> -->
+                        <starter.waitonfailure>600000</starter.waitonfailure>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

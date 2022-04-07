@@ -18,7 +18,6 @@
 
     <properties>
         <thisdockerimage>composum/slingstarter</thisdockerimage>
-        <docker.image.tag>${project.version}</docker.image.tag>
     </properties>
 
     <dependencies>
@@ -86,6 +85,9 @@
                                 <args>
                                     <FELIXVERSION>${org.apache.felix.framework.version}</FELIXVERSION>
                                 </args>
+                                <createImageOptions>
+                                    <platform>${docker.platform}</platform>
+                                </createImageOptions>
                             </build>
                             <run>
                                 <ports>

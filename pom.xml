@@ -160,6 +160,36 @@
                 <module>compatibility</module>
             </modules>
         </profile>
+        <profile>
+            <!-- For building docker images for Intel based architecture. -->
+            <id>amd64</id>
+            <activation>
+                <!-- For setting a default in the maven settings. -->
+                <property>
+                    <name>dockerplatform</name>
+                    <value>amd64</value>
+                </property>
+            </activation>
+            <properties>
+                <docker.platform>linux/amd64</docker.platform>
+                <docker.image.tag>${project.version}-amd64</docker.image.tag>
+            </properties>
+        </profile>
+        <profile>
+            <!-- For building docker for Mac M1 etc. -->
+            <id>arm64</id>
+            <activation>
+                <!-- For setting a default in the maven settings. -->
+                <property>
+                    <name>dockerplatform</name>
+                    <value>arm64</value>
+                </property>
+            </activation>
+            <properties>
+                <docker.platform>linux/arm64</docker.platform>
+                <docker.image.tag>${project.version}-arm64</docker.image.tag>
+            </properties>
+        </profile>
     </profiles>
 
     <repositories>
