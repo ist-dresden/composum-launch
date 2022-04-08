@@ -1,0 +1,5 @@
+{
+  "content-packages:ARTIFACTS|true": [
+    "com.composum.nodes:composum-nodes-sling-package:zip:${composum.nodes.version}"
+  ]
+}

@@ -79,7 +79,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <replacePropertyVariables>
-                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version
+                        composum.nodes.version,org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version
                     </replacePropertyVariables>
                     <framework>
                         <groupId>org.apache.felix</groupId>
@@ -90,15 +90,6 @@
                         <aggregate>
                             <classifier>composum</classifier>
                             <filesInclude>**/composum*.json</filesInclude>
-                            <includeArtifact>
-                                <groupId>com.composum.nodes.setup</groupId>
-                                <artifactId>composum-nodes-slingfeature</artifactId>
-                                <version>${composum.nodes.version}</version>
-                                <type>slingosgifeature</type>
-                            </includeArtifact>
-                            <artifactsOverrides>
-                                <artifactsOverride>com.composum.nodes:*:HIGHEST</artifactsOverride>
-                            </artifactsOverrides>
                         </aggregate>
                         <aggregate>
                             <classifier>oak_tar</classifier>
@@ -111,9 +102,6 @@
                                 <classifier>oak_tar</classifier>
                                 <type>slingosgifeature</type>
                             </includeArtifact>
-                            <artifactsOverrides>
-                                <artifactsOverride>com.composum.nodes:*:HIGHEST</artifactsOverride>
-                            </artifactsOverrides>
                         </aggregate>
                         <aggregate>
                             <classifier>oak_mongo</classifier>
@@ -126,9 +114,6 @@
                                 <classifier>oak_mongo</classifier>
                                 <type>slingosgifeature</type>
                             </includeArtifact>
-                            <artifactsOverrides>
-                                <artifactsOverride>com.composum.nodes:*:HIGHEST</artifactsOverride>
-                            </artifactsOverrides>
                         </aggregate>
                     </aggregates>
                     <scans>
