@@ -4,7 +4,7 @@ echo 'Prints short helptexts for all files' # helptext-marker
 BINPATH=$( dirname ${0} )
 
  for fil in `fgrep -l "helptext""-marker" $BINPATH/*`; do
-   echo $fil:
-   fgrep "helptext""-marker" $fil | sed "s/# helptext""-marker//" | sed "s/^echo //"
+   echo -ne "$fil:\t"
+   fgrep "helptext""-marker" $fil | sed "s/# helptext""-marker//" | sed "s/^echo //" | tr -d "['\"]"
    echo
  done

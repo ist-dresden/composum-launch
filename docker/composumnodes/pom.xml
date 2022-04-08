@@ -164,6 +164,9 @@
                             /bin/packages.html,
                             /bin/cpm/usermanagement.tree.json/home/users/system/sling,
                             /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.console.*active,
+                            /system/console/healthcheck.txt?tags=*%2C-oak&amp;forceInstantExecution=true&amp;quiet=true CONTAINS HealthCheck executed. 0 failures,
+                            /system/console/healthcheck.txt?tags=*%2C-oak CONTAINS bundles are started,
+                            /system/console/healthcheck.txt?tags=*%2C-oak CONTAINS All . required services are available,
                         </starter.check.paths>
                     </systemPropertyVariables>
                 </configuration>

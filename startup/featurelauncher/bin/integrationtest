@@ -1,0 +1,9 @@
+#!/bin/bash
+echo 'Performs a rough test on a running server' # helptext-marker
+# e.g. run with
+# while mvn -P integrationtest failsafe:integration-test failsafe:verify; do bin/stop; /bin/rm -fr launcher logs/*; bin/start; sleep 20; done
+exec mvn -P manual.integrationtest failsafe:integration-test failsafe:verify
+
+/system/console/healthcheck.txt?tags=*%2C-oak&forceInstantExecution=true&quiet=true CONTAINS HealthCheck executed, 0 failures
+/system/console/healthcheck.txt?tags=*%2C-oak CONTAINS bundles are started
+/system/console/healthcheck.txt?tags=*%2C-oak CONTAINS All 5 required services are available

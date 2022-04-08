@@ -89,8 +89,6 @@ class UrlCheck {
                 while (null != (line = reader.readLine())) {
                     if (containsPattern.matcher(line).find()) {
                         return null;
-                    } else {
-                        System.out.println(line);
                     }
                 }
             }
