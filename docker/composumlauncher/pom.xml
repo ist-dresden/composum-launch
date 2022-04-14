@@ -19,7 +19,6 @@
 
     <properties>
         <thisdockerimage>composum/featurelauncher-composum</thisdockerimage>
-        <docker.image.tag>${project.version}</docker.image.tag>
     </properties>
 
     <dependencies>
@@ -180,14 +179,14 @@
         <profile>
             <id>develop</id>
             <properties>
-                <docker.image.tag>develop</docker.image.tag>
+                <docker.image.tag>develop-${os.arch}</docker.image.tag>
             </properties>
         </profile>
 
         <profile>
             <id>master</id>
             <properties>
-                <docker.image.tag>latest</docker.image.tag>
+                <docker.image.tag>latest-${os.arch}</docker.image.tag>
             </properties>
         </profile>
 
