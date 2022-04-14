@@ -300,6 +300,36 @@
         </profile>
 
         <profile>
+            <id>composumnodespackage</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>fileinstall-composum-nodes</id>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>com.composum.nodes</groupId>
+                                            <artifactId>composum-nodes-sling-package</artifactId>
+                                            <version>${composum.nodes.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
             <id>composumuberpackages</id>
             <build>
                 <plugins>

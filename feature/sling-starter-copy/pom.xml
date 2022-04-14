@@ -10,21 +10,21 @@
     either express or implied. See the License for the specific language governing permissions
     and limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.apache.sling</groupId>
         <artifactId>sling</artifactId>
         <version>47</version>
-        <relativePath/>
+        <relativePath />
     </parent>
 
-    <artifactId>org.apache.sling.starter</artifactId>
+    <groupId>com.composum.platform.features</groupId>
+    <artifactId>sling.starter.copy</artifactId>
     <version>12.1-SNAPSHOT</version>
 
-    <name>Apache Sling Starter Application</name>
+    <name>Reduced copy of Apache Sling Starter Application</name>
     <description>
         A copy of the the Sling Starter demo application.
     </description>
