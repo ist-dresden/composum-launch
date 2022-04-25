@@ -9,7 +9,7 @@ version: "3.7"
 
 services:
   sling:
-    image: composum/featurelauncher-nodes:${PROJECT_VERSION}
+    image: composum/featurelauncher-nodes:${DOCKER_IMAGE_TAG}
     container_name: featurelauncher-nodes
     volumes:
       - "./target/run/logs:/opt/sling/launcher/logs"
@@ -19,4 +19,3 @@ services:
       - "8080:8080"
       - "18080:18080"
       - "28080:28080"
-

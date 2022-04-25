@@ -2,8 +2,8 @@
 # Relies on a maven build to copy the sling starter into target/lib/
 # See comments of base image!
 
-ARG PROJECT_VERSION
-FROM composum/slingstarter:${PROJECT_VERSION}
+ARG DOCKER_IMAGE_TAG
+FROM composum/slingstarter:${DOCKER_IMAGE_TAG}
 
 RUN set -eux; \
     mkdir -p /opt/sling/fileinstall-immediate; \

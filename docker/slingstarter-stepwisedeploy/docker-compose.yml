@@ -7,7 +7,7 @@ version: "3.7"
 
 services:
   sling:
-    image: composum/slingstarter-stepwisedeploy:${PROJECT_VERSION}
+    image: composum/slingstarter-stepwisedeploy:${DOCKER_IMAGE_TAG}
     container_name: slingstarterdeploy
     volumes:
       - "./target/run/logs:/opt/sling/launcher/logs"

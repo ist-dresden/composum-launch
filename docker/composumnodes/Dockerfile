@@ -2,8 +2,8 @@
 # Relies on a maven build to copy the sling starter into target/lib/
 # See comments of base image!
 
-ARG PROJECT_VERSION
-FROM composum/slingstarter-stepwisedeploy:${PROJECT_VERSION}
+ARG DOCKER_IMAGE_TAG
+FROM composum/slingstarter-stepwisedeploy:${DOCKER_IMAGE_TAG}
 
 RUN rm -f /opt/sling/fileinstall-docker/*/composum-sling-osgi-package-installer*
 

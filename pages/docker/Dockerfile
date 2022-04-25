@@ -2,8 +2,8 @@
 # Relies on a maven build to copy the sling starter into target/lib/
 # See comments of base image!
 
-ARG PROJECT_VERSION
-FROM composum/nodes:${PROJECT_VERSION}
+ARG DOCKER_IMAGE_TAG
+FROM composum/nodes:${DOCKER_IMAGE_TAG}
 
 COPY --chown=sling:sling src/main/scripts /opt/sling/scripts/
 

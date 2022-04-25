@@ -6,7 +6,7 @@ version: "3.7"
 
 services:
   sling:
-    image: composum/pages:${PROJECT_VERSION}
+    image: composum/pages:${DOCKER_IMAGE_TAG}
     container_name: composumbasic
     volumes:
       - "./target/run/logs:/opt/sling/sling/logs"
@@ -15,4 +15,3 @@ services:
       - "8080:8080"
       - "18080:18080"
       - "28080:28080"
-

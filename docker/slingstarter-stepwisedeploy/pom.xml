@@ -44,7 +44,7 @@
                                 <dockerFile>Dockerfile</dockerFile>
                                 <contextDir>${project.basedir}</contextDir>
                                 <args>
-                                    <PROJECT_VERSION>${project.version}</PROJECT_VERSION>
+                                    <DOCKER_IMAGE_TAG>${docker.image.tag}</DOCKER_IMAGE_TAG>
                                 </args>
                             </build>
                         </image>

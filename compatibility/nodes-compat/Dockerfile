@@ -2,8 +2,8 @@
 # Relies on a maven build to copy the sling starter into target/lib/
 # See comments of base image!
 
-ARG PROJECT_VERSION
-FROM composum/slingstarter-compat:${PROJECT_VERSION}
+ARG DOCKER_IMAGE_TAG
+FROM composum/slingstarter-compat:${DOCKER_IMAGE_TAG}
 
 ENV FILEINSTALL_OPTS \
     -Dsling.fileinstall.dir=fileinstall

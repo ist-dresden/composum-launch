@@ -2,8 +2,8 @@
 # Relies on a maven build to copy the sling starter into target/lib/
 # See comments of base image!
 
-ARG PROJECT_VERSION
-FROM composum/featurelauncher-nodes:${PROJECT_VERSION}
+ARG DOCKER_IMAGE_TAG
+FROM composum/featurelauncher-nodes:${DOCKER_IMAGE_TAG}
 
 # from maven
 COPY --chown=sling:sling target/dependencies/* /opt/sling/features-docker/

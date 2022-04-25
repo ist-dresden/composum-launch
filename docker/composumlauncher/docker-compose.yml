@@ -9,7 +9,7 @@ version: "3.7"
 
 services:
   sling:
-    image: composum/featurelauncher-composum:${PROJECT_VERSION}
+    image: composum/featurelauncher-composum:${DOCKER_IMAGE_TAG}
     container_name: composum
     volumes:
       - "./target/run/logs:/opt/sling/launcher/logs"
