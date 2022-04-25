@@ -265,7 +265,7 @@
                     </dependenciesToScan>
                     <systemPropertyVariables>
                         <starter.http.test.ports>false:${http.port}</starter.http.test.ports>
-                        <starter.min.bundles.count>242</starter.min.bundles.count>
+                        <starter.min.bundles.count>228</starter.min.bundles.count>
                         <!-- Comma-separated list of paths to check for 200 status -->
                         <starter.check.paths>
                             /starter.html,

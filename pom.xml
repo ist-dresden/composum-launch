@@ -30,11 +30,6 @@
     mvn -DallowSnapshots=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
     -->
     <properties>
-        <!-- For building cross platform docker images: there are profiles for linux/amd64 , linux/arm64 -->
-        <!-- See the amd64/arm64 profiles at the end. Default values are 'architecture agnostic'. -->
-        <!-- If you have a Mac M1 it's sensible to set the property dockerplatform to arm64 in the maven settings, triggering the profile.  -->
-        <!-- Unfortunately that cannot be empty due to https://github.com/fabric8io/docker-maven-plugin/issues/1541 . -->
-        <docker.platform>amd64</docker.platform>
         <docker.image.tag>${project.version}-${os.arch}</docker.image.tag>
 
         <!-- nodes e.g. 3.4.1 or 4.1.1 - we rather use nodes 4, since otherwise the FAR could either

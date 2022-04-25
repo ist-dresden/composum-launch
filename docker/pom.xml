@@ -17,6 +17,10 @@
     <modules>
         <module>featurelauncher</module>
         <module>composumlauncher</module>
+        <!-- More or less obsolete docker images. -->
+        <module>slingstarter</module>
+        <module>slingstarter-stepwisedeploy</module>
+        <module>composumnodes</module>
     </modules>
 
     <properties>
@@ -24,17 +28,17 @@
     </properties>
 
     <profiles>
-        <profile>
-            <id>obsolete</id>
-            <modules>
-                <!-- More or less obsolete docker images.
-                 Do not build by default because of docker pull rate limiting.
-                  https://docs.docker.com/docker-hub/download-rate-limit/ -->
-                <module>slingstarter</module>
-                <module>slingstarter-stepwisedeploy</module>
-                <module>composumnodes</module>
-            </modules>
-        </profile>
+        <!-- More or less obsolete docker images.
+         Do not build by default because of docker pull rate limiting.
+          https://docs.docker.com/docker-hub/download-rate-limit/ -->
+<!--        <profile>-->
+<!--            <id>obsolete</id>-->
+<!--            <modules>-->
+<!--                <module>slingstarter</module>-->
+<!--                <module>slingstarter-stepwisedeploy</module>-->
+<!--                <module>composumnodes</module>-->
+<!--            </modules>-->
+<!--        </profile>-->
     </profiles>
 
     <build>
