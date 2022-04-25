@@ -279,9 +279,9 @@
                             /system/console/status-Bundlelist.txt CONTAINS com.composum.nodes.console.*active,
                             /system/console/status-Bundlelist.txt CONTAINS com.composum.platform.htl,
                             /bin/cpm/usermanagement.tree.json/home/users/system/composum/platform CONTAINS composum-platform-service,
-                            /system/console/healthcheck.txt?tags=*%2C-oak&amp;forceInstantExecution=true&amp;quiet=true CONTAINS HealthCheck executed. 0 failures,
-                            /system/console/healthcheck.txt?tags=*%2C-oak CONTAINS bundles are started,
-                            /system/console/healthcheck.txt?tags=*%2C-oak CONTAINS All . required services are available,
+                            /system/console/healthcheck.txt?tags=*%2C-diskspace%2C-oak&amp;forceInstantExecution=true&amp;quiet=true CONTAINS HealthCheck executed. 0 failures,
+                            /system/console/healthcheck.txt?tags=*%2C-diskspace%2C-oak CONTAINS bundles are started,
+                            /system/console/healthcheck.txt?tags=*%2C-diskspace%2C-oak CONTAINS All . required services are available,
                         </starter.check.paths>
                     </systemPropertyVariables>
                 </configuration>
