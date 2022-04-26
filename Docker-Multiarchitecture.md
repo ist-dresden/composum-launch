@@ -17,6 +17,15 @@ So we opt for building the image only on the native architecture,
 and possibly creating multi architecture images per script. The architecture
 is added as an suffix to the version.
 
+## Creating multiarchitecture images
+
+In docker/bin/ there is a makemultiarch.sh that combines the images
+for both supported architectures into one multiarchitecture manifest.
+makeallmultiarch.sh combines all published images.
+
+If it's a snapshot, repeat this with develop as additional argument (= tag);
+if it's a release, repeat this with latest as additional argument.
+
 ## Checking whether it's right
 
 `docker image inspect` shows the architecture of an image.

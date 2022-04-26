@@ -84,8 +84,18 @@
             </plugin>
 
         </plugins>
-    </build>
 
+        <pluginManagement>
+            <!-- not used here, but to simplify the build so that the docker plugin is known. -->
+            <plugins>
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>0.39.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
   <scm>
     <tag>composum-launcher-1.2.0</tag>
