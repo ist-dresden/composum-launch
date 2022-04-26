@@ -69,6 +69,6 @@ CMD exec $COMMAND $JVM_OPTS $MEM_OPTS $DEBUG_OPTS $JMX_OPTS $ADD_OPTS $STARTER_C
 ENV STARTER_CMDLINE -jar featurelauncher.jar -f main.far -u jar:file:felixcontainer.zip! -u jar:file:main.far! -fv $FELIXVERSION -v
 
 # from maven dependency:copy
-COPY target/lib/composum-launcher-feature-felixcontainer-*-SNAPSHOT-zip.zip felixcontainer.zip
+COPY target/lib/composum-launcher-feature-felixcontainer-*-zip.zip felixcontainer.zip
 COPY target/lib/org.apache.sling.feature.launcher-*.jar featurelauncher.jar
 COPY target/lib/org.apache.sling.starter-*-oak_tar_far.far main.far
