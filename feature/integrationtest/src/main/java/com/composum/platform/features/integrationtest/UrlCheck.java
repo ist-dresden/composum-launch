@@ -19,7 +19,7 @@ package com.composum.platform.features.integrationtest;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.ConnectException;
+import java.net.SocketException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -38,7 +38,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 
 class UrlCheck {
 
-    private final static Log LOG = LogFactory.getLog(UrlCheck.class);
+    private static final Log LOG = LogFactory.getLog(UrlCheck.class);
 
     private final String url;
     private final Pattern containsPattern;
@@ -116,7 +116,7 @@ class UrlCheck {
                     if (lastFailure == null) {
                         break;
                     }
-                } catch ( ConnectException | NoHttpResponseException e ) {
+                } catch (SocketException | NoHttpResponseException e) {
                     lastFailure = e.getClass().getName() + " : " + e.getMessage();
                 }
     
@@ -132,7 +132,7 @@ class UrlCheck {
 
                 String waitTimeStr = System.getProperty(STARTER_WAITONFAILURE_PROPERTY, "");
                 if (!waitTimeStr.trim().isEmpty()) {
-                    long waitTime = Long.valueOf(waitTimeStr);
+                    long waitTime = Long.parseLong(waitTimeStr);
                     if (waitTime > 0) {
                         LOG.error("FAILURE; waiting for " + waitTime + "ms for diagnostic purposes: " + errorMessage + " ; at " + new Date());
                         Thread.sleep(waitTime);
@@ -140,8 +140,7 @@ class UrlCheck {
                     }
                 }
 
-                throw new RuntimeException(
-                        errorMessage);
+                throw new RuntimeException(errorMessage);
             }
         }
     }
