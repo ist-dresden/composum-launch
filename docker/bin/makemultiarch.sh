@@ -9,7 +9,7 @@
 # docker/bin/makemultiarch.sh composum/nodes
 # docker/bin/makemultiarch.sh composum/pages
 
-set -vx
+# set -vx
 # set -e
 
 name=$1
@@ -40,12 +40,14 @@ done
 
 CMD="docker manifest create $name:$destversion"
 for arch in $architectures; do
-  CMD="$CMD --amend $name:$version-$arch"
+  CMD="$CMD $name:$version-$arch"
 done
+
+docker manifest rm $name:$destversion
 
 echo $CMD
 
-set -e
+set -vxe
 
 $CMD
 
