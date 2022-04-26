@@ -104,3 +104,6 @@ and because there are some images for compatibility checking that are rarely nee
 
 So, to build absolutely everything, you'd have to call
 mvn clean install -P compat,obsolete
+
+The automatic deployment on Github does nothing for docker since we do not currently have a working 
+automatic solution for multi architecture docker builds. 
