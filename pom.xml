@@ -21,7 +21,7 @@
     <!--
     We release project and platform in synchronized versions. The project version is adapted with
      the maven release plugin to the right version - so we have everything in sync. E.g.:
-     mvn -B release:update-versions -DdevelopmentVersion=1.1.1-SNAPSHOT
+     mvn -P obsolete,compat -B release:update-versions -DdevelopmentVersion=1.1.1-SNAPSHOT
      -->
     <!--
     Set properties to latest releases with
@@ -147,6 +147,7 @@
         <module>docker</module>
         <module>pages</module>
         <module>feature</module>
+        <module>startup/featurelauncher</module>
     </modules>
 
     <scm>

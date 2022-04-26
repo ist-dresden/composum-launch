@@ -1,3 +1,0 @@
-#!/bin/bash
-echo "Copies the latest composum snapshots into the fileinstall directory"
-mvn -P latestsnapshots,composumsites install

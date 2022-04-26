@@ -17,6 +17,7 @@
 
     <modules>
         <module>starter</module>
+        <module>docker</module>
     </modules>
 
     <properties>
