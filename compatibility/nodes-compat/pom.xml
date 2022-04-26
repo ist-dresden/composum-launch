@@ -5,12 +5,11 @@
     <parent>
         <artifactId>composum-launcher-compatibility</artifactId>
         <groupId>com.composum.platform</groupId>
-        <version>1.3.0</version>
+        <version>1.3.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>composum-launcher-compatibility-docker-nodes</artifactId>
     <packaging>docker</packaging>
-    <version>1.3.0</version>
 
     <name>Composum Launcher Compatibility Docker Starter with Composum Nodes</name>
     <description>Creates a docker image from sling launcher compatibility version, with Composum Nodes (incl. Package
