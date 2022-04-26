@@ -5,7 +5,7 @@
     <parent>
         <artifactId>composum-launcher-compatibility</artifactId>
         <groupId>com.composum.platform</groupId>
-        <version>1.3.0-SNAPSHOT</version>
+        <version>1.3.0</version>
     </parent>
 
     <artifactId>composum-launcher-compatibility-docker-slingstarter</artifactId>

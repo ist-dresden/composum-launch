@@ -22,7 +22,7 @@
 
     <groupId>com.composum.platform.features</groupId>
     <artifactId>sling.starter.copy</artifactId>
-    <version>12.1-SNAPSHOT</version>
+    <version>1.3.0</version>
 
     <name>Reduced copy of Apache Sling Starter Application</name>
     <description>
