@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Copies the latest nodes 3 snapshot into the fileinstall directory" # helptext-marker
+echo "Caution: nodes 3 does only work with the starter com.composum.platform.features:sling.starter.copy that does not contain nodes 4!"
+mvn -P latestsnapshots,composumnodespackage install

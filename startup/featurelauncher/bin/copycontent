@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Copies content from oldrepository twit oak-upgrade into the launcher repository.." # helptext-marker
+echo "Copies content from oldrepository with oak-upgrade into the launcher repository.." # helptext-marker
 echo "oldrepository can be the content from an old system that you want to replace with a new system"
 
 BINPATH=$( dirname ${0} )

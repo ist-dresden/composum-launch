@@ -55,10 +55,23 @@
                                     <outputDirectory>${project.basedir}/starter</outputDirectory>
                                 </artifactItem>
 
+                                <!--
                                 <artifactItem>
                                     <groupId>org.apache.sling</groupId>
                                     <artifactId>org.apache.sling.starter</artifactId>
                                     <version>${sling.starter.version}</version>
+                                    <type>far</type>
+                                    <classifier>oak_tar_far</classifier>
+                                    <outputDirectory>${project.basedir}/starter</outputDirectory>
+                                </artifactItem>
+                                -->
+
+                                <!-- Only as an alternative to org.apache.sling.starter above! Needs the nodes package in that case.
+                                    This also allows installing the nodes 3 package. -->
+                                <artifactItem>
+                                    <groupId>com.composum.platform.features</groupId>
+                                    <artifactId>sling.starter.copy</artifactId>
+                                    <version>${project.version}</version>
                                     <type>far</type>
                                     <classifier>oak_tar_far</classifier>
                                     <outputDirectory>${project.basedir}/starter</outputDirectory>
@@ -277,6 +290,22 @@
                                         <artifactItem>
                                             <groupId>com.composum.pages.options</groupId>
                                             <artifactId>composum-pages-options-microsite-package</artifactId>
+                                            <version>${composum.pages.options.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+
+                                        <artifactItem>
+                                            <groupId>com.composum.pages.options</groupId>
+                                            <artifactId>composum-pages-options-wiki-package</artifactId>
+                                            <version>${composum.pages.options.version}</version>
+                                            <type>zip</type>
+                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
+                                        </artifactItem>
+
+                                        <artifactItem>
+                                            <groupId>com.composum.pages.options</groupId>
+                                            <artifactId>composum-pages-options-blog-package</artifactId>
                                             <version>${composum.pages.options.version}</version>
                                             <type>zip</type>
                                             <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
@@ -577,7 +606,6 @@
                                 <starter.min.bundles.count>242</starter.min.bundles.count>
                                 <!-- Comma-separated list of paths to check for 200 status -->
                                 <starter.check.paths>
-                                    /starter.html,
                                     /server/default/jcr:root/content CONTAINS sv:node,
                                     /system/sling.js,
                                     /content/starter/img/sling-logo.svg,
