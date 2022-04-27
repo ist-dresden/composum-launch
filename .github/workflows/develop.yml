@@ -23,7 +23,11 @@ jobs:
 
     - name: Build with Maven
       # When parent-2:1.7 is active, -P ensureSnapshots will do a sanity check of the version number
-      run: mvn -s .github/settings-istrepo.xml -P ensureSnapshots -B verify
+      # We try several times since unfortunately there are sporadic startup problems in the integration tests :-(
+      run: |
+        ( mvn -s .github/settings-istrepo.xml -P ensureSnapshots -B install && echo 1st run success ) || \
+        ( mvn -s .github/settings-istrepo.xml -P ensureSnapshots -B install && echo 2nd run success ) || \
+        ( mvn -s .github/settings-istrepo.xml -P ensureSnapshots -B install && echo 3rd run success )
 
     - name: Sanitycheck version before deploying
       run: |
