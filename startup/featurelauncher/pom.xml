@@ -153,7 +153,7 @@
         <profile>
             <id>latestsnapshots</id>
             <properties>
-                <composum.nodes.version>3.4.2-SNAPSHOT</composum.nodes.version>
+                <composum.nodes.version>3.4.3-SNAPSHOT</composum.nodes.version>
                 <composum.platform.version>1.6.1-SNAPSHOT</composum.platform.version>
                 <composum.pages.version>1.4.2-SNAPSHOT</composum.pages.version>
                 <composum.pages.options.version>1.4.2-SNAPSHOT</composum.pages.options.version>
@@ -441,13 +441,13 @@
                                 </goals>
                                 <configuration>
                                     <artifactItems>
-                                        <artifactItem>
-                                            <groupId>com.composum.platform</groupId>
-                                            <artifactId>composum-platform-config-mapping</artifactId>
-                                            <version>${cpm.platform.config.version}</version>
-                                            <type>zip</type>
-                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>
-                                        </artifactItem>
+<!--                                        <artifactItem>-->
+<!--                                            <groupId>com.composum.platform</groupId>-->
+<!--                                            <artifactId>composum-platform-config-mapping</artifactId>-->
+<!--                                            <version>${cpm.platform.config.version}</version>-->
+<!--                                            <type>zip</type>-->
+<!--                                            <outputDirectory>${project.basedir}/fileinstall</outputDirectory>-->
+<!--                                        </artifactItem>-->
 
                                         <artifactItem>
                                             <groupId>com.composum.platform</groupId>
