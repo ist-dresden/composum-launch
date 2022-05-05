@@ -1,0 +1,12 @@
+{
+  "id": "${project.groupId}:${project.artifactId}:slingosgifeature:enablefsregistry:${project.version}",
+  "title": "Enable the FS PackageRegistry via configuration",
+  "configurations": {
+    "org.apache.jackrabbit.vault.packaging.registry.impl.FSPackageRegistry": {
+      "authIdsForRootInstallation": "",
+      "scope": "UNSCOPED",
+      "homePath": "packageregistry",
+      "authIdsForHookExecution": ""
+    }
+  }
+}
