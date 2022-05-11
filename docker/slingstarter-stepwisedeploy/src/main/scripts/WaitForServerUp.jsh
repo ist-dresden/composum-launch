@@ -41,8 +41,8 @@ import java.util.regex.Pattern;
                         randomAccessFile.close();
                     }
                 }
-            } catch (InterruptedException e) {
-                // Done waiting
+            } catch (InterruptedException e) { // can't rethrow here; since interruption flag is cleared:
+                Thread.currentThread().interrupt();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

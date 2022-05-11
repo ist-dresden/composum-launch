@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "tail of all logs" # helptext-marker
+echo "==============================================================================="
 BINPATH=$( dirname ${0} )
 CPM_HOME=$( cd $BINPATH/..; pwd )
 cd ${CPM_HOME}

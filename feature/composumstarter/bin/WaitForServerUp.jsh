@@ -43,8 +43,8 @@ import java.util.Date;
                         randomAccessFile.close();
                     }
                 }
-            } catch (InterruptedException e) {
-                // Done waiting
+            } catch (InterruptedException e) { // can't rethrow; since interruption flag was cleared:
+                Thread.currentThread().interrupt();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

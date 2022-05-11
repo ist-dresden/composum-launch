@@ -148,21 +148,21 @@ public class SmokeIT {
                         .append(bs.resolvedBundles).append(" resolved bundles, ")
                         .append(bs.installedBundles).append(" installed bundlles: ");
 
-                    for ( int i = 0 ; i < bundles.size(); i++ ) {
+                    for (Object o : bundles) {
                         @SuppressWarnings("unchecked")
-                        Map<String, Object> bundle = (Map<String, Object>) bundles.get(i);
+                        Map<String, Object> bundle = (Map<String, Object>) o;
 
                         String bundleState = (String) bundle.get("state");
                         String bundleSymbolicName = (String) bundle.get("symbolicName");
                         String bundleVersion = (String) bundle.get("version");
 
-                        switch ( bundleState ) {
+                        switch (bundleState) {
                             case "Active":
                             case "Fragment":
                                 continue;
 
                             default:
-                                out.append("\n- ").append(bundleSymbolicName).append(" ").append(bundleVersion).append(" is in state " ).append(bundleState);
+                                out.append("\n- ").append(bundleSymbolicName).append(" ").append(bundleVersion).append(" is in state ").append(bundleState);
                         }
                     }
 
@@ -214,7 +214,7 @@ public class SmokeIT {
         final String baseURL = String.format("http://localhost:%d", slingHttpPort);
         final List<UrlCheck> checks = new ArrayList<>();
         Stream.of(System.getProperty(CHECK_PATHS_PROPERTY).split(","))
-            .map(path -> path.trim())
+            .map(String::trim)
             .filter(path -> !path.isEmpty())
             .forEach(path -> checks.add(new UrlCheck(baseURL, path))
         );

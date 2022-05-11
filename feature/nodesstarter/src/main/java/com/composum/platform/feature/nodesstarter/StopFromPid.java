@@ -25,11 +25,11 @@ public class StopFromPid {
      */
     public static final String STOP_COMMAND = "stop";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         stopFromPid(args);
     }
 
-    public static void stopFromPid(String[] arg) throws IOException {
+    public static void stopFromPid(String[] arg) throws IOException, ExecutionException, InterruptedException, TimeoutException {
         if (arg.length != 2 || !STOP_COMMAND.equalsIgnoreCase(arg[0]) || !arg[1].startsWith(OPTION_PIDFILE)) {
             throw new IllegalArgumentException("Expecting arguments " + STOP_COMMAND + " " + OPTION_PIDFILE + "{pidfilepath} but got: " + Arrays.toString(arg));
         }
@@ -63,6 +63,9 @@ public class StopFromPid {
                 } catch (InterruptedException | ExecutionException | TimeoutException e2) {
                     // Very strange. No idea what to do.
                     throw new IOException("Could not terminate process " + pid, e);
+                }
+                if (e instanceof InterruptedException) {
+                    throw e;
                 }
             } finally {
                 if (!process.isAlive()) {
