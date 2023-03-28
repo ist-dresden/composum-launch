@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.composum.meta.ist</groupId>
         <artifactId>parent-2-public</artifactId>
-        <version>1.6</version>
+        <version>1.7.1</version>
         <relativePath />
     </parent>
 
@@ -35,18 +35,18 @@
         <!-- nodes e.g. 3.4.1 or 4.1.1 - we rather use nodes 4, since otherwise the FAR could either
          not be easily installed on plain Sling Starter 12, or we would have to install nodes as a package - but
          then upgrade would be a problem until https://issues.apache.org/jira/browse/SLING-11221 is fixed. -->
-        <composum.nodes.version>4.1.1</composum.nodes.version>
-        <composum.platform.version>1.6.0</composum.platform.version>
-        <composum.pages.version>1.4.1</composum.pages.version>
-        <composum.pages.options.version>1.4.1</composum.pages.options.version>
-        <composum.assets.version>1.3.1</composum.assets.version>
+        <composum.nodes.version>4.2.1</composum.nodes.version>
+        <composum.platform.version>1.7.0</composum.platform.version>
+        <composum.pages.version>1.5.0</composum.pages.version>
+        <composum.pages.options.version>${composum.pages.version}</composum.pages.options.version>
+        <composum.assets.version>1.3.2-SNAPSHOT</composum.assets.version>
         <composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
-        <cpm.platform.htl.version>1.1.1</cpm.platform.htl.version>
+        <cpm.platform.htl.version>1.1.2-SNAPSHOT</cpm.platform.htl.version>
 
         <!-- Version numbers of some proprietary packages, not for general use. -->
-        <cpm.platform.replication.version>1.1.1</cpm.platform.replication.version>
-        <cpm.platform.workflow.version>1.1.1</cpm.platform.workflow.version>
-        <cpm.platform.tenant.version>1.1.1</cpm.platform.tenant.version>
+        <cpm.platform.replication.version>1.1.2-SNAPSHOT</cpm.platform.replication.version>
+        <cpm.platform.workflow.version>1.1.2-SNAPSHOT</cpm.platform.workflow.version>
+        <cpm.platform.tenant.version>1.1.2-SNAPSHOT</cpm.platform.tenant.version>
 
         <!-- no deployment except if specified otherwise -->
         <maven.deploy.skip>true</maven.deploy.skip>
