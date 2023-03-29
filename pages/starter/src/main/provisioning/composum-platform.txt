@@ -3,7 +3,7 @@
 #
 [feature name=composum-platform]
 [variables]
-    composum.platform.version=1.3.0
+    composum.platform.version=1.7.0
 
 [artifacts startLevel=30]
 

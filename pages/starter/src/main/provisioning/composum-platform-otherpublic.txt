@@ -3,7 +3,7 @@
 #
 [feature name=composum-platform-otherpublic]
 [variables]
-    composum.platform.other.version=1.0.0
+    composum.platform.other.version=1.1.1
 
 [artifacts startLevel=33]
 
