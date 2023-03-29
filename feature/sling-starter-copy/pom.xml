@@ -55,7 +55,7 @@
         <mongo.container.image>mongo:4.4.6</mongo.container.image>
         <it.startTimeoutSeconds>60</it.startTimeoutSeconds>
         <!-- used for reproducible builds (https://maven.apache.org/guides/mini/guide-reproducible-builds.htm), automatically updated during release -->
-        <project.build.outputTimestamp>1645804465</project.build.outputTimestamp>
+        <project.build.outputTimestamp>1680101885</project.build.outputTimestamp>
     </properties>
 
     <build>
