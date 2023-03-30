@@ -46,20 +46,22 @@ jobs:
         git status --untracked-files --ignored
         git log -3 --no-color
         $MVNCMD -version
+        git branch --show-current
 
     - name: Mvn Effective POM
-      run: $MVNCMD -P develop -N help:effective-pom
+      run: $MVNCMD -P $(git branch --show-current) -N help:effective-pom
 
     - name: Mvn Effective Settings
-      run: $MVNCMD -P develop -N help:effective-settings
+      run: $MVNCMD -P $(git branch --show-current) -N help:effective-settings
 
     - name: Build with Maven
       # When parent-2:1.7 is active, -P ensureSnapshots will do a sanity check of the version number
       # We try several times since unfortunately there are sporadic startup problems in the integration tests :-(
       run: |
-        ( $MVNCMD -P ensureSnapshots,test -B verify$MVNCMD -P ensureSnapshots,test -B verify && echo 1st run success ) || \
-        ( $MVNCMD -P ensureSnapshots,test -B verify && echo 2nd run success ) || \
-        ( $MVNCMD -P ensureSnapshots,test -B verify && echo 3rd run success )
+        PROFILES="ensureSnapshots,$(git branch --show-current)"
+        ( $MVNCMD -P $PROFILES install && echo 1st run success ) || \
+        ( $MVNCMD -P $PROFILES install && echo 2nd run install ) || \
+        ( $MVNCMD -P $PROFILES install && echo 3rd run install ) )
 
     - name: Sanitycheck version before deploying
       run: |
@@ -72,7 +74,9 @@ jobs:
     - name: Deploy with Maven
       # We don't do docker pushes as we don't currently (as of 4/22) have an automatic solution for multi architecture builds
       # Compare also https://github.com/actions/virtual-environments/issues/2187 (M1 support for github actions)
-      run: $MVNCMD -P develop deploy
+      run: |
+        PROFILES="ensureSnapshots,$(git branch --show-current)"
+        $MVNCMD -P $PROFILES,deployDocker clean deploy
       env:
         NEXUS_BUILD_USER: ${{ secrets.NEXUS_BUILD_USER }}
         NEXUS_BUILD_PASSWD: ${{ secrets.NEXUS_BUILD_PASSWD }}
