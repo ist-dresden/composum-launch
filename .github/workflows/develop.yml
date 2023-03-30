@@ -60,9 +60,10 @@ jobs:
       # We try several times since unfortunately there are sporadic startup problems in the integration tests :-(
       run: |
         PROFILES="ensureSnapshots,$(git branch --show-current)"
+        echo "profiles: $PROFILES"
         ( $MVNCMD -P $PROFILES install && echo 1st run success ) || \
         ( $MVNCMD -P $PROFILES install && echo 2nd run install ) || \
-        ( $MVNCMD -P $PROFILES install && echo 3rd run install ) )
+        ( $MVNCMD -P $PROFILES install && echo 3rd run install )
 
     - name: Sanitycheck version before deploying
       run: |
