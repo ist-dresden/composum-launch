@@ -20,6 +20,11 @@
             <username>${env.NEXUS_BUILD_USER}</username>
             <password>${env.NEXUS_BUILD_PASSWD}</password>
         </server>
+        <server>
+            <id>docker.io</id>
+            <username>${env.DOCKERHUB_USER}</username>
+            <password>${env.DOCKERHUB_PASSWD}</password>
+        </server>
     </servers>
 
     <mirrors>
