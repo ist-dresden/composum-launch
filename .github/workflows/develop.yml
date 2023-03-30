@@ -98,6 +98,14 @@ jobs:
         # unfortunately, this would require a snapshot parent if just called from the command line, so we cannot use it: :-(
         # mvn org.apache.maven.plugins:maven-enforcer-plugin:3.0.0:enforce -Drules=requireSnapshotVersion
 
+    - name: Check docker status
+      run: |
+        docker info
+        docker version
+        docker ps -a
+        sleep 300
+        docker ps -a
+
     - name: Deploy with Maven
       # We don't do docker pushes as we don't currently (as of 4/22) have an automatic solution for multi architecture builds
       # Compare also https://github.com/actions/virtual-environments/issues/2187 (M1 support for github actions)
@@ -107,7 +115,13 @@ jobs:
         export DOCKERHUB_PASSWD=$(echo "LS0tLS1CRUdJTiBQR1AgTUVTU0FHRS0tLS0tCgpoUUlNQTJ6dkpmcmVaZHhuQVJBQXJEYUZZQlVMdXhRZ3g2and3NUpkRmVlS1NjNmxZUXp3SFExZTR3alIxQUlWCml0V09YZHNHQVZYTzVTQ2wraGpkZUdzcCtiK0ZTdi9qbW9XUmZSUWhMWTRueGlpV1ZuQVdCZ3R3aUc2QkpTVU8KS09Ib3kxVnR6R2d2R2lZVDRwMTR5TDFXam5mZms0MCtwOG5lSFRCMy9VL2JhN1N1WnlzeWorVFV1bFdVWmtqdQp2ZGcrTXBzUjFaMmRDdDVtSDFZTEhHWXRxbktVUXdnUUY0K3JmZEZIMFU2SG9ZRERJbnN3TkZIaGhWRVNFSjZ1CmhxZFVZL1ZMYVB0ZnVWYktqVkE3bHg4c2Y3SVdQM2JUKzV5OU5aR0tqMy9tT1I1bmxNUkNKcExlWGxtMEVNTjQKL01tVUEyZk04NlBYb0JjUWJSY00reE1XMy9YVi96QmkxSC9wMjArY21lSmM0N0lmVmpSRVMrV211VFZqOVZqNAp4YURZMkdlZ3pndk1rU3RzajA2Nk83WEdmV1hDRmthVU9CZDRQbEFwTS84bjk4c2N6VUF1aFFhbGxXN1pvb0hSCmYyMmJMK0N5bkVYQ0JUN3dPN1VEMjNKWjFoUkFXYjFiTzFndkN2Nm91aVJ3VXAxeXNJTjFyRytrVjJMZ2lvRXcKUEtpMnFJZlM2K3IzL3BRazdPS2NuRzhidHdzNlNwNUsxNHJFZWtMeWNnbE5tS291clRYQk1mQnhVeE1ndnFobwpNbDlRSi80cE9vSFA0bTgxWUNtU2VIS3VsdUJYWE5FNnR4N0Jta2xMWHZoamRHVllDMmVhTWVvMGlLRGtaR3ZMCkJQMUNpSVVHcG5DME53cnhUZFRreDBIYmx4SXEzMEZaRm4xQlA4dDA3UUJsMm1USWpFNEFqbUVlcWZXWnZRYlMKVEFGL2JORlo0bDJrUW5mSVlXOUhIUDk3YlZFRkFXdHE3RUE1cm51SnBKOWhzMVRqbm02aGRxQkVaU0dGekFFWQpIejJzU2xKOHAxRWJ5dEdRNmxmOGVzVFN2UStMUkhnZ29LSUxYa0k9Cj1YOGI4Ci0tLS0tRU5EIFBHUCBNRVNTQUdFLS0tLS0K" | base64 --decode | gpg -d )
         # FIXME END
         PROFILES="ensureSnapshots,$(git branch --show-current)"
-        $MVNCMD -P $PROFILES,deployDocker clean deploy
+        $MVNCMD -P $PROFILES,deployDocker deploy
       env:
         NEXUS_BUILD_USER: ${{ secrets.NEXUS_BUILD_USER }}
         NEXUS_BUILD_PASSWD: ${{ secrets.NEXUS_BUILD_PASSWD }}
+
+    - name: Check docker status
+      run: |
+        docker ps -a
+        sleep 300
+        docker ps -a
