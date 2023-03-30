@@ -42,6 +42,13 @@ jobs:
       run: |
           echo '${{ toJSON(github) }}'
 
+    - name: Set a master password
+      run: |
+        MASTERPWD=$(openssl rand -base64 25)
+        echo "<settingsSecurity> <master>$(mvn --encrypt-master-password "$MASTERPWD")</master></settingsSecurity>" > $HOME/.m2/settings-security.xml
+        # echo "MASTERPWD=\"$MASTERPWD\"" >> $GITHUB_ENV
+        # The master password isn't actually used, but the maven complains otherwise.
+
     - name: Git & Maven Status
       run: |
         git status --untracked-files --ignored
