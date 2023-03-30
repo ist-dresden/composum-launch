@@ -21,6 +21,8 @@ version also as version for the various artefacts of composum-launch.
     - in the top level composum-launch/pom.xml
     - composum-launch/pages/starter/src/main/provisioning/composum-*.txt
     - set composum-launch/pages/**/pom.xml version to pages version (search for "sync with Pages")
+   Caution: for versions:set you need processAllModules=true : 
+      mvn versions:set -DnewVersion=1.5.0-SNAPSHOT -DgenerateBackupPoms=false -DprocessAllModules=true 
 2. Build locally
 3. Try starter jar locally in pages/starter
     - start with `start.sh`
