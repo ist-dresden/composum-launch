@@ -10,10 +10,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
-
-    env:
-      MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-public.xml  -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+    runs-on: macos-latest
 
     steps:
       - name: Dump event context for debugging
@@ -30,6 +27,7 @@ jobs:
           echo '${{ toJSON(github) }}'
 
       - name: Check of secrets
+        continue-on-error: true
         env:
           DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
           GPG_OWNERTRUST: ${{ secrets.DOCKERHUB_PASSWD }}
@@ -39,3 +37,8 @@ jobs:
           echo $DOCKERHUB_PASSWD | wc
           echo $DOCKERHUB_PASSWD | md5sum
           echo '${{ toJSON(secrets) }}'
+
+      - name: uname
+        continue-on-error: true
+        run: |
+            uname -a
