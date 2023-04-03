@@ -21,9 +21,8 @@ This module creates a couple of docker images with which it is easy to run the p
 
 - **pages/docker**: (obsolete) docker image based on slingstarter, it deploys both the newest version of the [Composum Nodes](https://github.com/ist-dresden/composum), [Composum Platform](https://github.com/ist-dresden/composum-platform) and [Composum Pages](https://github.com/ist-dresden/composum-pages). On dockerhub this is available as [composum/pages](https://cloud.docker.com/u/composum/repository/docker/composum/pages). (TODO: make this based on slingstarter-stepwisedeploy.)
 
-- compatibility/**slingstarter-compat**: like slingstarter, but with the earliest Sling Launchpad version that is supported the Composum Nodes (as of 4/2019: version 9 on JDK 8).
-
-- compatibility/**nodes-compat**: like slingstarter, but with the earliest Sling Launchpad version that is supported the Composum Nodes (as of 4/2019: version 9 on JDK 8).
+- archived/compatibilityV1/* like slingstarter, but with an earlier Sling Launchpad version 
+  that was supported the Composum Nodes (as of 4/2019: version 9 on JDK 8); not supported anymore.
 
 - **startup**: some experiments how to start up Sling with composum using the various starters
 

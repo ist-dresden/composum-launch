@@ -10,9 +10,13 @@
     - composum/nodes : composum-launch/docker/composumnodes/Dockerfile FROM composum/slingstarter-stepwisedeploy
         - composum/pages : composum-launch/pages/docker/Dockerfile FROM composum/nodes
     
+perhaps use as basis:
+- apache/sling : sling/sling-starter/Dockerfile FROM docker.io/openjdk:17-slim
+
+
+
+
+Archived:
 - composum/slingstarter-compat : composum-launch/compatibility/slingstarter-compat/Dockerfile FROM openjdk:8-jdk
     - composum/core-compat : composum-launch/compatibility/core-compat/Dockerfile FROM composum/slingstarter-compat
     - composum/nodes-compat : composum-launch/compatibility/nodes-compat/Dockerfile FROM composum/slingstarter-compat
-
-perhaps use as basis:
-- apache/sling : sling/sling-starter/Dockerfile FROM docker.io/openjdk:17-slim
