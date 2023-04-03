@@ -154,15 +154,6 @@
         <tag>composum-launcher-1.2.0</tag>
     </scm>
 
-    <profiles>
-        <profile>
-            <id>compat</id>
-            <modules>
-                <module>compatibility</module>
-            </modules>
-        </profile>
-    </profiles>
-
     <repositories>
         <repository>
             <!-- To be able to reference sling starter snapshots, since there is no public 12 release yet. -->
