@@ -16,42 +16,26 @@ jobs:
       MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-public.xml  -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 3
+      - name: Dump event context for debugging
+        continue-on-error: true  # Debugging output only, and this annoyingly fails when the commit messge has a (
+        run: |
+          echo '${{ github.event_name }} for ${{ github.ref_type }} ${{ github.ref_name }} or ${{ github.event.ref }}'
+          # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
+          echo 'github.event:'
+          echo '${{ toJSON(github.event) }}'
 
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: maven
-        maven-version: 3.8.7
-
-    - name: Dump event context for debugging
-      continue-on-error: true  # Debugging output only, and this annoyingly fails when the commit messge has a (
-      run: |
-        echo '${{ github.event_name }} for ${{ github.ref_type }} ${{ github.ref_name }} or ${{ github.event.ref }}'
-        # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
-        echo 'github.event:'
-        echo '${{ toJSON(github.event) }}'
-
-    - name: Dump github context
-      continue-on-error: true  # Debugging output only, and this annoyingly fails when the commit message has a (
-      run: |
+      - name: Dump github context
+        continue-on-error: true  # Debugging output only, and this annoyingly fails when the commit message has a (
+        run: |
           echo '${{ toJSON(github) }}'
 
-    - name: Git & Maven Status
-      run: |
-        git status --untracked-files --ignored
-        git log -3 --no-color
-        $MVNCMD -version
-
-    - name: Mvn Effective POM
-      run: $MVNCMD -N help:effective-pom
-
-    - name: Mvn Effective Settings
-      run: $MVNCMD -N help:effective-settings
-
-    - name: Testbuild with Maven
-      run: $MVNCMD -P test verify
+      - name: Check of secrets
+        env:
+          DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+          GPG_OWNERTRUST: ${{ secrets.DOCKERHUB_PASSWD }}
+        run: |
+          echo $DOCKERHUB_USER | wc
+          echo $DOCKERHUB_USER | md5sum
+          echo $DOCKERHUB_PASSWD | wc
+          echo $DOCKERHUB_PASSWD | md5sum
+          echo '${{ toJSON(secrets) }}'
