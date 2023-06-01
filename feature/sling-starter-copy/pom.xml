@@ -27,6 +27,8 @@
     <name>Reduced copy of Apache Sling Starter Application</name>
     <description>
         A copy of the the Sling Starter demo application.
+        It contains a copy of most of Sling Starter but cleaned up somewhat with optional things like slingshot and htl repl.
+        This is just for IST internal use.
     </description>
 
     <scm>

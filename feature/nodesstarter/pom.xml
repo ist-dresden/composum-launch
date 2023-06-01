@@ -15,6 +15,7 @@
     <description>
         Creates a feature set and a starter based on a Sling Starter 12 snapshot to start Sling and updating Composum
         Nodes.
+        It produces a self contained feature archive that doesn't need network access to start. The starter contains that feature archive.
     </description>
 
     <dependencies>

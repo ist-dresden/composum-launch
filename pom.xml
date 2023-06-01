@@ -37,11 +37,12 @@
          then upgrade would be a problem until https://issues.apache.org/jira/browse/SLING-11221 is fixed. -->
         <composum.nodes.version>4.2.1</composum.nodes.version>
         <composum.platform.version>1.7.0</composum.platform.version>
-        <composum.pages.version>1.5.0</composum.pages.version>
+        <composum.pages.version>1.5.1</composum.pages.version>
         <composum.pages.options.version>${composum.pages.version}</composum.pages.options.version>
         <composum.assets.version>1.4.0</composum.assets.version>
         <composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
         <cpm.platform.htl.version>1.1.2-SNAPSHOT</cpm.platform.htl.version>
+        <composum.chatgpt.version>0.1.0</composum.chatgpt.version>
 
         <!-- Version numbers of some proprietary packages, not for general use. -->
         <cpm.platform.replication.version>1.1.2-SNAPSHOT</cpm.platform.replication.version>
