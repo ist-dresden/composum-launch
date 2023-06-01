@@ -19,28 +19,24 @@ the [Composum](http://composum.com/) suite.
   with a sling feature launcher that launches a FAR from a Sling Starter 12 and includes all public Composum modules
   as features. Based on the featurelauncher docker image ( composum/featurelauncher-nodes ).
 
-## Obsolete (unmaintained) docker images
+## Deprecated (unmaintained) docker images
 
-- [**slingstarter**](docker/slingstarter/): (obsolete) starts a [Sling Starter](https://github.
-  com/apache/sling-org-apache-sling-starter) on JDK
-  11 with enabled debugging and JMX and some provisions to automatically install more packages when a derived docker
-  image is started. On dockerhub this is available
-  as [composum/slingstarter](https://cloud.docker.com/u/composum/repository/docker/composum/slingstarter).
+- [**slingstarter**](docker/slingstarter/): (obsolete) docker image
+  [composum/slingstarter](https://cloud.docker.com/u/composum/repository/docker/composum/slingstarter)
+  starts a [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter) on JDK 11 with enabled debugging
+  and JMX and some provisions to automatically install more packages when a derived docker
+  image is started.
 
-- [**slingstarter-stepwisedeploy**](docker/slingstarter-stepwisedeploy/): (obsolete) docker image based on slingstarter
-  that sets up
-  some
-  basic
-  scripts for the
-  stepwise deployment of packages within sling starter from a docker image to avoid problems with dependencies between
-  them. On dockerhub available
-  as [composum/slingstarter-stepwisedeploy](https://cloud.docker.com/u/composum/repository/docker/composum/slingstarter-stepwisedeploy).
+- [**slingstarter-stepwisedeploy**](docker/slingstarter-stepwisedeploy/): (obsolete) docker image
+  [composum/slingstarter-stepwisedeploy](https://cloud.docker.com/u/composum/repository/docker/composum/slingstarter-stepwisedeploy)
+  based on slingstarter that sets up some basic scripts for the stepwise deployment of packages within sling starter
+  from a docker image to avoid problems with dependencies between them.
 
-- [**pages/docker**](pages/docker/): (obsolete) docker image based on slingstarter, it deploys both the newest
-  version of
+- [**pages/docker**](pages/docker/): (obsolete) docker image
+  [composum/pages](https://cloud.docker.com/u/composum/repository/docker/composum/pages) based on slingstarter, it
+  deploys both the newest version of
   the [Composum Nodes](https://github.com/ist-dresden/composum), [Composum Platform](https://github.com/ist-dresden/composum-platform)
-  and [Composum Pages](https://github.com/ist-dresden/composum-pages). On dockerhub this is available
-  as [composum/pages](https://cloud.docker.com/u/composum/repository/docker/composum/pages). (TODO: make this based on
+  and [Composum Pages](https://github.com/ist-dresden/composum-pages). (TODO: make this based on
   slingstarter-stepwisedeploy.)
 
 - [archived/compatibilityV1/*](archived/compatibilityV1/) like slingstarter, but with an earlier Sling Launchpad version
@@ -48,6 +44,29 @@ the [Composum](http://composum.com/) suite.
 
 Since there are various modules involved, we normally use the pages version as version number for all docker images, as
 kind of the leading module.
+
+## Dependency diagram
+
+The following maps out most of the dependencies of the folders / docker images. The node labels contain in the first 
+line the groupid, second the artifactid, fourth folder and fourth line the docker image name on dockerhub.
+
+```mermaid
+graph LR
+  A["com.composum.pages\ncomposum-launcher-pages-docker\n./pages/docker\ncomposum/pages"]
+  A --> C["com.composum.platform\ncomposum-launcher-composumnodes\n./docker/composumnodes\ncomposum/nodes"]
+  D["com.composum.platform.features\ncomposum-launcher-feature-composumstarter\n./feature/composumstarter"]
+  D --> E["com.composum.platform.features\ncomposum-launcher-feature-nodesstarter\n./feature/nodesstarter"]
+  F["com.composum.platform\ncomposum-launcher-compatibility-docker-nodes\n./archived/compatibilityV1/nodes-compat"]
+  F --> G["com.composum.platform\ncomposum-launcher-compatibility-docker-slingstarter\n./archived/compatibilityV1/slingstarter-compat"]
+  C --> H["com.composum.platform\ncomposum-launcher-slingstarter-stepwisedeploy\n./docker/slingstarter-stepwisedeploy\ncomposum/slingstarter-stepwisedeploy"]
+  I["com.composum.platform\ncomposum-launcher-docker-composumlauncher\n./docker/composumlauncher\ncomposum/featurelauncher-composum"] --> D
+  I --> J["com.composum.platform\ncomposum-launcher-docker-featurelauncher\n./docker/featurelauncher\ncomposum/featurelauncher-nodes"]
+  J --> E
+  K["com.composum.platform\ncomposum-launcher-docker-slingstarter\n./docker/slingstarter\ncomposum/slingstarter"]
+  K --> L["com.composum.platform.features\ncomposum-launcher-feature-felixcontainer\n./feature/felixframeworkcontainer"]
+  H --> K
+  M["com.composum.platform\ncomposum-startup-featurelauncher\n./startup/featurelauncher"]
+```
 
 # Start the Composum Suite (incl. Pages and additional modules) using docker
 
@@ -101,10 +120,11 @@ Stop it and destroy created containers with:
 
 # Start Composum Pages using Sling Starter
 
-[**feature/nodesstarter**](feature/nodesstarter): A [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter)
+[**feature/nodesstarter**](feature/nodesstarter):
+A [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter)
 12 with composum nodes installed in the newest version, and some provisions to install packages (
 see [feature/README.md](feature/README.md)), and run it offline.
-[**feature/composumstarter**](feature/composumstarter): Extends the feature/nodesstarter with all public Composum 
+[**feature/composumstarter**](feature/composumstarter): Extends the feature/nodesstarter with all public Composum
 modules. (There are some enterprise modules, which aren't contained.)
 
 ## Obsolete (unmaintained) starters
