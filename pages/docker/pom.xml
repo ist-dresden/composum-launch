@@ -13,7 +13,7 @@
     <version>1.5.0-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
     <packaging>docker</packaging>
 
-    <name>Composum Launcher Pages Docker image</name>
+    <name>Composum Launcher Pages Docker Image</name>
     <description>Creates a docker image from sling starter with updated Composum Core (incl. Package manager and User
         mgmt) and Composum Platform and Pages. Basically all released public parts of Composum.
     </description>

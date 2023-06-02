@@ -11,7 +11,7 @@
     <artifactId>composum-launcher-slingstarter-stepwisedeploy</artifactId>
     <packaging>docker-build</packaging>
 
-    <name>Composum Launcher Docker Sling Starter With Deployments</name>
+    <name>Composum Launcher Docker Sling Starter Stepwise Deployments</name>
     <description>Creates a docker image from sling starter with updated Composum Core (incl. Package manager and User
         mgmt) and some basic scripts to fire up docker images with installed modules.
     </description>

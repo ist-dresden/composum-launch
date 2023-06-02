@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>composum-launcher-feature-felixcontainer</artifactId>
-    <name>Composum Feature Launcher Felixcontainer</name>
+    <name>Composum Laucher Feature Felixcontainer</name>
     <description>Creates a zip containing the felix artifact needed to start a feature launcher</description>
     <packaging>pom</packaging>
 

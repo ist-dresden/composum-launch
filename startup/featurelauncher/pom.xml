@@ -15,7 +15,7 @@
 
     <packaging>pom</packaging>
 
-    <name>Composum Startup Featurelauncher</name>
+    <name>Composum Launcher Startup Featurelauncher</name>
     <description>Example for startup with feature launcher</description>
 
     <dependencies>

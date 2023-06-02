@@ -11,7 +11,7 @@
     <artifactId>composum-launcher-feature-composumstarter</artifactId>
     <version>1.5.0-SNAPSHOT</version><!-- sync with Pages -->
 
-    <name>Composum Feature Based Sling Starter With Composum Public</name>
+    <name>Composum Laucher Feature Composum Starter (With Composum Public)</name>
     <description>
         Creates a feature set and a starter based on a Sling Starter 12 snapshot to start Sling, updating Composum Nodes
         and deploying all public parts of composum.
@@ -45,7 +45,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <replacePropertyVariables>
-                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version
+                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version,composum.chatgpt.version,composum.dashboard.version
                     </replacePropertyVariables>
                     <framework>
                         <groupId>org.apache.felix</groupId>

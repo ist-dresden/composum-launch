@@ -56,11 +56,10 @@ makes an execution plan that
 triggers [org.apache.sling.jcr.packageinit](https://github.com/apache/sling-org-apache-sling-jcr-packageinit) to install
 the packages included in the feature. This has currently a couple of issues, though.
 
-To work around the Jackrabbit Vault bug [JCRVLT-517](https://issues.apache.org/jira/browse/JCRVLT-517) we need to modify
-sling-org-apache-sling-jcr-packageinit (see [SLING-10339](https://issues.apache.org/jira/browse/SLING-10339)). Second,
-we make a copy of the Sling Starter 12 to have a fixed basis for our starter, since there isn't any release there.
+(For the record: there was a workaround for [JCRVLT-517](https://issues.apache.org/jira/browse/JCRVLT-517) that needed 
+[SLING-10339](https://issues.apache.org/jira/browse/SLING-10339))
 
-Second, the use of uber-packages with subpackages like platform-package does lead to trouble when deploying a new
+The use of uber-packages with subpackages like platform-package does lead to trouble when deploying a new
 version of the package in the server, so that we have to deploy the individual packages. (See stacktrace in appendix).
 
 ## Appendix

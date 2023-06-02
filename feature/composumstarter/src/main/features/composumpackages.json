@@ -1,8 +1,8 @@
 {
-  "bundles":[
+  "bundles": [
     {
-      "id":"com.composum.assets:metadata-extractor-bundle::${composum.assets.version}",
-      "start-order":"9"
+      "id": "com.composum.assets:metadata-extractor-bundle::${composum.assets.version}",
+      "start-order": "9"
     }
   ],
   "content-packages:ARTIFACTS|required": [
@@ -52,6 +52,14 @@
     },
     {
       "id": "com.composum.platform:cpm-platform-htl-package:zip:${cpm.platform.htl.version}",
+      "start-order": "45"
+    },
+    {
+      "id": "com.composum.chatgpt:composum-chatgpt-integration-composum-package:zip:${composum.chatgpt.version}",
+      "start-order": "45"
+    },
+    {
+      "id": "com.composum.dashboard:composum-dashboard-sling:zip:${composum.dashboard.version}",
       "start-order": "45"
     }
   ]

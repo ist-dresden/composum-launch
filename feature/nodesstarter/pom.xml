@@ -11,7 +11,7 @@
     <artifactId>composum-launcher-feature-nodesstarter</artifactId>
     <version>1.5.0-SNAPSHOT</version><!-- sync with Pages -->
 
-    <name>Composum Feature Based Sling Starter With Composum Nodes</name>
+    <name>Composum Launcher Feature Nodes Starter</name>
     <description>
         Creates a feature set and a starter based on a Sling Starter 12 snapshot to start Sling and updating Composum
         Nodes.

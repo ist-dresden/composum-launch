@@ -11,7 +11,7 @@
     <artifactId>composum-launcher-composumnodes</artifactId>
     <packaging>docker</packaging>
 
-    <name>Composum Launcher Docker Nodes image</name>
+    <name>Composum Launcher Docker Composum Nodes</name>
     <description>Creates a docker image from sling starter with updated Composum Core version 1 (incl. Package manager
         and User mgmt) and some basic scripts to fire up docker images with installed modules.
     </description>
