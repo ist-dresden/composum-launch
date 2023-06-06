@@ -153,6 +153,19 @@
                                     <type>zip</type>
                                     <outputDirectory>${project.build.directory}/lib/43</outputDirectory>
                                 </artifactItem>
+
+                                <artifactItem>
+                                    <groupId>com.composum.chatgpt</groupId>
+                                  	<artifactId>composum-chatgpt-integration-composum-package</artifactId>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/lib/43</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.composum.dashboard</groupId>
+                                    <artifactId>composum-dashboard-sling</artifactId>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/lib/43</outputDirectory>
+                                </artifactItem>
                         </artifactItems>
                         </configuration>
                     </execution>
