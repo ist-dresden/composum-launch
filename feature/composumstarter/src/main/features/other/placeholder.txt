@@ -1,0 +1,1 @@
+This directory is meant to contain features to be included that do not belong to composum.

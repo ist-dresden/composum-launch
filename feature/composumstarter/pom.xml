@@ -11,7 +11,7 @@
     <artifactId>composum-launcher-feature-composumstarter</artifactId>
     <version>1.5.0-SNAPSHOT</version><!-- sync with Pages -->
 
-    <name>Composum Laucher Feature Composum Starter (With Composum Public)</name>
+    <name>Composum Launcher Feature Composum Starter (With Composum Public)</name>
     <description>
         Creates a feature set and a starter based on a Sling Starter 12 snapshot to start Sling, updating Composum Nodes
         and deploying all public parts of composum.
@@ -55,7 +55,7 @@
                     <aggregates>
                         <aggregate>
                             <classifier>composum</classifier>
-                            <filesInclude>**/composum*.json</filesInclude>
+                            <filesInclude>composum/**/*.json</filesInclude>
                             <includeArtifact>
                                 <groupId>com.composum.platform.features</groupId>
                                 <artifactId>composum-launcher-feature-nodesstarter</artifactId>
@@ -69,7 +69,7 @@
                         </aggregate>
                         <aggregate>
                             <classifier>oak_tar</classifier>
-                            <filesInclude>**/*.json</filesInclude>
+                            <filesInclude>other/**/*.json</filesInclude>
                             <includeClassifier>composum</includeClassifier>
                             <includeArtifact>
                                 <groupId>com.composum.platform.features</groupId>
@@ -84,7 +84,7 @@
                         </aggregate>
                         <aggregate>
                             <classifier>oak_mongo</classifier>
-                            <filesInclude>**/*.json</filesInclude>
+                            <filesInclude>other/**/*.json</filesInclude>
                             <includeClassifier>composum</includeClassifier>
                             <includeArtifact>
                                 <groupId>com.composum.platform.features</groupId>

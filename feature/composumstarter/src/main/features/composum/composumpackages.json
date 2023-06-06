@@ -5,6 +5,20 @@
       "start-order": "9"
     }
   ],
+  "variables": {
+    "openapikey": "",
+    "openapikeyfile": ""
+  },
+  "configurations": {
+    "com.composum.chatgpt.base.service.chat.impl.GPTChatCompletionServiceImpl": {
+      "enable": true,
+      "connectionTimeout": "20",
+      "defaultModel": "gpt-3.5-turbo",
+      "openAiApiKey": "${openapikey}",
+      "openAiApiKeyFile": "${openapikeyfile}",
+      "requestTimeout": "60"
+    }
+  },
   "content-packages:ARTIFACTS|required": [
     {
       "id": "com.composum.platform:composum-platform-commons-package:zip:${composum.platform.version}",
