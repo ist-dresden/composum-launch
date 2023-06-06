@@ -2,10 +2,18 @@
 #  Composum Platform other public projects
 #
 [feature name=composum-platform-otherpublic]
+
 [variables]
     composum.platform.other.version=1.1.1
+    composum.chatgpt.version=0.1.1-SNAPSHOT
 
 [artifacts startLevel=33]
 
-  # Composum Platform additional packages
-  com.composum.platform/cpm-platform-htl-package/${composum.platform.other.version}/zip
+    # Composum Platform additional packages
+    com.composum.platform/cpm-platform-htl-package/${composum.platform.other.version}/zip
+    com.composum.chatgpt/composum-chatgpt-integration-composum-package/${composum.chatgpt.version}/zip
+
+[configurations]
+
+  com.composum.chatgpt.base.service.chat.impl.GPTChatCompletionServiceImpl
+    enable=B"true"

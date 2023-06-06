@@ -12,11 +12,8 @@
   "configurations": {
     "com.composum.chatgpt.base.service.chat.impl.GPTChatCompletionServiceImpl": {
       "enable": true,
-      "connectionTimeout": "20",
-      "defaultModel": "gpt-3.5-turbo",
       "openAiApiKey": "${openapikey}",
-      "openAiApiKeyFile": "${openapikeyfile}",
-      "requestTimeout": "60"
+      "openAiApiKeyFile": "${openapikeyfile}"
     }
   },
   "content-packages:ARTIFACTS|required": [
