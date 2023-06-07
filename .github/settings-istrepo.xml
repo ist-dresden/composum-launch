@@ -21,6 +21,15 @@
             <password>${env.NEXUS_BUILD_PASSWD}</password>
         </server>
         <server>
+          <id>ossrh</id>
+            <username>${env.OSSRH_USER}</username>
+            <password>${env.OSSRH_PASSWD}</password>
+        </server>
+        <server>
+            <id>gpg.passphrase</id>
+            <passphrase>${env.GPG_PASSPHRASE}</passphrase>
+        </server>
+        <server>
             <id>docker.io</id>
             <username>${env.DOCKERHUB_USER}</username>
             <password>${env.DOCKERHUB_PASSWD}</password>

@@ -80,12 +80,27 @@ jobs:
         # unfortunately, this would require a snapshot parent if just called from the command line, so we cannot use it: :-(
         # mvn org.apache.maven.plugins:maven-enforcer-plugin:3.0.0:enforce -Drules=requireSnapshotVersion
 
+    - name: Check docker status
+      run: |
+        docker info
+        docker version
+        docker ps -a
+        sleep 300
+        docker ps -a
+
     - name: Deploy with Maven
+      env:
+        NEXUS_BUILD_USER: ${{ secrets.NEXUS_BUILD_USER }}
+        NEXUS_BUILD_PASSWD: ${{ secrets.NEXUS_BUILD_PASSWD }}
+        GPG_PASSPHRASE : ${{ secrets.GPG_PASSPHRASE }}
       # We don't do docker pushes as we don't currently (as of 4/22) have an automatic solution for multi architecture builds
       # Compare also https://github.com/actions/virtual-environments/issues/2187 (M1 support for github actions)
       run: |
         PROFILES="ensureSnapshots,$(git branch --show-current)"
-        $MVNCMD -P $PROFILES,deployDocker clean deploy
-      env:
-        NEXUS_BUILD_USER: ${{ secrets.NEXUS_BUILD_USER }}
-        NEXUS_BUILD_PASSWD: ${{ secrets.NEXUS_BUILD_PASSWD }}
+        $MVNCMD -P $PROFILES,deployDocker deploy
+
+    - name: Check docker status
+      run: |
+        docker ps -a
+        sleep 300
+        docker ps -a
