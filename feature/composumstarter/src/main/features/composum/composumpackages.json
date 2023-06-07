@@ -11,7 +11,7 @@
   },
   "configurations": {
     "com.composum.chatgpt.base.service.chat.impl.GPTChatCompletionServiceImpl": {
-      "enable": true,
+      "disable": false,
       "openAiApiKey": "${openapikey}",
       "openAiApiKeyFile": "${openapikeyfile}"
     }

@@ -16,4 +16,4 @@
 [configurations]
 
   com.composum.chatgpt.base.service.chat.impl.GPTChatCompletionServiceImpl
-    enable=B"true"
+    disable=B"false"
