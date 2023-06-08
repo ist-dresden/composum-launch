@@ -6,7 +6,7 @@
 
 ## TODO
 
-perhaps use as basis:
+perhaps use as basis: -> problem: no arm64
 - apache/sling : sling/sling-starter/Dockerfile FROM docker.io/openjdk:17-slim
 
 

@@ -22,11 +22,11 @@ echo
 docker/bin/makemultiarch.sh composum/featurelauncher-nodes $version $destversion
 docker/bin/makemultiarch.sh composum/featurelauncher-composum $version $destversion
 
-# stepwise package deployment section
-docker/bin/makemultiarch.sh composum/slingstarter $version $destversion
-docker/bin/makemultiarch.sh composum/slingstarter-stepwisedeploy $version $destversion
-docker/bin/makemultiarch.sh composum/nodes $version $destversion
-docker/bin/makemultiarch.sh composum/pages $version $destversion
+# stepwise package deployment section; obsolete.
+#docker/bin/makemultiarch.sh composum/slingstarter $version $destversion
+#docker/bin/makemultiarch.sh composum/slingstarter-stepwisedeploy $version $destversion
+#docker/bin/makemultiarch.sh composum/nodes $version $destversion
+#docker/bin/makemultiarch.sh composum/pages $version $destversion
 
 # ignored composum/slingstarter-compat (not public)
 # ignored composum/nodes-compat (not public)

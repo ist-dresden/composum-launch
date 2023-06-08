@@ -32,7 +32,7 @@ if test -z "$destversion"; then
   destversion=$version
 fi
 
-architectures="aarch64 x86_64"
+architectures="aarch64 amd64"
 
 for arch in $architectures; do
   docker pull $name:$version-$arch
