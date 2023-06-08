@@ -164,13 +164,12 @@
 
     <modules>
         <module>docker</module>
-        <module>pages</module>
         <module>feature</module>
         <module>startup/featurelauncher</module>
     </modules>
 
     <scm>
-        <tag>composum-launcher-1.2.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <repositories>

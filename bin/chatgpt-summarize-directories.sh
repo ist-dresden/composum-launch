@@ -49,6 +49,15 @@ done
 
 echo "# ChatGPT generated summary of all modules" > .cgpt.description.all.md
 echo >> .cgpt.description.all.md
+for fil in $(find . -name .cgpt.description.md | fgrep -v archived/); do
+  cat $fil >> .cgpt.description.all.md
+  echo >> .cgpt.description.all.md
+  echo >> .cgpt.description.all.md
+done
+
+cd archived
+echo "# ChatGPT generated summary of all modules" > .cgpt.description.all.md
+echo >> .cgpt.description.all.md
 for fil in $(find . -name .cgpt.description.md); do
   cat $fil >> .cgpt.description.all.md
   echo >> .cgpt.description.all.md
