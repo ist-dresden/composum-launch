@@ -10,3 +10,4 @@ which was included in (as of 4/2023) pretty old versions of Sling starter, and c
 how to update that to newer versions.
 
 starter11: docker images etc. that use Sling Starter 11, which is from 2018.
+sling-starter-copy: a sling starter copy used before Sling Starter 12 was released.

@@ -45,7 +45,6 @@ graph LR
 - docker cpm:CL-docker::pom
 - docker/composumlauncher cpm:CL-docker-composumlauncher::docker
 - docker/featurelauncher cpm:CL-docker-featurelauncher::docker
-- feature/sling-starter-copy cpmf:sling.starter.copy:1.3.1-SNAPSHOT:
 - feature/nodesstarter cpmf:CL-feature-nodesstarter::
 - feature cpmf:CL-feature::pom
 - feature/composumstarter cpmf:CL-feature-composumstarter::
@@ -61,6 +60,8 @@ graph LR
 - pages cpm:CL-pages::pom
 
 ## Obsolete (don't look at it, don't touch, not necessarily compileable)
+
+- archive/feature/sling-starter-copy cpmf:sling.starter.copy:1.3.1-SNAPSHOT:
 
 - archived/sling11/docker/slingstarter cpm:CL-docker-slingstarter::docker
 - archived/sling11/docker/slingstarter-stepwisedeploy cpm:CL-slingstarter-stepwisedeploy::docker-build

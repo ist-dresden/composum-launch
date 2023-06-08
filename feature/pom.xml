@@ -17,7 +17,6 @@
     <description>Composum launchers using the feature system</description>
 
     <modules>
-        <module>sling-starter-copy</module>
         <module>nodesstarter</module>
         <module>composumstarter</module>
         <module>felixframeworkcontainer</module>
