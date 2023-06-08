@@ -30,7 +30,8 @@
     mvn -DallowSnapshots=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
     -->
     <properties>
-        <docker.image.tag>${project.version}-${os.arch}</docker.image.tag>
+        <docker.image.tag>${project.version}</docker.image.tag>
+        <docker.platforms>linux/amd64,linux/arm64/v8</docker.platforms>
 
         <!-- nodes e.g. 3.4.1 or 4.1.1 - we rather use nodes 4, since otherwise the FAR could either
          not be easily installed on plain Sling Starter 12, or we would have to install nodes as a package - but
@@ -153,6 +154,17 @@
                         <allContainers>true</allContainers>
                         <!-- ensures a container left running after an aborted build is noticed because it's in conflict. -->
                         <containerNamePattern>%n</containerNamePattern>
+                        <images>
+                          <image>
+                            <build>
+                              <buildx>
+                                <platforms>
+                                  <platform>${docker.platforms}</platform>
+                                </platforms>
+                              </buildx>
+                            </build>
+                          </image>
+                        </images>
                     </configuration>
                 </plugin>
             </plugins>
