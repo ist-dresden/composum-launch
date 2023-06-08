@@ -15,9 +15,14 @@
     <name>Composum Launcher Compatibility checks</name>
     <description>Some launchers to check whether we are compatible with old Sling versions</description>
 
+    <properties>
+        <!-- Archived stuff doesn't go to maven central or anywhere else. -->
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
     <modules>
-        <module>slingstarter-compat</module>
-<!--        <module>nodes-compat</module>-->
+        <!-- <module>slingstarter-compat</module> -->
+        <!-- <module>nodes-compat</module> -->
     </modules>
 
 </project>

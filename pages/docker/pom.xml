@@ -20,6 +20,8 @@
 
     <properties>
         <thisdockerimage>composum/pages</thisdockerimage>
+        <!-- Sling starter 11 based - obsolete, don't update on maven central. -->
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <dependencies>
