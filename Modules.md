@@ -2,12 +2,12 @@
 
 ## Docker image to folder map
  
-- composum/slingstarter - Module: docker/slingstarter
-- composum/slingstarter-stepwisedeploy - Module: docker/slingstarter-stepwisedeploy
 - composum/featurelauncher-nodes - Module: docker/featurelauncher
-- composum/nodes - Module: docker/composumnodes, Dependencies: docker/slingstarter-stepwisedeploy
 - composum/featurelauncher-composum - Module: docker/composumlauncher, Dependencies: docker/featurelauncher, composum-launcher-feature-composumstarter, composum-launcher-feature-integrationtest
-- composum/pages - Module: pages/docker, Dependencies: composum-launcher-composumnodes, composum-launcher-feature-integrationtest
+- archived/starter11/composum/slingstarter - Module: docker/slingstarter
+- archived/starter11/composum/slingstarter-stepwisedeploy - Module: docker/slingstarter-stepwisedeploy
+- archived/starter11/composum/nodes - Module: docker/composumnodes, Dependencies: docker/slingstarter-stepwisedeploy
+- archived/starter11/composum/pages - Module: pages/docker, Dependencies: composum-launcher-composumnodes, composum-launcher-feature-integrationtest
 
 ## Docker image dependencies
 

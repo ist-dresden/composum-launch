@@ -1,7 +1,7 @@
 # An overview over the relationships of the docker images contained here (and some additions)
 
 - composum/featurelauncher-nodes : composum-launch/docker/featurelauncher/Dockerfile FROM openjdk:17
-  - composum/featurelauncher-composum : composum-launch/docker/composumlauncher/Dockerfile FROM composum/featurelauncher-nodes
+- composum/featurelauncher-composum : composum-launch/docker/composumlauncher/Dockerfile FROM composum/featurelauncher-nodes
 - composum-enterprise/featurelauncher-allprojects : cpm-launch/docker/allprojectslauncher/Dockerfile FROM composum/featurelauncher-nodes
 
 - composum/slingstarter : composum-launch/docker/slingstarter/Dockerfile FROM openjdk:17
