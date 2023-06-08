@@ -14,6 +14,7 @@ All feature modules create feature archives with classifiers oak_tar and oak_mon
 - sling-starter-copy: a renamed copy of [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter)
   version 12 since there was no release of that for a long long time and we need something to base the nodesstarter on.
   When Sling Starter 12 is released, this can be replaced and removed.
+- integrationtest : helper for other modules that checks whether they start up correctly in the mvn verify phase 
 
 ## Open points
 
