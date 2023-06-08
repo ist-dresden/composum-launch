@@ -16,7 +16,6 @@
 
     <modules>
         <module>featurelauncher</module>
-        <module>composumnodes</module>
         <module>composumlauncher</module>
     </modules>
 

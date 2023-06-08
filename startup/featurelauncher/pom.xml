@@ -61,23 +61,10 @@
 									<outputDirectory>${project.basedir}/starter</outputDirectory>
 								</artifactItem>
 
-								<!--
 								<artifactItem>
 									<groupId>org.apache.sling</groupId>
 									<artifactId>org.apache.sling.starter</artifactId>
 									<version>${sling.starter.version}</version>
-									<type>far</type>
-									<classifier>oak_tar_far</classifier>
-									<outputDirectory>${project.basedir}/starter</outputDirectory>
-								</artifactItem>
-								-->
-
-								<!-- Only as an alternative to org.apache.sling.starter above! Needs the nodes package in that case.
-									This also allows installing the nodes 3 package. -->
-								<artifactItem>
-									<groupId>com.composum.platform.features</groupId>
-									<artifactId>sling.starter.copy</artifactId>
-									<version>${project.version}</version>
 									<type>far</type>
 									<classifier>oak_tar_far</classifier>
 									<outputDirectory>${project.basedir}/starter</outputDirectory>

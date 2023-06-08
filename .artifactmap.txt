@@ -20,3 +20,6 @@ com.composum.platform:composum-launcher-pages:1.5.0-SNAPSHOT:pom	./archived/star
 com.composum.platform:composum-launcher-slingstarter-stepwisedeploy:1.5.0-SNAPSHOT:docker-build	./archived/starter11/docker/slingstarter-stepwisedeploy
 com.composum.platform:composum-launcher:1.5.0-SNAPSHOT:pom	.
 com.composum.platform:composum-startup-featurelauncher:1.5.0-SNAPSHOT:pom	./startup/featurelauncher
+
+# Cleanup:
+# /bin/rm -fr $HOME/.m2/repository/com/composum/platform/composum-*launcher* $HOME/.m2/repository/com/composum/platform/features $HOME/.m2/repository/com/composum/pages/composum-launcher*
