@@ -21,7 +21,7 @@ jobs:
 
     env:
       SUBDIR: ${{ github.event.inputs.subdir }}
-      MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-istrepo.xml -P nexus-staging,skipDocker
+      MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-istrepo.xml -P nexus-staging,skipDocker,!docker
 
     steps:
     - uses: actions/checkout@v3
@@ -137,7 +137,7 @@ jobs:
         OSSRH_PASSWD: ${{ secrets.OSSRH_PASSWD  }}
         GPG_PASSPHRASE : ${{ secrets.GPG_PASSPHRASE }}
       run: |
-        $MVNCMD release:perform -DlocalCheckout=true -DdeployAtEnd=true "-Dgoals=clean install package source:jar javadoc:jar deploy"
+        $MVNCMD release:perform -DlocalCheckout=true -DdeployAtEnd=true "-Dgoals=clean test source:jar javadoc:jar deploy"
 
     - name: Git Status after perform
       if: always()

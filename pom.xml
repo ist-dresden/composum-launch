@@ -1,232 +1,254 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.composum.meta.ist</groupId>
-        <artifactId>parent-2-public</artifactId>
-        <version>1.7.1</version>
-        <relativePath />
-    </parent>
+	<parent>
+		<groupId>com.composum.meta.ist</groupId>
+		<artifactId>parent-2-public</artifactId>
+		<version>1.7.1</version>
+		<relativePath/>
+	</parent>
 
-    <groupId>com.composum.platform</groupId>
-    <artifactId>composum-launcher</artifactId>
-    <version>1.5.0-SNAPSHOT</version>
+	<groupId>com.composum.platform</groupId>
+	<artifactId>composum-launcher</artifactId>
+	<version>1.5.0-SNAPSHOT</version>
 
-    <packaging>pom</packaging>
+	<packaging>pom</packaging>
 
-    <name>Composum Launchers</name>
-    <description>Maven parent for Composum Platform launcher (various docker images).</description>
+	<name>Composum Launchers</name>
+	<description>Maven parent for Composum Platform launcher (various docker images).</description>
 
-    <!--
-    We release project and platform in synchronized versions. The project version is adapted with
-     the maven release plugin to the right version - so we have everything in sync. E.g.:
-     mvn -P obsolete,compat -B release:update-versions -DdevelopmentVersion=1.1.1-SNAPSHOT
-     -->
-    <!--
-    Set properties to latest releases with
-    mvn -DallowDowngrade=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
-    If you want the latest snapshots:
-    mvn -DallowSnapshots=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
-    -->
-    <properties>
-        <docker.image.tag>${project.version}</docker.image.tag>
-        <docker.platforms>linux/amd64,linux/arm64/v8</docker.platforms>
+	<!--
+	We release project and platform in synchronized versions. The project version is adapted with
+	 the maven release plugin to the right version - so we have everything in sync. E.g.:
+	 mvn -P obsolete,compat -B release:update-versions -DdevelopmentVersion=1.1.1-SNAPSHOT
+	 -->
+	<!--
+	Set properties to latest releases with
+	mvn -DallowDowngrade=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
+	If you want the latest snapshots:
+	mvn -DallowSnapshots=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
+	-->
+	<properties>
+		<docker.image.tag>${project.version}</docker.image.tag>
+		<docker.platforms>linux/amd64,linux/arm64/v8</docker.platforms>
 
-        <!-- nodes e.g. 3.4.1 or 4.1.1 - we rather use nodes 4, since otherwise the FAR could either
-         not be easily installed on plain Sling Starter 12, or we would have to install nodes as a package - but
-         then upgrade would be a problem until https://issues.apache.org/jira/browse/SLING-11221 is fixed. -->
-        <composum.nodes.version>4.2.1</composum.nodes.version>
-        <composum.platform.version>1.7.0</composum.platform.version>
-        <composum.pages.version>1.5.1</composum.pages.version>
-        <composum.pages.options.version>${composum.pages.version}</composum.pages.options.version>
-        <composum.assets.version>1.4.0</composum.assets.version>
-        <composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
-        <cpm.platform.htl.version>1.1.1</cpm.platform.htl.version>
-        <composum.chatgpt.version>0.1.1</composum.chatgpt.version>
-        <!-- https://mvnrepository.com/artifact/com.composum.dashboard/composum-dashboard-sling -->
-        <composum.dashboard.version>1.2.13</composum.dashboard.version>
+		<!-- nodes e.g. 3.4.1 or 4.1.1 - we rather use nodes 4, since otherwise the FAR could either
+		 not be easily installed on plain Sling Starter 12, or we would have to install nodes as a package - but
+		 then upgrade would be a problem until https://issues.apache.org/jira/browse/SLING-11221 is fixed. -->
+		<composum.nodes.version>4.2.1</composum.nodes.version>
+		<composum.platform.version>1.7.0</composum.platform.version>
+		<composum.pages.version>1.5.1</composum.pages.version>
+		<composum.pages.options.version>${composum.pages.version}</composum.pages.options.version>
+		<composum.assets.version>1.4.0</composum.assets.version>
+		<composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
+		<cpm.platform.htl.version>1.1.1</cpm.platform.htl.version>
+		<composum.chatgpt.version>0.1.1</composum.chatgpt.version>
+		<!-- https://mvnrepository.com/artifact/com.composum.dashboard/composum-dashboard-sling -->
+		<composum.dashboard.version>1.2.13</composum.dashboard.version>
 
-        <!-- Version numbers of some proprietary packages, not for general use. -->
-        <cpm.platform.replication.version>1.1.2-SNAPSHOT</cpm.platform.replication.version>
-        <cpm.platform.workflow.version>1.1.2-SNAPSHOT</cpm.platform.workflow.version>
-        <cpm.platform.tenant.version>1.1.2-SNAPSHOT</cpm.platform.tenant.version>
+		<!-- Version numbers of some proprietary packages, not for general use. -->
+		<cpm.platform.replication.version>1.1.2-SNAPSHOT</cpm.platform.replication.version>
+		<cpm.platform.workflow.version>1.1.2-SNAPSHOT</cpm.platform.workflow.version>
+		<cpm.platform.tenant.version>1.1.2-SNAPSHOT</cpm.platform.tenant.version>
 
-        <!-- no deployment except if specified otherwise -->
-        <maven.deploy.skip>true</maven.deploy.skip>
+		<!-- no deployment except if specified otherwise -->
+		<maven.deploy.skip>true</maven.deploy.skip>
 
-         <sling.starter.version>12</sling.starter.version>
-        <!-- or our copy: -->
-<!--        <sling.starter.version>12.1-SNAPSHOT</sling.starter.version>-->
-        <!-- Does have to be the same version as in the launcher. https://mvnrepository.com/artifact/org.apache.jackrabbit/oak-upgrade -->
-        <launcher.oak.version>1.42.0</launcher.oak.version>
+		<sling.starter.version>12</sling.starter.version>
+		<!-- or our copy: -->
+		<!--        <sling.starter.version>12.1-SNAPSHOT</sling.starter.version>-->
+		<!-- Does have to be the same version as in the launcher. https://mvnrepository.com/artifact/org.apache.jackrabbit/oak-upgrade -->
+		<launcher.oak.version>1.42.0</launcher.oak.version>
 
-        <!-- For the feature starter. -->
-        <!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.framework -->
-        <org.apache.felix.framework.version>7.0.5</org.apache.felix.framework.version>
-        <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.feature.launcher -->
-        <!-- Due to https://issues.apache.org/jira/browse/SLING-11158 1.1.28 and 1.2.0 do not work.
-        1.3.0 gives a java.lang.ClassNotFoundException: org.apache.commons.cli.ParseException , update deferred. -->
-        <org.apache.sling.feature.launcher.version>1.1.26</org.apache.sling.feature.launcher.version>
-        <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.jcr.packageinit -->
-        <org.apache.sling.jcr.packageinit.version>1.0.4</org.apache.sling.jcr.packageinit.version>
-    </properties>
+		<!-- For the feature starter. -->
+		<!-- https://mvnrepository.com/artifact/org.apache.felix/org.apache.felix.framework -->
+		<org.apache.felix.framework.version>7.0.5</org.apache.felix.framework.version>
+		<!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.feature.launcher -->
+		<!-- Due to https://issues.apache.org/jira/browse/SLING-11158 1.1.28 and 1.2.0 do not work.
+		1.3.0 gives a java.lang.ClassNotFoundException: org.apache.commons.cli.ParseException , update deferred. -->
+		<org.apache.sling.feature.launcher.version>1.1.26</org.apache.sling.feature.launcher.version>
+		<!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.jcr.packageinit -->
+		<org.apache.sling.jcr.packageinit.version>1.0.4</org.apache.sling.jcr.packageinit.version>
+	</properties>
 
-    <dependencyManagement>
-        <!-- Declares the versions of additional packages that can be deployed -->
-        <dependencies>
-            <dependency>
-                <groupId>com.composum.platform</groupId>
-                <artifactId>cpm-platform-htl-package</artifactId>
-                <version>${cpm.platform.htl.version}</version>
-            </dependency>
+	<dependencyManagement>
+		<!-- Declares the versions of additional packages that can be deployed -->
+		<dependencies>
+			<dependency>
+				<groupId>com.composum.platform</groupId>
+				<artifactId>cpm-platform-htl-package</artifactId>
+				<version>${cpm.platform.htl.version}</version>
+			</dependency>
 
-            <!-- For the feature starter: the used framework. -->
-            <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.framework</artifactId>
-                <version>${org.apache.felix.framework.version}</version>
-            </dependency>
+			<!-- For the feature starter: the used framework. -->
+			<dependency>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>org.apache.felix.framework</artifactId>
+				<version>${org.apache.felix.framework.version}</version>
+			</dependency>
 
-            <!-- These dependencies are mostly declared here to allow automatical update of the properties with mvn release:update-versions
-                mvn -DallowDowngrade=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
-                or
-                mvn -DallowSnapshots=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
-            -->
-            <dependency>
-                <groupId>com.composum.nodes</groupId>
-                <artifactId>composum-nodes-commons</artifactId>
-                <version>${composum.nodes.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.composum.platform</groupId>
-                <artifactId>composum-platform-commons-package</artifactId>
-                <version>${composum.platform.version}</version>
-                <type>zip</type>
-            </dependency>
-            <dependency>
-                <groupId>com.composum.pages</groupId>
-                <artifactId>composum-pages-components-package</artifactId>
-                <version>${composum.pages.version}</version>
-                <type>zip</type>
-            </dependency>
-            <dependency>
-                <groupId>com.composum.pages.options</groupId>
-                <artifactId>composum-pages-options-assets-package</artifactId>
-                <version>${composum.pages.options.version}</version>
-                <type>zip</type>
-            </dependency>
-            <dependency>
-                <groupId>com.composum.assets</groupId>
-                <artifactId>composum-assets-commons-package</artifactId>
-                <version>${composum.assets.version}</version>
-                <type>zip</type>
-            </dependency>
-            <dependency>
-                <groupId>com.composum.chatgpt</groupId>
-               	<artifactId>composum-chatgpt-integration-composum-package</artifactId>
-                <version>${composum.chatgpt.version}</version>
-                <type>zip</type>
-            </dependency>
-            <dependency>
-                <groupId>com.composum.dashboard</groupId>
-                <artifactId>composum-dashboard-sling</artifactId>
-                <version>${composum.dashboard.version}</version>
-                <type>zip</type>
-            </dependency>
-        </dependencies>
+			<!-- These dependencies are mostly declared here to allow automatical update of the properties with mvn release:update-versions
+				mvn -DallowDowngrade=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
+				or
+				mvn -DallowSnapshots=true -DgenerateBackupPoms=false -DprocessParent=true versions:update-properties versions:update-parent
+			-->
+			<dependency>
+				<groupId>com.composum.nodes</groupId>
+				<artifactId>composum-nodes-commons</artifactId>
+				<version>${composum.nodes.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.composum.platform</groupId>
+				<artifactId>composum-platform-commons-package</artifactId>
+				<version>${composum.platform.version}</version>
+				<type>zip</type>
+			</dependency>
+			<dependency>
+				<groupId>com.composum.pages</groupId>
+				<artifactId>composum-pages-components-package</artifactId>
+				<version>${composum.pages.version}</version>
+				<type>zip</type>
+			</dependency>
+			<dependency>
+				<groupId>com.composum.pages.options</groupId>
+				<artifactId>composum-pages-options-assets-package</artifactId>
+				<version>${composum.pages.options.version}</version>
+				<type>zip</type>
+			</dependency>
+			<dependency>
+				<groupId>com.composum.assets</groupId>
+				<artifactId>composum-assets-commons-package</artifactId>
+				<version>${composum.assets.version}</version>
+				<type>zip</type>
+			</dependency>
+			<dependency>
+				<groupId>com.composum.chatgpt</groupId>
+				<artifactId>composum-chatgpt-integration-composum-package</artifactId>
+				<version>${composum.chatgpt.version}</version>
+				<type>zip</type>
+			</dependency>
+			<dependency>
+				<groupId>com.composum.dashboard</groupId>
+				<artifactId>composum-dashboard-sling</artifactId>
+				<version>${composum.dashboard.version}</version>
+				<type>zip</type>
+			</dependency>
+		</dependencies>
 
-    </dependencyManagement>
+	</dependencyManagement>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <!-- FIXME move to parent in composum-meta -->
-                <!-- https://mvnrepository.com/artifact/io.fabric8/docker-maven-plugin -->
-                <plugin>
-                    <groupId>io.fabric8</groupId>
-                    <artifactId>docker-maven-plugin</artifactId>
-                    <version>0.43.0</version>
-                    <extensions>true</extensions>
-                    <configuration>
-                        <verbose>all</verbose>
-                        <stopMode>kill</stopMode>
-                        <allContainers>true</allContainers>
-                        <!-- ensures a container left running after an aborted build is noticed because it's in conflict. -->
-                        <containerNamePattern>%n</containerNamePattern>
-                        <images>
-                          <image>
-                            <build>
-                              <buildx>
-                                <platforms>
-                                  <platform>${docker.platforms}</platform>
-                                </platforms>
-                              </buildx>
-                            </build>
-                          </image>
-                        </images>
-                    </configuration>
-                </plugin>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- FIXME move to parent in composum-meta -->
+				<!-- https://mvnrepository.com/artifact/io.fabric8/docker-maven-plugin -->
+				<plugin>
+					<groupId>io.fabric8</groupId>
+					<artifactId>docker-maven-plugin</artifactId>
+					<version>0.43.0</version>
+					<extensions>true</extensions>
+					<configuration>
+						<verbose>all</verbose>
+						<stopMode>kill</stopMode>
+						<allContainers>true</allContainers>
+						<!-- ensures a container left running after an aborted build is noticed because it's in conflict. -->
+						<containerNamePattern>%n</containerNamePattern>
+						<images>
+							<image>
+								<build>
+									<buildx>
+										<platforms>
+											<platform>${docker.platforms}</platform>
+										</platforms>
+									</buildx>
+								</build>
+							</image>
+						</images>
+					</configuration>
+				</plugin>
 
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <configuration>
-                        <checkModificationExcludes>
-                            <checkModificationExclude>**/.env</checkModificationExclude>
-                        </checkModificationExcludes>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<configuration>
+						<checkModificationExcludes>
+							<checkModificationExclude>**/.env</checkModificationExclude>
+						</checkModificationExcludes>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 
-    <modules>
-        <module>docker</module>
-        <module>feature</module>
-        <!-- Deliberately not included, as there is nothing to build or release there - just for running things.
-         <module>startup/featurelauncher</module> -->
-    </modules>
+	<modules>
+		<module>feature</module>
+		<!-- docker is built with the profile docker, which is active by default, but we only include it into
+			a profile to be able to exclude it easily when creating a release, as it's less failure prone to separate that.
+		<module>docker</module> -->
+		<!-- Deliberately not included, as there is nothing to build or release there - just for running things.
+		 <module>startup/featurelauncher</module> -->
+	</modules>
 
-    <scm>
-        <tag>HEAD</tag>
-    </scm>
+	<scm>
+		<tag>HEAD</tag>
+	</scm>
 
-    <repositories>
-        <repository>
-            <!-- To be able to reference sling starter snapshots, since there is no public 12 release yet. -->
-            <id>apache.snapshots</id>
-            <name>Apache Development Snapshot Repository</name>
-            <url>https://repository.apache.org/content/repositories/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+	<repositories>
+		<repository>
+			<!-- To be able to reference sling starter snapshots, since there is no public 12 release yet. -->
+			<id>apache.snapshots</id>
+			<name>Apache Development Snapshot Repository</name>
+			<url>https://repository.apache.org/content/repositories/snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
-    <profiles>
-        <profile>
-            <id>skipDocker</id>
-            <properties>
-                <docker.skip>true</docker.skip>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-release-plugin</artifactId>
-                        <configuration>
-                            <arguments>
-                                -Ddocker.skip=true -P skipDocker -DdeployAtEnd=true
-                            </arguments>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+	<profiles>
+		<profile>
+			<id>docker</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>docker</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<!-- Covers all modules, primarily for setting versions etc., since some modules are not released or even built. -->
+			<id>allmodules</id>
+			<modules>
+				<module>docker</module>
+				<module>startup/featurelauncher</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>skipDocker</id>
+			<properties>
+				<docker.skip>true</docker.skip>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<configuration>
+							<arguments>
+								-Ddocker.skip=true -P skipDocker,!docker -DdeployAtEnd=true
+							</arguments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
