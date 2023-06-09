@@ -107,7 +107,7 @@ jobs:
       run: |
         # export GPG_PASSPHRASE=$(mvn --encrypt-password "$(echo $GPG_PASSPHRASE_RAW | base64 --decode)")
         # we need the snapshot of the topmost pom installed for the versions:update-child-modules later.
-        $MVNCMD -N install
+        # $MVNCMD -N install
         $MVNCMD clean release:clean
         $MVNCMD release:prepare -DdryRun=true -DpushChanges=false
         $MVNCMD release:perform -DdryRun=true -DlocalCheckout=true -DdeployAtEnd=true
@@ -154,8 +154,9 @@ jobs:
 
     - name: Switch allmodules to same release since we skipped docker modules and startup test modules
       run: |
-        git reset --hard HEAD^  
-        $MVNCMD versions:update-child-modules -DgenerateBackupPoms=false -DallowSnapshots=false -DallowTimestampedSnapshots=false -DprocessAllModules=true '-DparentVersion=${project.version}' -P allmodules
+        git reset --hard HEAD^
+        $MVNCMD -N versions:update-child-modules -DprocessAllModules -P allmodules -DgenerateBackupPoms=false
+        (cd docker; $MVNCMD -N versions:update-child-modules -DprocessAllModules -P allmodules -DgenerateBackupPoms=false)        
         releasetag=$(git tag -l --points-at HEAD)
         git add -u pom.xml '**/pom.xml'
         git commit --amend --no-edit
@@ -172,7 +173,7 @@ jobs:
     - name: Push changes
       if: ${{ github.event.inputs.dryrun == 'false' }}
       run: |
-        git push origin --follow-tags -v
+        git push origin --tags -v
 
     - name: Release to maven central repository
       if: ${{ github.event.inputs.dryrun == 'false' }}
