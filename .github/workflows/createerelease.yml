@@ -150,6 +150,23 @@ jobs:
       run: |
         git status --untracked-files --ignored
 
+    - name: Switch allmodules to same release since we skipped docker modules and startup test modules
+      run: |
+        git reset --hard HEAD^  
+        $MVNCMD versions:update-child-modules -DgenerateBackupPoms=false -DallowSnapshots=false -DallowTimestampedSnapshots=false -DprocessAllModules=true '-DparentVersion=${project.version}' -P allmodules
+        releasetag=$(git tag -l --points-at HEAD)
+        git add -u pom.xml '**/pom.xml'
+        git commit --amend --no-edit
+        git tag -f $releasetag
+        $MVNCMD -B release:update-versions -DautoVersionSubmodules=true -DgenerateBackupPoms=false -DprocessAllModules=true -P allmodules
+        git add -u pom.xml '**/pom.xml'
+        git commit -m "Next development version"
+
+    - name: Git Status after allmodules update
+      run: |
+        git status
+        git log -3 --no-color --decorate
+
     - name: Push changes
       if: ${{ github.event.inputs.dryrun == 'false' }}
       run: |
