@@ -173,7 +173,9 @@ jobs:
     - name: Push changes
       if: ${{ github.event.inputs.dryrun == 'false' }}
       run: |
-        git push origin --tags -v
+        git push origin -v || true
+        git push origin --follow-tags -v || true
+        git push origin --tags -v || true
 
     - name: Release to maven central repository
       if: ${{ github.event.inputs.dryrun == 'false' }}
