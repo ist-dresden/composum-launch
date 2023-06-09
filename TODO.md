@@ -3,7 +3,10 @@
 ## Next
 
 - Put release of starters out to maven central
+- Update README.md and restructure it
 - try to convince https://github.com/apache/sling-org-apache-sling-feature-launcher version 1.3.0 to work.
+- integrate and activate dashboard!
+- create release 1.5.1
 
 ## Backlog
 

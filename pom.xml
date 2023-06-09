@@ -167,6 +167,16 @@
                         </images>
                     </configuration>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <configuration>
+                        <checkModificationExcludes>
+                            <checkModificationExclude>**/.env</checkModificationExclude>
+                        </checkModificationExcludes>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -196,5 +206,27 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <profiles>
+        <profile>
+            <id>skipDocker</id>
+            <properties>
+                <docker.skip>true</docker.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <configuration>
+                            <arguments>
+                                -Ddocker.skip=true -P skipDocker -DdeployAtEnd=true
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
