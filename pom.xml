@@ -42,7 +42,7 @@
         <composum.pages.options.version>${composum.pages.version}</composum.pages.options.version>
         <composum.assets.version>1.4.0</composum.assets.version>
         <composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
-        <cpm.platform.htl.version>1.1.2-SNAPSHOT</cpm.platform.htl.version>
+        <cpm.platform.htl.version>1.1.1</cpm.platform.htl.version>
         <composum.chatgpt.version>0.1.1</composum.chatgpt.version>
         <!-- https://mvnrepository.com/artifact/com.composum.dashboard/composum-dashboard-sling -->
         <composum.dashboard.version>1.2.13</composum.dashboard.version>
@@ -174,7 +174,8 @@
     <modules>
         <module>docker</module>
         <module>feature</module>
-        <module>startup/featurelauncher</module>
+        <!-- Deliberately not included, as there is nothing to build or release there - just for running things.
+         <module>startup/featurelauncher</module> -->
     </modules>
 
     <scm>
