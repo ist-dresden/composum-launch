@@ -106,6 +106,8 @@ jobs:
         GPG_PASSPHRASE : ${{ secrets.GPG_PASSPHRASE }}
       run: |
         # export GPG_PASSPHRASE=$(mvn --encrypt-password "$(echo $GPG_PASSPHRASE_RAW | base64 --decode)")
+        # we need the snapshot of the topmost pom installed for the versions:update-child-modules later.
+        $MVNCMD -N install
         $MVNCMD clean release:clean
         $MVNCMD release:prepare -DdryRun=true -DpushChanges=false
         $MVNCMD release:perform -DdryRun=true -DlocalCheckout=true -DdeployAtEnd=true
