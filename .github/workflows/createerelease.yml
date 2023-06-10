@@ -163,7 +163,7 @@ jobs:
         git tag -f $releasetag
         $MVNCMD -B release:update-versions -DautoVersionSubmodules=true -DgenerateBackupPoms=false -DprocessAllModules=true -P allmodules
         git add -u pom.xml '**/pom.xml'
-        git commit -m "Next development version"
+        git commit -m "prepare for next development iteration"
 
     - name: Git Status after allmodules update
       run: |
@@ -173,9 +173,7 @@ jobs:
     - name: Push changes
       if: ${{ github.event.inputs.dryrun == 'false' }}
       run: |
-        git push origin -v || true
-        git push origin --follow-tags -v || true
-        git push origin --tags -v || true
+        git push origin --follow-tags -v
 
     - name: Release to maven central repository
       if: ${{ github.event.inputs.dryrun == 'false' }}
