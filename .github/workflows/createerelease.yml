@@ -21,7 +21,7 @@ jobs:
 
     env:
       SUBDIR: ${{ github.event.inputs.subdir }}
-      MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-istrepo.xml -P nexus-staging
+      MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-istrepo.xml -P nexus-staging,skipDocker,!docker
 
     steps:
     - uses: actions/checkout@v3
@@ -106,6 +106,8 @@ jobs:
         GPG_PASSPHRASE : ${{ secrets.GPG_PASSPHRASE }}
       run: |
         # export GPG_PASSPHRASE=$(mvn --encrypt-password "$(echo $GPG_PASSPHRASE_RAW | base64 --decode)")
+        # we need the snapshot of the topmost pom installed for the versions:update-child-modules later.
+        # $MVNCMD -N install
         $MVNCMD clean release:clean
         $MVNCMD release:prepare -DdryRun=true -DpushChanges=false
         $MVNCMD release:perform -DdryRun=true -DlocalCheckout=true -DdeployAtEnd=true
@@ -123,9 +125,7 @@ jobs:
         GPG_PASSPHRASE : ${{ secrets.GPG_PASSPHRASE }}
       run: |
         git clean -f -d -x
-        # we use -P allmodules to set the new versions here even in the modules that we want not pushed to maven central
-        # That is not done during mvn release:perform, so they aren't uploaded to maven central.
-        $MVNCMD -P allmodules clean release:clean release:prepare -DpushChanges=false
+        $MVNCMD clean release:clean release:prepare -DpushChanges=false
 
     - name: Git status after prepare
       run: |
@@ -139,7 +139,7 @@ jobs:
         OSSRH_PASSWD: ${{ secrets.OSSRH_PASSWD  }}
         GPG_PASSPHRASE : ${{ secrets.GPG_PASSPHRASE }}
       run: |
-        $MVNCMD release:perform -DlocalCheckout=true -DdeployAtEnd=true "-Dgoals=clean install package source:jar javadoc:jar deploy" "-Darguments=-DdeployAtEnd=true"
+        $MVNCMD release:perform -DlocalCheckout=true -DdeployAtEnd=true "-Dgoals=clean test source:jar javadoc:jar deploy"
 
     - name: Git Status after perform
       if: always()
@@ -152,10 +152,29 @@ jobs:
       run: |
         git status --untracked-files --ignored
 
+    - name: Switch allmodules to same release since we skipped docker modules and startup test modules
+      run: |
+        git reset --hard HEAD^
+        $MVNCMD -N versions:update-child-modules -DprocessAllModules -P allmodules -DgenerateBackupPoms=false
+        (cd docker; $MVNCMD -N versions:update-child-modules -DprocessAllModules -P allmodules -DgenerateBackupPoms=false)        
+        releasetag=$(git tag -l --points-at HEAD)
+        git add -u pom.xml '**/pom.xml'
+        git commit --amend --no-edit
+        git tag -f $releasetag
+        $MVNCMD -B release:update-versions -DautoVersionSubmodules=true -DgenerateBackupPoms=false -DprocessAllModules=true -P allmodules
+        git add -u pom.xml '**/pom.xml'
+        git commit -m "prepare for next development iteration"
+
+    - name: Git Status after allmodules update
+      run: |
+        git status
+        git log -3 --no-color --decorate
+
     - name: Push changes
       if: ${{ github.event.inputs.dryrun == 'false' }}
       run: |
-        git push origin --follow-tags -v
+        git push -v
+        git push --tags -v
 
     - name: Release to maven central repository
       if: ${{ github.event.inputs.dryrun == 'false' }}

@@ -9,7 +9,6 @@
     </parent>
 
     <artifactId>composum-launcher-feature-nodesstarter</artifactId>
-    <version>1.5.0-SNAPSHOT</version><!-- sync with Pages -->
 
     <name>Composum Launcher Feature Nodes Starter</name>
     <description>

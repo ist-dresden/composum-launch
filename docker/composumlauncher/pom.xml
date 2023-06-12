@@ -8,7 +8,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>composum-launcher-docker-composumlauncher</artifactId>
-    <version>1.5.0-SNAPSHOT</version><!-- sync with Pages. This is used as a tag for the docker image. -->
     <packaging>docker</packaging>
 
     <name>Composum Launcher Docker Composumlauncher (Featurelauncher)</name>

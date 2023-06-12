@@ -1,5 +1,6 @@
 # This builds develop and deploys a snapshot to our repository.
 # Will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# Docker deployment is manual because that's quite a lot of computation time and we don't want to do it on every push.
 name: Develop - Build and Deploy Snapshot
 run-name: Develop - Build and Deploy Snapshot on ${{ github.ref_name }}
 
@@ -14,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-istrepo.xml  -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+      MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-istrepo.xml -Ddocker.skip=true -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
     steps:
     - uses: actions/checkout@v3
@@ -80,27 +81,10 @@ jobs:
         # unfortunately, this would require a snapshot parent if just called from the command line, so we cannot use it: :-(
         # mvn org.apache.maven.plugins:maven-enforcer-plugin:3.0.0:enforce -Drules=requireSnapshotVersion
 
-    - name: Check docker status
-      run: |
-        docker info
-        docker version
-        docker ps -a
-        sleep 300
-        docker ps -a
-
     - name: Deploy with Maven
       env:
         NEXUS_BUILD_USER: ${{ secrets.NEXUS_BUILD_USER }}
         NEXUS_BUILD_PASSWD: ${{ secrets.NEXUS_BUILD_PASSWD }}
-        GPG_PASSPHRASE : ${{ secrets.GPG_PASSPHRASE }}
-      # We don't do docker pushes as we don't currently (as of 4/22) have an automatic solution for multi architecture builds
-      # Compare also https://github.com/actions/virtual-environments/issues/2187 (M1 support for github actions)
       run: |
         PROFILES="ensureSnapshots,$(git branch --show-current)"
-        $MVNCMD -P $PROFILES,deployDocker deploy
-
-    - name: Check docker status
-      run: |
-        docker ps -a
-        sleep 300
-        docker ps -a
+        $MVNCMD -P $PROFILES deploy

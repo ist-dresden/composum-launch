@@ -9,7 +9,6 @@
     </parent>
 
     <artifactId>composum-launcher-feature-composumstarter</artifactId>
-    <version>1.5.0-SNAPSHOT</version><!-- sync with Pages -->
 
     <name>Composum Launcher Feature Composum Starter (With Composum Public)</name>
     <description>
