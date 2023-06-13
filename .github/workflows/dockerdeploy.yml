@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-istrepo.xml  -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+      MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-istrepo.xml
 
     steps:
     - uses: actions/checkout@v3
@@ -60,31 +60,11 @@ jobs:
     - name: Mvn Effective Settings
       run: $MVNCMD -P $(git branch --show-current) -N help:effective-settings
 
-    - name: Build with Maven
-      env:
-        GPG_PASSPHRASE : ${{ secrets.GPG_PASSPHRASE }}
-      # We try several times since unfortunately there are sporadic startup problems in the integration tests :-(
-      run: |
-        PROFILES="$(git branch --show-current)"
-        echo "profiles: $PROFILES"
-        ( $MVNCMD -P $PROFILES install && echo 1st run success ) || \
-        ( $MVNCMD -P $PROFILES install && echo 2nd run install ) || \
-        ( $MVNCMD -P $PROFILES install && echo 3rd run install )
-
-    - name: Sanitycheck version before deploying
-      run: |
-        echo "Version: "
-        $MVNCMD help:evaluate -Dexpression=project.version -q -DforceStdout
-        $MVNCMD help:evaluate -Dexpression=project.version -q -DforceStdout | egrep -- '-SNAPSHOT$' > /dev/null || exit 1
-        # unfortunately, this would require a snapshot parent if just called from the command line, so we cannot use it: :-(
-        # mvn org.apache.maven.plugins:maven-enforcer-plugin:3.0.0:enforce -Drules=requireSnapshotVersion
-
     - name: Check docker status
       run: |
         docker info
         docker version
-        docker ps -a
-        sleep 300
+        docker images -a
         docker ps -a
 
     - name: Deploy with Maven
@@ -95,11 +75,12 @@ jobs:
       # We don't do docker pushes as we don't currently (as of 4/22) have an automatic solution for multi architecture builds
       # Compare also https://github.com/actions/virtual-environments/issues/2187 (M1 support for github actions)
       run: |
-        PROFILES="$(git branch --show-current)"
-        $MVNCMD -P $PROFILES,deployDocker deploy
+        cd docker
+        $MVNCMD deploy
 
     - name: Check docker status
       run: |
+        docker images -a
         docker ps -a
         sleep 300
         docker ps -a
