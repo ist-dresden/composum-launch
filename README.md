@@ -2,7 +2,11 @@
 
 This repository contains the sources for building some starters that allow you to try out or use the public parts
 of the [Composum](http://composum.com/) suite - both as Docker images and as Sling Starter JAR with preinstalled
-Composum Nodes, Platform, Pages, Assets and ChatGPT-Intergration.
+Composum [Nodes](https://github.com/ist-dresden/composum-nodes), 
+[Platform](https://github.com/ist-dresden/composum-platform), 
+[Pages](https://github.com/ist-dresden/composum-pages), 
+[Assets](https://github.com/ist-dresden/composum-assets) and 
+[ChatGPT-Intergration](https://github.com/ist-dresden/composum-chatgpt-integration).
 
 # Start Composum Pages as JAR based on Sling Starter
 
