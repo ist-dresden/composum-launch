@@ -13,7 +13,7 @@
 
     <packaging>pom</packaging>
 
-    <name>Composum Lauchner Feature Launchers</name>
+    <name>Composum Launcher Feature Launchers</name>
     <description>Composum launchers using the feature system</description>
 
     <modules>

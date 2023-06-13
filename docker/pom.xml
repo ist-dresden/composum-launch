@@ -1,59 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>com.composum.platform</groupId>
-        <artifactId>composum-launcher</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>com.composum.platform</groupId>
+		<artifactId>composum-launcher</artifactId>
         <version>1.5.1-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
 
-    <artifactId>composum-launcher-docker</artifactId>
-    <packaging>pom</packaging>
+	<artifactId>composum-launcher-docker</artifactId>
+	<packaging>pom</packaging>
 
-    <name>Composum Launcher Docker Images</name>
-    <description>Parent of various Docker-Images related to Composum. This contains some stuff common to all docker images.</description>
+	<name>Composum Launcher Docker Images</name>
+	<description>Parent of various Docker-Images related to Composum. This contains some stuff common to all docker
+		images.
+	</description>
 
-    <modules>
-        <module>featurelauncher</module>
-        <module>composumlauncher</module>
-    </modules>
+	<modules>
+		<module>featurelauncher</module>
+		<module>composumlauncher</module>
+	</modules>
 
-    <properties>
-        <maven.deploy.skip>false</maven.deploy.skip>
-    </properties>
+	<properties>
+		<maven.deploy.skip>false</maven.deploy.skip>
+	</properties>
 
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources-filtered</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources-filtered</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 
-        <plugins>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <!-- Generate .env file with our version to enable version independent compose files -->
-                        <id>copy-resources</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/env</directory>
-                                    <filtering>true</filtering>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+		<plugins>
+			<plugin>
+				<!-- Nothing for the standard deployment plugin here - just docker:push. -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<!-- Generate .env file with our version to enable version independent compose files -->
+						<id>copy-resources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/env</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
