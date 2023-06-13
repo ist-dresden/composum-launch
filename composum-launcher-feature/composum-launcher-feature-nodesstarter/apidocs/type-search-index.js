@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.composum.platform.feature.nodesstarter","l":"LaunchFromEmbeddedFAR"},{"p":"com.composum.platform.feature.nodesstarter","l":"StopFromPid"}]
