@@ -15,11 +15,11 @@ launcherjar=`ls -1 $launcherpattern`
 launcherjar=`basename $launcherjar`
 
 mkdir -p target/launcher/fileinstall
-for hook in ${scriptdir}/*-resourceshook.sh; do
-    if [[ -e $hook ]]; then
-        $hook
-    fi
-done
+#for hook in ${scriptdir}/*-resourceshook.sh; do
+#    if [[ -e $hook ]]; then
+#        $hook
+#    fi
+#done
 
 $scriptdir/preload.sh &
 preloadpid=$!

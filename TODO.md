@@ -8,6 +8,10 @@
 - integrate and activate dashboard!
 - create release 1.5.1
 
+## Bugs
+
+- why does fileinstall not work on feature/composumstarter ???
+
 ## Backlog
 
 - integrate and activate dashboard!
