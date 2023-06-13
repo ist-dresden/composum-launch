@@ -55,10 +55,14 @@ jobs:
         git branch --show-current
 
     - name: Mvn Effective POM
-      run: $MVNCMD -P $(git branch --show-current) -N help:effective-pom
+      run: |
+        cd docker
+        $MVNCMD -P $(git branch --show-current) -N help:effective-pom
 
     - name: Mvn Effective Settings
-      run: $MVNCMD -P $(git branch --show-current) -N help:effective-settings
+      run: |
+        cd docker
+        $MVNCMD -P $(git branch --show-current) -N help:effective-settings
 
     - name: Check docker status
       run: |
@@ -76,7 +80,7 @@ jobs:
       # Compare also https://github.com/actions/virtual-environments/issues/2187 (M1 support for github actions)
       run: |
         cd docker
-        $MVNCMD deploy
+        $MVNCMD -P $(git branch --show-current) deploy
 
     - name: Check docker status
       run: |
