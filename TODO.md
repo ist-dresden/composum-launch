@@ -10,7 +10,8 @@
 
 ## Bugs
 
-- why does fileinstall not work on feature/composumstarter ???
+- why does fileinstall not work on feature/composumstarter ??? probably wrong configuration, works in docker. 
+  Compare https://sling.apache.org/documentation/bundles/file-installer-provider.html 
 
 ## Backlog
 

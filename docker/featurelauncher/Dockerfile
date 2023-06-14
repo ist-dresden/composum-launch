@@ -14,7 +14,7 @@ RUN installer=$(command -v yum && echo yum || echo microdnf); \
 RUN set -eux; \
     groupadd -r sling --gid=1000; \
     useradd -r -g sling --uid=1000 --home-dir=/opt/sling --shell=/bin/bash sling; \
-    mkdir -p /opt/sling/launcher /opt/sling/fileinstall-docker /opt/sling/fileinstall-user /opt/sling/features-docker/system /opt/sling/features-user /opt/sling/features-docker /opt/sling/scripts; \
+    mkdir -p /opt/sling/launcher /opt/sling/fileinstall-docker /opt/sling/fileinstall-user /opt/sling/features-docker/system /opt/sling/features-user /opt/sling/features-docker /opt/sling/launcher/repository /opt/sling/scripts; \
     chown -R sling:sling /opt/sling; \
     ln -s /opt/sling/launcher/logs /var/log/sling; \
     ln -s /opt/sling/launcher/logs /opt/sling/logs;
@@ -35,6 +35,7 @@ VOLUME /opt/sling/launcher
 VOLUME /opt/sling/fileinstall-user
 VOLUME /opt/sling/features-user
 VOLUME /opt/sling/scripts-user
+VOLUME /opt/sling/launcher/repository
 WORKDIR /opt/sling
 USER sling:sling
 

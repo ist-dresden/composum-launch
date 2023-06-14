@@ -15,6 +15,7 @@ services:
       - "./target/run/logs:/opt/sling/launcher/logs"
       - "./target/run/fileinstall:/opt/sling/fileinstall-user"
       - "./target/run/features:/opt/sling/features-user"
+      - "./target/run/repository:/opt/sling/launcher/repository"
     ports:
       - "8080:8080"
       - "18080:18080"
