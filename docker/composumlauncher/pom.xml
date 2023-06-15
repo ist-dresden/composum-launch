@@ -144,6 +144,20 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+
+            <!-- TODO remove this workaround for missing installation of artifacts https://github.com/fabric8io/docker-maven-plugin/issues/1537 -->
+            <plugin>
+                <artifactId>maven-install-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-install</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>install</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
