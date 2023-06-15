@@ -13,6 +13,7 @@ printVersion pages/options composum.pages.options.version
 printVersion assets composum.assets.version
 printVersion cpm-site-composum composum.sites.version
 printVersion cpm-platform-htl cpm.platform.htl.version
+printVersion composum-dashboard composum.dashboard.version
 
 printVersion composum-launch composum.launch.version
 echo
@@ -22,3 +23,7 @@ printVersion cpm-platform-workflow cpm.platform.workflow.version
 printVersion cpm-platform-tenant cpm.platform.tenant.version
 printVersion cpm-platform-auth cpm.platform.auth.version
 printVersion cpm-platform-config cpm.platform.config.version
+
+echo
+echo "<!-- AEM only -->"
+printVersion composum-aem-microsite composum.aem.microsite.version

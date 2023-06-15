@@ -58,4 +58,25 @@ complicated.
 That amounts to mounting /opt/sling/launcher/repository as a volume from outside the store, which is easily done, or
 keeping the JCR repository in a MongoDB or other database outside of the docker container. 
 
-Things to check before using this in production:
+## Necessary adaptions
+
+- introduced volume /opt/sling/launcher/repository/ into docker-image -> repository outside of docker container (DONE) 
+
+## Test results:
+
+- permanency of JCR works.
+- Package updated in docker container -> is updated on restart in the system
+- configuration: changed configurations are saved in the JCR and are updated in felix when the new container is started.
+- Added packages are saved in JCR, incl. bundles -> permanent, too.
+
+## Open points
+
+1. The test system is used for daily deployments through the "Develop - Build and Deploy Snapshot" jobs. That is so 
+   far done using the package manager. Replacing this through building a (850MB) new docker image each time is probably 
+   not a good idea -> can, however be combined by continuing with package manager here and replacing the docker 
+   image once in a while.
+2. Where to store the (due to the non public projects) internal docker images? Possible solutions:
+   - https://repo.ist-software.com/ can be configured for docker images
+   - solve licensing topic and make them public
+3. Where / how are /opt/sling/launcher/repository and /opt/sling/launcher/logs stored? -> depends on the provider 
+   hosting the server.
