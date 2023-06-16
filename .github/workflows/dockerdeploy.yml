@@ -73,7 +73,7 @@ jobs:
 
       - name: Deploy with Maven
         env:
-          DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+          DOCKERHUB_USER: composum
           DOCKERHUB_PASSWD: ${{ secrets.DOCKERHUB_PASSWD }}
         # We don't do docker pushes as we don't currently (as of 4/22) have an automatic solution for multi architecture builds
         # Compare also https://github.com/actions/virtual-environments/issues/2187 (M1 support for github actions)
