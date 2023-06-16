@@ -15,76 +15,75 @@ jobs:
       MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-istrepo.xml
 
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 3
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 3
 
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: maven
-        maven-version: 3.8.7
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: maven
+          maven-version: 3.8.7
 
-    - name: Dump event context for debugging
-      continue-on-error: true  # Debugging output only, and this annoyingly fails when the commit messge has a (
-      run: |
-        echo '${{ github.event_name }} for ${{ github.ref_type }} ${{ github.ref_name }} or ${{ github.event.ref }}'
-        # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
-        echo 'github.event:'
-        echo '${{ toJSON(github.event) }}'
+      - name: Dump event context for debugging
+        continue-on-error: true  # Debugging output only, and this annoyingly fails when the commit messge has a (
+        run: |
+          echo '${{ github.event_name }} for ${{ github.ref_type }} ${{ github.ref_name }} or ${{ github.event.ref }}'
+          # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
+          echo 'github.event:'
+          echo '${{ toJSON(github.event) }}'
 
-    - name: Dump github context
-      continue-on-error: true  # Debugging output only, and this annoyingly fails when the commit message has a (
-      run: |
+      - name: Dump github context
+        continue-on-error: true  # Debugging output only, and this annoyingly fails when the commit message has a (
+        run: |
           echo '${{ toJSON(github) }}'
 
-    - name: Set a master password
-      run: |
-        MASTERPWD=$(openssl rand -base64 25)
-        echo "<settingsSecurity> <master>$(mvn --encrypt-master-password "$MASTERPWD")</master></settingsSecurity>" > $HOME/.m2/settings-security.xml
-        # echo "MASTERPWD=\"$MASTERPWD\"" >> $GITHUB_ENV
-        # The master password isn't actually used, but the maven complains otherwise.
+      - name: Set a master password
+        run: |
+          MASTERPWD=$(openssl rand -base64 25)
+          echo "<settingsSecurity> <master>$(mvn --encrypt-master-password "$MASTERPWD")</master></settingsSecurity>" > $HOME/.m2/settings-security.xml
+          # echo "MASTERPWD=\"$MASTERPWD\"" >> $GITHUB_ENV
+          # The master password isn't actually used, but the maven complains otherwise.
 
-    - name: Git & Maven Status
-      run: |
-        git status --untracked-files --ignored
-        git log -3 --no-color
-        $MVNCMD -version
-        git branch --show-current
+      - name: Git & Maven Status
+        run: |
+          git status --untracked-files --ignored
+          git log -3 --no-color
+          $MVNCMD -version
+          git branch --show-current
 
-    - name: Mvn Effective POM
-      run: |
-        cd docker
-        $MVNCMD -P $(git branch --show-current) -N help:effective-pom
+      - name: Mvn Effective POM
+        run: |
+          cd docker
+          $MVNCMD -P $(git branch --show-current) -N help:effective-pom
 
-    - name: Mvn Effective Settings
-      run: |
-        cd docker
-        $MVNCMD -P $(git branch --show-current) -N help:effective-settings
+      - name: Mvn Effective Settings
+        run: |
+          cd docker
+          $MVNCMD -P $(git branch --show-current) -N help:effective-settings
 
-    - name: Check docker status
-      run: |
-        docker info
-        docker version
-        docker images -a
-        docker ps -a
+      - name: Check docker status
+        run: |
+          docker info
+          docker version
+          docker images -a
+          docker ps -a
 
-    - name: Deploy with Maven
-      env:
-        NEXUS_BUILD_USER: ${{ secrets.NEXUS_BUILD_USER }}
-        NEXUS_BUILD_PASSWD: ${{ secrets.NEXUS_BUILD_PASSWD }}
-        GPG_PASSPHRASE : ${{ secrets.GPG_PASSPHRASE }}
-      # We don't do docker pushes as we don't currently (as of 4/22) have an automatic solution for multi architecture builds
-      # Compare also https://github.com/actions/virtual-environments/issues/2187 (M1 support for github actions)
-      run: |
-        cd docker
-        $MVNCMD -P $(git branch --show-current) deploy
+      - name: Deploy with Maven
+        env:
+          DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+          DOCKERHUB_PASSWD: ${{ secrets.DOCKERHUB_PASSWD }}
+        # We don't do docker pushes as we don't currently (as of 4/22) have an automatic solution for multi architecture builds
+        # Compare also https://github.com/actions/virtual-environments/issues/2187 (M1 support for github actions)
+        run: |
+          cd docker
+          $MVNCMD -P $(git branch --show-current) deploy
 
-    - name: Check docker status
-      run: |
-        docker images -a
-        docker ps -a
-        sleep 300
-        docker ps -a
+      - name: Check docker status
+        run: |
+          docker images -a
+          docker ps -a
+          sleep 300
+          docker ps -a
