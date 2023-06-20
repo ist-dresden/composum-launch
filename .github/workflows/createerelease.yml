@@ -205,3 +205,11 @@ jobs:
         find . -type d -name target
         ls -l ./target/checkout/target || true
         ls -l ./target/checkout/commons/target || true
+
+    - name: Set master to the release tag
+      if: ${{ github.event.inputs.dryrun == 'false' }}
+      run: |
+        git checkout master
+        git reset --hard $releasetag
+        git push -v
+        git push --tags -v
