@@ -152,7 +152,7 @@
 				<composum.assets.version>1.4.1-SNAPSHOT</composum.assets.version>
 				<composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
 				<cpm.platform.htl.version>1.1.2-SNAPSHOT</cpm.platform.htl.version>
-				<composum.chatgpt.version>0.1.1-SNAPSHOT</composum.chatgpt.version>
+				<composum.ai.version>0.2.0-SNAPSHOT</composum.ai.version>
 
 				<!-- closed source parts -->
 				<cpm.platform.replication.version>1.1.2-SNAPSHOT</cpm.platform.replication.version>

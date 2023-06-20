@@ -10,7 +10,7 @@
     "openapikeyfile": ""
   },
   "configurations": {
-    "com.composum.chatgpt.base.service.chat.impl.GPTChatCompletionServiceImpl": {
+    "com.composum.ai.backend.base.service.chat.impl.GPTChatCompletionServiceImpl": {
       "disable": false,
       "openAiApiKey": "${openapikey}",
       "openAiApiKeyFile": "${openapikeyfile}"
@@ -66,7 +66,7 @@
       "start-order": "45"
     },
     {
-      "id": "com.composum.chatgpt:composum-chatgpt-integration-composum-package:zip:${composum.chatgpt.version}",
+      "id": "com.composum.ai:composum-ai-integration-composum-package:zip:${composum.ai.version}",
       "start-order": "45"
     },
     {

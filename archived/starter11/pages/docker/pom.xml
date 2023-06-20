@@ -157,8 +157,8 @@
                                 </artifactItem>
 
                                 <artifactItem>
-                                    <groupId>com.composum.chatgpt</groupId>
-                                  	<artifactId>composum-chatgpt-integration-composum-package</artifactId>
+                                    <groupId>com.composum.ai</groupId>
+                                  	<artifactId>composum-ai-integration-composum-package</artifactId>
                                     <type>zip</type>
                                     <outputDirectory>${project.build.directory}/lib/43</outputDirectory>
                                 </artifactItem>

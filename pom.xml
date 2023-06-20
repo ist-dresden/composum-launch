@@ -43,7 +43,7 @@
 		<composum.assets.version>1.4.0</composum.assets.version>
 		<composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
 		<cpm.platform.htl.version>1.1.1</cpm.platform.htl.version>
-		<composum.chatgpt.version>0.1.1</composum.chatgpt.version>
+		<composum.ai.version>0.2.0</composum.ai.version>
 		<!-- https://mvnrepository.com/artifact/com.composum.dashboard/composum-dashboard-sling -->
 		<composum.dashboard.version>1.2.13</composum.dashboard.version>
 
@@ -123,9 +123,9 @@
 				<type>zip</type>
 			</dependency>
 			<dependency>
-				<groupId>com.composum.chatgpt</groupId>
-				<artifactId>composum-chatgpt-integration-composum-package</artifactId>
-				<version>${composum.chatgpt.version}</version>
+				<groupId>com.composum.ai</groupId>
+				<artifactId>composum-ai-integration-composum-package</artifactId>
+				<version>${composum.ai.version}</version>
 				<type>zip</type>
 			</dependency>
 			<dependency>
