@@ -18,5 +18,5 @@ if test -z "$tag"; then
   tag=latest
 fi
 
-$(dirname $0)/tagdockerhublatest.sh composum/featurelauncher-nodes "$version" "$tag"
-$(dirname $0)/tagdockerhublatest.sh composum/featurelauncher-composum "$version" "$tag"
+$(dirname $0)/tagdockerhub.sh composum/featurelauncher-nodes "$version" "$tag"
+$(dirname $0)/tagdockerhub.sh composum/featurelauncher-composum "$version" "$tag"
