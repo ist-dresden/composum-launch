@@ -79,7 +79,7 @@ jobs:
         # Compare also https://github.com/actions/virtual-environments/issues/2187 (M1 support for github actions)
         run: |
           cd docker
-          $MVNCMD -P $(git branch --show-current) deploy
+          $MVNCMD -P $(git branch --show-current),allplatforms deploy
 
       - name: Check docker status
         run: |

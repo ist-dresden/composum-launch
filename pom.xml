@@ -31,7 +31,6 @@
 	-->
 	<properties>
 		<docker.image.tag>${project.version}</docker.image.tag>
-		<docker.platforms>linux/amd64,linux/arm64</docker.platforms>
 
 		<!-- nodes e.g. 3.4.1 or 4.1.1 - we rather use nodes 4, since otherwise the FAR could either
 		 not be easily installed on plain Sling Starter 12, or we would have to install nodes as a package - but
@@ -247,6 +246,14 @@
 					</plugin>
 				</plugins>
 			</build>
+		</profile>
+
+		<profile>
+			<!-- Build docker modules for all platforms -->
+			<id>allplatforms</id>
+			<properties>
+				<docker.platforms>linux/amd64,linux/arm64</docker.platforms>
+			</properties>
 		</profile>
 	</profiles>
 
