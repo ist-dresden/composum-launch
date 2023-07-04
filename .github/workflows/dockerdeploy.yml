@@ -13,6 +13,8 @@ jobs:
 
     env:
       MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-istrepo.xml
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_ACTOR: ${{ github.actor }}
 
     steps:
       - uses: actions/checkout@v3
