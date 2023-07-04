@@ -20,8 +20,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      SUBDIR: ${{ github.event.inputs.subdir }}
       MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-istrepo.xml -P nexus-staging,skipDocker,!docker
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_ACTOR: ${{ github.actor }}
 
     steps:
     - uses: actions/checkout@v3

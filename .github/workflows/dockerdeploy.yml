@@ -13,6 +13,8 @@ jobs:
 
     env:
       MVNCMD: mvn -B -ntp -s ${{ github.workspace }}/.github/settings-istrepo.xml
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_ACTOR: ${{ github.actor }}
 
     steps:
       - uses: actions/checkout@v3
@@ -79,7 +81,7 @@ jobs:
         # Compare also https://github.com/actions/virtual-environments/issues/2187 (M1 support for github actions)
         run: |
           cd docker
-          $MVNCMD -P $(git branch --show-current) deploy
+          $MVNCMD -P $(git branch --show-current),allplatforms deploy
 
       - name: Check docker status
         run: |
