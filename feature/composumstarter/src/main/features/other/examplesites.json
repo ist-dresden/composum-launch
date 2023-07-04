@@ -1,0 +1,12 @@
+{
+  "content-packages:ARTIFACTS|required": [
+    {
+      "id": "sites.ist.composum:composum-site-app-package:zip:${composum.sites.version}",
+      "start-order": "50"
+    },
+    {
+      "id": "sites.ist.composum:composum-site-content:zip:${composum.sites.version}",
+      "start-order": "50"
+    }
+  ]
+}
