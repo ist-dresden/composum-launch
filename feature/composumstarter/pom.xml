@@ -44,7 +44,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <replacePropertyVariables>
-                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version,composum.ai.version,composum.dashboard.version
+                        org.apache.sling.jcr.packageinit.version,composum.platform.version,composum.assets.version,composum.pages.version,composum.pages.options.version,cpm.platform.htl.version,composum.ai.version,composum.dashboard.version,composum.sites.version
                     </replacePropertyVariables>
                     <framework>
                         <groupId>org.apache.felix</groupId>

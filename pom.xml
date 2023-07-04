@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>com.composum.meta.ist</groupId>
 		<artifactId>parent-2-public</artifactId>
 		<version>1.7.1</version>
-		<relativePath />
+		<relativePath/>
 	</parent>
 
 	<groupId>com.composum.platform</groupId>
@@ -209,6 +210,26 @@
 	</repositories>
 
 	<profiles>
+		<profile>
+			<!-- Needed for downloading the example site www-composum-com -->
+			<id>github-www-composum-com</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<repositories>
+				<repository>
+					<id>github</id>
+					<url>https://maven.pkg.github.com/ist-dresden/www-composum-com</url>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+				</repository>
+			</repositories>
+		</profile>
+
 		<profile>
 			<id>docker</id>
 			<activation>

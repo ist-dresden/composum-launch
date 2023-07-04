@@ -21,6 +21,11 @@
             <password>${env.NEXUS_BUILD_PASSWD}</password>
         </server>
         <server>
+          <id>github</id>
+          <username>${env.GITHUB_ACTOR}</username>
+          <password>${env.GITHUB_TOKEN}</password>
+        </server>
+        <server>
           <id>ossrh</id>
             <username>${env.OSSRH_USER}</username>
             <password>${env.OSSRH_PASSWD}</password>
@@ -41,7 +46,7 @@
         <mirror>
             <id>istrepo</id>
             <name>istrepo</name>
-            <mirrorOf>*</mirrorOf>
+            <mirrorOf>*,!github-www-composum-com,!github</mirrorOf>
             <url>https://repo.ist-software.com/repository/maven-public</url>
         </mirror>
         <!-- -->
