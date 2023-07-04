@@ -55,6 +55,7 @@
                         <aggregate>
                             <classifier>composum</classifier>
                             <filesInclude>composum/**/*.json</filesInclude>
+                            <filesInclude>other/**/*.json</filesInclude>
                             <includeArtifact>
                                 <groupId>com.composum.platform.features</groupId>
                                 <artifactId>composum-launcher-feature-nodesstarter</artifactId>
@@ -68,7 +69,6 @@
                         </aggregate>
                         <aggregate>
                             <classifier>oak_tar</classifier>
-                            <filesInclude>other/**/*.json</filesInclude>
                             <includeClassifier>composum</includeClassifier>
                             <includeArtifact>
                                 <groupId>com.composum.platform.features</groupId>
@@ -83,7 +83,6 @@
                         </aggregate>
                         <aggregate>
                             <classifier>oak_mongo</classifier>
-                            <filesInclude>other/**/*.json</filesInclude>
                             <includeClassifier>composum</includeClassifier>
                             <includeArtifact>
                                 <groupId>com.composum.platform.features</groupId>
