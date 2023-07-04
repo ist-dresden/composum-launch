@@ -176,6 +176,29 @@
 						</checkModificationExcludes>
 					</configuration>
 				</plugin>
+
+				<plugin>
+					<!-- The composum-site is basically a perpetual snapshot - let's ignore this. -->
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-enforcer-plugin</artifactId>
+				    <executions>
+				        <execution>
+				            <id>enforce-no-snapshots-in-releases</id>
+				            <goals>
+				                <goal>enforce</goal>
+				            </goals>
+				            <configuration>
+				                <rules>
+				                    <requireReleaseDeps>
+				                        <excludes>
+				                            <exclude>sites.ist.composum:*</exclude>
+				                        </excludes>
+				                    </requireReleaseDeps>
+				                </rules>
+				            </configuration>
+				        </execution>
+				    </executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>

@@ -57,7 +57,7 @@ jobs:
       run: $MVNCMD -N help:effective-settings
 
     - name: Check versioning
-      run: $MVNCMD org.apache.maven.plugins:maven-enforcer-plugin:3.0.0:enforce -Drules=requireReleaseVersion,requireReleaseDeps
+      run: $MVNCMD org.apache.maven.plugins:maven-enforcer-plugin:3.0.0:enforce -Drules=requireReleaseVersion
 
     - name: Check build with Maven
       run: $MVNCMD verify
