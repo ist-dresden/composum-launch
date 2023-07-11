@@ -43,7 +43,7 @@
 		<composum.assets.version>1.4.0</composum.assets.version>
 		<composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
 		<cpm.platform.htl.version>1.1.1</cpm.platform.htl.version>
-		<composum.ai.version>0.3.1</composum.ai.version>
+		<composum.ai.version>0.4.0</composum.ai.version>
 		<!-- https://mvnrepository.com/artifact/com.composum.dashboard/composum-dashboard-sling -->
 		<composum.dashboard.version>1.2.13</composum.dashboard.version>
 
