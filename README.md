@@ -10,17 +10,18 @@ Composum [Nodes](https://github.com/ist-dresden/composum-nodes),
 
 # Start Composum Pages as JAR based on Sling Starter
 
-[**feature/nodesstarter**](feature/nodesstarter):
+- [**feature/nodesstarter**](feature/nodesstarter):
 A [Sling Starter](https://github.com/apache/sling-org-apache-sling-starter)
 12 with composum nodes installed in the newest version, and some provisions to install packages (
 see [feature/README.md](feature/README.md)), and run it offline.
-[on mvnrepository.com](https://mvnrepository.com/artifact/com.composum.platform.features/composum-launcher-feature-nodesstarter) / 
+Download it [on mvnrepository.com](https://mvnrepository.com/artifact/com.composum.platform.
+features/composum-launcher-feature-nodesstarter) / 
 [on search.maven.org](https://search.maven.org/search?q=a:composum-launcher-feature-nodesstarter)
-[**feature/composumstarter**](feature/composumstarter): Extends the feature/nodesstarter with all public Composum
+- [**feature/composumstarter**](feature/composumstarter): Extends the feature/nodesstarter with all public Composum
 modules. (There are some enterprise modules, which aren't contained.)
-[On mvnrepository.com](https://mvnrepository.com/artifact/com.composum.platform.features/composum-launcher-feature-composumstarterm) / 
-[On search.maven.org](https://search.maven.org/search?q=a:composum-launcher-feature-composumstarter)
-[Download it](https://search.maven.org/search?q=a:composum-launcher-feature-composumstarter) - e.g. the 
+Download it 
+[on mvnrepository.com](https://mvnrepository.com/artifact/com.composum.platform.features/composum-launcher-feature-composumstarter) / 
+[on search.maven.org](https://search.maven.org/search?q=a:composum-launcher-feature-composumstarter) - e.g. as the 
 oak_tar-launcher.jar , and start it with java -jar. 
 
 # Available Docker images
