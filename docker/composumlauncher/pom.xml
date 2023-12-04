@@ -71,6 +71,31 @@
                             </artifactItems>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>fetch-example-sites</id>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <!-- The system FAR is already in the docker image - add our application(s) now -->
+                                <artifactItem>
+                                    <groupId>sites.ist.composum</groupId>
+                                    <artifactId>composum-site-app-package</artifactId>
+                                    <version>${composum.sites.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/examplesites</outputDirectory>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>sites.ist.composum</groupId>
+                                    <artifactId>composum-site-content</artifactId>
+                                    <version>${composum.sites.version}</version>
+                                    <type>zip</type>
+                                    <outputDirectory>${project.build.directory}/examplesites</outputDirectory>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 

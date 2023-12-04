@@ -7,3 +7,4 @@ FROM composum/featurelauncher-nodes:${DOCKER_IMAGE_TAG}
 
 # from maven
 COPY --chown=sling:sling target/dependencies/* /opt/sling/features-docker/
+COPY --chown=sling:sling target/examplesites/* /opt/sling/fileinstall-docker/

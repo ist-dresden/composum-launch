@@ -85,4 +85,5 @@ maven release build complains with:
     Error:  in project 'Composum Launcher Feature Composum Starter (With Composum Public)' 
         (com.composum.platform.features:composum-launcher-feature-composumstarter:jar:1.5.2.2-SNAPSHOT)
 
-These are included from examplesites.json .
+These are included from examplesites.json . -> For now we rename examplesites.json to examplesites.json.deactivated 
+so that www-composum-com is not in there, but include it into the docker image docker/composumlauncher directly.

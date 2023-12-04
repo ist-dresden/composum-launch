@@ -47,8 +47,14 @@ So you'll probably need to verify only that the docker images work, if there are
    - run quickcheck (see below)
    - install a site e.g. cpm-site-composum with package manager, 
      - mvn -P cpmLocalDefault,installPackage install
-   - install a site e.g. by copying package to target/run/fileinstall 
- 
+   - install a site e.g. by copying package to target/run/fileinstall
+
+### Release develop docker image
+
+- start the job https://github.com/ist-dresden/composum-launch/actions/workflows/dockerdeploy.yml on branch develop
+- test as in "Release project" below but with the snapshot version
+- set "develop" tag with bin/tagdockerhubdevelop_all.sh {version}
+
 ### Release project
 
 For releasing there are some Github actions https://github.com/ist-dresden/composum-launch/actions :
@@ -65,7 +71,7 @@ For releasing there are some Github actions https://github.com/ist-dresden/compo
    - docker run --rm -p 8080:8080 composum/featurelauncher-nodes:{version}
 
    - docker pull composum/featurelauncher-composum:{version}
-   - docker run --rm -p 8080:8080 composum/featurelauncher-composum:{version}
+   - docker run --rm -p 8080:8080 -e OPENAI_API_KEY=$OPENAI_API_KEY composum/featurelauncher-composum:{version} 
    
 6. set "latest" tag: scripts bin/tagdockerhublatest_all.sh {version} 
    - Test possibly with scripts start-*-from-dockerhub.sh in the docker projects
@@ -76,6 +82,7 @@ Check http://localhost:8080/
 
 - Sling console: all bundles active? Composum versions correct?
 - quick look at browser, user manager, package manager
+- have a look at composum site, e.g. http://localhost:8080/bin/pages.html/content/ist/composum/home/platform
 - create simple site in pages, publish, create release, in-place replication + check replicated result in browser
 
 ## Debugging Docker
