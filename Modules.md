@@ -73,3 +73,16 @@ graph LR
 - archived/compatibilityV1/slingstarter-compat cpm:CL-compatibility-docker-slingstarter::docker
 - archived/compatibilityV1 cpm:CL-compatibility::pom
 - archived/compatibilityV1/nodes-compat cpm:CL-compatibility-docker-nodes:1.3.1-SNAPSHOT:docker
+
+## Problem with composum-site
+
+maven release build complains with:
+
+    Error:  Failed to execute goal org.apache.maven.plugins:maven-release-plugin:2.5.3:prepare (default-cli) on project 
+        composum-launcher: Can't release project due to non released dependencies :
+    Error:      sites.ist.composum:composum-site-app-package:zip:1.0.0-SNAPSHOT:provided
+    Error:      sites.ist.composum:composum-site-content:zip:1.0.0-SNAPSHOT:provided
+    Error:  in project 'Composum Launcher Feature Composum Starter (With Composum Public)' 
+        (com.composum.platform.features:composum-launcher-feature-composumstarter:jar:1.5.2.2-SNAPSHOT)
+
+These are included from examplesites.json .
