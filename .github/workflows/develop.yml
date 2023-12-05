@@ -1,8 +1,8 @@
 # This builds develop and deploys a snapshot to our repository.
 # Will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # Docker deployment is manual because that's quite a lot of computation time and we don't want to do it on every push.
-name: Develop - Build and Deploy Snapshot
-run-name: Develop - Build and Deploy Snapshot on ${{ github.ref_name }}
+name: Develop - Build and Upload Snapshot
+run-name: Develop - Build and Upload Snapshot from ${{ github.ref_name }}
 
 on:
   push:
