@@ -26,6 +26,11 @@
           <password>${env.GITHUB_TOKEN}</password>
         </server>
         <server>
+          <id>github-www-composum-com</id>
+          <username>${env.GITHUB_ACTOR}</username>
+          <password>${env.GITHUB_TOKEN}</password>
+        </server>
+        <server>
           <id>ossrh</id>
             <username>${env.OSSRH_USER}</username>
             <password>${env.OSSRH_PASSWD}</password>
