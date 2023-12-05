@@ -210,6 +210,7 @@ jobs:
     - name: Set master to the release tag
       if: ${{ github.event.inputs.dryrun == 'false' }}
       run: |
+        git fetch --depth=3 origin master
         git checkout master
         git reset --hard $releasetag
         git push -v
