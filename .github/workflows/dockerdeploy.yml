@@ -77,11 +77,13 @@ jobs:
         env:
           DOCKERHUB_USER: composum
           DOCKERHUB_PASSWD: ${{ secrets.DOCKERHUB_PASSWD }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
         # We don't do docker pushes as we don't currently (as of 4/22) have an automatic solution for multi architecture builds
         # Compare also https://github.com/actions/virtual-environments/issues/2187 (M1 support for github actions)
         run: |
           cd docker
-          $MVNCMD -P $(git branch --show-current),allplatforms deploy
+          $MVNCMD -P $(git branch --show-current),allplatforms,github-www-composum-com deploy
 
       - name: Check docker status
         run: |
