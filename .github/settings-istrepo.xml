@@ -46,7 +46,7 @@
         <mirror>
             <id>istrepo</id>
             <name>istrepo</name>
-            <mirrorOf>*,!github-www-composum-com,!github</mirrorOf>
+            <mirrorOf>central</mirrorOf>
             <url>https://repo.ist-software.com/repository/maven-public</url>
         </mirror>
         <!-- -->
