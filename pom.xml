@@ -35,14 +35,14 @@
 		<!-- nodes e.g. 3.4.1 or 4.1.1 - we rather use nodes 4, since otherwise the FAR could either
 		 not be easily installed on plain Sling Starter 12, or we would have to install nodes as a package - but
 		 then upgrade would be a problem until https://issues.apache.org/jira/browse/SLING-11221 is fixed. -->
-		<composum.nodes.version>4.2.2-SNAPSHOT</composum.nodes.version>
+		<composum.nodes.version>4.2.2</composum.nodes.version>
 		<composum.platform.version>1.7.0</composum.platform.version>
 		<composum.pages.version>1.5.1</composum.pages.version>
 		<composum.pages.options.version>${composum.pages.version}</composum.pages.options.version>
 		<composum.assets.version>1.4.0</composum.assets.version>
 		<composum.sites.version>1.0.0-SNAPSHOT</composum.sites.version>
 		<cpm.platform.htl.version>1.1.1</cpm.platform.htl.version>
-		<composum.ai.version>0.6.0</composum.ai.version>
+		<composum.ai.version>0.8.1</composum.ai.version>
 		<!-- https://mvnrepository.com/artifact/com.composum.dashboard/composum-dashboard-sling -->
 		<composum.dashboard.version>1.2.13</composum.dashboard.version>
 
